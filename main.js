@@ -44,6 +44,7 @@ function renderProperties(properties) {
 
         const image = document.createElement('img');
         image.src = property.image;
+        image.alt = `${property.name} 부동산 이미지`; // Add alt text for SEO
         card.appendChild(image);
 
         const info = document.createElement('div');
