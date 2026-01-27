@@ -1,14 +1,77 @@
-<!doctype html>
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전국 부동산 정보</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1>전국 부동산 정보</h1>
+        <nav>
+            <ul>
+                <li><a href="#">아파트</a></li>
+                <li><a href="#">오피스텔</a></li>
+                <li><a href="#">주택</a></li>
+                <li><a href="#">분양</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <input type="text" placeholder="지역, 단지명, 지하철역 등 검색">
+            <button>검색</button>
+        </section>
+
+        <section class="filter-section">
+            <div class="filter-group">
+                <label for="region">지역</label>
+                <select id="region">
+                    <option value="">시/도</option>
+                </select>
+                <select id="district">
+                    <option value="">시/군/구</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="type">부동산 유형</label>
+                <select id="type">
+                    <option value="">전체</option>
+                    <option value="apartment">아파트</option>
+                    <option value="officetel">오피스텔</option>
+                    <option value="house">주택</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="deal-type">거래 유형</label>
+                <select id="deal-type">
+                    <option value="">전체</option>
+                    <option value="sale">매매</option>
+                    <option value="jeonse">전세</option>
+                    <option value="wolse">월세</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="price-range">가격 범위</label>
+                <input type="text" id="price-range" placeholder="가격 범위 입력">
+            </div>
+        </section>
+
+        <section class="property-list-section">
+            <h2>추천 매물</h2>
+            <div class="property-list">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 전국 부동산 정보. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
