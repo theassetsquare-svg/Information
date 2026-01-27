@@ -8,7 +8,7 @@ const sampleProperties = [
         price: '30억',
         type: '아파트',
         dealType: '매매',
-        image: 'https://via.placeholder.com/280x200',
+        image: 'https://images.unsplash.com/photo-1632480436940-fab96a84c3ac?q=80&w=2940&auto=format&fit=crop',
     },
     {
         name: '아크로 리버파크',
@@ -16,7 +16,7 @@ const sampleProperties = [
         price: '32억',
         type: '아파트',
         dealType: '매매',
-        image: 'https://via.placeholder.com/280x200',
+        image: 'https://images.unsplash.com/photo-1574362845104-33d7d50c9298?q=80&w=2825&auto=format&fit=crop',
     },
     {
         name: '트리마제',
@@ -24,7 +24,7 @@ const sampleProperties = [
         price: '25억',
         type: '아파트',
         dealType: '매매',
-        image: 'https://via.placeholder.com/280x200',
+        image: 'https://images.unsplash.com/photo-1655845763599-99c5513d69e4?q=80&w=2864&auto=format&fit=crop',
     },
     {
         name: '갤러리아 포레',
@@ -32,7 +32,7 @@ const sampleProperties = [
         price: '28억',
         type: '아파트',
         dealType: '매매',
-        image: 'https://via.placeholder.com/280x200',
+        image: 'https://images.unsplash.com/photo-1655845763599-99c5513d69e4?q=80&w=2864&auto=format&fit=crop',
     },
 ];
 
