@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0">
 <channel>
   <title>전국 부동산 정보</title>
   <link>https://theassetsquare-svg.github.io/Information/</link>
   <description>전국 부동산의 최신 정보와 2026년 시장 전망을 제공합니다.</description>
-  <atom:link href="https://theassetsquare-svg.github.io/Information/rss.xml" rel="self" type="application/rss+xml" />
+  <language>ko-kr</language>
   
   <item>
     <title>2026년 부동산 시장 전망</title>
     <link>https://theassetsquare-svg.github.io/Information/#info-section</link>
     <description>금리 인하 가능성과 경기 회복 기대감이 맞물리는 2026년, 주택 및 상업용 부동산 시장의 주요 전망을 확인하세요.</description>
     <pubDate>Tue, 27 Jan 2026 12:00:00 GMT</pubDate>
-    <guid>https://theassetsquare-svg.github.io/Information/#info-section</guid>
+    <guid isPermaLink="true">https://theassetsquare-svg.github.io/Information/#info-section</guid>
   </item>
 
   <item>
@@ -19,7 +19,7 @@
     <link>https://theassetsquare-svg.github.io/Information/#property-list-section</link>
     <description>서울 주요 지역의 아파트, 오피스텔 등 최신 추천 매물 정보를 확인하세요.</description>
     <pubDate>Tue, 27 Jan 2026 12:00:00 GMT</pubDate>
-    <guid>https://theassetsquare-svg.github.io/Information/#property-list-section</guid>
+    <guid isPermaLink="true">https://theassetsquare-svg.github.io/Information/#property-list-section</guid>
   </item>
 
 </channel>
