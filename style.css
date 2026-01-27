@@ -126,3 +126,14 @@ footer {
     color: white;
 }
 
+
+@media (max-width: 600px) {
+    header nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .search-section {
+        flex-direction: column;
+    }
+}
