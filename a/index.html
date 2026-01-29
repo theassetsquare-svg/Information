@@ -26,65 +26,114 @@
 <meta name="twitter:description" content="수유샴푸나이트는 한국에 있는 나이트입니다. 방문 전 확인 포인트와 이용 정보를 정리했습니다.">
 <meta name="twitter:image" content="https://informationa.pages.dev/og/suyu-shampoo-night-1x1.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
-body{margin:0;font-family:system-ui,-apple-system,Apple SD Gothic Neo,Noto Sans KR,sans-serif;line-height:1.6}
-.wrap{max-width:820px;margin:auto;padding:24px}
-h1{font-size:28px}
-h2{margin-top:40px}
-.cta{margin:24px 0}
-.note{background:#f7f7f7;padding:16px;border-radius:8px;font-size:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;line-height:1.7;color:#2d2d2d;background:#f5f5f7}
+
+/* 히어로 섹션 */
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:60px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(233,69,96,0.08) 0%,transparent 60%);animation:pulse 8s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.hero img{width:200px;height:200px;border-radius:20px;object-fit:cover;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative;z-index:1}
+.hero h1{font-size:32px;font-weight:800;margin:24px 0 12px;position:relative;z-index:1}
+.hero p{font-size:16px;color:rgba(255,255,255,0.75);max-width:500px;margin:0 auto;position:relative;z-index:1}
+.hero .badge{display:inline-block;background:#e94560;color:#fff;font-size:13px;font-weight:600;padding:6px 16px;border-radius:20px;margin-bottom:20px;position:relative;z-index:1}
+
+/* 본문 */
+.wrap{max-width:720px;margin:-32px auto 0;padding:0 16px 48px;position:relative;z-index:2}
+
+/* 카드 */
+.card{background:#fff;border-radius:16px;padding:32px 28px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+
+.card h2{font-size:20px;font-weight:800;color:#1a1a2e;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.card h2 .icon{width:32px;height:32px;background:linear-gradient(135deg,#e94560,#c23152);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.card p{color:#555;font-size:15px;margin-bottom:12px}
+.card p:last-child{margin-bottom:0}
+
+/* 체크리스트 */
+.checklist{list-style:none;padding:0}
+.checklist li{padding:12px 16px;background:#f8f9fa;border-radius:10px;margin-bottom:8px;font-size:15px;color:#333;display:flex;align-items:center;gap:10px;transition:background 0.2s}
+.checklist li:hover{background:#eef1f5}
+.checklist li::before{content:'';width:20px;height:20px;background:linear-gradient(135deg,#e94560,#c23152);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid #eee;padding:16px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-item .q{font-weight:600;color:#1a1a2e;font-size:15px;margin-bottom:6px}
+.faq-item .a{color:#666;font-size:14px;padding-left:4px}
+
+/* CTA 버튼 */
+.cta-btn{display:block;text-align:center;background:linear-gradient(135deg,#e94560,#c23152);color:#fff;text-decoration:none;padding:16px 32px;border-radius:12px;font-size:16px;font-weight:600;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 16px rgba(233,69,96,0.3)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,69,96,0.4)}
+
+/* 공지 배너 */
+.notice{background:linear-gradient(135deg,#f8f9fa,#eef1f5);border-left:4px solid #e94560;border-radius:0 12px 12px 0;padding:16px 20px;font-size:13px;color:#666;line-height:1.6}
+
+/* 푸터 */
+.footer{text-align:center;padding:32px 16px;color:#aaa;font-size:12px}
 </style>
 </head>
 
 <body>
+
+<div class="hero">
+<span class="badge">수유 지역 나이트 정보</span>
+<img src="https://informationa.pages.dev/og/suyu-shampoo-night-1x1.png" alt="수유샴푸나이트 황정민 나이트 안내 썸네일 이미지" width="1200" height="1200">
+<h1>수유샴푸나이트 예약 안내</h1>
+<p>수유샴푸나이트는 한국에 있는 나이트입니다. 검색 사용자를 위한 <strong>정보 제공 목적</strong>의 안내 페이지입니다.</p>
+</div>
+
 <div class="wrap">
 
-<img src="https://informationa.pages.dev/og/suyu-shampoo-night-1x1.png" alt="수유샴푸나이트 황정민 나이트 안내 썸네일 이미지" width="1200" height="1200" style="width:100%;max-width:600px;height:auto;display:block;margin:0 auto 24px;border-radius:12px">
+<div class="card">
+<h2><span class="icon">i</span> 수유샴푸나이트 소개</h2>
+<p>수유 지역에서 운영되는 나이트 관련 정보를 정리해 제공합니다.</p>
+<p>과장된 표현이나 혐오·불법·성인·음란성 요소를 배제하고, 방문 전 참고할 수 있는 일반적인 정보 위주로 구성했습니다.</p>
+</div>
 
-<h1>수유샴푸나이트 예약 안내</h1>
-
-<p>
-수유샴푸나이트는 한국에 있는 나이트입니다.
-이 페이지는 검색 사용자를 위한 <strong>정보 제공 목적</strong>의 안내 페이지입니다.
-</p>
-
-<h2>수유샴푸나이트 소개</h2>
-<p>
-수유 지역에서 운영되는 나이트 관련 정보를 정리해 제공합니다.
-과장된 표현이나 혐오·불법·성인·음란성 요소를 배제하고,
-방문 전 참고할 수 있는 일반적인 정보 위주로 구성했습니다.
-</p>
-
-<h2>방문 전 확인 포인트</h2>
-<ul>
+<div class="card">
+<h2><span class="icon">&#10003;</span> 방문 전 확인 포인트</h2>
+<ul class="checklist">
 <li>운영 시간 및 혼잡 시간대</li>
 <li>예약 필요 여부</li>
 <li>단체 방문 가능 여부</li>
 <li>현장 상황에 따른 변동 가능성</li>
 </ul>
-
-<h2>예약 및 문의 안내</h2>
-<p>
-네이버 검색 정책을 고려하여 개인정보(휴대전화번호, 개인 이름)는
-페이지에 직접 노출하지 않습니다.
-</p>
-
-<div class="cta">
-<a href="#" class="note">문의 채널 안내 예정</a>
 </div>
 
-<h2>자주 묻는 질문</h2>
-<p><strong>Q. 수유샴푸나이트는 어디에 있나요?</strong><br>
-A. 수유샴푸나이트는 한국에 있는 나이트입니다.</p>
+<div class="card">
+<h2><span class="icon">&#9742;</span> 예약 및 문의 안내</h2>
+<p>네이버 검색 정책을 고려하여 개인정보(휴대전화번호, 개인 이름)는 페이지에 직접 노출하지 않습니다.</p>
+<div style="margin-top:20px">
+<a href="#" class="cta-btn">문의 채널 안내 예정</a>
+</div>
+</div>
 
-<p><strong>Q. 이 페이지는 어떤 정보인가요?</strong><br>
-A. 검색 사용자를 위한 정보 제공 목적의 안내 페이지입니다.</p>
+<div class="card">
+<h2><span class="icon">?</span> 자주 묻는 질문</h2>
+<div class="faq-item">
+<div class="q">Q. 수유샴푸나이트는 어디에 있나요?</div>
+<div class="a">A. 수유샴푸나이트는 한국에 있는 나이트입니다.</div>
+</div>
+<div class="faq-item">
+<div class="q">Q. 이 페이지는 어떤 정보인가요?</div>
+<div class="a">A. 검색 사용자를 위한 정보 제공 목적의 안내 페이지입니다.</div>
+</div>
+</div>
 
-<div class="note">
-이 페이지는 네이버 검색 정책을 준수하여
-불법, 성인·음란, 스팸성, 개인정보 노출 요소를 포함하지 않습니다.
+<div class="notice">
+이 페이지는 네이버 검색 정책을 준수하여 불법, 성인·음란, 스팸성, 개인정보 노출 요소를 포함하지 않습니다.
 </div>
 
 </div>
+
+<div class="footer">
+&copy; 2026 informationa.pages.dev
+</div>
+
 </body>
 </html>
