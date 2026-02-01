@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>전국 부동산 정보</title>
-  <link>https://theassetsquare-svg.github.io/Information/</link>
-  <description>전국 부동산의 최신 정보와 2026년 시장 전망을 제공합니다.</description>
+  <title>informationa.pages.dev</title>
+  <link>https://informationa.pages.dev/</link>
+  <description>전국 나이트라이프 및 지역 정보 가이드</description>
   <language>ko-kr</language>
-  
+  <lastBuildDate>Sun, 01 Feb 2026 12:00:00 +0900</lastBuildDate>
+  <atom:link href="https://informationa.pages.dev/rss.xml" rel="self" type="application/rss+xml"/>
+
   <item>
-    <title>2026년 부동산 시장 전망</title>
-    <link>https://theassetsquare-svg.github.io/Information/#info-section</link>
-    <description>금리 인하 가능성과 경기 회복 기대감이 맞물리는 2026년, 주택 및 상업용 부동산 시장의 주요 전망을 확인하세요.</description>
-    <pubDate>Tue, 27 Jan 2026 12:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://theassetsquare-svg.github.io/Information/#info-section</guid>
+    <title>신림그랑프리나이트 | 2026 입장료·위치·영업시간 완벽 가이드</title>
+    <link>https://informationa.pages.dev/d/</link>
+    <description>신림그랑프리나이트 2026년 최신 정보 완벽 가이드. 입장료, 위치, 영업시간, 테이블 요금, 주차 정보까지 첫 방문자를 위한 모든 것을 정리했습니다.</description>
+    <pubDate>Sun, 01 Feb 2026 00:00:00 +0900</pubDate>
+    <guid isPermaLink="true">https://informationa.pages.dev/d/</guid>
   </item>
 
   <item>
-    <title>추천 매물 정보</title>
-    <link>https://theassetsquare-svg.github.io/Information/#property-list-section</link>
-    <description>서울 주요 지역의 아파트, 오피스텔 등 최신 추천 매물 정보를 확인하세요.</description>
-    <pubDate>Tue, 27 Jan 2026 12:00:00 GMT</pubDate>
-    <guid isPermaLink="true">https://theassetsquare-svg.github.io/Information/#property-list-section</guid>
+    <title>수원찬스돔나이트 | 2026 입장료·위치·영업시간 완벽 가이드</title>
+    <link>https://informationa.pages.dev/c/</link>
+    <description>수원찬스돔나이트 2026년 최신 정보 완벽 가이드. 입장료, 위치, 영업시간, 테이블 요금, 주차 정보까지 첫 방문자를 위한 모든 것을 정리했습니다.</description>
+    <pubDate>Sun, 01 Feb 2026 00:00:00 +0900</pubDate>
+    <guid isPermaLink="true">https://informationa.pages.dev/c/</guid>
   </item>
 
 </channel>
