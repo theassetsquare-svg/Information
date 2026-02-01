@@ -172,6 +172,10 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#f6f5f0;color:#1a1a1a;line-height:1.85;-webkit-font-smoothing:antialiased}
 
+.hero-img{position:relative;width:100%;overflow:hidden}
+.hero-img img{width:100%;height:420px;object-fit:cover;display:block;filter:brightness(0.85)}
+.hero-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,#f6f5f0,transparent)}
+
 .masthead{background:#1a1a1a;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:8px}
 .masthead .dot{width:6px;height:6px;border-radius:50%;background:#c8a45a}
 .masthead span{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;font-weight:600}
@@ -266,6 +270,10 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#f6f5f0;color:#1
   <span class="dot"></span>
   <span>청담동 나이트클럽 가이드</span>
   <span class="dot"></span>
+</div>
+
+<div class="hero-img">
+  <img src="cheongdam-h2o-night-party.png" alt="청담H2O나이트 매장 내부 파티 분위기" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async">
 </div>
 
 <div style="max-width:620px;margin:20px auto;padding:0 16px;text-align:center">
