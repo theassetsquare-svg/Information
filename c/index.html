@@ -533,23 +533,11 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#f6f5f0;color:#1
 <div class="ft">&copy; 2026 informationa.pages.dev</div>
 
 <div class="bottom-bar">
-  <a href="#" onclick="copyKakao();return false;">
-    <span>💬</span>
-    카카오톡 문의하기
+  <a href="tel:01093541323" target="_blank" rel="noopener">
+    <span>📞</span>
+    강호동 전화 문의하기
   </a>
 </div>
-
-<div id="copy-toast" style="opacity:0;visibility:hidden;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a2332;color:#fff;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;z-index:1000;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:opacity 0.3s">카톡 ID가 복사되었습니다!</div>
-
-<script>
-function copyKakao(){
-  navigator.clipboard.writeText('besta12').then(function(){
-    var t=document.getElementById('copy-toast');
-    t.style.opacity='1';t.style.visibility='visible';
-    setTimeout(function(){t.style.opacity='0';t.style.visibility='hidden'},2000);
-  });
-}
-</script>
 
 </body>
 </html>
