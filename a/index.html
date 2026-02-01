@@ -200,7 +200,10 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.8;color:#1a1a
 
 <!-- 히어로 이미지 -->
 <div class="hero-img">
-  <img src="dancing_women.png" alt="수유샴푸나이트 매장 내부 전경">
+  <picture>
+    <source srcset="dancing_women.webp" type="image/webp">
+    <img src="dancing_women.png" alt="수유샴푸나이트 매장 내부 전경" width="1024" height="1024" loading="eager" fetchpriority="high" decoding="async">
+  </picture>
 </div>
 
 <!-- 타이틀 -->
@@ -213,7 +216,7 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.8;color:#1a1a
 <!-- 프로필 카드 -->
 <div class="profile-card">
   <div class="profile-inner">
-    <img src="https://informationa.pages.dev/og/suyu-shampoo-hwangjungmin-1x1.png" alt="방문 후기 작성자 프로필" width="80" height="80">
+    <img src="https://informationa.pages.dev/og/suyu-shampoo-hwangjungmin-1x1.png" alt="방문 후기 작성자 프로필" width="80" height="80" loading="lazy" decoding="async">
     <div class="profile-info">
       <h3>방문 후기 작성자</h3>
       <p>수유 지역 나이트 방문 경험 공유</p>
