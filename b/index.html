@@ -382,11 +382,24 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.8;color:#eee;
 
 <!-- 하단 CTA -->
 <div class="cta-bar">
-  <a href="tel:01074752342">
-    <span class="cta-icon">📞</span>
-    상봉동한국관나이트 전화 문의
+  <a href="javascript:void(0)" onclick="copyKakao()" id="kakao-btn">
+    <span class="cta-icon">💬</span>
+    제휴문의 카톡 besta12
   </a>
 </div>
+
+<!-- 복사 토스트 -->
+<div id="copy-toast" style="display:none;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;z-index:1000;box-shadow:0 4px 16px rgba(0,0,0,0.3)">카톡 ID가 복사되었습니다!</div>
+
+<script>
+function copyKakao(){
+  navigator.clipboard.writeText('besta12').then(function(){
+    var t=document.getElementById('copy-toast');
+    t.style.display='block';
+    setTimeout(function(){t.style.display='none'},2000);
+  });
+}
+</script>
 
 </body>
 </html>
