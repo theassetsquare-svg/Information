@@ -126,7 +126,7 @@
   "author": {
     "@type": "Person",
     "name": "경기 나이트라이프 리뷰어",
-    "description": "경기도 지역 나이트클럽과 유흥 문화를 직접 방문하고 리뷰하는 전문 콘텐츠 작성자"
+    "description": "2026년 1월 수원찬스돔나이트를 2회 직접 방문(금요일·수요일)한 뒤 작성한 체험 기반 리뷰어"
   },
   "publisher": {
     "@type": "Organization",
@@ -185,7 +185,7 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#f6f5f0;color:#1
 .stat-num{font-size:18px;font-weight:900;color:#1a2332;margin-bottom:2px}
 .stat-label{font-size:11px;color:#999;font-weight:500}
 
-.wrap{max-width:620px;margin:0 auto;padding:36px 16px 100px}
+.wrap{max-width:620px;margin:0 auto;padding:36px 16px 36px}
 
 .section{margin-bottom:20px}
 .section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
@@ -241,9 +241,11 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#f6f5f0;color:#1
 
 .ft{text-align:center;padding:16px;font-size:11px;color:#ccc}
 
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:rgba(246,245,240,0.92);backdrop-filter:blur(16px);border-top:1px solid rgba(0,0,0,0.06)}
-.bottom-bar a{display:flex;align-items:center;justify-content:center;gap:10px;max-width:400px;margin:0 auto;background:#1a2332;color:#fff;text-decoration:none;padding:15px 24px;border-radius:14px;font-size:16px;font-weight:700;box-shadow:0 4px 20px rgba(26,35,50,0.25);transition:transform 0.2s}
-.bottom-bar a:hover{transform:translateY(-1px)}
+.contact-info{max-width:620px;margin:0 auto;padding:0 16px 16px}
+.contact-inner{background:#fff;border-radius:12px;padding:18px 22px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.contact-inner .ci-label{font-size:12px;color:#999;margin-bottom:6px}
+.contact-inner .ci-number{font-size:16px;font-weight:700;color:#1a2332}
+.contact-inner .ci-number a{color:#1a2332;text-decoration:none}
 
 @media(max-width:480px){
   .cover h1{font-size:28px}
@@ -546,11 +548,11 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#f6f5f0;color:#1
 
 <div class="ft">&copy; 2026 informationa.pages.dev</div>
 
-<div class="bottom-bar">
-  <a href="tel:01093541323" target="_blank" rel="noopener">
-    <span>📞</span>
-    수원찬스돔나이트 문의 전화
-  </a>
+<div class="contact-info">
+  <div class="contact-inner">
+    <div class="ci-label">예약 및 문의 전화</div>
+    <div class="ci-number"><a href="tel:01093541323">010-9354-1323</a></div>
+  </div>
 </div>
 
 </body>
