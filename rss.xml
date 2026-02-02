@@ -1,74 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
-  <title>informationa.pages.dev - 전국 나이트라이프 가이드</title>
+  <title>전국 부동산 정보 가이드</title>
   <link>https://informationa.pages.dev/</link>
-  <description>전국 나이트라이프 및 지역 정보 가이드 – 입장료, 위치, 영업시간, 후기를 한눈에</description>
+  <description>전국 부동산 정보 가이드 – 지역별 아파트 시세, 청약 일정, 재개발·재건축 현황, 투자 분석을 총정리</description>
   <language>ko-kr</language>
   <lastBuildDate>Mon, 02 Feb 2026 12:00:00 +0900</lastBuildDate>
   <atom:link href="https://informationa.pages.dev/rss.xml" rel="self" type="application/rss+xml"/>
 
   <item>
-    <title>파주야당스카이돔나이트 | 야당역 야경·데이트·사진 코스 총정리</title>
-    <link>https://informationa.pages.dev/f/</link>
-    <description>파주야당스카이돔나이트 방문 전 필수 가이드. 야당역 근처 야경 명소의 돔 조명·추천 코스(데이트·가족·친구)·사진 촬영 팁·주변 맛집 카페까지 한 번에 정리했습니다.</description>
-    <content:encoded><![CDATA[<p>파주야당스카이돔나이트 방문 전 필수 가이드. 야당역 근처 야경 명소의 돔 조명과 추천 코스, 사진 촬영 팁, 주변 맛집 카페까지 한 번에 정리했습니다.</p><p>자세한 내용은 <a href="https://informationa.pages.dev/f/">여기</a>에서 확인하세요.</p>]]></content:encoded>
-    <pubDate>Sun, 01 Feb 2026 00:00:00 +0900</pubDate>
-    <guid isPermaLink="true">https://informationa.pages.dev/f/</guid>
-  </item>
-
-  <item>
-    <title>청담H2O나이트 | 청담동 클럽 요금·분위기·후기 솔직 정리</title>
-    <link>https://informationa.pages.dev/g/</link>
-    <description>청담H2O나이트를 직접 2회 방문한 체험 후기. 청담역 도보 7분 거리의 프리미엄 나이트클럽으로, 입장료·테이블 요금·요일별 분위기·드레스코드까지 첫 방문자를 위해 정리했습니다.</description>
-    <content:encoded><![CDATA[<p>청담H2O나이트를 직접 2회 방문한 체험 후기. 청담역 도보 7분 거리의 프리미엄 나이트클럽으로, 입장료·테이블 요금·요일별 분위기·드레스코드까지 첫 방문자를 위해 정리했습니다.</p><p>자세한 내용은 <a href="https://informationa.pages.dev/g/">여기</a>에서 확인하세요.</p>]]></content:encoded>
+    <title>2026년 전국 부동산 시장 동향 총정리 | 서울·경기·인천·부산·대구·광주·대전·세종</title>
+    <link>https://informationa.pages.dev/</link>
+    <description>2026년 전국 부동산 정보를 한눈에. 서울 강남3구·마용성·노도강, 경기 수용성·판교·3기 신도시, 인천·부산·대구·광주·대전·세종 등 지역별 아파트 시세, 청약 일정, 재개발·재건축 현황, 투자 체크포인트를 총정리했습니다.</description>
+    <content:encoded><![CDATA[<p>2026년 전국 부동산 시장 동향을 지역별로 상세히 정리했습니다. 서울 강남3구·마용성·노도강부터 경기 3기 신도시, 인천 송도·청라, 부산·대구·광주·대전·세종, 충청·강원·제주·전라·경상권까지 시세·청약·재개발 정보와 투자 체크포인트를 총망라했습니다.</p>]]></content:encoded>
     <pubDate>Mon, 02 Feb 2026 00:00:00 +0900</pubDate>
-    <guid isPermaLink="true">https://informationa.pages.dev/g/</guid>
-  </item>
-
-  <item>
-    <title>신림그랑프리나이트 | 신림역 나이트클럽 요금·위치·후기 총정리</title>
-    <link>https://informationa.pages.dev/h/</link>
-    <description>신림그랑프리나이트 2026년 최신 정보 완벽 가이드. 입장료, 위치, 영업시간, 테이블 요금, 주차 정보까지 첫 방문자를 위한 모든 것을 정리했습니다.</description>
-    <content:encoded><![CDATA[<p>신림그랑프리나이트 2026년 최신 정보 완벽 가이드. 입장료, 위치, 영업시간, 테이블 요금, 주차 정보까지 첫 방문자를 위한 모든 것을 정리했습니다.</p><p>자세한 내용은 <a href="https://informationa.pages.dev/h/">여기</a>에서 확인하세요.</p>]]></content:encoded>
-    <pubDate>Sun, 01 Feb 2026 00:00:00 +0900</pubDate>
-    <guid isPermaLink="true">https://informationa.pages.dev/h/</guid>
-  </item>
-
-  <item>
-    <title>수원찬스돔나이트 | 2026 입장료·위치·영업시간 완벽 가이드</title>
-    <link>https://informationa.pages.dev/c/</link>
-    <description>수원찬스돔나이트 2026년 최신 정보 완벽 가이드. 입장료, 위치, 영업시간, 테이블 요금, 주차 정보까지 첫 방문자를 위한 모든 것을 정리했습니다.</description>
-    <content:encoded><![CDATA[<p>수원찬스돔나이트 2026년 최신 정보 완벽 가이드. 입장료, 위치, 영업시간, 테이블 요금, 주차 정보까지 첫 방문자를 위한 모든 것을 정리했습니다.</p><p>자세한 내용은 <a href="https://informationa.pages.dev/c/">여기</a>에서 확인하세요.</p>]]></content:encoded>
-    <pubDate>Sun, 01 Feb 2026 00:00:00 +0900</pubDate>
-    <guid isPermaLink="true">https://informationa.pages.dev/c/</guid>
-  </item>
-
-  <item>
-    <title>상봉동한국관나이트 | 2026 요금·오시는길·영업시간 총정리</title>
-    <link>https://informationa.pages.dev/b/</link>
-    <description>상봉동한국관나이트 2026년 최신 정보를 총정리했습니다. 입장 요금, 오시는 길, 영업시간, 테이블 가격까지 첫 방문자가 알아야 할 모든 것을 안내합니다.</description>
-    <content:encoded><![CDATA[<p>상봉동한국관나이트 2026년 최신 정보를 총정리했습니다. 입장 요금, 오시는 길, 영업시간, 테이블 가격까지 첫 방문자가 알아야 할 모든 것을 안내합니다.</p><p>자세한 내용은 <a href="https://informationa.pages.dev/b/">여기</a>에서 확인하세요.</p>]]></content:encoded>
-    <pubDate>Sat, 31 Jan 2026 00:00:00 +0900</pubDate>
-    <guid isPermaLink="true">https://informationa.pages.dev/b/</guid>
-  </item>
-
-  <item>
-    <title>수유샴푸나이트 | 위치·예약·이용안내</title>
-    <link>https://informationa.pages.dev/a/</link>
-    <description>수유샴푸나이트 이용 안내 페이지입니다. 위치, 운영시간, 예약/문의 방법과 방문 전 확인사항을 정리했습니다.</description>
-    <content:encoded><![CDATA[<p>수유샴푸나이트 이용 안내 페이지입니다. 위치, 운영시간, 예약/문의 방법과 방문 전 확인사항을 정리했습니다.</p><p>자세한 내용은 <a href="https://informationa.pages.dev/a/">여기</a>에서 확인하세요.</p>]]></content:encoded>
-    <pubDate>Sat, 31 Jan 2026 00:00:00 +0900</pubDate>
-    <guid isPermaLink="true">https://informationa.pages.dev/a/</guid>
-  </item>
-
-  <item>
-    <title>인천아라비안나이트 | 인천 나이트클럽 요금·위치·후기 총정리</title>
-    <link>https://informationa.pages.dev/i/</link>
-    <description>인천아라비안나이트를 직접 2회 방문한 솔직 후기. 인천 지역 대표 나이트클럽의 입장료·영업시간·분위기·드레스코드·주차 정보까지 첫 방문자를 위해 정리했습니다.</description>
-    <content:encoded><![CDATA[<p>인천아라비안나이트를 직접 2회 방문한 솔직 후기. 입장료, 영업시간, 분위기, 주차 정보까지 첫 방문자를 위한 완벽 가이드.</p><p>자세한 내용은 <a href="https://informationa.pages.dev/i/">여기</a>에서 확인하세요.</p>]]></content:encoded>
-    <pubDate>Mon, 02 Feb 2026 00:00:00 +0900</pubDate>
-    <guid isPermaLink="true">https://informationa.pages.dev/i/</guid>
+    <guid isPermaLink="true">https://informationa.pages.dev/</guid>
   </item>
 
 </channel>

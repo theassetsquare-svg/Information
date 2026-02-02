@@ -1,76 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://informationa.pages.dev/</loc>
     <lastmod>2026-02-02T00:00:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/a/</loc>
-    <lastmod>2026-02-01T00:00:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/a/dancing_women.webp</image:loc>
-      <image:title>수유샴푸나이트 매장 내부 전경</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/b/</loc>
-    <lastmod>2026-02-01T00:00:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/b/sangbong-hangukgwan-night-party.webp</image:loc>
-      <image:title>상봉동한국관나이트 매장 내부 파티 분위기</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/c/</loc>
-    <lastmod>2026-02-01T00:00:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/c/suwon-chancedom-night-party.webp</image:loc>
-      <image:title>수원찬스돔나이트 매장 내부 파티 분위기</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/h/</loc>
-    <lastmod>2026-02-02T00:00:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/h/sillim-grandprix-night-party.webp</image:loc>
-      <image:title>신림그랑프리나이트 매장 내부 파티 분위기</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/g/</loc>
-    <lastmod>2026-02-02T00:00:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/g/cheongdam-h2o-night-party.webp</image:loc>
-      <image:title>청담H2O나이트 매장 내부 파티 분위기</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/f/</loc>
-    <lastmod>2026-02-01T00:00:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/f/paju-yadang-skydome-night.webp</image:loc>
-      <image:title>파주야당스카이돔나이트 파티 분위기 속 웃고 있는 여성 3명</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/i/</loc>
-    <lastmod>2026-02-02T00:00:00+09:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
 </urlset>
