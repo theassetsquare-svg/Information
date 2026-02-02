@@ -277,11 +277,6 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.8;color:#eee;
 /* 푸터 */
 .footer{text-align:center;padding:20px 16px 28px;color:rgba(255,255,255,0.12);font-size:11px}
 
-/* CTA 바 */
-.cta-bar{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:12px 16px;background:rgba(13,13,18,0.9);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.05)}
-.cta-bar a{display:flex;align-items:center;justify-content:center;gap:10px;max-width:400px;margin:0 auto;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;text-decoration:none;padding:15px 24px;border-radius:14px;font-size:16px;font-weight:700;letter-spacing:0.3px;box-shadow:0 4px 28px rgba(124,58,237,0.35);transition:transform 0.2s,box-shadow 0.2s}
-.cta-bar a:hover{transform:translateY(-1px);box-shadow:0 8px 36px rgba(124,58,237,0.5)}
-.cta-icon{font-size:20px}
 
 @media(max-width:480px){
   .hero-img img{height:300px}
@@ -541,24 +536,6 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;line-height:1.8;color:#eee;
   &copy; 2026 informationa.pages.dev
 </div>
 
-<div class="cta-bar">
-  <a href="#contact" onclick="copyKakao();return false;" id="kakao-btn">
-    <span class="cta-icon">💬</span>
-    제휴문의 카톡 besta12
-  </a>
-</div>
-
-<div id="copy-toast" style="opacity:0;visibility:hidden;position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;z-index:1000;box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:opacity 0.3s">카톡 ID가 복사되었습니다!</div>
-
-<script>
-function copyKakao(){
-  navigator.clipboard.writeText('besta12').then(function(){
-    var t=document.getElementById('copy-toast');
-    t.style.opacity='1';t.style.visibility='visible';
-    setTimeout(function(){t.style.opacity='0';t.style.visibility='hidden'},2000);
-  });
-}
-</script>
 
 </body>
 </html>
