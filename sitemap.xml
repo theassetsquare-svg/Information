@@ -3,21 +3,9 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://informationa.pages.dev/</loc>
-    <lastmod>2026-02-01T00:00:00+09:00</lastmod>
+    <lastmod>2026-02-02T00:00:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/images/apartment-1.webp</image:loc>
-      <image:title>래미안 원베일리 아파트 외관</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/images/apartment-2.webp</image:loc>
-      <image:title>아크로 리버파크 아파트 외관</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/images/apartment-3.webp</image:loc>
-      <image:title>갤러리아 포레 오피스텔 외관</image:title>
-    </image:image>
   </url>
   <url>
     <loc>https://informationa.pages.dev/a/</loc>
