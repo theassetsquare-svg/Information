@@ -974,9 +974,11 @@ a:hover {
 }
 .floating-call .btn {
   pointer-events: auto;
-  width: min(480px, 92vw);
+  width: fit-content;
+  max-width: 92vw;
   justify-content: center;
   box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
+  white-space: nowrap;
 }
 @media (max-width: 640px) {
   .floating-call {
@@ -1004,13 +1006,13 @@ a:hover {
 
 .floating-call .btn {
   font-size: 1.05rem;
-  padding: 16px 28px;
+  padding: 14px 20px;
   border-radius: 999px;
 }
 @media (max-width: 600px) {
   .floating-call .btn {
     font-size: 1rem;
-    padding: 15px 22px;
+    padding: 13px 18px;
   }
 }
 
