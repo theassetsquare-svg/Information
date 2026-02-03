@@ -434,5 +434,23 @@ body{font-family:'Noto Sans KR',system-ui,sans-serif;background:#f6f5f0;color:#1
 })();
 </script>
 
+
+<script id="page-theme-script">
+(function(){
+  var path = location.pathname || "/";
+  var theme = "neutral";
+  if (path === "/" || path === "/index.html") theme = "home";
+  else if (path.indexOf("/b/") === 0) theme = "b";
+  else if (path.indexOf("/f/") === 0) theme = "f";
+  else if (path.indexOf("/i/") === 0) theme = "i";
+  else if (path.indexOf("/j/") === 0) theme = "j";
+  else if (path.indexOf("/k/") === 0) theme = "k";
+  else if (path.indexOf("/l/") === 0) theme = "l";
+  else if (path.indexOf("/m/") === 0) theme = "m";
+  else if (path.indexOf("/og/") === 0) theme = "preview";
+  document.body.setAttribute("data-theme", theme);
+})();
+</script>
+
 </body>
 </html>
