@@ -60,6 +60,17 @@
 </script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+
+<style id="age-gate-style">
+  #age-gate-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.86);z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;text-align:center}
+  #age-gate-overlay .age-card{max-width:420px;background:#121212;border-radius:16px;padding:24px 22px;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+  #age-gate-overlay h2{margin:0 0 12px;font-size:20px;color:#fff;letter-spacing:-0.3px}
+  #age-gate-overlay p{margin:0 0 18px;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7}
+  #age-gate-overlay .age-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  #age-gate-confirm{padding:12px 22px;border:none;border-radius:10px;background:#e94560;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
+  #age-gate-exit{padding:12px 22px;border:1px solid rgba(255,255,255,0.2);border-radius:10px;background:transparent;color:#fff;font-size:14px;font-weight:700;text-decoration:none;display:inline-block}
+</style>
+
 </head>
 <body>
     <header>
@@ -268,6 +279,28 @@
     </footer>
 
 
+</div>
+</div>
+
+
+<script id="page-theme-script">
+(function(){
+  var path = location.pathname || "/";
+  var theme = "neutral";
+  if (path === "/" || path === "/index.html") theme = "home";
+  else if (path.indexOf("/b/") === 0) theme = "b";
+  else if (path.indexOf("/f/") === 0) theme = "f";
+  else if (path.indexOf("/i/") === 0) theme = "i";
+  else if (path.indexOf("/j/") === 0) theme = "j";
+  else if (path.indexOf("/k/") === 0) theme = "k";
+  else if (path.indexOf("/l/") === 0) theme = "l";
+  else if (path.indexOf("/m/") === 0) theme = "m";
+  else if (path.indexOf("/og/") === 0) theme = "preview";
+  document.body.setAttribute("data-theme", theme);
+})();
+</script>
+
+
 <div id="age-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
   <div class="age-card">
     <h2 id="age-gate-title">본 페이지는 만 19세 이상을 대상으로 합니다</h2>
@@ -295,24 +328,6 @@
   if (btn) {
     btn.addEventListener("click", function(){ overlay.style.display = "none"; });
   }
-})();
-</script>
-
-
-<script id="page-theme-script">
-(function(){
-  var path = location.pathname || "/";
-  var theme = "neutral";
-  if (path === "/" || path === "/index.html") theme = "home";
-  else if (path.indexOf("/b/") === 0) theme = "b";
-  else if (path.indexOf("/f/") === 0) theme = "f";
-  else if (path.indexOf("/i/") === 0) theme = "i";
-  else if (path.indexOf("/j/") === 0) theme = "j";
-  else if (path.indexOf("/k/") === 0) theme = "k";
-  else if (path.indexOf("/l/") === 0) theme = "l";
-  else if (path.indexOf("/m/") === 0) theme = "m";
-  else if (path.indexOf("/og/") === 0) theme = "preview";
-  document.body.setAttribute("data-theme", theme);
 })();
 </script>
 

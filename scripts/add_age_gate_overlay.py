@@ -24,7 +24,6 @@ STYLE = """
   #age-gate-overlay .age-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   #age-gate-confirm{padding:12px 22px;border:none;border-radius:10px;background:#e94560;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
   #age-gate-exit{padding:12px 22px;border:1px solid rgba(255,255,255,0.2);border-radius:10px;background:transparent;color:#fff;font-size:14px;font-weight:700;text-decoration:none;display:inline-block}
-  #age-gate-overlay .age-note{margin-top:12px;font-size:12px;color:rgba(255,255,255,0.5)}
 </style>
 """
 
@@ -37,7 +36,6 @@ OVERLAY = """
       <button id=\"age-gate-confirm\" type=\"button\">19세 이상입니다</button>
       <a id=\"age-gate-exit\" href=\"https://informationa.pages.dev/\">나가기</a>
     </div>
-    <div class=\"age-note\">안내는 사용자 화면에만 표시되며, 검색 로봇에는 적용되지 않습니다.</div>
   </div>
 </div>
 """
