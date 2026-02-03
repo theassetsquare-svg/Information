@@ -2,56 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://informationa.pages.dev/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://informationa.pages.dev/n/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://informationa.pages.dev/b/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://informationa.pages.dev/j/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://informationa.pages.dev/l/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://informationa.pages.dev/m/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://informationa.pages.dev/f/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://informationa.pages.dev/i/</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
+    <lastmod>2026-02-03T21:30:00+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://informationa.pages.dev/call.html</loc>
-    <lastmod>2026-02-03T21:00:00+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
   </url>
 </urlset>
