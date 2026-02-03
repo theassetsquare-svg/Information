@@ -202,6 +202,13 @@ a:hover {
   background: #000;
 }
 
+.photo-grid.full-view {
+  grid-template-columns: 1fr;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
 .photo-card img {
   width: 100%;
   height: 100%;
