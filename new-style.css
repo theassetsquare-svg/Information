@@ -133,6 +133,43 @@ a:hover {
   text-transform: uppercase;
 }
 
+.page-hero {
+  max-width: var(--content-max);
+  margin: var(--space-5) auto 0;
+  padding: 0 var(--space-4);
+}
+
+.page-hero-inner {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 255, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+}
+
+.page-hero-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.page-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 4.5vw, 46px);
+  margin: 0 0 10px;
+  line-height: 1.15;
+}
+
+.page-hero p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15.5px;
+}
+
 .site-header {
   padding: 24px 0 0;
   position: relative;
@@ -655,6 +692,18 @@ a:hover {
 
   .hero p {
     font-size: 15px;
+  }
+
+  .page-hero {
+    margin-top: var(--space-4);
+  }
+
+  .page-hero-inner {
+    padding: var(--space-4);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(26px, 7vw, 36px);
   }
 
   .hero-actions {
