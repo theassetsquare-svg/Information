@@ -63,6 +63,22 @@ a:hover {
   text-decoration: none;
 }
 
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 12px;
+  padding: 10px 16px;
+  background: #111827;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 13px;
+  z-index: 999;
+}
+
+.skip-link:focus {
+  left: 16px;
+}
+
 .page {
   min-height: 100vh;
   display: flex;
@@ -103,7 +119,6 @@ a:hover {
   width: 38px;
   height: 38px;
   border-radius: 14px;
-  background: linear-gradient(140deg, #1f4fd7 0%, #0f766e 100%);
   box-shadow: var(--shadow-sm);
 }
 
@@ -143,6 +158,11 @@ a:hover {
 .nav-links a:hover {
   background: rgba(31, 79, 215, 0.08);
   color: var(--accent);
+}
+.nav-links a:focus-visible,
+.button:focus-visible {
+  outline: 2px solid rgba(31, 79, 215, 0.6);
+  outline-offset: 2px;
 }
 
 .hero {
