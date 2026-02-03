@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>전화 안내 | 010-7475-2342</title>
+    <meta name="description" content="전화 안내 페이지입니다. 010-7475-2342로 연결하거나 번호를 복사할 수 있습니다.">
+    <meta name="robots" content="noindex,follow">
+    <link rel="canonical" href="https://informationa.pages.dev/call.html">
+    <link rel="stylesheet" href="new-style.css">
+    <link rel="icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap"></noscript>
+</head>
+<body data-theme="home">
+    <a class="skip-link" href="#main-content">본문 바로가기</a>
+    <div class="page">
+        <header class="site-header">
+            <div class="nav-bar">
+                <div class="brand">
+                    <img class="brand-mark" src="images/logo-mark.svg" alt="전국 부동산 정보 가이드 로고" width="38" height="38" loading="lazy" decoding="async">
+                    <div class="brand-text">
+                        <span class="brand-title">전화 안내</span>
+                        <span class="brand-sub">Call Support</span>
+                    </div>
+                </div>
+                <nav class="nav-links" aria-label="빠른 이동">
+                    <a href="/">홈</a>
+                    <a href="/k/">수유샴푸나이트</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="content" id="main-content">
+            <section class="section">
+                <div class="section-head reveal" data-reveal>
+                    <span class="section-eyebrow">Phone</span>
+                    <h2>전화번호 안내</h2>
+                    <p>아래 번호로 바로 연결하거나 복사할 수 있습니다.</p>
+                </div>
+                <div class="hero-actions reveal" data-reveal>
+                    <a class="button button-primary" href="tel:01074752342">010-7475-2342 전화하기</a>
+                    <button class="button button-secondary" type="button" id="copy-number">번호 복사</button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 전국 부동산 정보 가이드. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+      (function(){
+        var btn = document.getElementById('copy-number');
+        if (!btn || !navigator.clipboard) return;
+        btn.addEventListener('click', function(){
+          navigator.clipboard.writeText('01074752342').then(function(){
+            btn.textContent = '복사 완료';
+            setTimeout(function(){ btn.textContent = '번호 복사'; }, 1200);
+          });
+        });
+      })();
+    </script>
+</body>
+</html>
