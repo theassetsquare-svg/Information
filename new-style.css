@@ -526,6 +526,15 @@ a:hover {
 
 .panel ul li {
   margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.check-icon {
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .faq-item h3 {
