@@ -3,78 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
     <title>404 - 페이지를 찾을 수 없습니다</title>
-    <meta name="robots" content="noindex">
+    <meta name="description" content="요청하신 페이지를 찾을 수 없습니다. 주소를 확인하거나 메인 페이지로 이동해 주세요.">
+    <meta name="robots" content="noindex,follow">
+    <link rel="canonical" href="https://informationa.pages.dev/404.html">
     <link rel="stylesheet" href="new-style.css">
     <link rel="icon" href="favicon.ico">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"></noscript>
-
-
-<style id="age-gate-style">
-  #age-gate-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.86);z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;text-align:center}
-  #age-gate-overlay .age-card{max-width:420px;background:#121212;border-radius:16px;padding:24px 22px;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
-  #age-gate-overlay h2{margin:0 0 12px;font-size:20px;color:#fff;letter-spacing:-0.3px}
-  #age-gate-overlay p{margin:0 0 18px;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7}
-  #age-gate-overlay .age-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  #age-gate-confirm{padding:12px 22px;border:none;border-radius:10px;background:#e94560;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
-  #age-gate-exit{padding:12px 22px;border:1px solid rgba(255,255,255,0.2);border-radius:10px;background:transparent;color:#fff;font-size:14px;font-weight:700;text-decoration:none;display:inline-block}
-</style>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap"></noscript>
 </head>
-<body>
-    <header>
-        <h1>404</h1>
-        <p>페이지를 찾을 수 없습니다.</p>
-    </header>
+<body data-theme="home">
+    <a class="skip-link" href="#main-content">본문 바로가기</a>
+    <div class="page">
+        <header class="site-header">
+            <div class="nav-bar">
+                <div class="brand">
+                    <img class="brand-mark" src="images/logo-mark.svg" alt="전국 부동산 정보 가이드 로고" width="38" height="38" loading="lazy" decoding="async">
+                    <div class="brand-text">
+                        <span class="brand-title">전국 부동산 정보 가이드</span>
+                        <span class="brand-sub">Not Found</span>
+                    </div>
+                </div>
+                <nav class="nav-links" aria-label="빠른 이동">
+                    <a href="/">홈</a>
+                </nav>
+            </div>
+        </header>
 
-    <div class="main-container">
-        <main>
-            <section class="info-section">
-                <h2>요청하신 페이지가 존재하지 않거나 주소가 변경되었습니다.</h2>
-                <p>주소를 다시 확인해 주세요.</p>
-                <a href="/" class="button">홈으로 돌아가기</a>
+        <main class="content" id="main-content">
+            <section class="section">
+                <div class="section-head reveal" data-reveal>
+                    <span class="section-eyebrow">Error</span>
+                    <h1>404 - 페이지를 찾을 수 없습니다</h1>
+                    <p>요청하신 페이지가 존재하지 않거나 주소가 변경되었습니다. 메인으로 돌아가 다시 검색해 주세요.</p>
+                </div>
+                <div class="hero-actions reveal" data-reveal>
+                    <a class="button button-primary" href="/">홈으로 돌아가기</a>
+                </div>
             </section>
         </main>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 전국 부동산 정보 가이드. All rights reserved.</p>
+        </footer>
     </div>
-
-    <footer>
-        <p>&copy; 2026 전국 부동산 정보 가이드. All rights reserved.</p>
-    </footer>
-
-</div>
-</div>
-
-
-
-<div id="age-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
-  <div class="age-card">
-    <h2 id="age-gate-title">본 페이지는 만 19세 이상을 대상으로 합니다</h2>
-    <p>04:00~20:00 시간대에는 성인 확인 안내가 표시됩니다. 만 19세 미만은 청소년 보호법에 따라 관련 정보 열람이 제한됩니다.</p>
-    <div class="age-actions">
-      <button id="age-gate-confirm" type="button">19세 이상입니다</button>
-      <a id="age-gate-exit" href="https://informationa.pages.dev/">나가기</a>
-    </div>
-  </div>
-</div>
-
-
-<script id="age-gate-script">
-(function(){
-  var ua = navigator.userAgent || "";
-  if (/Yeti/i.test(ua)) return;
-  var now = new Date();
-  var hour = now.getHours();
-  var show = (hour >= 4 && hour < 20);
-  if (!show) return;
-  var overlay = document.getElementById("age-gate-overlay");
-  if (!overlay) return;
-  overlay.style.display = "flex";
-  var btn = document.getElementById("age-gate-confirm");
-  if (btn) {
-    btn.addEventListener("click", function(){ overlay.style.display = "none"; });
-  }
-})();
-</script>
-
 </body>
 </html>
