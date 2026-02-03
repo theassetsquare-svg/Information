@@ -807,3 +807,20 @@ a:hover {
     bottom: 12px;
   }
 }
+
+
+.floating-call .btn {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  font-weight: 700;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.18);
+}
+.floating-call .btn:hover {
+  filter: brightness(1.04);
+  transform: translateY(-2px);
+}
+.floating-call .btn:focus-visible {
+  outline: 3px solid rgba(34, 197, 94, 0.35);
+  outline-offset: 3px;
+}
