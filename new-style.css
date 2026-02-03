@@ -174,8 +174,9 @@ a:hover {
 
 .photo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
   gap: 16px;
+  justify-content: center;
 }
 
 .photo-card {
@@ -186,6 +187,7 @@ a:hover {
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   aspect-ratio: 1 / 1;
+  max-width: 240px;
 }
 
 .photo-card img {
