@@ -190,6 +190,17 @@ a:hover {
   max-width: 240px;
 }
 
+.photo-grid.full-view .photo-card {
+  aspect-ratio: auto;
+  max-width: 320px;
+}
+
+.photo-grid.full-view .photo-card img {
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 .photo-card img {
   width: 100%;
   height: 100%;
