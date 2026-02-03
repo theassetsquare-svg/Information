@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
-  --bg: #f7f6f3;
-  --bg-2: #eef2f7;
+  --bg: #f8f6f2;
+  --bg-2: #eef1f6;
   --surface: #ffffff;
   --surface-glass: rgba(255, 255, 255, 0.72);
   --ink: #111827;
@@ -11,6 +11,7 @@
   --accent: #1f4fd7;
   --accent-2: #0f766e;
   --accent-3: #b45309;
+  --accent-soft: rgba(31, 79, 215, 0.12);
   --hero-grad: linear-gradient(135deg, rgba(31,79,215,0.12), rgba(15,118,110,0.08));
   --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.08);
   --shadow-md: 0 24px 60px rgba(15, 23, 42, 0.12);
@@ -40,9 +41,11 @@ html {
 
 body {
   margin: 0;
-  background: radial-gradient(900px 500px at 10% -10%, rgba(31,79,215,0.12), transparent 55%),
-              radial-gradient(900px 500px at 90% 0%, rgba(15,118,110,0.10), transparent 60%),
-              var(--bg);
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(31,79,215,0.10), transparent 55%),
+    radial-gradient(900px 500px at 92% 0%, rgba(15,118,110,0.10), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.2)),
+    var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
   line-height: 1.7;
@@ -86,7 +89,7 @@ a:hover {
 }
 
 .announcement {
-  background: #0f172a;
+  background: linear-gradient(120deg, #0f172a, #1f2a44);
   color: rgba(255, 255, 255, 0.78);
   text-align: center;
   padding: 10px 16px;
@@ -97,16 +100,33 @@ a:hover {
 
 .site-header {
   padding: 24px 0 0;
+  position: relative;
+}
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px 220px at 12% 0%, rgba(31, 79, 215, 0.12), transparent 70%),
+              radial-gradient(480px 260px at 88% 0%, rgba(15, 118, 110, 0.10), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .nav-bar {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 0 var(--space-4);
+  padding: 10px var(--space-4);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
 }
 
 .brand {
@@ -173,12 +193,14 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-5);
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-card {
-  background: var(--surface-glass);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(245, 247, 255, 0.72));
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   box-shadow: var(--shadow-md);
@@ -229,7 +251,7 @@ a:hover {
 }
 
 .button-primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, #1f4fd7, #2563eb);
   color: #fff;
   box-shadow: 0 12px 20px rgba(31, 79, 215, 0.2);
 }
@@ -246,7 +268,7 @@ a:hover {
 }
 
 .button-secondary:hover {
-  background: rgba(31, 79, 215, 0.06);
+  background: rgba(31, 79, 215, 0.08);
   transform: translateY(-2px);
 }
 
@@ -255,6 +277,12 @@ a:hover {
   overflow: hidden;
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.hero-media img {
+  transition: transform 0.6s ease;
+}
+.hero-media:hover img {
+  transform: scale(1.02);
 }
 
 .hero-media img {
@@ -273,7 +301,7 @@ a:hover {
 }
 
 .stat-card {
-  background: var(--surface);
+  background: linear-gradient(180deg, #ffffff, #f8faff);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 18px 20px;
@@ -321,6 +349,15 @@ a:hover {
   font-size: clamp(24px, 3vw, 36px);
   margin: 12px 0 12px;
 }
+.section h2::after {
+  content: "";
+  display: block;
+  margin-top: 10px;
+  width: 44px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
 
 .section p {
   color: var(--muted);
@@ -334,9 +371,10 @@ a:hover {
 }
 
 .panel {
-  background: var(--surface);
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
+  border-top: 3px solid var(--accent-soft);
   padding: 22px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -380,14 +418,14 @@ a:hover {
 .badge {
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(31, 79, 215, 0.08);
+  background: rgba(31, 79, 215, 0.12);
   color: var(--accent);
   font-size: 12px;
   font-weight: 600;
 }
 
 .notice {
-  background: var(--surface);
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 22px;
