@@ -1,0 +1,7 @@
+{
+  "messageTemplate": "chore: automated deploy {timestamp}" ,
+  "notes": [
+    "This file documents the default commit message format for scripts/auto_push.sh.",
+    "Update the template if you want a different default commit message."
+  ]
+}

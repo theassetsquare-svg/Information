@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "deploy": "bash scripts/auto_push.sh"
+  },
   "dependencies": {
     "sharp": "^0.34.5"
   }

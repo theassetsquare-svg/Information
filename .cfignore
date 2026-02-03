@@ -1,0 +1,7 @@
+.git
+.github
+.claude
+.idx
+.vscode
+node_modules
+firebase-debug.log
