@@ -390,5 +390,16 @@
             <p>&copy; 2026 전국 부동산 정보 가이드. All rights reserved.</p>
         </footer>
     </div>
+    <div class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-describedby="age-gate-desc">
+        <div class="age-gate-card">
+            <h2 id="age-gate-title">안내: 만 19세 이상 대상 페이지</h2>
+            <p id="age-gate-desc">매일 04:00~20:00 시간대에는 성인 확인 안내가 표시됩니다. 만 19세 미만은 청소년 보호법에 따라 관련 정보 열람이 제한됩니다.</p>
+            <div class="age-gate-actions">
+                <button class="button button-primary" type="button" data-age-confirm>19세 이상입니다</button>
+                <a class="button age-gate-exit" href="https://informationa.pages.dev/" data-age-exit>나가기</a>
+            </div>
+        </div>
+    </div>
+    <script src="/main.js" defer></script>
 </body>
 </html>

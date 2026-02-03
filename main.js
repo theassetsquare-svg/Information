@@ -37,6 +37,7 @@ const sampleProperties = [
 ];
 
 function renderProperties(properties) {
+    if (!propertyList) return;
     propertyList.innerHTML = '';
     for (const property of properties) {
         const card = document.createElement('div');
@@ -44,7 +45,7 @@ function renderProperties(properties) {
 
         const image = document.createElement('img');
         image.src = property.image;
-        image.alt = `${property.name} 부동산 이미지`; // Add alt text for SEO
+        image.alt = `${property.name} 부동산 이미지`;
         card.appendChild(image);
 
         const info = document.createElement('div');
@@ -67,4 +68,29 @@ function renderProperties(properties) {
     }
 }
 
+function initAgeGate() {
+    const overlay = document.querySelector('.age-gate');
+    if (!overlay) return;
+    const now = new Date();
+    const hour = now.getHours();
+    const shouldShow = hour >= 4 && hour < 20;
+    if (!shouldShow) return;
+
+    overlay.classList.add('is-active');
+    const confirmButton = overlay.querySelector('[data-age-confirm]');
+    const exitLink = overlay.querySelector('[data-age-exit]');
+    if (confirmButton) {
+        confirmButton.focus();
+        confirmButton.addEventListener('click', () => {
+            overlay.classList.remove('is-active');
+        });
+    }
+    if (exitLink) {
+        exitLink.addEventListener('click', () => {
+            overlay.classList.remove('is-active');
+        });
+    }
+}
+
 renderProperties(sampleProperties);
+initAgeGate();
