@@ -38,7 +38,7 @@ body[data-theme="i"] { --accent: #1d4ed8; --accent-2: #f97316; --accent-soft: rg
 body[data-theme="j"] { --accent: #111827; --accent-2: #38bdf8; --accent-soft: rgba(17, 24, 39, 0.14); }
 body[data-theme="k"] { --accent: #be123c; --accent-2: #f59e0b; --accent-soft: rgba(190, 18, 60, 0.16); }
 body[data-theme="l"] { --accent: #0f766e; --accent-2: #84cc16; --accent-soft: rgba(15, 118, 110, 0.16); }
-body[data-theme="m"] { --accent: #b45309; --accent-2: #f97316; --accent-soft: rgba(180, 83, 9, 0.16); }
+body[data-theme="o"] { --accent: #b45309; --accent-2: #f97316; --accent-soft: rgba(180, 83, 9, 0.16); }
 
 body[data-theme="n"] { --accent: #be123c; --accent-2: #f59e0b; --accent-soft: rgba(190, 18, 60, 0.16); }
 
