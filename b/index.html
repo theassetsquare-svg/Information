@@ -15,43 +15,89 @@
     <meta property="og:site_name" content="전국 지역 정보 가이드">
     <link rel="stylesheet" href="../new-style.css">
     <link rel="icon" href="../favicon.ico">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"></noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap"></noscript>
     <meta name="naver-site-verification" content="1179edfcfa456f3ab7573e53979cfe0932a148d3">
     <link rel="alternate" type="application/rss+xml" title="전국 지역 정보 가이드 RSS" href="https://informationa.pages.dev/rss.xml">
 </head>
 <body>
-    <header>
-        <h1>상봉동한국관나이트</h1>
-        <p>상봉역 인근 이동 동선과 보행 안전 정보를 안내합니다.</p>
-    </header>
+    <div class="page">
+        <div class="announcement">상봉역 이동 동선 가이드</div>
 
-    <div class="main-container">
-        <main>
-            <section class="info-section">
-                <h2>서론: 상봉동한국관나이트 검색 의도</h2>
-                <p><strong>상봉동한국관나이트</strong>는 <strong>상봉역</strong> 인근에서 이동 경로와 접근 정보를 찾는 이용자들이 사용하는 키워드입니다. 이 페이지는 <strong>중랑구 상봉동</strong>의 동선 특징과 <strong>환승 접근</strong>에 대한 기본 정보를 제공합니다.</p>
+        <header class="site-header">
+            <div class="nav-bar">
+                <div class="brand">
+                    <div class="brand-mark" aria-hidden="true"></div>
+                    <div class="brand-text">
+                        <span class="brand-title">전국 부동산 정보 가이드</span>
+                        <span class="brand-sub">Local Night Guide</span>
+                    </div>
+                </div>
+                <nav class="nav-links" aria-label="빠른 이동">
+                    <a href="/">홈</a>
+                    <a href="/index.html#seoul">서울</a>
+                    <a href="/index.html#gyeonggi">경기</a>
+                    <a href="/index.html#subscriptions">청약 일정</a>
+                </nav>
+            </div>
+
+            <section class="hero" aria-labelledby="hero-title">
+                <div class="hero-card">
+                    <span class="hero-eyebrow">Seoul · 상봉역</span>
+                    <h1 id="hero-title">상봉동한국관나이트</h1>
+                    <p>상봉역 인근 야간 이동과 보행 안전 정보를 간단히 안내합니다.</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#guide">이동 동선 보기</a>
+                        <a class="button button-secondary" href="/index.html">전체 가이드</a>
+                    </div>
+                </div>
+                <div class="hero-media" aria-hidden="true">
+                    <picture>
+                        <source srcset="og-thumb.jpg" type="image/jpeg">
+                        <img src="og-thumb.jpg" alt="상봉역 인근 야간 이미지">
+                    </picture>
+                </div>
+            </section>
+        </header>
+
+        <main class="content" id="guide">
+            <section class="section">
+                <div class="section-head">
+                    <span class="section-eyebrow">Overview</span>
+                    <h2>서론: 상봉동한국관나이트 검색 의도</h2>
+                    <p><strong>상봉동한국관나이트</strong>는 <strong>상봉역</strong> 인근에서 이동 경로와 접근 정보를 찾는 이용자들이 사용하는 키워드입니다. 이 페이지는 <strong>중랑구 상봉동</strong>의 동선 특징과 <strong>환승 접근</strong>에 대한 기본 정보를 제공합니다.</p>
+                </div>
+                <div class="section-grid">
+                    <article class="panel">
+                        <h3>환승과 대중교통</h3>
+                        <p>상봉역은 여러 노선이 교차해 <strong>환승 접근</strong>이 쉽습니다. 출발 지점에 따라 도착 시간이 달라질 수 있으니 <strong>야간 대중교통</strong> 시간표를 함께 확인하는 것이 좋습니다.</p>
+                    </article>
+                    <article class="panel">
+                        <h3>도보 동선 구성</h3>
+                        <p>역 주변은 상권과 보행로가 가까워 <strong>도보 동선</strong>이 짧게 구성됩니다. 보행 흐름이 많은 구간에서는 정지 시간을 줄이고 이동 속도를 유지하세요.</p>
+                    </article>
+                    <article class="panel">
+                        <h3>혼잡 시간대와 안전</h3>
+                        <p>퇴근 시간대와 주말 저녁에는 <strong>혼잡 시간대</strong>가 형성될 수 있습니다. <strong>보행 안전</strong>을 위해 횡단보도 신호를 확인하고, 차량 통행이 잦은 구간은 주의 깊게 이동하세요.</p>
+                    </article>
+                </div>
             </section>
 
-            <section class="info-section">
-                <h2>본론: 접근과 보행 동선</h2>
-                <h3>환승과 대중교통</h3>
-                <p>상봉역은 여러 노선이 교차해 <strong>환승 접근</strong>이 쉽습니다. 출발 지점에 따라 도착 시간이 달라질 수 있으니 <strong>야간 대중교통</strong> 시간표를 함께 확인하는 것이 좋습니다.</p>
-                <h3>도보 동선 구성</h3>
-                <p>역 주변은 상권과 보행로가 가까워 <strong>도보 동선</strong>이 짧게 구성됩니다. 보행 흐름이 많은 구간에서는 정지 시간을 줄이고 이동 속도를 유지하세요.</p>
-                <h3>혼잡 시간대와 안전</h3>
-                <p>퇴근 시간대와 주말 저녁에는 <strong>혼잡 시간대</strong>가 형성될 수 있습니다. <strong>보행 안전</strong>을 위해 횡단보도 신호를 확인하고, 차량 통행이 잦은 구간은 주의 깊게 이동하세요.</p>
-            </section>
-
-            <section class="info-section">
-                <h2>결론: 방문 전 확인 포인트</h2>
-                <p>방문 전에는 도착 시간, 예상 혼잡도, 날씨를 함께 점검하면 이동이 한결 편안합니다. 현장 안내가 변경될 수 있으므로 최신 공지를 확인하는 것을 권장합니다.</p>
+            <section class="section">
+                <div class="section-head">
+                    <span class="section-eyebrow">Checklist</span>
+                    <h2>결론: 방문 전 확인 포인트</h2>
+                    <p>방문 전에는 도착 시간, 예상 혼잡도, 날씨를 함께 점검하면 이동이 한결 편안합니다. 현장 안내가 변경될 수 있으므로 최신 공지를 확인하는 것을 권장합니다.</p>
+                </div>
             </section>
         </main>
-    </div>
 
-    <footer>
-        <p>&copy; 2026 전국 부동산 정보 가이드. All rights reserved.</p>
-    </footer>
+        <footer class="site-footer">
+            <p><strong>전국 부동산 정보 가이드</strong> · 상봉역 접근 안내</p>
+            <p>&copy; 2026 전국 부동산 정보 가이드. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
