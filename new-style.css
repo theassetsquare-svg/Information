@@ -851,3 +851,13 @@ a:hover {
   font-size: 0.78rem;
   font-weight: 700;
 }
+
+
+.photo-card.letterbox {
+  background: #fff;
+}
+.photo-card.letterbox img {
+  padding: 10px;
+  background: #fff;
+  object-fit: contain;
+}
