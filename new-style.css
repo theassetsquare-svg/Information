@@ -783,3 +783,27 @@ a:hover {
     font-size: 14px;
   }
 }
+
+
+.floating-call {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  z-index: 999;
+  pointer-events: none;
+}
+.floating-call .btn {
+  pointer-events: auto;
+  width: min(480px, 92vw);
+  justify-content: center;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
+}
+@media (max-width: 640px) {
+  .floating-call {
+    bottom: 12px;
+  }
+}
