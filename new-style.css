@@ -192,13 +192,14 @@ a:hover {
 
 .photo-grid.full-view .photo-card {
   aspect-ratio: auto;
-  max-width: 320px;
+  max-width: none;
 }
 
 .photo-grid.full-view .photo-card img {
   aspect-ratio: auto;
   height: auto;
   object-fit: contain;
+  background: #000;
 }
 
 .photo-card img {
