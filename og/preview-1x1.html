@@ -1,171 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <title>OG 1:1</title>
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="전국 지역 정보 가이드">
-    <meta property="og:locale" content="ko_KR">
-    <meta property="og:url" content="https://informationa.pages.dev/og/preview-1x1.html">
-    <meta property="og:title" content="OG 1:1">
-    <meta property="og:description" content="네이버 공유용 OG 이미지 미리보기 페이지입니다.">
-    <meta property="og:image" content="https://informationa.pages.dev/images/og-thumb.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:alt" content="전국 지역 정보 가이드 대표 이미지">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OG Image Preview - 1x1</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="../new-style.css">
+    <link rel="icon" href="../favicon.ico">
     <style>
-        @font-face {
-            font-family: 'Noto Sans KR';
-            src: url('/home/user/.fonts/NotoSansKR.ttf') format('truetype');
-            font-weight: 100 900;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
         }
-        body { margin: 0; padding: 40px; background: #222; }
-        .og {
+        .og-preview {
             width: 800px;
             height: 800px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            font-family: 'Noto Sans KR', sans-serif;
-            color: white;
-            position: relative;
-            overflow: hidden;
+            align-items: center;
+            text-align: center;
         }
-        .og::before {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            right: -100px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(233,69,96,0.25) 0%, transparent 70%);
-            border-radius: 50%;
+        .og-content {
+            max-width: 80%;
         }
-        .og::after {
-            content: '';
-            position: absolute;
-            top: -80px;
-            left: -80px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(233,69,96,0.15) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-        .badge {
-            background: #e94560;
-            color: #fff;
-            font-size: 24px;
-            font-weight: 700;
-            padding: 10px 30px;
-            border-radius: 30px;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
-        .main-text {
+        .og-content h1 {
             font-size: 120px;
             font-weight: 900;
-            letter-spacing: 6px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            color: #111;
+            margin-bottom: 20px;
         }
-        .sub-text {
-            font-size: 88px;
-            font-weight: 900;
-            text-align: center;
-            margin-top: 20px;
-            color: #e94560;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .bottom-text {
-            position: absolute;
-            bottom: 50px;
-            font-size: 22px;
-            font-weight: 700;
-            color: rgba(255,255,255,0.45);
-            z-index: 1;
-            letter-spacing: 2px;
+        .og-content p {
+            font-size: 48px;
+            color: #666;
         }
     </style>
-
-<style id="age-gate-style">
-  #age-gate-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.86);z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;text-align:center}
-  #age-gate-overlay .age-card{max-width:420px;background:#121212;border-radius:16px;padding:24px 22px;box-shadow:0 10px 30px rgba(0,0,0,0.4)}
-  #age-gate-overlay h2{margin:0 0 12px;font-size:20px;color:#fff;letter-spacing:-0.3px}
-  #age-gate-overlay p{margin:0 0 18px;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7}
-  #age-gate-overlay .age-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  #age-gate-confirm{padding:12px 22px;border:none;border-radius:10px;background:#e94560;color:#fff;font-size:14px;font-weight:700;cursor:pointer}
-  #age-gate-exit{padding:12px 22px;border:1px solid rgba(255,255,255,0.2);border-radius:10px;background:transparent;color:#fff;font-size:14px;font-weight:700;text-decoration:none;display:inline-block}
-  #age-gate-overlay .age-note{margin-top:12px;font-size:12px;color:rgba(255,255,255,0.5)}
-</style>
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
-<link rel="stylesheet" href="/ui.css">
 </head>
 <body>
-    <div class="og">
-        <div class="badge">수유 지역 나이트 정보</div>
-        <div class="main-text">수유샴푸</div>
-        <div class="sub-text">황정민</div>
-        <div class="bottom-text">수유샴푸나이트 이용 안내</div>
+    <div class="og-preview">
+        <div class="og-content">
+            <h1>전국 부동산 정보 가이드</h1>
+            <p>2026년 지역별 시세·청약·재개발·투자 분석 총정리</p>
+        </div>
     </div>
-
-<div id="age-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
-  <div class="age-card">
-    <h2 id="age-gate-title">본 페이지는 만 19세 이상을 대상으로 합니다</h2>
-    <p>04:00~20:00 시간대에는 성인 확인 안내가 표시됩니다. 만 19세 미만은 청소년 보호법에 따라 관련 정보 열람이 제한됩니다.</p>
-    <div class="age-actions">
-      <button id="age-gate-confirm" type="button">19세 이상입니다</button>
-      <a id="age-gate-exit" href="https://informationa.pages.dev/">나가기</a>
-    </div>
-  </div>
-</div>
-
-
-<script id="age-gate-script">
-(function(){
-  var ua = navigator.userAgent || "";
-  if (/Yeti/i.test(ua)) return;
-  var now = new Date();
-  var hour = now.getHours();
-  var show = (hour >= 4 && hour < 20);
-  if (!show) return;
-  var overlay = document.getElementById("age-gate-overlay");
-  if (!overlay) return;
-  overlay.style.display = "flex";
-  var btn = document.getElementById("age-gate-confirm");
-  if (btn) {
-    btn.addEventListener("click", function(){ overlay.style.display = "none"; });
-  }
-})();
-</script>
-
-
-<script id="page-theme-script">
-(function(){
-  var path = location.pathname || "/";
-  var theme = "neutral";
-  if (path === "/" || path === "/index.html") theme = "home";
-  else if (path.indexOf("/b/") === 0) theme = "b";
-  else if (path.indexOf("/f/") === 0) theme = "f";
-  else if (path.indexOf("/i/") === 0) theme = "i";
-  else if (path.indexOf("/j/") === 0) theme = "j";
-  else if (path.indexOf("/k/") === 0) theme = "k";
-  else if (path.indexOf("/l/") === 0) theme = "l";
-  else if (path.indexOf("/m/") === 0) theme = "m";
-  else if (path.indexOf("/og/") === 0) theme = "preview";
-  document.body.setAttribute("data-theme", theme);
-})();
-</script>
-
 </body>
 </html>
