@@ -183,12 +183,12 @@ a:hover {
   border: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
+  aspect-ratio: 1 / 1;
 }
 
 .photo-card img {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  height: auto;
+  height: 100%;
   object-fit: contain;
   background: #fff;
   display: block;
