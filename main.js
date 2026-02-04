@@ -68,46 +68,6 @@ function renderProperties(properties) {
     }
 }
 
-function initAgeGate() {
-    const overlay = document.querySelector('.age-gate');
-    if (!overlay) return;
-    const now = new Date();
-    const hour = now.getHours();
-    const shouldShow = hour >= 4 && hour < 20;
-    if (!shouldShow) return;
-    const redirectTo = overlay.getAttribute('data-redirect');
-    const storageKey = overlay.getAttribute('data-storage-key') || 'ageGateConfirmed';
-    const hasConfirmed = window.localStorage.getItem(storageKey) === 'true';
-    if (hasConfirmed && redirectTo) {
-        window.location.href = redirectTo;
-        return;
-    }
-
-    overlay.classList.add('is-active');
-    document.body.classList.add('gate-active');
-
-    const confirmButton = overlay.querySelector('[data-age-confirm]');
-    const exitLink = overlay.querySelector('[data-age-exit]');
-    if (confirmButton) {
-        confirmButton.focus();
-        confirmButton.addEventListener('click', () => {
-            window.localStorage.setItem(storageKey, 'true');
-            if (redirectTo) {
-                window.location.href = redirectTo;
-                return;
-            }
-            overlay.classList.remove('is-active');
-            document.body.classList.remove('gate-active');
-        });
-    }
-    if (exitLink) {
-        exitLink.addEventListener('click', () => {
-            overlay.classList.remove('is-active');
-            document.body.classList.remove('gate-active');
-        });
-    }
-}
-
 function initReveal() {
     const elements = document.querySelectorAll('[data-reveal]');
     if (!('IntersectionObserver' in window) || elements.length === 0) {
@@ -129,5 +89,4 @@ function initReveal() {
 }
 
 renderProperties(sampleProperties);
-initAgeGate();
 initReveal();
