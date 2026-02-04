@@ -14,6 +14,17 @@ body {
   color: var(--ink);
   font-family: 'Manrope', 'Noto Sans KR', sans-serif;
 }
+.section-head .section-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #3b4a6b;
+  background: #eef2ff;
+  padding: 4px 8px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
 .page {
   padding-bottom: 140px;
 }
@@ -46,6 +57,18 @@ body {
 .section-head p {
   color: var(--muted);
 }
+.section {
+  position: relative;
+}
+.section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+}
 .photo-card {
   border-radius: 14px;
   border: 1px solid var(--line);
@@ -63,6 +86,14 @@ body {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 16px;
+}
+.panel ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+.panel li {
+  margin: 6px 0;
 }
 .callout, .notice {
   background: #f1f5ff;
