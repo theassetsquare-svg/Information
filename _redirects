@@ -1,1 +1,2 @@
-/l/guide/*  /404.html  404
+/l/guide/   /l/  302
+/l/guide/*  /l/  302
