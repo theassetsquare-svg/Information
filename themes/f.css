@@ -81,6 +81,13 @@ body {
   overflow: hidden;
   box-shadow: 0 12px 26px rgba(17, 24, 39, 0.06);
 }
+.photo-card img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block;
+  max-height: none !important;
+}
 .photo-card.contain {
   padding: 8px;
   background: #fafbff;
