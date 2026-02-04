@@ -116,6 +116,43 @@ figcaption {
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.04);
 }
+.age-gate {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+}
+.age-gate-card {
+  width: min(520px, 92vw);
+  background: #111;
+  color: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+.age-gate-card h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+.age-gate-card p {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.75);
+}
+.age-gate-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.age-gate-exit {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
 .button {
   display: inline-block;
 }
