@@ -10,7 +10,7 @@
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  background: var(--bg);
+  background: radial-gradient(circle at 12% 10%, #ffffff 0, var(--bg) 42%);
   color: var(--ink);
   font-family: 'Manrope', 'Noto Sans KR', sans-serif;
 }
@@ -43,12 +43,29 @@ body {
   padding: 24px;
   box-shadow: 0 16px 32px rgba(17, 24, 39, 0.06);
 }
+.page-hero-inner {
+  gap: 12px;
+}
 .page-hero h1 {
   font-size: 32px;
   margin: 6px 0 8px;
 }
 .page-hero p {
   color: var(--muted);
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.meta-chip {
+  font-size: 12px;
+  padding: 6px 10px;
+  background: #eef2ff;
+  color: #2f3a59;
+  border-radius: 999px;
+  border: 1px solid var(--line);
 }
 .section-head h2 {
   font-size: 20px;
@@ -74,6 +91,7 @@ body {
   border: 1px solid var(--line);
   background: var(--card);
   overflow: hidden;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
 }
 .photo-card img {
   width: 100%;
@@ -86,6 +104,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 16px;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
 }
 .panel ul {
   margin: 0;
