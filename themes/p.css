@@ -1,0 +1,75 @@
+:root {
+  --bg: #f7f7fb;
+  --ink: #1b1c24;
+  --muted: #5a6072;
+  --accent: #2f5cff;
+  --card: #ffffff;
+  --line: #e3e6f2;
+}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=Nanum+Myeongjo:wght@400;700&display=swap');
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at 10% 10%, #ffffff 0, var(--bg) 40%);
+  color: var(--ink);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.announcement {
+  background: #111827;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+.page-hero {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 18px 40px rgba(21, 32, 77, 0.08);
+}
+.page-hero h1 {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 36px;
+  margin: 8px 0 10px;
+}
+.page-hero p {
+  color: var(--muted);
+}
+.section-head h2 {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 24px;
+  margin: 0 0 8px;
+}
+.section-head p {
+  color: var(--muted);
+}
+.photo-card {
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  overflow: hidden;
+}
+.photo-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.panel, .stat-card, .mini-card, .step-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.callout, .notice {
+  background: #f0f4ff;
+}
+.button-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.site-footer {
+  color: var(--muted);
+}
