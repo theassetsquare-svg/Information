@@ -1,0 +1,30 @@
+:root {
+  --bg: #0f1221;
+  --ink: #e9ecff;
+  --muted: #a5accb;
+  --accent: #7c5cff;
+  --card: #1b2038;
+  --line: #2a3050;
+}
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nanum+Myeongjo:wght@400;700&display=swap');
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 20%, #1c2350 0, var(--bg) 45%),
+              radial-gradient(circle at 90% 10%, #3a2f6a 0, transparent 40%);
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.page { max-width: 1000px; margin: 0 auto; padding: 38px 20px 80px; }
+.announcement { color: var(--ink); border: 1px solid var(--line); padding: 10px 14px; letter-spacing: 0.06em; }
+.hero, .page-hero { background: var(--card); border: 1px solid var(--line); padding: 28px; border-radius: 10px; }
+.hero h1, .page-hero h1 { font-size: 38px; }
+.section { margin-top: 36px; }
+.section-head h2 { font-size: 24px; }
+.section-head p { color: var(--muted); }
+.photo-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.photo-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+.stat-card, .panel, .mini-card, .step-card { background: var(--card); border: 1px solid var(--line); padding: 14px; border-radius: 12px; }
+.button { display: inline-block; padding: 10px 14px; border: 1px solid var(--accent); color: var(--ink); text-decoration: none; border-radius: 6px; }
+.button-primary { background: var(--accent); }
+.site-footer { margin-top: 60px; color: var(--muted); }
