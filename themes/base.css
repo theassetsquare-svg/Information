@@ -1,0 +1,135 @@
+:root {
+  font-size: 16px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.page {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 32px 20px 72px;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+  background: #000;
+  color: #fff;
+  padding: 8px 12px;
+  z-index: 999;
+}
+.announcement {
+  border-radius: 8px;
+}
+.hero, .page-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hero-card,
+.page-hero-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hero-media {
+  min-height: 200px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+}
+.stats {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 26px;
+}
+.section {
+  margin-top: 36px;
+}
+.content {
+  margin-top: 24px;
+}
+.section-head {
+  margin-bottom: 16px;
+}
+.section-head p {
+  max-width: 70ch;
+}
+.section-grid {
+  display: grid;
+  gap: 16px;
+}
+.photo-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.photo-card {
+  overflow: hidden;
+}
+.photo-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+figcaption {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-top: 8px;
+}
+.mini-cards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.steps {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.callout {
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+}
+.notice {
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+}
+.button {
+  display: inline-block;
+}
+.site-footer {
+  margin-top: 60px;
+}
+@media (max-width: 820px) {
+  .page {
+    padding: 26px 16px 60px;
+  }
+  .hero, .page-hero {
+    padding: 0;
+  }
+  .hero-media {
+    min-height: 160px;
+  }
+}
