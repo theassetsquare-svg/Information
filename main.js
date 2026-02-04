@@ -71,6 +71,10 @@ function renderProperties(properties) {
 function initAgeGate() {
     const overlay = document.querySelector('.age-gate');
     if (!overlay) return;
+    const now = new Date();
+    const hour = now.getHours();
+    const shouldShow = hour >= 4 && hour < 20;
+    if (!shouldShow) return;
     const redirectTo = overlay.getAttribute('data-redirect');
     const storageKey = overlay.getAttribute('data-storage-key') || 'ageGateConfirmed';
     const hasConfirmed = window.localStorage.getItem(storageKey) === 'true';
