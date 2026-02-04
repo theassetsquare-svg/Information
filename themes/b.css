@@ -85,8 +85,8 @@ body {
 .photo-card img {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+  background: #f7f3ea;
 }
 .panel, .stat-card, .mini-card, .step-card {
   background: var(--card);
