@@ -84,6 +84,7 @@ body {
 .photo-card img {
   width: 100%;
   height: auto;
+  aspect-ratio: auto;
   object-fit: contain;
   background: #f7f7fb;
 }
