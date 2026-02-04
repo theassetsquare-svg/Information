@@ -174,9 +174,11 @@ a:hover {
 
 .photo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   justify-content: center;
+  max-width: 1120px;
+  margin: 0 auto;
 }
 
 .photo-card {
@@ -187,7 +189,7 @@ a:hover {
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   aspect-ratio: 1 / 1;
-  max-width: 240px;
+  max-width: 320px;
 }
 
 .photo-grid.full-view .photo-card {
@@ -936,6 +938,14 @@ a:hover {
 
   .stats {
     grid-template-columns: 1fr;
+  }
+
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-card {
+    max-width: none;
   }
 
   .panel {
