@@ -175,7 +175,7 @@ figcaption {
   display: block;
   width: 100%;
   text-align: center;
-  padding: 14px 18px;
+  padding: 8px 10px;
   border-radius: 999px;
   font-size: 16px;
   font-weight: 600;
@@ -187,7 +187,7 @@ figcaption {
 }
 .floating-call .btn.primary img {
   display: block;
-  width: min(320px, 100%);
+  width: min(520px, 100%);
   height: auto;
   margin: 0 auto;
 }
