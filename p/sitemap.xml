@@ -2,20 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>./</loc>
+    <loc>https://informationa.pages.dev/p/</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>수유샴푸나이트황정민네이버썸네일2.png</image:loc>
+      <image:loc>https://informationa.pages.dev/p/%EC%88%98%EC%9C%A0%EC%83%B4%ED%91%B8%EB%82%98%EC%9D%B4%ED%8A%B8%ED%99%A9%EC%A0%95%EB%AF%BC%EB%84%A4%EC%9D%B4%EB%B2%84%EC%8D%B8%EB%84%A4%EC%9D%BC2.png</image:loc>
       <image:caption>수유샴푸나이트 안내 대표 이미지</image:caption>
     </image:image>
     <image:image>
-      <image:loc>dancing_women.webp</image:loc>
+      <image:loc>https://informationa.pages.dev/p/dancing_women.webp</image:loc>
       <image:caption>야간 보행 분위기 참고 사진</image:caption>
     </image:image>
     <image:image>
-      <image:loc>naver-thumb2.png</image:loc>
+      <image:loc>https://informationa.pages.dev/p/dancing_women.png</image:loc>
+      <image:caption>야간 보행 분위기 참고 사진</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/p/naver-thumb2.png</image:loc>
       <image:caption>수유역 주변 이동 안내 이미지</image:caption>
     </image:image>
   </url>
