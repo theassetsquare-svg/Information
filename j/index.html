@@ -248,5 +248,53 @@
             <a class="btn primary" target="_blank" rel="noopener" aria-label="전화 바로가기" href="tel:01093541323"><img src="call-number.svg" alt="전화번호" loading="lazy"></a>
         </div>
 
+
+<!-- SIMILARITY RULES
+[유사도 기준(강제) — 10%]
+- “이전 페이지들과의 유사도(Self Similarity Score)”를 0~100으로 산정하라.
+- 기준: 유사도 >= 10 이면 실패로 판정하고 즉시 재생성한다.
+- 목표: 페이지 간 체감 유사도를 최소화하여 “복붙 템플릿” 인상을 0에 가깝게 만든다.
+
+[재생성(리롤) 규칙 — 10% 이상일 때 반드시 수행]
+- 재생성 시 아래를 모두 강제 변경(부분 변경 금지):
+  1) LAYOUT_ARCHETYPE: 이전과 다른 번호로 변경(최우선, 구조 자체를 바꿀 것)
+  2) CONTENT_PACK: 이전과 다른 번호로 변경(목차/섹션 종류 교체)
+  3) VISUAL_SYSTEM: 이전과 다른 번호로 변경(CSS 변수/컴포넌트 스타일 전면 교체)
+  4) INTERACTION_PACK: 이전과 다른 번호로 변경(JS 상호작용 교체)
+  5) H2 제목: 80% 이상 완전 신규 창작(흔한 단어/패턴 반복 금지)
+  6) Hero: 헤드라인/서브카피/CTA 모두 완전 교체(유사 문장 금지)
+  7) 섹션 순서: 동일한 순서 재사용 금지(Act 구조도 바꿀 것)
+
+[유사도 산정 방식(초엄격)]
+- Text Similarity(0~100):
+  title/H1/H2/본문 핵심 문장에 대해 3~5단어 n-gram 중복률 + 문장 구조 유사도
+- Structure Similarity(0~100):
+  섹션의 종류/순서/개수 + 컴포넌트 패턴(스플릿, 타임라인, 대시보드, FAQ-퍼스트 등) 일치율
+- Visual Similarity(0~100):
+  색 시스템/타이포 스케일/그리드/버튼·카드 형태/모션 패턴 유사도
+
+최종 유사도 = 0.45*Text + 0.40*Structure + 0.15*Visual
+※ 구조(Structure) 가중치를 높여 “템플릿 복붙”을 강하게 차단한다.
+
+[출력 강제]
+- 결과물 마지막에 “SIMILARITY REPORT” 출력:
+  - Text/Structure/Visual/Total 점수
+  - 이전 페이지와 겹친 요소(겹친 H2, 섹션 순서, 컴포넌트 등) 5줄 요약
+  - 재생성 여부(Yes/No)
+  - 이번 페이지의 A/C/V/I 팩 번호와 이름
+-->
+<section class="similarity-report" id="similarity-report" aria-label="Similarity report">
+  <h2>SIMILARITY REPORT</h2>
+  <p>Text: TBD · Structure: TBD · Visual: TBD · Total: TBD</p>
+  <p>Overlap summary (5 lines):</p>
+  <p>1) TBD</p>
+  <p>2) TBD</p>
+  <p>3) TBD</p>
+  <p>4) TBD</p>
+  <p>5) TBD</p>
+  <p>Regeneration: TBD</p>
+  <p>Pack: LAYOUT_ARCHETYPE TBD · CONTENT_PACK TBD · VISUAL_SYSTEM TBD · INTERACTION_PACK TBD</p>
+</section>
+
 </body>
 </html>
