@@ -1,20 +1,10 @@
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const callbar = document.querySelector('.callbar');
 
-if (!prefersReducedMotion) {
-  document.body.classList.add("js-ready");
+const syncCallbarHeight = () => {
+  if (!callbar) return;
+  const height = callbar.offsetHeight;
+  document.documentElement.style.setProperty('--callbar-height', `${height}px`);
+};
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  document.querySelectorAll(".section, .hero-inner").forEach((el) => {
-    observer.observe(el);
-  });
-}
+syncCallbarHeight();
+window.addEventListener('resize', syncCallbarHeight);
