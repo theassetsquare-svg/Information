@@ -1,0 +1,309 @@
+@font-face {
+  font-family: "Gothic A1";
+  src: local("Gothic A1");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gmarket Sans";
+  src: local("Gmarket Sans");
+  font-display: swap;
+}
+
+:root {
+  --bg: #0b0c10;
+  --bg-accent: #13152a;
+  --fg: #f8f8f2;
+  --muted: #b6b6c7;
+  --primary: #ff4d2e;
+  --secondary: #ffd400;
+  --card: #1b1e3a;
+  --line: #2f3360;
+  --focus: #8be9fd;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Gothic A1", "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.7;
+}
+
+.poster-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 77, 46, 0.28), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(255, 212, 0, 0.2), transparent 30%),
+    linear-gradient(135deg, #0b0c10 0%, #0b0c10 45%, #101327 100%);
+  z-index: -1;
+}
+
+.hero {
+  padding: 48px 20px 24px;
+}
+
+.hero-inner {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.hero-label {
+  font-family: "Gmarket Sans", "Gothic A1", sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: clamp(0.7rem, 1.3vw, 0.9rem);
+  color: var(--secondary);
+}
+
+h1 {
+  font-family: "Gmarket Sans", "Gothic A1", sans-serif;
+  font-size: clamp(2rem, 5.2vw, 3.4rem);
+  line-height: 1.2;
+  margin: 12px 0 16px;
+}
+
+.hero-summary {
+  color: var(--muted);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-bottom: 20px;
+}
+
+.toc {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toc a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.toc a:focus-visible,
+.mood-btn:focus-visible,
+.cta:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.section {
+  padding: 28px 20px;
+}
+
+.section-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.section h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  margin: 0 0 12px;
+  font-family: "Gmarket Sans", "Gothic A1", sans-serif;
+}
+
+.section h3 {
+  font-size: clamp(1.1rem, 2.6vw, 1.4rem);
+  margin: 0 0 8px;
+}
+
+.timeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.timeline-list li {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+.media {
+  margin: 0;
+  background: #0f1226;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.media figcaption {
+  padding: 10px 14px 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.interview-card {
+  border: 1px dashed var(--line);
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.interview-card .q {
+  color: var(--secondary);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.interview-card .a {
+  margin: 0;
+}
+
+.mood-selector {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.mood-btn {
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.mood-btn[aria-pressed="true"] {
+  background: var(--primary);
+  color: #0b0c10;
+}
+
+.mood-panel {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 14px;
+}
+
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer {
+  padding: 24px 20px 48px;
+  color: var(--muted);
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+@media (min-width: 481px) {
+  .hero {
+    padding: 64px 28px 32px;
+  }
+
+  .section {
+    padding: 32px 28px;
+  }
+
+  .section-inner {
+    padding: 28px;
+  }
+}
+
+@media (min-width: 769px) {
+  .grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+
+  .toc {
+    gap: 14px;
+  }
+
+  .timeline-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero {
+    padding: 80px 40px 40px;
+  }
+
+  .section {
+    padding: 36px 40px;
+  }
+
+  .section-inner {
+    padding: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
