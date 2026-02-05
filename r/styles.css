@@ -1,0 +1,269 @@
+@font-face {
+  font-family: "GowunBatang";
+  src: local("GowunBatang");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SUIT";
+  src: local("SUIT");
+  font-display: swap;
+}
+
+:root {
+  --r-paper: #f6f2e9;
+  --r-ink: #1a1f24;
+  --r-muted: #5b626a;
+  --r-accent: #1a4a63;
+  --r-soft: rgba(26, 74, 99, 0.12);
+  --r-line: rgba(20, 24, 28, 0.14);
+  --r-panel: rgba(255, 255, 255, 0.94);
+  --r-shadow: 0 20px 44px rgba(16, 22, 28, 0.12);
+  --r-dock-height: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "SUIT", "GowunBatang", "Apple SD Gothic Neo", sans-serif;
+  color: var(--r-ink);
+  background: var(--r-paper);
+  line-height: 1.85;
+  padding-bottom: calc(var(--r-dock-height) + env(safe-area-inset-bottom));
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.r-block {
+  padding: 28px 0;
+}
+
+.r-frame {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero {
+  padding-top: 18px;
+}
+
+.r-hero-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.r-thumb {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--r-line);
+  background: #fff;
+  box-shadow: var(--r-shadow);
+}
+
+.r-thumb figcaption {
+  padding: 10px 12px 14px;
+  color: var(--r-muted);
+  font-size: 0.9rem;
+}
+
+.r-badge {
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.75rem;
+  color: var(--r-accent);
+  font-weight: 700;
+}
+
+h1 {
+  margin: 10px 0 14px;
+  font-family: "GowunBatang", "SUIT", serif;
+  font-size: clamp(2rem, 5.4vw, 3.2rem);
+  line-height: 1.2;
+}
+
+.r-lead {
+  margin: 0;
+  color: var(--r-muted);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.index-drawer {
+  margin-top: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--r-line);
+  background: var(--r-panel);
+  box-shadow: var(--r-shadow);
+  padding: 12px 16px;
+}
+
+.index-drawer summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.index-links {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.index-links a {
+  text-decoration: none;
+  color: var(--r-accent);
+  font-weight: 600;
+}
+
+.anchor-panel {
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid var(--r-line);
+  background: var(--r-panel);
+  box-shadow: var(--r-shadow);
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-family: "GowunBatang", "SUIT", serif;
+  font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+}
+
+.r-prep {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.r-prep li {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px dashed rgba(26, 74, 99, 0.35);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.r-note {
+  margin-top: 16px;
+  color: var(--r-muted);
+}
+
+.r-pair {
+  display: grid;
+  gap: 16px;
+}
+
+.r-photo {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--r-line);
+  background: #fff;
+  box-shadow: var(--r-shadow);
+}
+
+.r-qa {
+  display: grid;
+  gap: 12px;
+}
+
+.r-qa details {
+  border: 1px solid var(--r-line);
+  border-radius: 16px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.r-qa summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.r-notice {
+  border-radius: 16px;
+  border: 1px dashed rgba(26, 74, 99, 0.4);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 18px;
+}
+
+.r-footer {
+  padding: 20px 0 30px;
+  color: var(--r-muted);
+  font-size: 0.95rem;
+}
+
+.r-call {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px calc(10px + env(safe-area-inset-bottom));
+  background: #1a4a63;
+  color: #fff;
+  text-decoration: none;
+  z-index: 30;
+}
+
+.r-call-digits {
+  font-size: clamp(22px, 4.6vw, 28px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.r-call-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+@photo-card (min-width: 720px) {
+  .r-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@photo-card (min-width: 769px) {
+  body {
+    padding-bottom: 0;
+  }
+
+  .r-hero-grid {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+
+  .r-call {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    width: auto;
+    min-width: 320px;
+    border-radius: 18px;
+    box-shadow: var(--r-shadow);
+  }
+}
+
+@photo-card (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
