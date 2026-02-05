@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://informationa.pages.dev/o/</loc>
+    <lastmod>2026-02-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/o/ChatGPT%20Image%202026%EB%85%84%202%EC%9B%94%202%EC%9D%BC%20%EC%98%A4%EC%A0%84%2003_07_29.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/o/cheongdam-h2o-night-party.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/o/cheongdam-h2o-night-party.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/o/cheongdam-h2o-night-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/o/cheongdam-h2o-night-thumb.png</image:loc>
+    </image:image>
+  </url>
+</urlset>
