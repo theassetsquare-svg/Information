@@ -5,22 +5,21 @@
     <loc>https://informationa.pages.dev/l/</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>1.0</priority>
     <image:image>
       <image:loc>https://informationa.pages.dev/l/ChatGPT%20Image%202026%EB%85%84%202%EC%9B%94%202%EC%9D%BC%20%EC%98%A4%EC%A0%84%2002_30_27.png</image:loc>
-      <image:caption>신림그랑프리나이트 안내 대표 이미지</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-thumb.webp</image:loc>
-      <image:caption>야간 이동 안내 참고 이미지</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-party.webp</image:loc>
-      <image:caption>보행 흐름 참고 이미지</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/l/ChatGPT%20Image%202026%EB%85%84%202%EC%9B%94%202%EC%9D%BC%20%EC%98%A4%EC%A0%84%2002_33_19.png</image:loc>
-      <image:caption>신림역 야간 이동 분위기</image:caption>
+      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-party.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-thumb.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-thumb.png</image:loc>
     </image:image>
   </url>
 </urlset>
