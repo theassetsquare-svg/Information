@@ -1,0 +1,262 @@
+@font-face {
+  font-family: "ChosunilboNM";
+  src: local("ChosunilboNM");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: local("Pretendard");
+  font-display: swap;
+}
+
+:root {
+  --bg: #f2efe7;
+  --panel: rgba(255, 255, 255, 0.92);
+  --ink: #1a1d22;
+  --muted: #5b636c;
+  --accent: #1f536b;
+  --accent-2: #d09a3a;
+  --line: rgba(20, 24, 28, 0.14);
+  --shadow: 0 22px 48px rgba(16, 22, 28, 0.12);
+  --callbar-height: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Pretendard", "ChosunilboNM", "Apple SD Gothic Neo", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.8;
+  padding-bottom: calc(var(--callbar-height) + env(safe-area-inset-bottom));
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.section {
+  padding: 28px 0;
+}
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero {
+  padding-top: 32px;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.hero-figure {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.hero-figure img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.hero-figure figcaption {
+  padding: 10px 12px 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+h1 {
+  margin: 10px 0 14px;
+  font-family: "ChosunilboNM", "Pretendard", sans-serif;
+  font-size: clamp(2rem, 5.4vw, 3.2rem);
+  line-height: 1.2;
+}
+
+.lead {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.snippet {
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-family: "ChosunilboNM", "Pretendard", sans-serif;
+  font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+}
+
+.gallery {
+  display: grid;
+  gap: 16px;
+}
+
+.media {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.faq {
+  display: grid;
+  gap: 12px;
+}
+
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.notice {
+  border-radius: 16px;
+  border: 1px dashed rgba(31, 83, 107, 0.4);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 18px;
+}
+
+.footer {
+  padding: 20px 0 30px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.callbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+  background: #1f536b;
+  color: #fff;
+  text-decoration: none;
+  z-index: 20;
+}
+
+.callbar-icon {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+}
+
+.callbar-text {
+  font-size: clamp(22px, 4.6vw, 28px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.callbar-sub {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 18px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-grid {
+    gap: 22px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-grid {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    padding-bottom: 0;
+  }
+
+  .callbar {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    width: auto;
+    min-width: 320px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
