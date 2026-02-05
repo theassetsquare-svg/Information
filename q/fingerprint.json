@@ -1,0 +1,43 @@
+{
+  "page": "/home/user/sunwook/q",
+  "seed": 95881708711206840021331071581173781399492036854242740358521876601883456476799,
+  "salt": 0,
+  "ids": {
+    "hero_id": 99,
+    "layout_id": 42,
+    "nav_id": 46,
+    "component_id": 64,
+    "tone_id": 99
+  },
+  "hero_family": "스토리패널",
+  "layout_family": "가로챕터",
+  "nav_family": "드롭다운",
+  "component_family": "FAQ아코디언",
+  "tone_family": "감성+실용",
+  "headings": [
+    "스니펫 앵커 문장",
+    "서론부 — 첫 기준을 세우는 글",
+    "본론부 — 이동의 결을 잡기",
+    "체크 메모 — 짧게 남기기",
+    "현장 이미지 노트",
+    "결론부 — 다음 행동의 정리",
+    "자주 묻는 질문",
+    "안내 고지",
+    "큰길을 먼저 잡기",
+    "혼잡을 읽는 한 박자",
+    "체감 포인트 점검"
+  ],
+  "components": [
+    "checklist",
+    "closing-essay",
+    "faq-accordion",
+    "hero-top-thumb",
+    "intro-essay",
+    "notice-box",
+    "signal-cards",
+    "snippet-anchor",
+    "story-gallery"
+  ],
+  "total_similarity": 0.0,
+  "against": null
+}
