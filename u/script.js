@@ -1,1 +1,10 @@
-// 수유동 야간 외출 가이드 스크립트
+const ctaBar = document.querySelector('.cta-bar');
+
+const syncCtaHeight = () => {
+  if (!ctaBar) return;
+  const height = ctaBar.offsetHeight;
+  document.documentElement.style.setProperty('--cta-height', `${height}px`);
+};
+
+syncCtaHeight();
+window.addEventListener('resize', syncCtaHeight);
