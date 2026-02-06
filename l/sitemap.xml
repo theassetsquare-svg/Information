@@ -3,23 +3,20 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://informationa.pages.dev/l/</loc>
-    <lastmod>2026-02-05</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://informationa.pages.dev/l/ChatGPT%20Image%202026%EB%85%84%202%EC%9B%94%202%EC%9D%BC%20%EC%98%A4%EC%A0%84%2002_30_27.png</image:loc>
+      <image:loc>https://informationa.pages.dev/l/og-thumb.jpg</image:loc>
+      <image:title>신림그랑프리나이트 실수 방지 체크북 대표 이미지</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-party.webp</image:loc>
+      <image:loc>https://informationa.pages.dev/l/body-1.png</image:loc>
+      <image:title>신림그랑프리나이트 내부 조명</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-party.png</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-thumb.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/l/sillim-grandprix-night-thumb.png</image:loc>
+      <image:loc>https://informationa.pages.dev/l/body-2.png</image:loc>
+      <image:title>신림그랑프리나이트 라운지 공간</image:title>
     </image:image>
   </url>
 </urlset>
