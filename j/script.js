@@ -1,10 +1,10 @@
-const callbar = document.querySelector('.callbar');
+const ctaBar = document.querySelector('.cta-bar');
 
-const updateCallbarHeight = () => {
-  if (!callbar) return;
-  const height = callbar.offsetHeight;
-  document.documentElement.style.setProperty('--callbar-height', `${height}px`);
+const updateCtaHeight = () => {
+  if (!ctaBar) return;
+  const height = ctaBar.offsetHeight;
+  document.documentElement.style.setProperty('--cta-h', `${height}px`);
 };
 
-updateCallbarHeight();
-window.addEventListener('resize', updateCallbarHeight);
+updateCtaHeight();
+window.addEventListener('resize', updateCtaHeight);
