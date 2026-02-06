@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://informationa.pages.dev/u/</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/u/p-thumb.png</image:loc>
-      <image:title>수유샴푸나이트 야간 선택 체크리스트 대표 이미지</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/u/p-img-1.png</image:loc>
-      <image:title>수유샴푸나이트 실내 현장 이미지</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/u/p-img-2.webp</image:loc>
-      <image:title>야간 분위기 현장 스케치</image:title>
-    </image:image>
+    <priority>0.8</priority>
   </url>
 </urlset>

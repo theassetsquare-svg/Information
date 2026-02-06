@@ -1,4 +1,4 @@
-/* 수유샴푸나이트 페이지 전용 스타일 - 완전 차별화 디자인 */
+/* 수유동 야간 외출 가이드 페이지 스타일 */
 
 :root {
   --c-bg: #0f1419;
@@ -15,7 +15,6 @@
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --cta-height: 72px;
 }
 
 *, *::before, *::after {
@@ -34,7 +33,7 @@ body {
   color: var(--c-text);
   line-height: 1.75;
   font-size: 16px;
-  padding-bottom: calc(var(--cta-height) + env(safe-area-inset-bottom));
+  padding-bottom: 0;
 }
 
 img {
@@ -387,68 +386,8 @@ h1 {
   color: var(--c-muted);
 }
 
-/* CTA 바 (전화 버튼) */
-.cta-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: var(--cta-height);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 0 20px calc(env(safe-area-inset-bottom));
-  background: linear-gradient(135deg, var(--c-accent-dark), var(--c-accent));
-  color: var(--c-bg);
-  text-decoration: none;
-  z-index: 100;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
-}
-
-.cta-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50%;
-}
-
-.cta-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.cta-number {
-  font-size: clamp(1.4rem, 5vw, 1.8rem);
-  font-weight: 900;
-  letter-spacing: 0.02em;
-}
-
-.cta-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  opacity: 0.85;
-}
-
 /* 데스크톱 반응형 */
 @media (min-width: 768px) {
-  .masthead-inner {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .masthead-visual {
-    order: 1;
-  }
-
-  .masthead-text {
-    order: 2;
-  }
-
   .toc ul {
     justify-content: center;
   }
@@ -465,21 +404,6 @@ h1 {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  body {
-    padding-bottom: 0;
-  }
-
-  .cta-bar {
-    left: auto;
-    right: 24px;
-    bottom: 24px;
-    width: auto;
-    min-width: 300px;
-    height: auto;
-    padding: 16px 24px;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-  }
 }
 
 @media (min-width: 1024px) {
@@ -498,7 +422,6 @@ h1 {
     scroll-behavior: auto;
   }
 
-  .cta-bar,
   .toc a {
     transition: none;
   }
