@@ -1,10 +1,10 @@
-const callbar = document.querySelector('.callbar');
+const ctaPhone = document.querySelector('.cta-phone');
 
-const syncCallbarHeight = () => {
-  if (!callbar) return;
-  const height = callbar.offsetHeight;
-  document.documentElement.style.setProperty('--callbar-height', `${height}px`);
+const syncCtaHeight = () => {
+  if (!ctaPhone) return;
+  const height = ctaPhone.offsetHeight;
+  document.documentElement.style.setProperty('--cta-h', `${height}px`);
 };
 
-syncCallbarHeight();
-window.addEventListener('resize', syncCallbarHeight);
+syncCtaHeight();
+window.addEventListener('resize', syncCtaHeight);
