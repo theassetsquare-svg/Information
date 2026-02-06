@@ -3,20 +3,20 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://informationa.pages.dev/p/</loc>
-    <lastmod>2026-02-05</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://informationa.pages.dev/p/%EC%88%98%EC%9C%A0%EC%83%B4%ED%91%B8%EB%82%98%EC%9D%B4%ED%8A%B8%ED%99%A9%EC%A0%95%EB%AF%BC%EB%84%A4%EC%9D%B4%EB%B2%84%EC%8D%B8%EB%84%A4%EC%9D%BC2.png</image:loc>
+      <image:loc>https://informationa.pages.dev/p/p-thumb.png</image:loc>
+      <image:title>수유샴푸나이트 야간 선택 체크리스트 대표 이미지</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/p/dancing_women.webp</image:loc>
+      <image:loc>https://informationa.pages.dev/p/p-img-1.png</image:loc>
+      <image:title>수유샴푸나이트 실내 현장 이미지</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/p/dancing_women.png</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://informationa.pages.dev/p/naver-thumb2.png</image:loc>
+      <image:loc>https://informationa.pages.dev/p/p-img-2.webp</image:loc>
+      <image:title>야간 분위기 현장 스케치</image:title>
     </image:image>
   </url>
 </urlset>
