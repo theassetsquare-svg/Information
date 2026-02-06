@@ -60,14 +60,16 @@ img {
 .hero-cover {
   margin: 0;
   width: 100%;
-  max-height: 400px;
-  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-cover img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .hero-headline {
@@ -413,7 +415,7 @@ h1 {
   }
 
   .hero-cover {
-    max-height: 480px;
+    max-width: 500px;
   }
 }
 
