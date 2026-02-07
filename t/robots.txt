@@ -1,4 +1,7 @@
 User-agent: Yeti
 Allow: /
+
 User-agent: *
 Allow: /
+
+Sitemap: https://informationa.pages.dev/t/sitemap.xml
