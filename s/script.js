@@ -1,172 +1,84 @@
-const toast = document.querySelector('.toast');
-const copyTargets = document.querySelectorAll('[data-copy]');
-let toastTimer = null;
+/* 하단 고정바 높이 동기화 */
+(function(){
+  var bar = document.querySelector('.bottom-bar');
+  if (!bar) return;
+  function sync(){
+    document.documentElement.style.setProperty('--bar-h', bar.offsetHeight + 'px');
+  }
+  sync();
+  window.addEventListener('resize', sync);
+})();
 
-function showToast(message) {
-  if (!toast) return;
-  toast.textContent = message;
-  toast.hidden = false;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.hidden = true;
-  }, 1800);
-}
+/* 클립보드 복사 + 토스트 */
+(function(){
+  var toast = document.querySelector('.toast');
+  var timer = null;
 
-async function copyText(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(text);
-    return true;
+  function showToast(msg){
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.hidden = false;
+    clearTimeout(timer);
+    timer = setTimeout(function(){ toast.hidden = true; }, 1800);
   }
 
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.style.position = 'fixed';
-  textarea.style.left = '-9999px';
-  document.body.appendChild(textarea);
-  textarea.select();
-  const success = document.execCommand('copy');
-  document.body.removeChild(textarea);
-  return success;
-}
-
-copyTargets.forEach((link) => {
-  link.addEventListener('click', async () => {
-    const text = link.dataset.copy;
-    if (!text) return;
-    try {
-      await copyText(text);
-      showToast('카톡 아이디가 복사되었습니다');
-    } catch (error) {
-      showToast('복사에 실패했습니다. 수동으로 입력해 주세요.');
+  function copyText(text){
+    if (navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(text);
     }
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    return Promise.resolve();
+  }
+
+  var btns = document.querySelectorAll('[data-copy]');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var text = btn.getAttribute('data-copy');
+      if (!text) return;
+      copyText(text).then(function(){
+        showToast('카톡 아이디가 복사되었습니다');
+      }).catch(function(){
+        showToast('복사에 실패했습니다. 수동으로 입력해 주세요.');
+      });
+    });
   });
-});
+})();
 
-const HERO_LAYOUTS = [
-  'poster-split',
-  'folded-poster',
-  'stacked-card',
-  'map-frame',
-  'timeline-slab',
-  'radio-grid',
-  'notebook-dock',
-  'catalogue',
-  'field-note',
-  'sticker-wall'
-];
+/* 스텝퍼 스크롤스파이 + 완료 토글 */
+(function(){
+  var nav = document.querySelector('.stepper-nav');
+  if (!nav) return;
+  var items = nav.querySelectorAll('li');
+  var steps = [];
+  items.forEach(function(li){
+    var a = li.querySelector('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    var el = document.querySelector(href);
+    if (el) steps.push({ li: li, el: el });
+  });
+  if (!steps.length) return;
 
-const HERO_TONES = [
-  'archival',
-  'noir',
-  'minimal',
-  'warm',
-  'calm',
-  'documentary',
-  'lyric',
-  'practical',
-  'precise',
-  'slow-breath'
-];
-
-const NAV_TYPES = [
-  'rail',
-  'tab',
-  'bookmark',
-  'breadcrumb',
-  'index-card',
-  'ticker',
-  'floating-dot',
-  'side-flag',
-  'stamp',
-  'paperclip'
-];
-
-const NAV_LABEL_STYLES = [
-  'short',
-  'caps',
-  'noun',
-  'verb',
-  'emoji-less',
-  'mono',
-  'dual',
-  'thin',
-  'bold',
-  'capsule'
-];
-
-const PROBLEM_FRAMES = [
-  'direction',
-  'timing',
-  'contact',
-  'noise',
-  'crowd',
-  'sequence',
-  'decision',
-  'clarity',
-  'exit',
-  'etiquette'
-];
-
-const PROBLEM_CONTEXTS = [
-  'first-visit',
-  'late-night',
-  'rain',
-  'weekend',
-  'weekday',
-  'peak-hour',
-  'quiet-hour',
-  'solo',
-  'pair',
-  'group'
-];
-
-const COMPONENT_TYPES = [
-  'fold-panel',
-  'card-deck',
-  'timeline',
-  'radio-guide',
-  'memo-block',
-  'stamp-grid',
-  'index-list',
-  'check-strip',
-  'bulletin',
-  'gallery'
-];
-
-const COMPONENT_SKINS = [
-  'paper',
-  'linen',
-  'ink',
-  'chalk',
-  'stamp',
-  'soft',
-  'mono',
-  'glass',
-  'grain',
-  'atlas'
-];
-
-const HERO_MATRIX = HERO_LAYOUTS.flatMap((layout) =>
-  HERO_TONES.map((tone) => `${layout}:${tone}`)
-);
-const NAV_MATRIX = NAV_TYPES.flatMap((type) =>
-  NAV_LABEL_STYLES.map((style) => `${type}:${style}`)
-);
-const PROBLEM_MATRIX = PROBLEM_FRAMES.flatMap((frame) =>
-  PROBLEM_CONTEXTS.map((context) => `${frame}:${context}`)
-);
-const COMPONENT_MATRIX = COMPONENT_TYPES.flatMap((type) =>
-  COMPONENT_SKINS.map((skin) => `${type}:${skin}`)
-);
-
-const archetypeId = document.body.dataset.archetype;
-const navId = document.body.dataset.nav;
-const heroId = document.body.dataset.hero;
-
-if (HERO_MATRIX.length < 100 || NAV_MATRIX.length < 100 || PROBLEM_MATRIX.length < 100 || COMPONENT_MATRIX.length < 100) {
-  console.warn('Matrix size check failed');
-}
-
-if (!archetypeId || !navId || !heroId) {
-  console.warn('Archetype identifiers missing');
-}
+  function update(){
+    var scrollY = window.scrollY || window.pageYOffset;
+    var activeIdx = -1;
+    steps.forEach(function(s, i){
+      if (s.el.offsetTop - 140 <= scrollY) activeIdx = i;
+    });
+    steps.forEach(function(s, i){
+      s.li.classList.toggle('active', i === activeIdx);
+      if (i < activeIdx) s.li.classList.add('done');
+    });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
