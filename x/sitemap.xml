@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://informationa.pages.dev/o/</loc>
+    <loc>https://informationa.pages.dev/x/</loc>
     <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://informationa.pages.dev/o/cheongdam-h2o-night-thumb.png</image:loc>
+      <image:loc>https://informationa.pages.dev/x/cheongdam-h2o-night-thumb.png</image:loc>
       <image:title>청담h2o나이트 첫 방문 가이드 대표 이미지</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/o/h2o-body-01.png</image:loc>
+      <image:loc>https://informationa.pages.dev/x/h2o-body-01.png</image:loc>
       <image:title>청담h2o나이트 내부 인테리어</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/o/h2o-body-02.png</image:loc>
+      <image:loc>https://informationa.pages.dev/x/h2o-body-02.png</image:loc>
       <image:title>청담h2o나이트 라운지 분위기</image:title>
     </image:image>
   </url>
