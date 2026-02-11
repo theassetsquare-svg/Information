@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://informationa.pages.dev/w/</loc>
+    <loc>https://informationa.pages.dev/y/</loc>
     <lastmod>2026-02-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://informationa.pages.dev/w/og-image.jpg</image:loc>
+      <image:loc>https://informationa.pages.dev/y/og-image.jpg</image:loc>
       <image:title>수유샴푸나이트 방문 안내 대표 이미지</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/w/body-1.png</image:loc>
+      <image:loc>https://informationa.pages.dev/y/body-1.png</image:loc>
       <image:title>수유샴푸나이트 내부 조명과 좌석</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://informationa.pages.dev/w/body-2.png</image:loc>
+      <image:loc>https://informationa.pages.dev/y/body-2.png</image:loc>
       <image:title>수유샴푸나이트 라운지 공간</image:title>
     </image:image>
   </url>

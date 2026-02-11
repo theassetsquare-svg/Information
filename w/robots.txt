@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://informationa.pages.dev/w/sitemap.xml
