@@ -1,0 +1,196 @@
+/* /b/ 현장 체크 로그북 — 슬레이트·인디고 테마 */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Pretendard',system-ui,-apple-system,sans-serif;
+  color:#1c1c1c;background:#f5f4f1;line-height:1.8;
+  padding-bottom:72px;
+}
+
+/* ── 히어로 ── */
+.hero{
+  max-width:740px;margin:0 auto;padding:24px 20px 0;text-align:center;
+}
+.hero-frame{
+  max-width:740px;margin:0 auto;
+  max-height:420px;overflow:hidden;border-radius:10px;
+  background:#111;
+}
+.hero-frame img{
+  width:100%;height:auto;
+  object-fit:contain;
+  display:block;margin:0 auto;
+}
+.hero h1{
+  margin-top:20px;font-size:1.35rem;font-weight:800;
+  color:#1c1c1c;line-height:1.5;letter-spacing:-.02em;
+}
+.hero-sub{
+  margin-top:8px;font-size:.9rem;color:#5a5a5a;line-height:1.7;
+}
+
+@media(max-width:640px){
+  .hero-frame{max-height:320px}
+  .hero h1{font-size:1.12rem}
+}
+
+/* ── 현장 환경 요약 ── */
+.env-summary{
+  max-width:740px;margin:36px auto 0;padding:0 20px;
+}
+.env-summary h2{
+  font-size:1.1rem;font-weight:800;color:#1c1c1c;
+  margin-bottom:14px;padding-bottom:6px;
+  border-bottom:2px solid #3d5a80;
+}
+.env-lines{list-style:none}
+.env-lines li{
+  padding:12px 0;border-bottom:1px solid #e5e2dc;
+  font-size:.88rem;color:#3a3a3a;line-height:1.7;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.env-lines li:last-child{border-bottom:none}
+.env-marker{
+  flex-shrink:0;display:inline-block;
+  padding:3px 10px;border-radius:4px;
+  background:#3d5a80;color:#fff;
+  font-size:.72rem;font-weight:700;white-space:nowrap;
+  margin-top:2px;
+}
+
+/* ── 공통 로그 섹션 ── */
+.log-section{
+  max-width:740px;margin:40px auto 0;padding:0 20px;
+}
+.log-section h2{
+  font-size:1.1rem;font-weight:800;color:#1c1c1c;
+  margin-bottom:10px;padding-bottom:6px;
+  border-bottom:2px solid #3d5a80;
+}
+.log-intro{
+  font-size:.88rem;color:#5a5a5a;margin-bottom:18px;line-height:1.7;
+}
+
+/* ── 체크 항목 토글 ── */
+.toggle-stack{display:flex;flex-direction:column;gap:8px}
+.toggle-item{
+  border:1px solid #ddd9d2;border-radius:8px;
+  background:#fff;overflow:hidden;
+}
+.toggle-item summary{
+  padding:14px 18px;font-weight:700;font-size:.9rem;color:#1c1c1c;
+  cursor:pointer;list-style:none;
+  display:flex;align-items:center;gap:10px;
+}
+.toggle-item summary::after{
+  content:'+';margin-left:auto;font-size:1.1rem;color:#999;
+  transition:transform .2s;
+}
+.toggle-item[open] summary::after{content:'\2212'}
+.toggle-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:6px;
+  background:#3d5a80;color:#fff;
+  font-size:.72rem;font-weight:800;flex-shrink:0;
+}
+.toggle-item p{
+  padding:0 18px 16px;font-size:.86rem;color:#4a4a4a;line-height:1.7;
+  padding-left:56px;
+}
+
+/* ── 현장 사진 ── */
+.photo-pair{margin-top:4px}
+.photo-pair figure{margin:0}
+.photo-pair img{
+  width:100%;height:auto;border-radius:8px;display:block;
+}
+.photo-pair figcaption{
+  font-size:.76rem;color:#999;text-align:center;margin-top:6px;
+}
+
+/* ── 타임라인 ── */
+.timeline{
+  position:relative;padding-left:28px;margin-top:4px;
+}
+.timeline::before{
+  content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:#d0cdc6;
+}
+.tl-step{
+  position:relative;padding-bottom:28px;
+}
+.tl-step:last-child{padding-bottom:0}
+.tl-time{
+  display:inline-block;padding:4px 12px;border-radius:20px;
+  background:#3d5a80;color:#fff;
+  font-size:.72rem;font-weight:700;
+  position:relative;
+  margin-bottom:8px;
+}
+.tl-time::before{
+  content:'';position:absolute;left:-24px;top:50%;
+  transform:translateY(-50%);
+  width:10px;height:10px;border-radius:50%;
+  background:#3d5a80;border:2px solid #f5f4f1;
+}
+.tl-body{margin-top:4px}
+.tl-body strong{
+  display:block;font-size:.92rem;color:#1c1c1c;margin-bottom:4px;
+}
+.tl-body p{font-size:.86rem;color:#4a4a4a;line-height:1.65;margin:0}
+
+/* ── FAQ 아코디언 ── */
+.faq-stack{display:flex;flex-direction:column;gap:8px}
+.faq-item{
+  border:1px solid #ddd9d2;border-radius:8px;
+  background:#fff;overflow:hidden;
+}
+.faq-item summary{
+  padding:14px 18px;font-weight:700;font-size:.9rem;color:#1c1c1c;
+  cursor:pointer;list-style:none;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.faq-item summary::after{content:'+';font-size:1.1rem;color:#999}
+.faq-item[open] summary::after{content:'\2212'}
+.faq-item p{padding:0 18px 16px;font-size:.86rem;color:#4a4a4a;line-height:1.7}
+
+/* ── 결론 ── */
+.wrap-section{
+  margin-top:44px;padding-top:28px;
+  border-top:3px double #d0cdc6;
+}
+.wrap-section h2{text-align:center;border-bottom:none;margin-bottom:18px}
+.wrap-list{
+  max-width:500px;margin:0 auto;
+  list-style:none;counter-reset:wrap;
+}
+.wrap-list li{
+  counter-increment:wrap;
+  padding:12px 0;border-bottom:1px solid #e5e2dc;
+  font-size:.9rem;color:#1c1c1c;line-height:1.6;
+  padding-left:36px;position:relative;
+}
+.wrap-list li:last-child{border-bottom:none}
+.wrap-list li::before{
+  content:counter(wrap);
+  position:absolute;left:0;top:12px;
+  width:24px;height:24px;line-height:24px;text-align:center;
+  border-radius:50%;background:#1c1c1c;color:#fff;
+  font-size:.75rem;font-weight:800;
+}
+
+/* ── 푸터 ── */
+.page-footer{
+  max-width:680px;margin:48px auto 0;padding:0 20px;text-align:center;
+}
+.page-footer p{font-size:.78rem;color:#aaa;line-height:1.6}
+
+/* ── 하단 고정 CTA ── */
+.dock-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  display:block;padding:16px 20px;
+  background:#3d5a80;color:#fff;text-align:center;
+  font-size:1.12rem;font-weight:800;
+  letter-spacing:.02em;cursor:default;
+  border-top:1px solid #2c4460;
+}

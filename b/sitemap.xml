@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://informationa.pages.dev/b/</loc>
+    <lastmod>2026-02-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/b/sangbong-hangukgwan-night-thumb.png</image:loc>
+      <image:title>상봉동한국관나이트 대표 이미지</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://informationa.pages.dev/b/sangbong-hangukgwan-night-party.png</image:loc>
+      <image:title>상봉동한국관나이트 현장 분위기</image:title>
+    </image:image>
+  </url>
+</urlset>
