@@ -7,26 +7,26 @@ import venues from '../data/venues.json';
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "서울 클럽 & 라운지 디렉토리",
+  "name": "전국 클럽·나이트·라운지 디렉토리",
   "url": Astro.site?.toString() ?? "https://informationa.pages.dev/",
   "inLanguage": "ko",
-  "description": "서울 주요 클럽·라운지·나이트를 비교하는 나이트라이프 디렉토리"
+  "description": "전국 주요 클럽·나이트·라운지를 비교하는 나이트라이프 디렉토리"
 };
 
 const regions = [...new Set(venues.map(v => v.region))];
 const categories = [...new Set(venues.map(v => v.category))];
 ---
 <BaseLayout
-  title="서울 클럽 & 라운지 디렉토리 | 2026 나이트라이프 가이드"
-  description="강남, 홍대, 이태원, 청담 주요 클럽·라운지·나이트를 한눈에 비교하는 디렉토리. 분위기, 위치, 예산으로 오늘 밤 장소를 고르세요."
+  title="전국 클럽·나이트·라운지 디렉토리 | 2026 나이트라이프 가이드"
+  description="강남, 홍대, 이태원, 부산, 대구, 대전, 인천, 광주, 제주까지 — 전국 주요 클럽·나이트·라운지 현장 확인 가이드."
   jsonLd={jsonLd}
 >
   <!-- HERO + SEARCH -->
   <section class="hero" aria-label="메인 검색">
     <div class="container">
       <div class="hero__inner">
-        <h1>가게이름·지역·카테고리로<br>빠르게 찾기</h1>
-        <p class="hero__desc">정보형 안내 · 지도 연결 · 2026년 1분기 현장 확인</p>
+        <h1>전국 클럽·나이트·라운지<br>빠르게 찾기</h1>
+        <p class="hero__desc">서울·수도권·지방 57곳 현장 확인 · 지도 연결 · 2026 업데이트</p>
         <div class="search-box" role="search" aria-label="장소 검색">
           <input type="search" class="search-box__input" id="search-input" placeholder="클럽·나이트·라운지 이름 또는 지역 검색" autocomplete="off" aria-label="장소 검색">
           <button class="search-box__btn" type="button" aria-label="검색">⌕</button>
@@ -44,7 +44,7 @@ const categories = [...new Set(venues.map(v => v.category))];
       "교통: 강남·홍대는 지하철 막차(23:40) 이후 택시 할증 구간, 호출 앱 필수",
       "드레스코드: 강남·청담은 스마트캐주얼 기본, 홍대·이태원은 운동화 OK"
     ]}
-    declaration="이 페이지는 23개 장소를 현장 확인 토대로 정리했다. 끝까지 보면 오늘 밤 선택지가 좁혀진다."
+    declaration={`이 페이지는 ${venues.length}개 장소를 현장 확인 토대로 정리했다. 끝까지 보면 오늘 밤 선택지가 좁혀진다.`}
     storyVisible={'<p>금요일 밤 11시, 강남역 사거리. 택시에서 내린 사람들이 지하로 사라진다. 어디로 가는지 모르면 줄만 서다 새벽을 맞는다. 홍대 골목은 또 다르다 — 간판 없는 지하 계단 앞에서 귓속말처럼 번호를 불러야 문이 열리는 곳도 있다.</p><p>이태원 뒷골목 3층 테크노 성지부터, 청담 새벽 4시에 문을 여는 애프터클럽까지. 서울 나이트라이프는 "아는 만큼 보인다"는 말이 가장 잘 맞는 분야다.</p>'}
     storyHidden={'<p>수유·상봉·신림 같은 로컬 나이트를 빼놓으면 서울 야간 문화의 절반을 놓치는 셈이다. 강남 클럽이 트렌드를 이끌지만, 30~50대가 주축인 로컬 나이트에서는 라이브 무대와 가성비 좌석 배치가 오히려 매력이다. 인천 아라비안나이트처럼 3개 층 규모에 발렛 주차까지 갖춘 곳도 있고, 파주 스카이돔처럼 돔형 천장이 음향을 완전히 바꾸는 구조도 있다.</p><p>이 디렉토리는 서울·수도권·지방 주요 나이트라이프를 한눈에 비교하도록 만들었다. 각 카드의 "상세 가이드 보기"를 누르면 교통·피크타임·좌석 배치·FAQ까지 확인할 수 있다.</p>'}
     ctas={[
@@ -80,25 +80,28 @@ const categories = [...new Set(venues.map(v => v.category))];
       <div class="container">
         <div class="section__header" data-reveal>
           <span class="section__eyebrow">All Venues</span>
-          <h2>전체 장소</h2>
+          <h2>전체 {venues.length}곳</h2>
           <p>서울·수도권·지방 주요 클럽·나이트·라운지를 한눈에.</p>
         </div>
         <div class="venue-grid" id="venue-grid">
-          {venues.map(v => (
-            <VenueCard
-              name={v.name}
-              category={v.category}
-              region={v.region}
-              thumbnail={v.thumbnail}
-              image_alt={v.image_alt}
-              badge={v.badge}
-              card_hook={v.card_hook}
-              card_value={v.card_value}
-              card_tags={v.card_tags}
-              detail_page={v.detail_page}
-              map_url={v.map_url}
-            />
-          ))}
+          {venues.map(v => {
+            const detailUrl = v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`;
+            return (
+              <VenueCard
+                name={v.name}
+                category={v.category}
+                region={v.region}
+                thumbnail={v.thumbnail}
+                image_alt={v.image_alt}
+                badge={v.badge}
+                card_hook={v.card_hook}
+                card_value={v.card_value}
+                card_tags={v.card_tags}
+                detail_page={detailUrl}
+                map_url={v.map_url}
+              />
+            );
+          })}
         </div>
         <p class="no-results" id="no-results" style="display:none;text-align:center;padding:var(--sp-2xl) 0;color:var(--c-muted);">
           조건에 맞는 장소가 없습니다. 필터를 변경해 보세요.
@@ -114,6 +117,7 @@ const categories = [...new Set(venues.map(v => v.category))];
           <h2>업데이트 로그</h2>
         </div>
         <div class="update-list">
+          <div class="update-card"><span class="update-card__date">2026.02.20</span><span class="update-card__text">전국 57곳 확장, 동적 상세 페이지 도입</span></div>
           <div class="update-card"><span class="update-card__date">2026.02.20</span><span class="update-card__text">Astro SSG 마이그레이션, 카드 가로형 레이아웃 적용</span></div>
           <div class="update-card"><span class="update-card__date">2026.02.18</span><span class="update-card__text">FAQ·갤러리·신뢰 블록 전 페이지 추가</span></div>
           <div class="update-card"><span class="update-card__date">2026.02.15</span><span class="update-card__text">네이버 지도 연결, 관련 페이지 내부 링크 확장</span></div>
@@ -150,7 +154,8 @@ const categories = [...new Set(venues.map(v => v.category))];
     function renderResults(matches) {
       if (!matches.length) { searchResults.classList.remove('is-open'); return; }
       searchResults.innerHTML = matches.slice(0, 8).map(function(v, i) {
-        return '<a class="search-item' + (i === activeIdx ? ' is-active' : '') + '" href="' + (v.detail_page || v.map_url) + '" target="_blank" rel="noopener noreferrer" role="option">' +
+        var link = v.detail_page || ('/' + v.cat_slug + '/' + v.region_slug + '/' + v.district_slug + '/' + v.slug + '/');
+        return '<a class="search-item' + (i === activeIdx ? ' is-active' : '') + '" href="' + link + '" target="_blank" rel="noopener noreferrer" role="option">' +
           '<div class="search-item__thumb"><img src="' + v.thumbnail + '" alt="' + v.name + '" width="40" height="40"></div>' +
           '<div class="search-item__info"><div class="search-item__name">' + v.name + '</div><div class="search-item__meta">' + v.region + ' \u00B7 ' + v.category + '</div></div></a>';
       }).join('');

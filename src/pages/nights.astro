@@ -7,7 +7,7 @@ import allVenues from '../data/venues.json';
 const venues = allVenues.filter(v => v.category === '나이트');
 ---
 <BaseLayout
-  title="나이트 리스트 — 서울·수도권·지방 나이트클럽 가이드 | 2026"
+  title="전국 나이트 리스트 — 서울·수도권·지방 나이트클럽 가이드 | 2026"
   description="수유, 상봉, 인천, 파주, 수원, 신림, 대전, 인덕원, 울산, 일산, 청담까지 — 전국 주요 나이트 현장 확인 가이드."
 >
   <main id="main-content">
@@ -33,14 +33,17 @@ const venues = allVenues.filter(v => v.category === '나이트');
           <h2>나이트 {venues.length}곳</h2>
         </div>
         <div class="venue-grid">
-          {venues.map(v => (
-            <VenueCard
-              name={v.name} category={v.category} region={v.region}
-              thumbnail={v.thumbnail} image_alt={v.image_alt} badge={v.badge}
-              card_hook={v.card_hook} card_value={v.card_value} card_tags={v.card_tags}
-              detail_page={v.detail_page} map_url={v.map_url}
-            />
-          ))}
+          {venues.map(v => {
+            const detailUrl = v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`;
+            return (
+              <VenueCard
+                name={v.name} category={v.category} region={v.region}
+                thumbnail={v.thumbnail} image_alt={v.image_alt} badge={v.badge}
+                card_hook={v.card_hook} card_value={v.card_value} card_tags={v.card_tags}
+                detail_page={detailUrl} map_url={v.map_url}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
