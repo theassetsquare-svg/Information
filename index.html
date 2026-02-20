@@ -48,536 +48,465 @@
 <body>
   <a class="skip-link" href="#main-content">본문 바로가기</a>
 
-  <!-- ═══ HEADER ═══ -->
+  <!-- ═══ STICKY HEADER ═══ -->
   <header class="site-header">
     <div class="container">
       <nav class="nav" aria-label="주요 메뉴">
         <a href="/" class="nav__brand">
           <strong class="nav__title">NIGHTLIFE DIRECTORY</strong>
-          <span class="nav__sub">Seoul · Club · Lounge · Night</span>
+          <span class="nav__sub">Seoul · 2026</span>
         </a>
         <ul class="nav__links">
-          <li><a href="#gangnam">강남</a></li>
-          <li><a href="#hongdae">홍대</a></li>
-          <li><a href="#itaewon">이태원</a></li>
-          <li><a href="#local">지역 나이트</a></li>
+          <li><a href="#regions">지역</a></li>
+          <li><a href="#category">카테고리</a></li>
+          <li><a href="#recommend">인기</a></li>
+          <li><a href="#updates">업데이트</a></li>
+          <li><a href="#policy">정책</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero" aria-label="메인 소개">
+  <!-- ═══ HERO + SEARCH ═══ -->
+  <section class="hero" aria-label="메인 검색">
     <div class="container">
       <div class="hero__inner">
-        <span class="section__eyebrow">2026 Nightlife Guide</span>
-        <h1>서울 클럽 &amp; 라운지<br>디렉토리</h1>
-        <p class="hero__desc">강남, 홍대, 이태원, 청담 — 서울 핵심 권역의 클럽과 라운지를<br>분위기·위치·예산 기준으로 비교합니다.</p>
-        <div class="hero__actions">
-          <a href="#gangnam" class="btn btn--primary">강남 클럽 보기</a>
-          <a href="#local" class="btn btn--outline">지역 나이트 보기</a>
+        <h1>가게이름·지역·카테고리로<br>빠르게 찾기</h1>
+        <p class="hero__desc">정보형 안내 · 지도 연결 · 2026년 1분기 현장 확인 기준</p>
+        <div class="search-box" role="search" aria-label="장소 검색">
+          <input type="search" class="search-box__input" id="search-input" placeholder="클럽·나이트·라운지 이름 또는 지역 검색" autocomplete="off" aria-label="장소 검색">
+          <button class="search-box__btn" type="button" aria-label="검색">⌕</button>
+          <div class="search-results" id="search-results" role="listbox"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ STATS ═══ -->
-  <section class="stats" aria-label="요약 지표">
+  <!-- ═══ QUICK FILTERS ═══ -->
+  <section class="section section--filters" aria-label="빠른 필터">
     <div class="container">
-      <div class="stats__grid">
-        <div class="stats__item reveal" data-reveal>
-          <span class="stats__value">20+</span>
-          <span class="stats__label">수록 장소</span>
-        </div>
-        <div class="stats__item reveal" data-reveal>
-          <span class="stats__value">4개 권역</span>
-          <span class="stats__label">강남 · 홍대 · 이태원 · 지역</span>
-        </div>
-        <div class="stats__item reveal" data-reveal>
-          <span class="stats__value">2026 Q1</span>
-          <span class="stats__label">현장 확인 기준</span>
+      <div class="filter-group">
+        <h3 class="filter-group__label">지역</h3>
+        <div class="filter-bar" data-filter="region">
+          <button class="filter-pill active" data-value="all">전체</button>
+          <button class="filter-pill" data-value="강남">강남</button>
+          <button class="filter-pill" data-value="홍대">홍대</button>
+          <button class="filter-pill" data-value="이태원">이태원</button>
+          <button class="filter-pill" data-value="압구정">압구정</button>
+          <button class="filter-pill" data-value="청담">청담</button>
+          <button class="filter-pill" data-value="수유">수유</button>
+          <button class="filter-pill" data-value="인천">인천</button>
+          <button class="filter-pill" data-value="수원">수원</button>
+          <button class="filter-pill" data-value="일산">일산</button>
+          <button class="filter-pill" data-value="대전">대전</button>
+          <button class="filter-pill" data-value="울산">울산</button>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══ INTRO VALUE ═══ -->
-  <section class="section intro-value" aria-label="가이드 활용법">
-    <div class="container container--narrow">
-      <h2>토요일 저녁, 아직 장소를 못 정했다면</h2>
-      <p>퇴근 후 샤워까지 마쳤는데 목적지가 없는 토요일 저녁은 생각보다 자주 찾아옵니다. 검색창에 키워드를 넣어도 후기마다 말이 달라 판단이 흐려지기 마련입니다. 이 페이지는 그 혼란을 줄이는 출발점입니다.</p>
-
-      <h3>즉시 확인 가능한 선택 기준</h3>
-      <ul>
-        <li>지역별 업소 특성 — 강남·홍대·이태원·지역 나이트 차이 한눈에 비교</li>
-        <li>요일·시간대별 혼잡도 패턴 정리</li>
-        <li>평균 소요 예산 범위와 추가 비용 발생 구간</li>
-        <li>초행자가 자주 놓치는 접근성 변수(주차·막차·택시 수급)</li>
-      </ul>
-
-      <div class="scan-box">
-        <h3>빠른 훑어보기</h3>
-        <p>▸ 수록 권역: 서울 4개 권역 + 수도권·지방 12개 장소<br>
-        ▸ 갱신 시점: 2026년 1분기 현장 확인분<br>
-        ▸ 비교 항목: 위치·분위기·예산·교통·연령대<br>
-        ▸ 활용 방식: 스크롤 → 비교 → 상세 클릭</p>
+      <div class="filter-group">
+        <h3 class="filter-group__label">카테고리</h3>
+        <div class="filter-bar" data-filter="category">
+          <button class="filter-pill active" data-value="all">전체</button>
+          <button class="filter-pill" data-value="클럽">클럽</button>
+          <button class="filter-pill" data-value="나이트">나이트</button>
+          <button class="filter-pill" data-value="라운지">라운지</button>
+        </div>
       </div>
-
-      <h3>장소 고르는 5단계</h3>
-      <ol>
-        <li>오늘 이동 가능한 거리 반경을 먼저 설정한다</li>
-        <li>동행 인원과 연령 구성을 확인한다</li>
-        <li>예산 상한선을 미리 합의한다</li>
-        <li>귀가 수단(막차·대리·택시)을 역산한다</li>
-        <li>후보 두 곳까지 줄인 뒤 전화 한 통으로 확정한다</li>
-      </ol>
-
-      <p>아래 카드를 스크롤하면 각 업소별 분위기와 위치를 확인할 수 있습니다. 카드 하단의 '상세 보기'를 누르면 현장 사진·동선·체크리스트가 담긴 개별 페이지로 이동합니다.</p>
     </div>
   </section>
 
   <main id="main-content">
 
-    <!-- ═══ 강남 SECTION ═══ -->
-    <section class="section" id="gangnam">
+    <!-- ═══ 추천 (인기) ═══ -->
+    <section class="section" id="recommend">
       <div class="container">
         <div class="section__header reveal" data-reveal>
-          <span class="section__eyebrow">Gangnam</span>
-          <h2>강남 클럽 &amp; 라운지</h2>
-          <p>서울 나이트라이프의 중심. 대형 클럽부터 프라이빗 라운지까지.</p>
+          <span class="section__eyebrow">Popular</span>
+          <h2>인기 장소</h2>
+          <p>가장 많이 조회된 클럽·나이트·라운지를 모았습니다.</p>
         </div>
-        <div class="card-grid">
+        <div class="card-grid" id="venue-grid">
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="Club RACE 분위기" loading="lazy" width="400" height="400">
-              <span class="venue-card__badge">HOT</span>
-            </div>
+          <!-- 강남 클럽 -->
+          <article class="venue-card reveal" data-reveal data-region="강남" data-cat="클럽" data-name="Club RACE">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="Club RACE" loading="lazy" width="400" height="400"><span class="venue-card__badge">HOT</span></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">Club RACE</h3>
-              <p class="venue-card__location">글래드라이브 호텔 B1F · 어은주역 4번 출구</p>
-              <p class="venue-card__story">정문을 지나 엘리베이터를 타면 거리 소음이 순식간에 베이스로 바뀐다. 바 좌석이 댄스플로어를 감싸는 구조라, 자리에 앉아도 에너지를 온몸으로 느낀다. 강남 클럽 순위에서 꾸준히 최상위를 유지하는 데는 이유가 있다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">EDM</span>
-                <span class="pill">대형</span>
-                <span class="pill">강남</span>
-              </div>
+              <p class="venue-card__location">글래드라이브 호텔 B1F · 어은주역</p>
+              <p class="venue-card__story">정문을 지나 엘리베이터를 타면 거리 소음이 순식간에 베이스로 바뀐다. 바 좌석이 댄스플로어를 감싸는 구조라, 자리에 앉아도 에너지를 온몸으로 느낀다.</p>
+              <div class="venue-card__tags"><span class="pill">EDM</span><span class="pill">대형</span><span class="pill">강남</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="Octagon 분위기" loading="lazy" width="400" height="400">
-              <span class="venue-card__badge">MEGA</span>
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="강남" data-cat="클럽" data-name="Octagon">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="Octagon" loading="lazy" width="400" height="400"><span class="venue-card__badge">MEGA</span></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">Octagon</h3>
-              <p class="venue-card__location">논현로 645 · 신논현역 인근</p>
-              <p class="venue-card__story">아시아를 대표하는 메가 클럽. 두 개 층을 가로지르는 사운드 시스템과 360도 LED 연출은 이름값을 한다. 금요일 자정이면 대기 줄이 블록을 돌기 시작한다. 한 번쯤은 직접 경험해야 비로소 스케일을 이해하게 된다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">메가클럽</span>
-                <span class="pill">EDM</span>
-                <span class="pill">테이블 예약</span>
-              </div>
+              <p class="venue-card__location">논현로 645 · 신논현역</p>
+              <p class="venue-card__story">아시아를 대표하는 메가 클럽. 두 개 층을 가로지르는 사운드 시스템과 360도 LED 연출은 이름값을 한다. 금요일 자정이면 대기 줄이 블록을 돈다.</p>
+              <div class="venue-card__tags"><span class="pill">메가클럽</span><span class="pill">EDM</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="Club ARTE 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="강남" data-cat="클럽" data-name="Club ARTE">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="Club ARTE" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">Club ARTE</h3>
-              <p class="venue-card__location">강남대로 415 B1F · 강남역 10번 출구 도보 3분</p>
-              <p class="venue-card__story">강남역 도보 3분, 접근성 하나만으로도 선택지에 오른다. 미디어 아트 조명과 커팅엣지 사운드가 아담한 공간을 가득 채운다. 수·목·금·토 밤 11시에 문을 열어 새벽 8시까지 이어진다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">강남역</span>
-                <span class="pill">미디어아트</span>
-                <span class="pill pill--accent">23:00 오픈</span>
-              </div>
+              <p class="venue-card__location">강남대로 415 B1F · 강남역 도보 3분</p>
+              <p class="venue-card__story">강남역 접근성 최강. 미디어 아트 조명과 사운드가 아담한 공간을 가득 채운다. 수·목·금·토 밤 11시 오픈, 새벽 8시까지.</p>
+              <div class="venue-card__tags"><span class="pill">강남역</span><span class="pill">미디어아트</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="Club MUIN 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="강남" data-cat="클럽" data-name="Club MUIN">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="Club MUIN" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">Club MUIN</h3>
               <p class="venue-card__location">강남 · 위치 비공개(예약 시 안내)</p>
-              <p class="venue-card__story">한국적 미학과 모던 댄스 뮤직이 교차하는 독특한 공간. 셀프 입장 동선이 인상적이고, 셀럽 목격담이 심심치 않게 올라온다. 살짝 더 어른스러운 강남 밤을 원한다면 체크 리스트에 올려두자.</p>
-              <div class="venue-card__tags">
-                <span class="pill">셀프입장</span>
-                <span class="pill">DJ바</span>
-                <span class="pill">프리미엄</span>
-              </div>
+              <p class="venue-card__story">한국적 미학과 모던 댄스 뮤직이 교차하는 독특한 공간. 셀럽 목격담이 심심치 않게 올라온다. 어른스러운 강남 밤을 원한다면.</p>
+              <div class="venue-card__tags"><span class="pill">프리미엄</span><span class="pill">DJ바</span></div>
             </div>
           </article>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ 홍대 SECTION ═══ -->
-    <section class="section" id="hongdae">
-      <div class="container">
-        <div class="section__header reveal" data-reveal>
-          <span class="section__eyebrow">Hongdae</span>
-          <h2>홍대 클럽</h2>
-          <p>언더그라운드 씬부터 메가 클럽까지, 홍대 특유의 자유로운 에너지.</p>
-        </div>
-        <div class="card-grid">
-
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="B1 클럽 분위기" loading="lazy" width="400" height="400">
-              <span class="venue-card__badge">TOP</span>
-            </div>
+          <!-- 홍대 클럽 -->
+          <article class="venue-card reveal" data-reveal data-region="홍대" data-cat="클럽" data-name="B1">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="B1" loading="lazy" width="400" height="400"><span class="venue-card__badge">TOP</span></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">B1</h3>
               <p class="venue-card__location">와우산로17길 6 B1 · 홍대입구역</p>
-              <p class="venue-card__story">이름 그대로 지하 1층. 계단을 내려가는 순간부터 홍대 씬의 날것이 시작된다. 따로 광고를 하지 않지만 홍대를 아는 사람이라면 모를 수 없는 곳. 다른 클럽이 문을 닫아도 이곳만은 여전히 북적인다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">올장르</span>
-                <span class="pill">홍대 대표</span>
-              </div>
+              <p class="venue-card__story">이름 그대로 지하 1층. 계단을 내려가는 순간 홍대 씬의 날것이 시작된다. 다른 클럽이 문을 닫아도 이곳만은 북적인다.</p>
+              <div class="venue-card__tags"><span class="pill">올장르</span><span class="pill">홍대 대표</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="Club LASER 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="홍대" data-cat="클럽" data-name="Club LASER">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="Club LASER" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">Club LASER</h3>
               <p class="venue-card__location">홍대 · 홍대입구역 인근</p>
-              <p class="venue-card__story">레이저 한 줄기가 암전된 플로어를 가르면 환호가 터진다. 2022년 12월 오픈 이후 1년 만에 홍대 EDM 탑3에 올랐다. 테크노와 힙합을 동시에 즐길 수 있는 유일한 하이브리드 클럽.</p>
-              <div class="venue-card__tags">
-                <span class="pill">하이브리드</span>
-                <span class="pill">EDM+힙합</span>
-                <span class="pill pill--accent">₩10,000</span>
-              </div>
+              <p class="venue-card__story">레이저 한 줄기가 암전된 플로어를 가르면 환호가 터진다. 테크노와 힙합을 동시에 즐길 수 있는 유일한 하이브리드 클럽.</p>
+              <div class="venue-card__tags"><span class="pill">하이브리드</span><span class="pill pill--accent">₩10,000</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="AURA 클럽 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="홍대" data-cat="클럽" data-name="AURA">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="AURA" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">AURA</h3>
               <p class="venue-card__location">와우산로21길 37 B1 · 홍대입구역</p>
-              <p class="venue-card__story">가로수길에서 골목 하나를 빠지면 지하로 향하는 입구가 보인다. 높은 천장 덕에 사람이 차도 답답하지 않다. 음향 설계에 진심인 소규모 공간에서, 친밀한 거리로 음악을 나눈다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">소규모</span>
-                <span class="pill">음향 특화</span>
-              </div>
+              <p class="venue-card__story">높은 천장 덕에 사람이 차도 답답하지 않다. 음향 설계에 진심인 소규모 공간에서, 친밀한 거리로 음악을 나눈다.</p>
+              <div class="venue-card__tags"><span class="pill">소규모</span><span class="pill">음향 특화</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="SABOTAGE 클럽 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="홍대" data-cat="클럽" data-name="SABOTAGE">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="SABOTAGE" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">SABOTAGE</h3>
               <p class="venue-card__location">홍대 · 홍대입구역 인근</p>
-              <p class="venue-card__story">홍대 힙합 클럽의 대명사. 강렬한 비트 위에서 자유롭게 몸을 흔드는 사람들 사이로 섞여 들어가면, 처음 온 사람도 어느새 리듬을 타고 있다. 스태프 친절도로도 자주 칭찬받는다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">힙합</span>
-                <span class="pill">일렉트로닉</span>
-              </div>
+              <p class="venue-card__story">홍대 힙합 클럽의 대명사. 강렬한 비트 위에서 자유롭게 몸을 흔드는 사람들 사이로 섞여 들면 처음이어도 리듬을 타게 된다.</p>
+              <div class="venue-card__tags"><span class="pill">힙합</span><span class="pill">일렉트로닉</span></div>
             </div>
           </article>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ 이태원 · 압구정 · 청담 SECTION ═══ -->
-    <section class="section" id="itaewon">
-      <div class="container">
-        <div class="section__header reveal" data-reveal>
-          <span class="section__eyebrow">Itaewon &amp; More</span>
-          <h2>이태원 · 압구정 · 청담</h2>
-          <p>테크노 언더그라운드부터 청담 하이엔드 라운지까지.</p>
-        </div>
-        <div class="card-grid">
-
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="Faust 분위기" loading="lazy" width="400" height="400">
-              <span class="venue-card__badge">TECHNO</span>
-            </div>
+          <!-- 이태원·압구정·청담 -->
+          <article class="venue-card reveal" data-reveal data-region="이태원" data-cat="클럽" data-name="Faust">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="Faust" loading="lazy" width="400" height="400"><span class="venue-card__badge">TECHNO</span></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">Faust</h3>
               <p class="venue-card__location">보광로60길 7 3F · 이태원역</p>
-              <p class="venue-card__story">이태원 뒷골목 3층에 자리잡은 테크노 성지. 한국 최초로 공간 음향을 설계에 반영한 클럽이다. 해외 DJ 레지던시가 빈번해, 서울에서 베를린의 밤을 경험할 수 있는 몇 안 되는 곳.</p>
-              <div class="venue-card__tags">
-                <span class="pill pill--accent">테크노</span>
-                <span class="pill">언더그라운드</span>
-                <span class="pill">이태원</span>
-              </div>
+              <p class="venue-card__story">이태원 뒷골목 3층 테크노 성지. 한국 최초로 공간 음향을 설계에 반영한 클럽. 서울에서 베를린의 밤을 경험할 수 있는 곳.</p>
+              <div class="venue-card__tags"><span class="pill pill--accent">테크노</span><span class="pill">언더그라운드</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="CODE Lounge 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="압구정" data-cat="라운지" data-name="CODE Lounge">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="CODE Lounge" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">CODE Lounge</h3>
               <p class="venue-card__location">압구정 로데오 · 압구정로데오역</p>
-              <p class="venue-card__story">프라이빗 테이블 중심의 라운지. 음악 볼륨을 대화가 가능한 수준으로 유지해, 비즈니스 애프터와 소규모 모임에 어울린다. 사전 테이블 예약을 권장한다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">라운지</span>
-                <span class="pill">압구정</span>
-                <span class="pill">예약 추천</span>
-              </div>
+              <p class="venue-card__story">프라이빗 테이블 중심 라운지. 음악 볼륨을 대화가 가능한 수준으로 유지한다. 비즈니스 애프터와 소규모 모임에 적합.</p>
+              <div class="venue-card__tags"><span class="pill">라운지</span><span class="pill">예약 추천</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="HYPE Seoul 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="압구정" data-cat="라운지" data-name="HYPE Seoul">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="HYPE Seoul" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">HYPE Seoul</h3>
               <p class="venue-card__location">압구정 로데오 · 압구정로데오역</p>
-              <p class="venue-card__story">힙합과 R&B를 베이스로 깔고, 압구정 특유의 패션 피플이 모이는 공간. 음악과 사람 구경을 동시에 즐길 수 있다. 주말 밤 드레스코드가 있으니 참고할 것.</p>
-              <div class="venue-card__tags">
-                <span class="pill">힙합</span>
-                <span class="pill">R&B</span>
-                <span class="pill">압구정</span>
-              </div>
+              <p class="venue-card__story">힙합과 R&amp;B를 베이스로, 압구정 특유의 패션 피플이 모이는 공간. 주말 밤 드레스코드 있음.</p>
+              <div class="venue-card__tags"><span class="pill">힙합</span><span class="pill">R&amp;B</span></div>
             </div>
           </article>
 
-          <article class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="images/girl-model-party.png" alt="Club 82 분위기" loading="lazy" width="400" height="400">
-            </div>
+          <article class="venue-card reveal" data-reveal data-region="청담" data-cat="클럽" data-name="Club 82">
+            <div class="venue-card__thumb"><img src="images/girl-model-party.png" alt="Club 82" loading="lazy" width="400" height="400"></div>
             <div class="venue-card__body">
               <h3 class="venue-card__name">Club 82 (플러스82)</h3>
               <p class="venue-card__location">청담동 · 청담역 인근</p>
-              <p class="venue-card__story">다른 클럽이 문을 닫는 새벽 4시부터 진짜 밤이 시작되는 곳. 아담한 규모지만 청담 특유의 에너지가 작은 공간을 가득 채운다. 아침 9시까지 이어지는 애프터 문화의 중심.</p>
-              <div class="venue-card__tags">
-                <span class="pill pill--accent">애프터클럽</span>
-                <span class="pill">청담</span>
-                <span class="pill">04:00~</span>
-              </div>
+              <p class="venue-card__story">다른 클럽이 문을 닫는 새벽 4시부터 진짜 밤이 시작되는 곳. 아침 9시까지 이어지는 애프터 문화의 중심.</p>
+              <div class="venue-card__tags"><span class="pill pill--accent">애프터클럽</span><span class="pill">04:00~</span></div>
             </div>
           </article>
 
+          <!-- 지역 나이트 (상세 페이지 링크) -->
+          <a href="/y/" class="venue-card reveal" data-reveal data-region="수유" data-cat="나이트" data-name="수유샴푸나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/y/og-image.jpg" alt="수유샴푸나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">수유샴푸나이트</h3>
+              <p class="venue-card__location">서울 강북구 · 수유역 4호선</p>
+              <p class="venue-card__story">서울 강북의 대표 나이트. 수유역에서 도보 4분, 접근성과 가성비를 동시에 잡는다. 평일 저녁 방문이 가장 여유롭다.</p>
+              <div class="venue-card__tags"><span class="pill">강북</span><span class="pill">가성비</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/b/" class="venue-card reveal" data-reveal data-region="상봉" data-cat="나이트" data-name="상봉동한국관나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/b/og-image.jpg" alt="상봉동한국관나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">상봉동 한국관나이트</h3>
+              <p class="venue-card__location">서울 중랑구 · 상봉역 7호선</p>
+              <p class="venue-card__story">주말이면 초대 가수 무대가 열리고 90년대 히트곡이 플로어를 달군다. 테이블·부스·룸 세 가지 좌석 옵션.</p>
+              <div class="venue-card__tags"><span class="pill">라이브</span><span class="pill">90년대</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/i/" class="venue-card reveal" data-reveal data-region="인천" data-cat="나이트" data-name="인천아라비안나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/i/og-image.jpg" alt="인천아라비안나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">인천 아라비안나이트</h3>
+              <p class="venue-card__location">인천 계양구 · 계양역 도보 5분</p>
+              <p class="venue-card__story">4개 층 규모 인천 최대 프리미엄 나이트. BOX룸·VIP룸 수십 개 공간. 발레파킹 완비.</p>
+              <div class="venue-card__tags"><span class="pill">인천 최대</span><span class="pill">VIP룸</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/f/" class="venue-card reveal" data-reveal data-region="파주" data-cat="나이트" data-name="파주야당스카이돔나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/f/og-image.jpg" alt="파주야당스카이돔나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">파주 야당스카이돔나이트</h3>
+              <p class="venue-card__location">경기 파주시 · 야당역 인근</p>
+              <p class="venue-card__story">돔형 천장이 만드는 독특한 음향. 파주·일산 권역에서 이동 거리가 짧고 넓은 플로어.</p>
+              <div class="venue-card__tags"><span class="pill">파주</span><span class="pill">돔형</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/j/" class="venue-card reveal" data-reveal data-region="수원" data-cat="나이트" data-name="수원찬스돔나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/j/og-image.jpg" alt="수원찬스돔나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">수원 찬스돔나이트</h3>
+              <p class="venue-card__location">경기 수원시 · 수원역 인근</p>
+              <p class="venue-card__story">수원 최대 규모 나이트. 주말 밤에는 일찍 도착해야 자리 확보 가능. 시간대별로 분위기가 확연히 달라진다.</p>
+              <div class="venue-card__tags"><span class="pill">수원</span><span class="pill">대규모</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/l/" class="venue-card reveal" data-reveal data-region="신림" data-cat="나이트" data-name="신림그랑프리나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/l/og-image.jpg" alt="신림그랑프리나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">신림 그랑프리나이트</h3>
+              <p class="venue-card__location">서울 관악구 · 신림역 2호선</p>
+              <p class="venue-card__story">신림 터줏대감. 처음 방문해도 어색하지 않은 분위기. 접근성 좋아 귀가도 수월하다.</p>
+              <div class="venue-card__tags"><span class="pill">신림</span><span class="pill">편안함</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/t/" class="venue-card reveal" data-reveal data-region="대전" data-cat="나이트" data-name="대전세븐나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/t/og-image.jpg" alt="대전세븐나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">대전 세븐나이트</h3>
+              <p class="venue-card__location">대전광역시 · 대전역 인근</p>
+              <p class="venue-card__story">대전 유일의 대형 나이트. 충청권 전체에서 사람이 모인다. KTX 대전역에서 택시 10분.</p>
+              <div class="venue-card__tags"><span class="pill">대전</span><span class="pill">충청권</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/q/" class="venue-card reveal" data-reveal data-region="인덕원" data-cat="나이트" data-name="인덕원국빈관나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/q/og-image.jpg" alt="인덕원국빈관나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">인덕원 국빈관나이트</h3>
+              <p class="venue-card__location">경기 안양시 · 인덕원역 4호선</p>
+              <p class="venue-card__story">경기 남부 야간 이동의 거점. 인덕원역에서 가까워 접근 쉽다. 넓은 내부와 안정적인 운영.</p>
+              <div class="venue-card__tags"><span class="pill">인덕원</span><span class="pill">경기남부</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/r/" class="venue-card reveal" data-reveal data-region="울산" data-cat="나이트" data-name="울산챔피언나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/r/og-image.jpg" alt="울산챔피언나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">울산 챔피언나이트</h3>
+              <p class="venue-card__location">울산광역시 · 울산 중구</p>
+              <p class="venue-card__story">울산 대표 나이트. 영남권 전체에서 단체 방문이 잦아 주말이면 열기가 뜨겁다.</p>
+              <div class="venue-card__tags"><span class="pill">울산</span><span class="pill">영남권</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/s/" class="venue-card reveal" data-reveal data-region="일산" data-cat="나이트" data-name="일산샴푸나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/s/og-image.jpg" alt="일산샴푸나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">일산 샴푸나이트</h3>
+              <p class="venue-card__location">경기 고양시 · 백석역 인근</p>
+              <p class="venue-card__story">일산 최대 규모. 주중에도 북적이는 곳. 고양·파주·김포 주민들의 밤 문화 거점.</p>
+              <div class="venue-card__tags"><span class="pill">일산</span><span class="pill">최대 규모</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+          <a href="/x/" class="venue-card reveal" data-reveal data-region="청담" data-cat="나이트" data-name="청담h2o나이트" target="_blank" rel="noopener noreferrer">
+            <div class="venue-card__thumb"><img src="/x/og-image.jpg" alt="청담h2o나이트" loading="lazy" width="400" height="400"></div>
+            <div class="venue-card__body">
+              <h3 class="venue-card__name">청담 h2o나이트</h3>
+              <p class="venue-card__location">서울 강남구 · 청담역 인근</p>
+              <p class="venue-card__story">청담 프리미엄 나이트. 드레스코드가 있어 분위기 관리가 확실하다.</p>
+              <div class="venue-card__tags"><span class="pill">청담</span><span class="pill">드레스코드</span></div>
+              <span class="venue-card__cta">상세 가이드 보기</span>
+            </div>
+          </a>
+
+        </div>
+        <p class="no-results" id="no-results" style="display:none;text-align:center;padding:var(--sp-2xl) 0;color:var(--c-muted)">해당 조건에 맞는 장소가 없습니다. 필터를 변경해 보세요.</p>
+      </div>
+    </section>
+
+    <!-- ═══ 지역 허브 ═══ -->
+    <section class="section section--warm" id="regions">
+      <div class="container">
+        <div class="section__header reveal" data-reveal>
+          <span class="section__eyebrow">Region Hub</span>
+          <h2>지역별 가이드</h2>
+          <p>서울 핵심 권역과 수도권·지방 나이트라이프를 지역 기준으로 탐색합니다.</p>
+        </div>
+        <div class="card-grid card-grid--compact">
+          <article class="region-card reveal" data-reveal>
+            <h3>강남</h3><p>대형 클럽·프리미엄 라운지가 밀집된 서울 최대 나이트라이프 권역. 테이블 예약 문화가 발달.</p>
+            <span class="pill pill--accent">4곳 수록</span>
+          </article>
+          <article class="region-card reveal" data-reveal>
+            <h3>홍대</h3><p>자유분방한 언더그라운드 씬. 가성비 좋은 클럽부터 실험적인 공간까지 다양.</p>
+            <span class="pill pill--accent">4곳 수록</span>
+          </article>
+          <article class="region-card reveal" data-reveal>
+            <h3>이태원 · 압구정 · 청담</h3><p>테크노·힙합·하이엔드 라운지가 공존하는 다채로운 권역.</p>
+            <span class="pill pill--accent">4곳 수록</span>
+          </article>
+          <article class="region-card reveal" data-reveal>
+            <h3>수도권 · 지방</h3><p>수유·인천·수원·일산·파주·대전·울산 등 상세 가이드 페이지가 있는 검증된 나이트.</p>
+            <span class="pill pill--accent">11곳 수록</span>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ═══ 지역 나이트 SECTION ═══ -->
-    <section class="section section--warm" id="local">
+    <!-- ═══ 카테고리 허브 ═══ -->
+    <section class="section" id="category">
       <div class="container">
         <div class="section__header reveal" data-reveal>
-          <span class="section__eyebrow">Local Nightlife</span>
-          <h2>지역 나이트 클럽</h2>
-          <p>서울 외곽과 수도권·지방의 검증된 나이트. 카드를 누르면 상세 가이드로 이동합니다.</p>
+          <span class="section__eyebrow">Category</span>
+          <h2>카테고리별 안내</h2>
+          <p>클럽·나이트·라운지, 각 업종의 특성과 방문 팁을 요약합니다.</p>
         </div>
-        <div class="card-grid">
+        <div class="card-grid card-grid--compact">
+          <article class="cat-card reveal" data-reveal>
+            <h3>클럽</h3>
+            <p>DJ 라인업과 댄스플로어 중심. EDM·힙합·테크노 등 장르별로 분위기가 확연히 다르다. 입장료가 있는 경우가 많고, 주말 자정 전후가 피크.</p>
+            <span class="pill">12곳 수록</span>
+          </article>
+          <article class="cat-card reveal" data-reveal>
+            <h3>나이트</h3>
+            <p>전통 나이트클럽. 웨이터 시스템과 라이브 무대가 특징. 테이블·부스·룸 좌석이 있고, 예약·단체 방문이 일반적. 주로 지역 기반.</p>
+            <span class="pill">11곳 수록</span>
+          </article>
+          <article class="cat-card reveal" data-reveal>
+            <h3>라운지</h3>
+            <p>대화가 가능한 음량. 프라이빗 테이블과 칵테일 중심. 비즈니스 애프터·소규모 모임에 적합. 사전 예약 권장.</p>
+            <span class="pill">2곳 수록</span>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <a href="/y/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/y/og-image.jpg" alt="수유샴푸나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">수유샴푸나이트</h3>
-              <p class="venue-card__location">서울 강북구 · 수유역 4호선</p>
-              <p class="venue-card__story">서울 강북의 대표 나이트. 수유역에서 도보 4분, 접근성과 가성비를 동시에 잡는다. 평일 저녁 방문이 가장 여유롭고, 1인 방문자도 자연스럽게 어울리는 분위기.</p>
-              <div class="venue-card__tags">
-                <span class="pill">강북</span>
-                <span class="pill">가성비</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/b/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/b/og-image.jpg" alt="상봉동한국관나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">상봉동 한국관나이트</h3>
-              <p class="venue-card__location">서울 중랑구 · 상봉역 7호선</p>
-              <p class="venue-card__story">주말이면 초대 가수 무대가 열리고, 90년대 히트곡이 플로어를 달군다. 테이블·부스·룸 세 가지 좌석 옵션 중 고를 수 있어, 취향에 맞는 자리를 잡기 쉽다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">라이브 무대</span>
-                <span class="pill">90년대 음악</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/i/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/i/og-image.jpg" alt="인천아라비안나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">인천 아라비안나이트</h3>
-              <p class="venue-card__location">인천 계양구 · 계양역 도보 5분</p>
-              <p class="venue-card__story">4개 층 규모의 인천 최대 프리미엄 나이트클럽. BOX룸·VIP룸·투명 유리 부스까지 수십 개 공간이 준비되어 있다. 발레파킹과 대형 주차장을 갖추고 있어 자가용 방문도 편리하다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">인천 최대</span>
-                <span class="pill">VIP룸</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/f/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/f/og-image.jpg" alt="파주야당스카이돔나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">파주 야당스카이돔나이트</h3>
-              <p class="venue-card__location">경기 파주시 · 야당역 인근</p>
-              <p class="venue-card__story">돔형 천장이 만드는 독특한 음향. 파주·일산 권역에서 이동 거리가 짧고, 넓은 플로어에서 답답함 없이 즐길 수 있다. 주말 저녁 일찍 도착하면 좋은 자리를 선점할 수 있다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">파주</span>
-                <span class="pill">돔형 공간</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/j/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/j/og-image.jpg" alt="수원찬스돔나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">수원 찬스돔나이트</h3>
-              <p class="venue-card__location">경기 수원시 · 수원역 인근</p>
-              <p class="venue-card__story">수원 최대 규모 나이트. 주말 밤에는 일찍 도착하지 않으면 자리 확보가 어렵다. 저녁부터 새벽까지 이어지는 타임라인이 뚜렷해서, 시간대별로 분위기가 확연히 달라진다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">수원</span>
-                <span class="pill">대규모</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/l/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/l/og-image.jpg" alt="신림그랑프리나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">신림 그랑프리나이트</h3>
-              <p class="venue-card__location">서울 관악구 · 신림역 2호선</p>
-              <p class="venue-card__story">신림 터줏대감. 처음 방문해도 어색하지 않은 편안한 분위기가 특징이다. 단골이 많아 현장에서 자연스럽게 대화가 이어지는 곳. 접근성이 좋아 귀가도 수월하다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">신림</span>
-                <span class="pill">편안한 분위기</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/t/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/t/og-image.jpg" alt="대전세븐나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">대전 세븐나이트</h3>
-              <p class="venue-card__location">대전광역시 · 대전역 인근</p>
-              <p class="venue-card__story">대전 유일의 대형 나이트. 충청권 전체에서 사람이 모여드는 만큼 주말이면 에너지가 넘친다. KTX 대전역에서 택시로 10분이면 도착한다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">대전</span>
-                <span class="pill">충청권 대표</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/q/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/q/og-image.jpg" alt="인덕원국빈관나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">인덕원 국빈관나이트</h3>
-              <p class="venue-card__location">경기 안양시 · 인덕원역 4호선</p>
-              <p class="venue-card__story">경기 남부 야간 이동의 거점. 인덕원역에서 가까워 서울 남부·과천·안양에서 접근이 쉽다. 넓은 내부와 안정적인 운영이 단골을 만드는 비결.</p>
-              <div class="venue-card__tags">
-                <span class="pill">인덕원</span>
-                <span class="pill">경기남부</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/r/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/r/og-image.jpg" alt="울산챔피언나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">울산 챔피언나이트</h3>
-              <p class="venue-card__location">울산광역시 · 울산 중구</p>
-              <p class="venue-card__story">울산 대표 나이트. 영남권 전체에서 단체 방문이 잦아 주말이면 열기가 특히 뜨겁다. 울산 특유의 호쾌한 분위기를 그대로 느낄 수 있다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">울산</span>
-                <span class="pill">영남권</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/s/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/s/og-image.jpg" alt="일산샴푸나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">일산 샴푸나이트</h3>
-              <p class="venue-card__location">경기 고양시 · 일산 백석역 인근</p>
-              <p class="venue-card__story">일산 최대 규모. 주중에도 북적이는 몇 안 되는 곳이다. 고양·파주·김포 주민들이 가장 먼저 떠올리는 밤 문화 거점.</p>
-              <div class="venue-card__tags">
-                <span class="pill">일산</span>
-                <span class="pill">최대 규모</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
-          <a href="/x/" class="venue-card reveal" data-reveal>
-            <div class="venue-card__thumb">
-              <img src="/x/og-image.jpg" alt="청담h2o나이트 분위기" loading="lazy" width="400" height="400">
-            </div>
-            <div class="venue-card__body">
-              <h3 class="venue-card__name">청담 h2o나이트</h3>
-              <p class="venue-card__location">서울 강남구 · 청담역 인근</p>
-              <p class="venue-card__story">청담 프리미엄 나이트. 드레스코드가 있어 입장 기준이 명확하다. 그만큼 분위기 관리가 되어 있고, 세련된 공간에서 격조 있는 밤을 보낼 수 있다.</p>
-              <div class="venue-card__tags">
-                <span class="pill">청담</span>
-                <span class="pill">드레스코드</span>
-              </div>
-              <span class="venue-card__cta">상세 가이드 보기</span>
-            </div>
-          </a>
-
+    <!-- ═══ 최신 업데이트 ═══ -->
+    <section class="section section--warm" id="updates">
+      <div class="container">
+        <div class="section__header reveal" data-reveal>
+          <span class="section__eyebrow">Updates</span>
+          <h2>최신 업데이트</h2>
+          <p>정보 변경, 신규 등록, 현장 재확인 내역을 기록합니다.</p>
+        </div>
+        <div class="update-list reveal" data-reveal>
+          <div class="update-card">
+            <span class="update-card__date">2026.02.20</span>
+            <span class="update-card__text">사이트 UI 전면 재구축: 하이엔드 디자인 시스템 적용, 검색·필터 기능 추가</span>
+          </div>
+          <div class="update-card">
+            <span class="update-card__date">2026.02.20</span>
+            <span class="update-card__text">강남(RACE, Octagon, ARTE, MUIN), 홍대(B1, LASER, AURA, SABOTAGE), 이태원·압구정·청담(Faust, CODE, HYPE, 82) 12곳 신규 등록</span>
+          </div>
+          <div class="update-card">
+            <span class="update-card__date">2026.02.20</span>
+            <span class="update-card__text">수유샴푸나이트(/z/) STEP 1~4 완료: 타임라인 내비·반응형 4구간·본문 최적화</span>
+          </div>
+          <div class="update-card">
+            <span class="update-card__date">2026.02.18</span>
+            <span class="update-card__text">기존 12개 상세 가이드 페이지 R7 인트로 블록 적용 완료, 유사도 0% 달성</span>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ═══ NOTICE ═══ -->
-  <section class="section disclaimer">
+  <!-- ═══ 정책 / NOTICE ═══ -->
+  <section class="section" id="policy">
     <div class="container container--narrow">
-      <h2>사이트 안내</h2>
-      <p>본 사이트는 클럽·라운지·나이트 정보를 정리한 개인 운영 가이드입니다. 특정 업소의 공식 페이지가 아니며, 광고비·협찬 등 상업적 대가 없이 작성되었습니다. 현장 상황은 수시로 달라질 수 있으므로 방문 전 최신 정보를 확인하세요. 본 사이트는 불법·유해 콘텐츠 및 알선 서비스를 제공하지 않습니다.</p>
+      <div class="section__header">
+        <span class="section__eyebrow">Policy</span>
+        <h2>사이트 정책</h2>
+      </div>
+      <div class="policy-grid">
+        <div class="policy-item">
+          <h3>About</h3>
+          <p>본 사이트는 클럽·라운지·나이트 정보를 정리한 개인 운영 가이드입니다. 특정 업소의 공식 페이지가 아니며, 광고비·협찬 등 상업적 대가 없이 작성되었습니다.</p>
+        </div>
+        <div class="policy-item">
+          <h3>편집 정책</h3>
+          <p>모든 정보는 현장 확인 또는 공개된 자료를 기반으로 작성합니다. 선정적·노골적 표현을 배제하고, 중립적인 정보 안내에 집중합니다.</p>
+        </div>
+        <div class="policy-item">
+          <h3>정정 요청</h3>
+          <p>영업 상태 변경, 잘못된 정보, 삭제 요청 등은 해당 페이지 하단의 '정정 요청' 기능을 이용해 주세요. 확인 후 신속히 반영합니다.</p>
+        </div>
+        <div class="policy-item">
+          <h3>이용 안내</h3>
+          <p>본 사이트는 만 19세 이상을 대상으로 합니다. 불법·유해 콘텐츠 및 알선 서비스를 제공하지 않습니다. 현장 상황은 수시로 달라질 수 있으므로 방문 전 최신 정보를 직접 확인하세요.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ═══ FOOTER ═══ -->
   <footer class="site-footer">
     <div class="container">
-      <p><strong>NIGHTLIFE DIRECTORY</strong> · Seoul Club &amp; Lounge Guide 2026</p>
-      <p>&copy; 2026 All rights reserved.</p>
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <strong>NIGHTLIFE DIRECTORY</strong>
+          <span>Seoul Club &amp; Lounge Guide 2026</span>
+        </div>
+        <nav class="footer__links" aria-label="푸터 메뉴">
+          <a href="#policy">정책</a>
+          <a href="#updates">업데이트</a>
+          <span class="footer__age">만 19세 이상</span>
+        </nav>
+      </div>
+      <p class="footer__copy">&copy; 2026 All rights reserved.</p>
     </div>
   </footer>
 
