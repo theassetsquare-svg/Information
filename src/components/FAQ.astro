@@ -1,0 +1,16 @@
+---
+interface Props {
+  items: { q: string; a: string }[];
+}
+
+const { items } = Astro.props;
+---
+<section class="faq container" id="faq-section">
+  <h2 class="faq__title">자주 묻는 질문</h2>
+  {items.map(item => (
+    <div class="faq__item">
+      <p class="faq__q">{item.q}</p>
+      <p class="faq__a">{item.a}</p>
+    </div>
+  ))}
+</section>

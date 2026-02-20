@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VenueCard from '../components/VenueCard.astro';
+import IntroBlock from '../components/IntroBlock.astro';
+import allVenues from '../data/venues.json';
+
+const venues = allVenues.filter(v => v.category === '클럽');
+---
+<BaseLayout
+  title="클럽 리스트 — 강남·홍대·이태원·청담 클럽 가이드 | 2026"
+  description="Club RACE, Octagon, B1, Faust 등 서울 주요 클럽을 현장 확인 토대로 비교합니다."
+>
+  <main id="main-content">
+    <IntroBlock
+      hookHeadline="서울 클럽, 간판만 보고 들어가면 입장료만 날린다"
+      bullets={[
+        "드레스코드: 강남·청담은 스마트캐주얼 필수, 홍대·이태원은 운동화 OK — 확인 없이 가면 입구에서 돌아온다",
+        "오픈 시간: 대부분 23시 오픈, 청담 Club 82는 새벽 4시 오픈 — 일반 클럽과 스케줄이 정반대",
+        "사운드 차이: 테크노(Faust), EDM(Octagon), 힙합(SABOTAGE) — 장르가 완전히 다르다"
+      ]}
+      declaration="아래 10개 클럽을 장르·드레스코드·교통 토대로 정리했다."
+      storyVisible="<p>강남역 지하, 엘리베이터 문이 열리면 거리 소음이 베이스로 바뀐다. 논현로의 Octagon은 두 개 층을 가로지르는 사운드 시스템으로 아시아 TOP 5에 이름을 올렸다. 반면 홍대 뒷골목 B1은 간판 없는 계단 하나로 씬의 날것을 보여준다.</p>"
+      storyHidden="<p>이태원 Faust는 한국 최초로 음향 설계를 건축에 반영한 테크노 전용 플로어다. 서울에서 베를린 나이트를 경험할 수 있는 유일한 선택지라는 평가를 받는다. 압구정 로데오의 CODE Lounge는 프라이빗 테이블 중심으로 대화가 가능한 볼륨을 유지하고, HYPE Seoul은 힙합·R&B 베이스의 패션 피플이 모이는 프리미엄 라운지와 클럽의 중간 지점이다.</p><p>청담 Club 82는 다른 클럽이 문을 닫는 새벽 4시부터 아침 9시까지 운영된다. 서울 애프터 문화의 실질적 중심이며, 방문 스케줄 자체를 역으로 짜야 하는 독특한 구조다.</p>"
+      ctas={[
+        { label: "나이트 보기", href: "/nights/" },
+        { label: "라운지 보기", href: "/lounges/" }
+      ]}
+    />
+    <section class="section">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <span class="section__eyebrow">Clubs</span>
+          <h2>클럽 {venues.length}곳</h2>
+        </div>
+        <div class="venue-grid">
+          {venues.map(v => (
+            <VenueCard
+              name={v.name} category={v.category} region={v.region}
+              thumbnail={v.thumbnail} image_alt={v.image_alt} badge={v.badge}
+              card_hook={v.card_hook} card_value={v.card_value} card_tags={v.card_tags}
+              detail_page={v.detail_page} map_url={v.map_url}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

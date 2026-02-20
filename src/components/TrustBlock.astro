@@ -1,0 +1,13 @@
+---
+interface Props {
+  storeName: string;
+}
+
+const { storeName } = Astro.props;
+---
+<div class="trust-block container" id="trust">
+  본 페이지는 개인이 운영하는 정보형 안내이며, {storeName} 공식 페이지가 아닙니다.
+  상업적 대가 없이 작성되었습니다.
+  정보 오류나 변경 사항은 <a href="#bottom-cta">정정 요청</a>을 이용해 주세요.
+  <a href="/#policy">편집 정책 보기</a>
+</div>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  hookHeadline: string;
+  bullets: string[];
+  declaration: string;
+  storyVisible: string;
+  storyHidden: string;
+  ctas: { label: string; href: string }[];
+}
+
+const { hookHeadline, bullets, declaration, storyVisible, storyHidden, ctas } = Astro.props;
+---
+<section class="intro-block" data-reveal>
+  <div class="container">
+    <h2 class="intro-block__hook">{hookHeadline}</h2>
+
+    <div class="intro-block__summary">
+      <ul class="intro-block__bullets">
+        {bullets.map(b => <li>{b}</li>)}
+      </ul>
+      <p class="intro-block__declaration">{declaration}</p>
+    </div>
+
+    <div class="intro-block__story">
+      <Fragment set:html={storyVisible} />
+      {storyHidden && (
+        <details class="intro-block__more">
+          <summary>더 읽기</summary>
+          <Fragment set:html={storyHidden} />
+        </details>
+      )}
+    </div>
+
+    <div class="intro-block__ctas">
+      {ctas.map(c => (
+        <a href={c.href} class="btn btn--primary" target={c.href.startsWith('http') ? '_blank' : undefined} rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{c.label}</a>
+      ))}
+    </div>
+  </div>
+</section>

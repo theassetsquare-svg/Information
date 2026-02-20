@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VenueCard from '../components/VenueCard.astro';
+import IntroBlock from '../components/IntroBlock.astro';
+import allVenues from '../data/venues.json';
+
+const venues = allVenues.filter(v => v.category === '라운지');
+---
+<BaseLayout
+  title="라운지 리스트 — 압구정·청담 프리미엄 라운지 가이드 | 2026"
+  description="CODE Lounge, HYPE Seoul 등 서울 프리미엄 라운지를 현장 확인 토대로 비교합니다."
+>
+  <main id="main-content">
+    <IntroBlock
+      hookHeadline="라운지는 '예약 없이 가면 빈 테이블이 없다'가 기본이다"
+      bullets={[
+        "예약: 압구정 라운지는 주말 사전 예약 필수 — 당일 워크인은 대기 1시간 이상 각오",
+        "드레스코드: 스마트캐주얼 이상 엄격 적용, 슬리퍼·반바지 입장 불가",
+        "분위기: 대화가 가능한 음량 — 클럽과 달리 비즈니스 미팅·소규모 모임에 적합"
+      ]}
+      declaration="아래 라운지를 예약·드레스코드·분위기 토대로 정리했다."
+      storyVisible="<p>압구정 로데오, 금요일 저녁 9시. CODE Lounge 앞에 발렛 차량이 줄을 선다. 프라이빗 테이블 사이로 낮은 음악이 흐르고, 대화 소리가 자연스럽게 섞인다. 클럽의 에너지와는 정반대 — 여기서는 분위기를 '소비'하는 게 아니라 '만드는' 쪽이다.</p>"
+      storyHidden="<p>HYPE Seoul은 힙합·R&B를 베이스로 압구정 특유의 패션 감각이 모이는 장소다. 주말 밤 드레스코드가 적용되며, 스니커즈는 허용하되 슬리퍼·반바지는 입장 불가다. 라운지와 클럽의 경계를 넘나드는 독특한 포지션이어서, 댄스 플로어를 원하면서도 너무 시끄러운 건 피하고 싶은 방문객에게 맞는다.</p>"
+      ctas={[
+        { label: "클럽 보기", href: "/clubs/" },
+        { label: "나이트 보기", href: "/nights/" }
+      ]}
+    />
+    <section class="section">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <span class="section__eyebrow">Lounges</span>
+          <h2>라운지 {venues.length}곳</h2>
+        </div>
+        <div class="venue-grid">
+          {venues.map(v => (
+            <VenueCard
+              name={v.name} category={v.category} region={v.region}
+              thumbnail={v.thumbnail} image_alt={v.image_alt} badge={v.badge}
+              card_hook={v.card_hook} card_value={v.card_value} card_tags={v.card_tags}
+              detail_page={v.detail_page} map_url={v.map_url}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

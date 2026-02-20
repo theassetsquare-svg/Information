@@ -1,0 +1,37 @@
+---
+interface Props {
+  name: string;
+  category: string;
+  region: string;
+  thumbnail: string;
+  image_alt: string;
+  badge?: string | null;
+  card_hook: string;
+  card_value: string;
+  card_tags: string[];
+  detail_page?: string | null;
+  map_url: string;
+}
+
+const { name, category, region, thumbnail, image_alt, badge, card_hook, card_value, card_tags, detail_page, map_url } = Astro.props;
+const href = detail_page || map_url;
+---
+<a class="venue-card" href={href} target="_blank" rel="noopener noreferrer">
+  <div class="venue-card__thumb">
+    <img src={thumbnail} alt={image_alt} width="100" height="100" loading="lazy">
+    {badge && <span class="venue-card__badge">{badge}</span>}
+  </div>
+  <div class="venue-card__body">
+    <div class="venue-card__meta">
+      <span class="venue-card__type">{category}</span>
+      <span class="venue-card__region">{region}</span>
+    </div>
+    <h3 class="venue-card__name">{name}</h3>
+    <p class="venue-card__hook">{card_hook}</p>
+    <p class="venue-card__value">{card_value}</p>
+    <div class="venue-card__tags">
+      {card_tags.map(tag => <span class="pill">{tag}</span>)}
+    </div>
+    {detail_page && <span class="venue-card__cta">상세 가이드 보기</span>}
+  </div>
+</a>
