@@ -41,6 +41,11 @@ const regionLabel = venue.region;
 const siteUrl = 'https://informationa.pages.dev';
 const pageUrl = `${siteUrl}/${venue.cat_slug}/${venue.region_slug}/${venue.district_slug}/${venue.slug}/`;
 
+/* ───────── Thumbnail (absolute URL) ───────── */
+const thumbPath = venue.thumbnail || '/images/og-thumb.jpg';
+const thumbAbsolute = thumbPath.startsWith('http') ? thumbPath : `${siteUrl}${thumbPath}`;
+const thumbAlt = venue.image_alt || `${venue.name} ${regionLabel} ${catLabel} 썸네일`;
+
 /* ───────── CONTENT GENERATION HELPERS ───────── */
 
 /* Hero taglines by category */
@@ -271,7 +276,6 @@ function genTimeline(): string[] {
 function genFAQ(): { q: string; a: string }[] {
   const stationInfo = venue.station || '확인 필요';
   const addressInfo = venue.address || '확인 필요';
-  const tagsStr = (venue.tags || []).join(', ');
 
   const qSets: Record<string, { q: string; a: string }[][]> = {
     club: [
@@ -352,13 +356,13 @@ const relatedVenues = venuesData
 
 /* SEO */
 const catFullLabel = catLabel === '클럽' ? '클럽' : catLabel === '나이트' ? '나이트' : '라운지';
-const title = `${venue.name} — ${catFullLabel} 가이드 | ${regionLabel}`;
+const title = `${venue.name} — ${regionLabel} ${catFullLabel} 가이드`;
 const description = `${venue.name} 방문 전 꼭 확인할 위치·교통·복장·예산·예약 정보를 한 페이지에 정리했습니다. ${regionLabel} ${catFullLabel} 탐색에 실질적으로 도움이 되는 가이드.`;
-const ogImage = venue.thumbnail || '/images/og-thumb.jpg';
 
 const faqItems = genFAQ();
 const timelineSteps = genTimeline();
 
+/* JSON-LD with image + LocalBusiness */
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -367,6 +371,24 @@ const jsonLd = {
       "name": title,
       "url": pageUrl,
       "description": description,
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": thumbAbsolute,
+      },
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": venue.name,
+      "url": pageUrl,
+      "image": thumbAbsolute,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": venue.address || '',
+        "addressRegion": regionLabel,
+        "addressCountry": "KR",
+      },
+      ...(venue.map_url ? { hasMap: venue.map_url } : {}),
+      ...(venue.phone ? { telephone: venue.phone } : {}),
     },
     {
       "@type": "BreadcrumbList",
@@ -389,26 +411,47 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
-  <main id="main-content">
+<BaseLayout title={title} description={description} ogImage={thumbPath} jsonLd={jsonLd}>
+  <main id="main-content" class="detail-page">
 
-    {/* ── [0] Hero Section ── */}
-    <section class="hero container" data-reveal>
-      <h1 class="hero__title">{venue.name} — {heroTag}</h1>
-      <div class="hero__actions">
-        <a href={venue.map_url} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
-        <a href="/" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">목록으로</a>
-        <a href="#faq-section" class="btn btn--outline">FAQ</a>
+    {/* ── [0] Detail Hero: Thumbnail → Title → Meta → CTA ── */}
+    <section class="detail-hero" data-reveal>
+      <figure class="detail-hero__figure">
+        <img
+          src={thumbPath}
+          alt={thumbAlt}
+          width="520"
+          height="520"
+          loading="eager"
+        />
+      </figure>
+
+      <h1 class="detail-hero__title">{venue.name}</h1>
+      <p class="detail-hero__tagline">{heroTag}</p>
+
+      <div class="detail-hero__badges">
+        <span class="pill pill--accent">{catFullLabel}</span>
+        <span class="pill">{regionLabel}</span>
+        {venue.badge && <span class="pill pill--accent">{venue.badge}</span>}
       </div>
 
-      <div class="quick-summary" data-reveal>
-        <h2 class="quick-summary__title">AI 인용 요약</h2>
-        <ul class="quick-summary__list">
+      <div class="detail-hero__ctas">
+        <a href={venue.map_url} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
+        <a href="#faq-section" class="btn btn--outline">FAQ 바로가기</a>
+        <a href="/" class="btn btn--outline">목록으로</a>
+      </div>
+    </section>
+
+    {/* ── [0.5] Quick Summary (AEO) ── */}
+    <section class="detail-section" data-reveal>
+      <div class="quick-summary">
+        <h2 class="quick-summary__title">핵심 요약</h2>
+        <ul>
           <li><strong>카테고리:</strong> {catFullLabel}</li>
           <li><strong>지역:</strong> {regionLabel} · {venue.address}</li>
           <li><strong>교통:</strong> {venue.station || '확인 필요'}</li>
           <li><strong>운영 참고:</strong> {venue.card_value || '확인 필요'}</li>
-          <li><strong>연락처:</strong> 네이버 지도 또는 전화 검색 권장</li>
+          {venue.phone && <li><strong>연락처:</strong> {venue.phone}</li>}
         </ul>
       </div>
     </section>
@@ -427,10 +470,10 @@ const jsonLd = {
     />
 
     {/* ── [2] Practical Guide ── */}
-    <section class="practical-guide container" data-reveal>
-      <h2>실전 준비 가이드</h2>
-      <div class="practical-guide__table-wrap">
-        <table class="practical-guide__table">
+    <section class="detail-section" data-reveal>
+      <h2 class="detail-section__heading">실전 준비 가이드</h2>
+      <div class="detail-table-wrap">
+        <table class="detail-table">
           <tbody>
             {guideRows.map(row => (
               <tr>
@@ -444,13 +487,13 @@ const jsonLd = {
     </section>
 
     {/* ── [3] Timeline ── */}
-    <section class="timeline container" data-reveal>
-      <h2>오늘 밤 플랜</h2>
-      <ol class="timeline__list">
+    <section class="detail-section" data-reveal>
+      <h2 class="detail-section__heading">오늘 밤 플랜</h2>
+      <ol class="detail-timeline">
         {timelineSteps.map((step: string, i: number) => (
-          <li class="timeline__step">
-            <span class="timeline__num">{i + 1}</span>
-            <span class="timeline__text">{step}</span>
+          <li class="detail-timeline__step">
+            <span class="detail-timeline__num">{i + 1}</span>
+            <span class="detail-timeline__text">{step}</span>
           </li>
         ))}
       </ol>
@@ -462,209 +505,29 @@ const jsonLd = {
     {/* ── [5] Trust Block ── */}
     <TrustBlock storeName={venue.name} />
 
-    {/* ── [6] Related Venues ── */}
+    {/* ── [6] Bottom CTA ── */}
+    <section class="detail-section detail-bottom-cta" id="bottom-cta" data-reveal>
+      <a href={venue.map_url} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
+      <a href="/" class="btn btn--outline">다른 장소 둘러보기</a>
+    </section>
+
+    {/* ── [7] Related Venues ── */}
     {relatedVenues.length > 0 && (
-      <section class="related container" data-reveal>
-        <h2>함께 살펴볼 만한 곳</h2>
-        <ul class="related__list">
+      <section class="detail-section" data-reveal>
+        <h2 class="detail-section__heading">함께 살펴볼 만한 곳</h2>
+        <div class="detail-related">
           {relatedVenues.map((v: any) => (
-            <li>
-              <a
-                href={v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {v.name} — {v.region} {v.category}
-              </a>
-            </li>
+            <a
+              href={v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`}
+              class="detail-related__link"
+            >
+              <strong>{v.name}</strong>
+              <span>{v.region} {v.category}</span>
+            </a>
           ))}
-        </ul>
+        </div>
       </section>
     )}
 
   </main>
 </BaseLayout>
-
-<style>
-  .hero {
-    padding: 3rem 0 2rem;
-    text-align: center;
-  }
-  .hero__title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 700;
-    line-height: 1.35;
-    margin-bottom: 1.25rem;
-  }
-  .hero__actions {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-
-  .quick-summary {
-    background: #f8f9fa;
-    border-left: 4px solid #4a6cf7;
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    text-align: left;
-    max-width: 640px;
-    margin: 0 auto;
-  }
-  .quick-summary__title {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #4a6cf7;
-  }
-  .quick-summary__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-  .quick-summary__list li strong {
-    color: #333;
-  }
-
-  .practical-guide {
-    padding: 2.5rem 0;
-  }
-  .practical-guide h2 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .practical-guide__table-wrap {
-    overflow-x: auto;
-  }
-  .practical-guide__table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
-  }
-  .practical-guide__table th,
-  .practical-guide__table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #e5e7eb;
-    text-align: left;
-    vertical-align: top;
-  }
-  .practical-guide__table th {
-    width: 130px;
-    font-weight: 600;
-    color: #374151;
-    white-space: nowrap;
-    background: #fafafa;
-  }
-
-  .timeline {
-    padding: 2.5rem 0;
-  }
-  .timeline h2 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .timeline__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    counter-reset: none;
-  }
-  .timeline__step {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  .timeline__num {
-    flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
-    background: #4a6cf7;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-  }
-  .timeline__text {
-    line-height: 1.6;
-    padding-top: 0.25rem;
-  }
-
-  .related {
-    padding: 2.5rem 0;
-  }
-  .related h2 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .related__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 0.75rem;
-  }
-  .related__list li a {
-    display: block;
-    padding: 0.75rem 1rem;
-    background: #f8f9fa;
-    border-radius: 6px;
-    color: #1a1a2e;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: background 0.2s;
-  }
-  .related__list li a:hover {
-    background: #e8ecff;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.6rem 1.25rem;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-    cursor: pointer;
-  }
-  .btn--primary {
-    background: #4a6cf7;
-    color: #fff;
-  }
-  .btn--primary:hover {
-    background: #3b5de7;
-  }
-  .btn--secondary {
-    background: #e5e7eb;
-    color: #374151;
-  }
-  .btn--secondary:hover {
-    background: #d1d5db;
-  }
-  .btn--outline {
-    border: 2px solid #4a6cf7;
-    color: #4a6cf7;
-    background: transparent;
-  }
-  .btn--outline:hover {
-    background: #4a6cf7;
-    color: #fff;
-  }
-</style>
