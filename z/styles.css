@@ -1,7 +1,14 @@
 /* ===== 수유샴푸나이트 실전 플로우 — /z/ ===== */
-/* CSS prefix: .flow- / .pipe- / .dock- */
+/* CSS prefix: .flow- / .pipe- / .tl- / .dock- */
+/* Nav pattern: (D) 수직 타임라인 내비 */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@font-face {
+  font-family: "Pretendard";
+  src: local("Pretendard");
+  font-display: swap;
+}
 
 :root {
   --z-bg: #faf9f7;
@@ -19,74 +26,78 @@
 html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: -apple-system, "Pretendard", "Noto Sans KR", sans-serif;
+  font-family: "Pretendard", -apple-system, "Noto Sans KR", sans-serif;
   background: var(--z-bg);
   color: var(--z-text);
   line-height: 1.75;
-  padding-bottom: 64px; /* dock space */
+  padding-bottom: 72px;
 }
 
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--z-accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ===== HERO ===== */
+/* ================================================
+   HERO — 이미지 전체 노출, 잘림 금지
+   ================================================ */
 .flow-hero {
-  max-width: 960px;
+  max-width: var(--z-max-w);
   margin: 0 auto;
-  padding: 2rem 1.25rem 1.5rem;
+  padding: 1.5rem 1.25rem 0;
 }
 
-.flow-hero-inner {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+.flow-hero-img {
+  width: 100%;
+  max-height: 400px;
+  border-radius: var(--z-radius);
+  overflow: hidden;
+  background: #111827;
 }
 
-.flow-hero-text { flex: 1; }
+.flow-hero-img img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+}
+
+.flow-hero-copy {
+  padding: 1.2rem 0 .5rem;
+}
 
 .flow-tag {
   display: inline-block;
-  font-size: .75rem;
+  font-size: clamp(.7rem, 1.8vw, .78rem);
   font-weight: 600;
   letter-spacing: .06em;
   color: var(--z-accent);
   background: var(--z-accent-light);
   padding: .25rem .7rem;
   border-radius: 4px;
-  margin-bottom: .75rem;
+  margin-bottom: .6rem;
 }
 
 .flow-hero h1 {
-  font-size: 1.45rem;
-  line-height: 1.45;
+  font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+  line-height: 1.5;
   font-weight: 800;
-  margin-bottom: .6rem;
+  margin-bottom: .5rem;
   word-break: keep-all;
 }
 
 .flow-desc {
-  font-size: .95rem;
+  font-size: clamp(.85rem, 2.2vw, .95rem);
   color: var(--z-muted);
   line-height: 1.65;
 }
 
-.flow-hero-thumb {
-  flex: 0 0 220px;
-  border-radius: var(--z-radius);
-  overflow: hidden;
-}
-
-.flow-hero-thumb img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* ===== BRIEF STRIP ===== */
+/* ================================================
+   BRIEF STRIP + 상단 CTA
+   ================================================ */
 .flow-brief {
   max-width: var(--z-max-w);
-  margin: 0 auto 1.5rem;
+  margin: 1rem auto 1.2rem;
   padding: .85rem 1.25rem;
   display: flex;
   justify-content: space-between;
@@ -98,7 +109,7 @@ a:hover { text-decoration: underline; }
 }
 
 .flow-brief p {
-  font-size: .85rem;
+  font-size: clamp(.78rem, 2vw, .85rem);
   color: var(--z-muted);
   margin: 0;
 }
@@ -111,59 +122,104 @@ a:hover { text-decoration: underline; }
   color: #fff;
   font-size: .82rem;
   font-weight: 600;
-  padding: .5rem 1rem;
+  padding: .55rem 1rem;
   border-radius: 6px;
   white-space: nowrap;
   text-decoration: none;
+  min-height: 44px;
 }
 
 .flow-cta-top:hover { opacity: .9; text-decoration: none; }
 
-/* ===== PIPE NAV ===== */
-.pipe-nav {
+/* ================================================
+   TIMELINE NAV — 수직 노드+커넥터
+   ================================================ */
+.tl-nav {
   max-width: var(--z-max-w);
   margin: 0 auto 2rem;
   padding: 0 1.25rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
-.pipe-nav ol {
+.tl-track {
   display: flex;
-  gap: .5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 28px;
 }
 
-.pipe-nav li a {
-  display: block;
-  font-size: .78rem;
-  font-weight: 600;
-  padding: .45rem .9rem;
-  border: 1px solid var(--z-border);
-  border-radius: 20px;
+/* 수직 연결선 */
+.tl-track::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  background: var(--z-pipe-line);
+}
+
+.tl-node {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .45rem 0;
+  position: relative;
+  text-decoration: none;
   color: var(--z-muted);
-  white-space: nowrap;
+  transition: color .2s;
+  min-height: 44px;
+}
+
+.tl-node:hover { color: var(--z-accent); text-decoration: none; }
+
+.tl-dot {
+  position: absolute;
+  left: -28px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--z-surface);
+  border: 2px solid var(--z-pipe-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--z-muted);
+  z-index: 1;
   transition: all .2s;
 }
 
-.pipe-nav li a:hover,
-.pipe-nav li a.active {
+.tl-node.active .tl-dot,
+.tl-node:hover .tl-dot {
   background: var(--z-accent);
-  color: #fff;
   border-color: var(--z-accent);
-  text-decoration: none;
+  color: #fff;
 }
 
-/* ===== MAIN ===== */
+.tl-label {
+  font-size: clamp(.82rem, 2vw, .9rem);
+  font-weight: 600;
+}
+
+.tl-node.active .tl-label {
+  color: var(--z-accent);
+  font-weight: 700;
+}
+
+/* ================================================
+   MAIN CONTAINER — 중앙 정렬
+   ================================================ */
 .flow-main {
   max-width: var(--z-max-w);
   margin: 0 auto;
   padding: 0 1.25rem;
 }
 
-/* ===== INTRO VALUE ===== */
+/* ================================================
+   INTRO VALUE
+   ================================================ */
 .intro-value {
   background: var(--z-surface);
   border: 1px solid var(--z-border);
@@ -173,27 +229,24 @@ a:hover { text-decoration: underline; }
 }
 
 .intro-value h2 {
-  font-size: 1.2rem;
+  font-size: clamp(1.05rem, 3vw, 1.2rem);
   font-weight: 700;
   margin-bottom: .75rem;
   line-height: 1.5;
 }
 
 .intro-value h3 {
-  font-size: 1rem;
+  font-size: clamp(.9rem, 2.5vw, 1rem);
   font-weight: 700;
   margin: 1.2rem 0 .5rem;
 }
 
-.intro-value p { margin-bottom: .7rem; font-size: .93rem; }
+.intro-value p { margin-bottom: .7rem; font-size: clamp(.87rem, 2.2vw, .93rem); }
 
-.intro-value ul {
-  padding-left: 1.2rem;
-  margin-bottom: .8rem;
-}
+.intro-value ul { padding-left: 1.2rem; margin-bottom: .8rem; }
 
 .intro-value li {
-  font-size: .9rem;
+  font-size: clamp(.84rem, 2.1vw, .9rem);
   margin-bottom: .35rem;
   line-height: 1.6;
 }
@@ -201,7 +254,9 @@ a:hover { text-decoration: underline; }
 .scan-summary h3 { margin-top: 0; font-size: .92rem; }
 .scan-summary p { font-size: .88rem; line-height: 1.7; margin: 0; }
 
-/* ===== PIPE STAGE ===== */
+/* ================================================
+   PIPE STAGE — 마커 + 카드
+   ================================================ */
 .pipe-stage {
   display: flex;
   gap: 1.2rem;
@@ -246,54 +301,30 @@ a:hover { text-decoration: underline; }
 }
 
 .pipe-content h2 {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.8vw, 1.1rem);
   font-weight: 700;
   margin-bottom: .6rem;
   line-height: 1.45;
 }
 
 .pipe-content p {
-  font-size: .92rem;
+  font-size: clamp(.86rem, 2.2vw, .92rem);
   margin-bottom: .6rem;
   line-height: 1.7;
 }
 
-/* definition list in pipe */
+/* definition list */
 .pipe-points { margin: .8rem 0; }
-.pipe-points dt {
-  font-weight: 700;
-  font-size: .9rem;
-  margin-top: .7rem;
-  color: var(--z-accent);
-}
-.pipe-points dd {
-  font-size: .88rem;
-  margin-left: 0;
-  line-height: 1.65;
-  color: var(--z-muted);
-}
+.pipe-points dt { font-weight: 700; font-size: .9rem; margin-top: .7rem; color: var(--z-accent); }
+.pipe-points dd { font-size: .88rem; margin-left: 0; line-height: 1.65; color: var(--z-muted); }
 
 /* ordered checklist */
-.pipe-checklist {
-  padding-left: 1.3rem;
-  margin: .7rem 0;
-}
-.pipe-checklist li {
-  font-size: .9rem;
-  margin-bottom: .5rem;
-  line-height: 1.6;
-}
+.pipe-checklist { padding-left: 1.3rem; margin: .7rem 0; }
+.pipe-checklist li { font-size: .9rem; margin-bottom: .5rem; line-height: 1.6; }
 
 /* gear list */
-.pipe-gear {
-  padding-left: 1.2rem;
-  margin: .7rem 0;
-}
-.pipe-gear li {
-  font-size: .9rem;
-  margin-bottom: .45rem;
-  line-height: 1.6;
-}
+.pipe-gear { padding-left: 1.2rem; margin: .7rem 0; }
+.pipe-gear li { font-size: .9rem; margin-bottom: .45rem; line-height: 1.6; }
 
 /* route box */
 .pipe-route {
@@ -302,69 +333,31 @@ a:hover { text-decoration: underline; }
   padding: 1rem 1.2rem;
   margin: .7rem 0;
 }
-.pipe-route p {
-  font-size: .88rem;
-  margin-bottom: .5rem;
-}
+.pipe-route p { font-size: .88rem; margin-bottom: .5rem; }
 .pipe-route p:last-child { margin-bottom: 0; }
 
 /* arrival steps */
-.pipe-arrival {
-  padding-left: 1.3rem;
-  margin: .7rem 0;
-}
-.pipe-arrival li {
-  font-size: .9rem;
-  margin-bottom: .4rem;
-  line-height: 1.6;
-}
+.pipe-arrival { padding-left: 1.3rem; margin: .7rem 0; }
+.pipe-arrival li { font-size: .9rem; margin-bottom: .4rem; line-height: 1.6; }
 
-/* timeline rows */
+/* timeline rows (체류 섹션) */
 .pipe-timeline { margin: .8rem 0; }
-.tl-row {
-  padding: .7rem 0;
-  border-bottom: 1px solid var(--z-border);
-}
+.tl-row { padding: .7rem 0; border-bottom: 1px solid var(--z-border); }
 .tl-row:last-child { border-bottom: none; }
-.tl-row strong {
-  display: block;
-  font-size: .88rem;
-  color: var(--z-accent);
-  margin-bottom: .2rem;
-}
+.tl-row strong { display: block; font-size: .88rem; color: var(--z-accent); margin-bottom: .2rem; }
 .tl-row p { font-size: .88rem; margin: 0; color: var(--z-muted); }
 
 /* return dl */
 .pipe-return { margin: .8rem 0; }
-.pipe-return dt {
-  font-weight: 700;
-  font-size: .9rem;
-  margin-top: .6rem;
-  color: var(--z-text);
-}
-.pipe-return dd {
-  font-size: .88rem;
-  margin-left: 0;
-  line-height: 1.65;
-  color: var(--z-muted);
-}
+.pipe-return dt { font-weight: 700; font-size: .9rem; margin-top: .6rem; color: var(--z-text); }
+.pipe-return dd { font-size: .88rem; margin-left: 0; line-height: 1.65; color: var(--z-muted); }
 
-/* ===== SCENE PHOTOS ===== */
-.pipe-scene {
-  margin: 2.5rem 0;
-}
-
-.pipe-scene h2 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: .4rem;
-}
-
-.pipe-scene > p {
-  font-size: .9rem;
-  color: var(--z-muted);
-  margin-bottom: 1rem;
-}
+/* ================================================
+   SCENE PHOTOS
+   ================================================ */
+.pipe-scene { margin: 2.5rem 0; }
+.pipe-scene h2 { font-size: clamp(1rem, 2.8vw, 1.1rem); font-weight: 700; margin-bottom: .4rem; }
+.pipe-scene > p { font-size: .9rem; color: var(--z-muted); margin-bottom: 1rem; }
 
 .pipe-photos {
   display: grid;
@@ -372,35 +365,16 @@ a:hover { text-decoration: underline; }
   gap: 1rem;
 }
 
-.pipe-photos figure {
-  border-radius: var(--z-radius);
-  overflow: hidden;
-  background: #eee;
-}
+.pipe-photos figure { border-radius: var(--z-radius); overflow: hidden; background: #eee; }
+.pipe-photos figcaption { font-size: .8rem; color: var(--z-muted); padding: .5rem .6rem; text-align: center; }
 
-.pipe-photos figcaption {
-  font-size: .8rem;
-  color: var(--z-muted);
-  padding: .5rem .6rem;
-  text-align: center;
-}
+/* ================================================
+   FAQ
+   ================================================ */
+.pipe-faq { margin: 2.5rem 0; }
+.pipe-faq h2 { font-size: clamp(1rem, 2.8vw, 1.1rem); font-weight: 700; margin-bottom: 1rem; }
 
-/* ===== FAQ ===== */
-.pipe-faq {
-  margin: 2.5rem 0;
-}
-
-.pipe-faq h2 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.faq-cards {
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
-}
+.faq-cards { display: flex; flex-direction: column; gap: .6rem; }
 
 .faq-card {
   background: var(--z-surface);
@@ -418,77 +392,40 @@ a:hover { text-decoration: underline; }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 48px;
 }
 
-.faq-card summary::after {
-  content: "+";
-  font-size: 1.1rem;
-  color: var(--z-muted);
-  transition: transform .2s;
-}
+.faq-card summary::after { content: "+"; font-size: 1.1rem; color: var(--z-muted); }
+.faq-card[open] summary::after { content: "−"; }
+.faq-card p { padding: 0 1.1rem 1rem; font-size: .88rem; color: var(--z-muted); line-height: 1.65; }
 
-.faq-card[open] summary::after {
-  content: "−";
-}
-
-.faq-card p {
-  padding: 0 1.1rem 1rem;
-  font-size: .88rem;
-  color: var(--z-muted);
-  line-height: 1.65;
-}
-
-/* ===== CLOSING ===== */
+/* ================================================
+   CLOSING
+   ================================================ */
 .pipe-closing {
   margin: 2.5rem 0 2rem;
   padding: 1.5rem;
   background: var(--z-accent-light);
   border-radius: var(--z-radius);
 }
+.pipe-closing h2 { font-size: clamp(.95rem, 2.6vw, 1.05rem); font-weight: 700; margin-bottom: .6rem; }
+.pipe-closing p { font-size: .92rem; line-height: 1.7; }
 
-.pipe-closing h2 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: .6rem;
-}
+/* ================================================
+   NOTICE + FOOTER
+   ================================================ */
+.flow-notice { max-width: var(--z-max-w); margin: 1.5rem auto; padding: 1rem 1.25rem; }
+.flow-notice p { font-size: .78rem; color: var(--z-muted); line-height: 1.6; }
 
-.pipe-closing p {
-  font-size: .92rem;
-  line-height: 1.7;
-}
+.flow-footer { max-width: var(--z-max-w); margin: 0 auto; padding: .8rem 1.25rem 2rem; text-align: center; }
+.flow-footer p { font-size: .78rem; color: var(--z-pipe-line); }
 
-/* ===== NOTICE ===== */
-.flow-notice {
-  max-width: var(--z-max-w);
-  margin: 1.5rem auto;
-  padding: 1rem 1.25rem;
-}
-
-.flow-notice p {
-  font-size: .78rem;
-  color: var(--z-muted);
-  line-height: 1.6;
-}
-
-/* ===== FOOTER ===== */
-.flow-footer {
-  max-width: var(--z-max-w);
-  margin: 0 auto;
-  padding: .8rem 1.25rem 2rem;
-  text-align: center;
-}
-
-.flow-footer p {
-  font-size: .78rem;
-  color: var(--z-pipe-line);
-}
-
-/* ===== DOCK (fixed bottom bar) ===== */
+/* ================================================
+   DOCK — 하단 고정바
+   ================================================ */
 .flow-dock {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   z-index: 900;
   background: var(--z-surface);
   border-top: 1px solid var(--z-border);
@@ -511,27 +448,21 @@ a:hover { text-decoration: underline; }
   width: 100%;
   max-width: 400px;
   justify-content: center;
+  min-height: 48px;
 }
-
 .dock-call:hover { opacity: .92; text-decoration: none; }
-
 .dock-label { font-weight: 500; }
 .dock-num { font-weight: 700; letter-spacing: .02em; }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 640px) {
-  .flow-hero-inner {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
+/* ================================================
+   RESPONSIVE — 4구간
+   ================================================ */
 
-  .flow-hero-thumb {
-    flex: none;
-    width: 100%;
-    max-height: 300px;
-  }
-
-  .flow-hero h1 { font-size: 1.25rem; }
+/* <=480 모바일 소형 */
+@media (max-width: 480px) {
+  .flow-hero-img { max-height: 280px; }
+  .flow-hero-img img { max-height: 280px; }
+  .flow-hero-copy { text-align: center; }
 
   .flow-brief {
     flex-direction: column;
@@ -539,11 +470,36 @@ a:hover { text-decoration: underline; }
     gap: .6rem;
   }
 
-  .pipe-photos {
-    grid-template-columns: 1fr;
-  }
+  .tl-track { padding-left: 24px; }
+  .tl-dot { left: -24px; width: 26px; height: 26px; font-size: .7rem; }
 
-  .pipe-stage::after {
-    left: 19px;
+  .pipe-stage { gap: .8rem; }
+  .pipe-marker { width: 34px; height: 34px; font-size: .85rem; }
+  .pipe-stage::after { left: 16px; }
+
+  .pipe-photos { grid-template-columns: 1fr; }
+}
+
+/* 481~768 모바일 대형 / 태블릿 소형 */
+@media (min-width: 481px) and (max-width: 768px) {
+  .flow-hero-img { max-height: 320px; }
+  .flow-hero-img img { max-height: 320px; }
+
+  .flow-brief {
+    flex-direction: column;
+    text-align: center;
+    gap: .6rem;
   }
+}
+
+/* 769~1024 태블릿 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .flow-hero-img { max-height: 380px; }
+  .flow-hero-img img { max-height: 380px; }
+}
+
+/* >=1025 데스크탑 */
+@media (min-width: 1025px) {
+  .flow-hero-img { max-height: 400px; }
+  .flow-hero-img img { max-height: 400px; }
 }

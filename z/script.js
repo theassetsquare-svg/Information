@@ -2,9 +2,9 @@
 (function () {
   "use strict";
 
-  /* 파이프 내비 active 상태 — IntersectionObserver */
+  /* 타임라인 내비 active 상태 — IntersectionObserver */
   var stages = document.querySelectorAll(".pipe-stage, .pipe-scene, .pipe-faq, .pipe-closing");
-  var navLinks = document.querySelectorAll(".pipe-nav a");
+  var navLinks = document.querySelectorAll(".tl-node");
 
   if (stages.length && navLinks.length && "IntersectionObserver" in window) {
     var obs = new IntersectionObserver(function (entries) {

@@ -99,25 +99,23 @@
 </head>
 <body>
 
-  <!-- ===== 히어로: 텍스트 중심 + 썸네일 우측 배치 ===== -->
+  <!-- ===== 히어로: 이미지 전체 노출 + 텍스트 하단 ===== -->
   <header class="flow-hero" id="top">
-    <div class="flow-hero-inner">
-      <div class="flow-hero-text">
-        <p class="flow-tag">Real-Time Flow Guide</p>
-        <h1>수유샴푸나이트, 검색 화면에서 귀갓길까지 끊기지 않는 일곱 단계</h1>
-        <p class="flow-desc">정보를 따로따로 모으느라 지쳤다면, 이 페이지 하나로 흐름을 이어 보세요. 단계마다 판단 포인트를 짧게 담았습니다.</p>
-      </div>
-      <figure class="flow-hero-thumb">
-        <img
-          src="./og-source.png"
-          width="600"
-          height="315"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          alt="수유샴푸나이트 안내 대표 이미지"
-        />
-      </figure>
+    <figure class="flow-hero-img">
+      <img
+        src="./og-image.jpg"
+        width="1200"
+        height="630"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        alt="수유샴푸나이트 안내 대표 이미지"
+      />
+    </figure>
+    <div class="flow-hero-copy">
+      <p class="flow-tag">Real-Time Flow Guide</p>
+      <h1>수유샴푸나이트, 검색 화면에서 귀갓길까지 끊기지 않는 일곱 단계</h1>
+      <p class="flow-desc">정보를 따로따로 모으느라 지쳤다면, 이 페이지 하나로 흐름을 이어 보세요. 단계마다 판단 포인트를 짧게 담았습니다.</p>
     </div>
   </header>
 
@@ -129,17 +127,17 @@
     </a>
   </div>
 
-  <!-- ===== 파이프라인 내비 ===== -->
-  <nav class="pipe-nav" aria-label="플로우 단계">
-    <ol>
-      <li><a href="#pipe-1">① 검색</a></li>
-      <li><a href="#pipe-2">② 판단</a></li>
-      <li><a href="#pipe-3">③ 준비</a></li>
-      <li><a href="#pipe-4">④ 이동</a></li>
-      <li><a href="#pipe-5">⑤ 도착</a></li>
-      <li><a href="#pipe-6">⑥ 체류</a></li>
-      <li><a href="#pipe-7">⑦ 귀가</a></li>
-    </ol>
+  <!-- ===== 타임라인 내비 (수직 노드+커넥터) ===== -->
+  <nav class="tl-nav" aria-label="플로우 단계">
+    <div class="tl-track">
+      <a href="#pipe-1" class="tl-node active" data-step="1"><span class="tl-dot">1</span><span class="tl-label">검색</span></a>
+      <a href="#pipe-2" class="tl-node" data-step="2"><span class="tl-dot">2</span><span class="tl-label">판단</span></a>
+      <a href="#pipe-3" class="tl-node" data-step="3"><span class="tl-dot">3</span><span class="tl-label">준비</span></a>
+      <a href="#pipe-4" class="tl-node" data-step="4"><span class="tl-dot">4</span><span class="tl-label">이동</span></a>
+      <a href="#pipe-5" class="tl-node" data-step="5"><span class="tl-dot">5</span><span class="tl-label">도착</span></a>
+      <a href="#pipe-6" class="tl-node" data-step="6"><span class="tl-dot">6</span><span class="tl-label">체류</span></a>
+      <a href="#pipe-7" class="tl-node" data-step="7"><span class="tl-dot">7</span><span class="tl-label">귀가</span></a>
+    </div>
   </nav>
 
   <!-- ===== 메인 플로우 ===== -->
@@ -286,7 +284,7 @@
       <div class="pipe-marker"><span>6</span></div>
       <div class="pipe-content">
         <h2>체류 — 안에서의 시간은 이렇게 흐른다</h2>
-        <p>자리에 앉으면 메뉴를 보고 음료를 주문한다. 이후는 본인의 페이스대로다.</p>
+        <p>수유샴푸나이트에서 자리에 앉으면 메뉴를 보고 음료를 주문한다. 이후는 본인의 페이스대로다.</p>
         <div class="pipe-timeline">
           <div class="tl-row">
             <strong>착석 후 10분</strong>
