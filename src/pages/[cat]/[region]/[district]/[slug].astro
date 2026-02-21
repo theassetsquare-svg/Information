@@ -3,7 +3,7 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import FAQ from '../../../../components/FAQ.astro';
 import TrustBlock from '../../../../components/TrustBlock.astro';
 import venuesData from '../../../../data/venues.json';
-import { generateAllContent, nameHash } from '../../../../lib/venue-content';
+import { generateAllContent, nameHash, hookTitles } from '../../../../lib/venue-content';
 import type { Venue } from '../../../../lib/venue-content';
 import { dedupeVenuePathParams, venueDetailPath } from '../../../../lib/slug-utils';
 
@@ -64,7 +64,10 @@ const relatedVenues = venuesData
   .slice(0, 8);
 
 /* SEO */
-const title = `${venue.name} | ${regionLabel} ${venue.district} ${catFullLabel} 위치·영업시간·입장료 가이드 2026`;
+const hookTitle = hookTitles[venue.slug] || '';
+const title = hookTitle
+  ? `${venue.name} — ${hookTitle} | ${regionLabel} ${catFullLabel} 가이드 2026`
+  : `${venue.name} | ${regionLabel} ${venue.district} ${catFullLabel} 위치·영업시간·입장료 가이드 2026`;
 const stationShort = venue.station ? venue.station.split(',')[0].trim() : '';
 const descParts = [
   `${venue.name}`,

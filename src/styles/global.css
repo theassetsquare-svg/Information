@@ -677,6 +677,13 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
   justify-content: center;
 }
 
+/* Extra story sections (tips/dialogue) centered */
+.detail-page .story-section__extra {
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Checklist centered */
 .detail-page .checklist-list {
   margin-left: auto;
