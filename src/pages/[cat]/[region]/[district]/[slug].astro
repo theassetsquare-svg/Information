@@ -1,353 +1,62 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
-import IntroBlock from '../../../../components/IntroBlock.astro';
 import FAQ from '../../../../components/FAQ.astro';
 import TrustBlock from '../../../../components/TrustBlock.astro';
 import venuesData from '../../../../data/venues.json';
+import { generateAllContent, nameHash } from '../../../../lib/venue-content';
+import type { Venue } from '../../../../lib/venue-content';
+import { dedupeVenuePathParams, venueDetailPath } from '../../../../lib/slug-utils';
 
 /* ───────── getStaticPaths ───────── */
 export function getStaticPaths() {
   return venuesData
     .filter((v: any) => !v.detail_page)
-    .map((v: any) => ({
-      params: {
-        cat: v.cat_slug,
-        region: v.region_slug,
-        district: v.district_slug,
-        slug: v.slug,
-      },
-      props: { venue: v },
-    }));
+    .map((v: any) => {
+      const dd = dedupeVenuePathParams(v.cat_slug, v.region_slug, v.district_slug, v.slug);
+      return {
+        params: {
+          cat: v.cat_slug,
+          region: v.region_slug,
+          district: dd.district,
+          slug: dd.slug,
+        },
+        props: { venue: v },
+      };
+    });
 }
 
-/* ───────── props ───────── */
-const { venue } = Astro.props;
+/* ───────── props & content gen ───────── */
+const { venue } = Astro.props as { venue: Venue };
 const idx = venuesData.findIndex((v: any) => v.slug === venue.slug);
-
-/* ───────── hash for variation ───────── */
-function nameHash(s: string): number {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) { h = ((h << 5) - h + s.charCodeAt(i)) | 0; }
-  return Math.abs(h);
-}
 const h = nameHash(venue.name);
-function pick<T>(arr: T[]): T { return arr[h % arr.length]; }
-function pickIdx<T>(arr: T[], offset = 0): T { return arr[(idx + offset) % arr.length]; }
+const content = generateAllContent(venue, idx);
 
-/* ───────── category label helpers ───────── */
-const catLabel = venue.category; // 클럽 | 나이트 | 라운지
-const catEn = venue.cat_slug; // club | night | lounge
+/* ───────── helpers ───────── */
+const catLabel = venue.category;
+const catEn = venue.cat_slug;
 const regionLabel = venue.region;
 const siteUrl = 'https://informationa.pages.dev';
-const pageUrl = `${siteUrl}/${venue.cat_slug}/${venue.region_slug}/${venue.district_slug}/${venue.slug}/`;
+const pageUrl = `${siteUrl}${venueDetailPath(venue)}`;
+const catFullLabel = catLabel === '클럽' ? '클럽' : catLabel === '나이트' ? '나이트' : '라운지';
 
-/* ───────── Thumbnail (absolute URL) ───────── */
+/* Thumbnail */
 const thumbPath = venue.thumbnail || '/images/og-thumb.jpg';
 const thumbAbsolute = thumbPath.startsWith('http') ? thumbPath : `${siteUrl}${thumbPath}`;
-const thumbAlt = venue.image_alt || `${venue.name} ${regionLabel} ${catLabel} 썸네일`;
+const thumbAlt = `${venue.name} ${regionLabel} ${venue.district} ${catFullLabel} — 내부 분위기와 인테리어`;
 
-/* ───────── CONTENT GENERATION HELPERS ───────── */
+/* Map URL: use venue.map_url if available, else Google Maps search fallback */
+const mapUrl = venue.map_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.name + ' ' + regionLabel)}`;
 
-/* Hero taglines by category */
+/* Last updated date */
+const lastUpdated = '2026.02.21';
+
+/* Hero taglines */
 const heroTaglines: Record<string, string[]> = {
-  club: [
-    '오늘 밤 선택할 비트의 목적지', '사운드가 몸을 깨우는 순간',
-    '밤의 에너지를 온몸으로 느끼다', '비트 위에서 시작되는 새로운 밤',
-    '음악과 조명이 만드는 비일상', '새벽까지 멈추지 않는 리듬',
-  ],
-  night: [
-    '가요와 댄스가 흐르는 플로어', '익숙한 노래가 새롭게 울리는 밤',
-    '모두가 하나 되는 댄스 플로어', '리듬에 맡기면 발이 저절로 움직인다',
-    '밤의 열기 속으로 한 발짝', '노래가 멈추지 않는 밤',
-  ],
-  lounge: [
-    '대화와 음악이 균형을 이루는 밤', '차분한 조명 아래 특별한 시간',
-    '소리보다 분위기가 먼저 닿는 밤', '프라이빗한 시간을 위한 선택',
-    '볼륨 대신 분위기를 높이다', '조용히 타오르는 밤의 온도',
-  ],
+  club: ['오늘 밤 선택할 비트의 목적지', '사운드가 몸을 깨우는 순간', '밤의 에너지를 온몸으로 느끼다', '비트 위에서 시작되는 새로운 밤', '음악과 조명이 만드는 비일상', '새벽까지 멈추지 않는 리듬'],
+  night: ['가요와 댄스가 흐르는 플로어', '익숙한 노래가 새롭게 울리는 밤', '모두가 하나 되는 댄스 플로어', '리듬에 맡기면 발이 저절로 움직인다', '밤의 열기 속으로 한 발짝'],
+  lounge: ['대화와 음악이 균형을 이루는 밤', '차분한 조명 아래 특별한 시간', '소리보다 분위기가 먼저 닿는 밤', '프라이빗한 시간을 위한 선택', '볼륨 대신 분위기를 높이다'],
 };
-
-const heroTag = pick(heroTaglines[catEn] || heroTaglines.club);
-
-/* Intro hookHeadline taglines */
-const introHookTaglines: Record<string, string[]> = {
-  club: [
-    '비트가 심장 박동을 앞서는 곳', 'DJ 플레이가 밤을 주도하는 곳',
-    '첫 곡이 울리면 시간이 멈춘다', '어둠 속에서 빛나는 사운드 체험',
-    '볼륨을 올려 일상을 잊는 방법', '밤의 주파수에 몸을 맡기다',
-  ],
-  night: [
-    '라이브 무대가 분위기를 끌어올리는 곳', '가요 한 곡이면 플로어가 달아오른다',
-    '세대를 넘어 함께 즐기는 무대', '발걸음이 자연스러워지는 리듬',
-    '첫 방문도 어색하지 않은 분위기', '오랜 단골이 인정한 플로어',
-  ],
-  lounge: [
-    '볼륨보다 무드가 우선인 밤', '대화가 끊기지 않는 사운드 세팅',
-    '프라이빗 테이블에서 시작하는 밤', '음악과 위스키가 어우러지는 시간',
-    '비즈니스부터 모임까지 다 되는 자리', '조용하지만 뜨거운 밤의 온도',
-  ],
-};
-const introHook = `${venue.name} — ${pick(introHookTaglines[catEn] || introHookTaglines.club)}`;
-
-/* Intro bullets generation */
-function genIntroBullets(): string[] {
-  const transportBullets = [
-    `${venue.station}에서 접근 가능, 늦은 시간에도 택시 잡기 수월한 위치`,
-    `교통 거점 ${venue.station} 인근 — 대중교통·택시 모두 편리`,
-    `${venue.station} 하차 후 도보 이동, 자가용 시 주변 주차장 확인 필요`,
-  ];
-  const timeBullets: Record<string, string[]> = {
-    club: [
-      '금·토요일 밤 23시 이후가 피크 — 자정 전 도착 권장',
-      '주말 심야가 에너지 절정, 평일은 비교적 여유',
-      '오픈 직후 입장하면 웨이팅 없이 자리 확보 가능',
-    ],
-    night: [
-      '저녁 8~9시 오픈, 밤 11시 전후로 분위기 최고조',
-      '평일 저녁이 가장 한산 — 첫 방문이라면 평일 추천',
-      '주말 밤 10시면 플로어가 가득 찬다, 일찍 출발 권장',
-    ],
-    lounge: [
-      '저녁 7시부터 열리지만, 분위기는 밤 10시 이후 무르익는다',
-      '사전 예약이 좌석 확보의 핵심 — 워크인 시 대기 가능',
-      '주중 방문이면 프라이빗한 분위기를 극대화할 수 있다',
-    ],
-  };
-  const dressBullets: Record<string, string[]> = {
-    club: [
-      '드레스코드 확인 필수 — 운동화·슬리퍼 제한이 일반적',
-      '스마트캐주얼 수준이면 무난, 단정한 신발 챙기기',
-      '비용은 입장료 + 음료 1잔 포함 3~5만 원 선',
-    ],
-    night: [
-      '복장 자유도 높음, 깔끔한 캐주얼이면 충분',
-      '입장료 + 음료 포함 2~4만 원 선, 현금 준비 권장',
-      '편한 신발 필수 — 오래 서 있거나 춤추게 된다',
-    ],
-    lounge: [
-      '스마트캐주얼 이상 — 셔츠·재킷이면 어디서든 OK',
-      '테이블 최소 주문 금액 있을 수 있으니 사전 확인',
-      '2인 방문 시 음료 + 안주 5~10만 원 선 예상',
-    ],
-  };
-  return [
-    pickIdx(transportBullets, 0),
-    pickIdx(timeBullets[catEn] || timeBullets.club, 1),
-    pickIdx(dressBullets[catEn] || dressBullets.club, 2),
-  ];
-}
-
-/* Declaration sentence */
-const declarations: Record<string, string[]> = {
-  club: [
-    `${venue.name}은(는) ${regionLabel}에서 밤의 에너지를 직접 체감할 수 있는 선택지다.`,
-    `사운드와 조명 연출이 결합된 ${venue.name}, ${regionLabel} 클러빙의 유력 후보.`,
-    `${regionLabel} 밤 문화를 대표하는 ${venue.name} — 직접 가 봐야 아는 현장감.`,
-  ],
-  night: [
-    `${venue.name}은(는) ${regionLabel}에서 가요·댄스를 함께 즐기려는 분에게 유력한 선택지다.`,
-    `${regionLabel} 나이트 문화를 경험하고 싶다면 ${venue.name}을(를) 후보에 올려 보자.`,
-    `${venue.name} — ${regionLabel}의 밤을 채우는 음악과 사람들의 열기.`,
-  ],
-  lounge: [
-    `${venue.name}은(는) 대화와 분위기를 동시에 원하는 분에게 맞는 ${regionLabel} 라운지다.`,
-    `조용하면서도 활기 있는 밤을 원한다면, ${venue.name}이(가) 후보에 든다.`,
-    `${regionLabel} 라운지 중 ${venue.name}이(가) 돋보이는 이유 — 프라이빗과 분위기의 균형.`,
-  ],
-};
-
-/* Story visible generation */
-function genStoryVisible(): string {
-  const clubStories = [
-    `<p>금요일 밤 11시, ${venue.station} 출구를 나서면 거리의 소음이 조금씩 비트로 바뀐다. ${venue.name} 입구에 다다르면 저음이 벽을 타고 전해져 온다. 문을 열고 들어서는 순간 조명이 눈앞을 가로지르고, DJ의 첫 드롭이 발끝까지 울린다.</p>
-<p>바 카운터에서 첫 잔을 받아 들면, 댄스플로어를 둘러싸는 사람들의 실루엣이 보인다. 아직 이른 시간이라 자리가 여유롭다. 자정이 지나면 에너지가 폭발하니, 오픈 직후에 도착하는 게 현명하다.</p>`,
-    `<p>택시에서 내려 ${venue.name} 앞에 섰을 때, 지하에서 올라오는 저주파가 발바닥을 간지럽힌다. 대기 줄 끝에 붙어 5분, 신분증 체크를 마치면 계단 아래로 전혀 다른 세계가 펼쳐진다.</p>
-<p>첫인상은 조명이다. 어둠 사이로 날카롭게 뻗는 레이저와 스모크 머신이 시야를 채운다. 음료 한 잔을 손에 쥐면 어색함이 사라진다. 음악에 맡기고 리듬을 타 보자.</p>`,
-    `<p>${venue.station}에서 걸어가는 동안 기대감이 쌓인다. ${venue.name}의 간판이 보이면 심장 박동이 한 박자 빨라진다. 입구에서 신분증을 보여주고, 어두운 복도를 지나면 사운드가 온몸을 감싼다.</p>
-<p>첫 방문이라면 바 근처에 자리를 잡아 보자. 음료를 홀짝이며 분위기를 살피다가 마음이 동하면 플로어로 향하면 된다. 강제로 합류할 필요 없다 — 각자의 속도로 밤을 즐기면 그뿐이다.</p>`,
-  ];
-  const nightStories = [
-    `<p>저녁 9시, ${venue.station}에서 내려 ${venue.name} 방향으로 걸어간다. 아직 이른 시간이라 로비가 한산하다. 입구에서 테이블을 안내받고 자리에 앉으면, 무대 위 조명이 서서히 밝아진다.</p>
-<p>첫 곡이 울리면 분위기가 달라진다. 익숙한 가요 선율에 하나둘 자리에서 일어나고, 플로어 중앙이 자연스럽게 채워진다. 첫 방문이라도 노래를 아는 순간 발이 움직인다.</p>`,
-    `<p>주말 저녁 ${venue.name}에 도착하면, 입구부터 음악 소리가 들린다. ${venue.station} 근처라 교통은 편하다. 안으로 들어서면 넓은 플로어와 둘러싼 테이블이 시야에 잡힌다.</p>
-<p>자리를 잡고 음료를 주문하는 사이, 무대에서 라이브가 시작된다. 90년대 히트곡이 울려 퍼지면 세대 불문 모든 테이블이 반응한다. 그 에너지가 밤새 이어진다.</p>`,
-    `<p>${venue.name}에 처음 간다면 평일 저녁을 권한다. ${venue.station}에서 내려 걸어가는 길, 간판을 보고 안으로 들어서면 아늑한 조명과 적당한 볼륨이 맞이한다.</p>
-<p>플로어에 사람이 많지 않은 시간대라 부담 없이 자리를 잡을 수 있다. 음료 한 잔과 함께 무대를 바라보다 보면, 발을 구르고 싶은 순간이 온다. 그때 플로어로 나가면 된다.</p>`,
-  ];
-  const loungeStories = [
-    `<p>${venue.station} 근처, ${venue.name} 입구는 눈에 띄지 않게 조용하다. 문을 열면 은은한 조명과 낮은 볼륨의 음악이 먼저 반긴다. 예약한 테이블로 안내받아 앉으면, 도시의 속도가 한 박자 느려진 느낌이다.</p>
-<p>메뉴판을 넘기며 위스키 한 잔을 고르고, 함께 온 사람과 대화를 시작한다. 음악이 대화를 방해하지 않는 볼륨 — 그 균형이 ${venue.name}의 핵심이다.</p>`,
-    `<p>약속 시간보다 10분 일찍 ${venue.name}에 도착했다. ${venue.station}에서 내려 걸어오는 동안 거리가 조용했고, 라운지 안은 더 조용하다. 바텐더가 가볍게 인사하며 자리를 안내한다.</p>
-<p>창가 소파에 앉아 메뉴를 살핀다. 시그니처 칵테일 하나, 간단한 안주 하나. 음악은 대화를 돕는 수준이다. 상대가 도착하면 자연스럽게 이야기가 흐를 분위기 — 그게 여기 오는 이유다.</p>`,
-  ];
-  const stories = catEn === 'club' ? clubStories : catEn === 'night' ? nightStories : loungeStories;
-  return stories[h % stories.length];
-}
-
-/* Story hidden generation */
-function genStoryHidden(): string {
-  const clubHidden = [
-    `<p>음료는 바 카운터에서 직접 주문하는 게 빠르다. 테이블 서비스보다 대기 시간이 짧고 바텐더에게 추천을 받을 수도 있다. 첫 잔은 가벼운 하이볼이나 맥주가 무난하다.</p>
-<p>화장실 위치는 입장 직후 확인해 두자. 사람이 많아지면 찾기 어려워진다. 귀가 시 ${venue.station} 방면 택시 승차 포인트도 미리 파악하면 새벽 이동이 수월하다.</p>`,
-    `<p>주말에는 자정 전후 입장 대기가 생길 수 있다. 가능하면 오픈 시간에 맞춰 가거나, 새벽 2시 이후 유입이 줄 때 시도하는 방법도 있다. 재입장 정책은 매번 다르니 입구에서 확인하자.</p>
-<p>소지품은 최소한으로 — 큰 가방은 클로크룸에 맡기고, 폰·카드·신분증만 들고 다니면 편하다. 발이 편한 신발은 필수, 춤추다 보면 몇 시간이 순식간이다.</p>`,
-  ];
-  const nightHidden = [
-    `<p>테이블 좌석을 원한다면 일찍 도착하는 게 유리하다. 주말 밤 10시 이후에는 빈 테이블 찾기가 어렵다. 예약이 가능한 곳이라면 미리 전화 한 통 하자.</p>
-<p>귀가 경로도 미리 생각해 두면 좋다. ${venue.station} 막차 시간을 체크하고, 심야엔 택시나 대리운전을 활용하자. 주변 편의점에서 물 한 병 사 두면 다음 날이 편하다.</p>`,
-    `<p>음료 가격은 보통 5,000~15,000원 선이다. 테이블 최소 주문 금액이 있을 수 있으니 입장 시 확인하자. 현금과 카드 모두 가능한 곳이 대부분이지만, 소액 현금을 챙기면 팁이나 간식 구매에 유용하다.</p>
-<p>복장은 깔끔한 캐주얼이면 충분하다. 너무 캐주얼한 옷차림(반바지·슬리퍼)만 피하면 입장에 문제없다. 라이브 무대가 있는 날은 분위기가 한층 달아오르니, 일정표를 사전에 체크하자.</p>`,
-  ];
-  const loungeHidden = [
-    `<p>예약 시 창가석이나 소파석을 요청하면 좋다. 바 좌석은 바텐더와 대화하기엔 좋지만, 프라이빗한 시간을 원한다면 안쪽 테이블이 낫다.</p>
-<p>가격대는 칵테일 15,000~25,000원, 위스키 글라스 20,000원 이상. 2인 방문 시 5~10만 원 예산이면 넉넉하다. 카드 결제가 기본이지만, 발렛이나 팁용 현금 소액이 있으면 편리하다.</p>`,
-    `<p>라운지 특성상 대화 볼륨이 중요하다. 주말 심야에는 음악 볼륨이 올라갈 수 있으니, 조용한 대화를 원하면 주중 방문이 좋다. 비즈니스 미팅이라면 목~금 저녁이 적당하다.</p>
-<p>드레스코드가 있는 곳이 많다. 최소 스마트캐주얼 — 남성은 셔츠에 슬랙스, 여성은 원피스나 블라우스 정도면 무난하다. 슬리퍼·반바지·트레이닝복은 대부분 입장 불가다.</p>`,
-  ];
-  const hidden = catEn === 'club' ? clubHidden : catEn === 'night' ? nightHidden : loungeHidden;
-  return hidden[h % hidden.length];
-}
-
-/* Timeline steps */
-function genTimeline(): string[] {
-  const base: Record<string, string[][]> = {
-    club: [
-      [
-        '출발 전 신분증·카드·폰 챙기고 드레스코드 확인',
-        '편한 신발과 최소 소지품으로 준비 완료',
-        `${venue.station} 방면 대중교통 또는 택시 탑승`,
-        `${venue.name} 도착 — 입구에서 신분증 제시`,
-        '바 카운터에서 첫 음료 주문, 내부 구조 파악',
-        '댄스플로어로 진입 — 리듬에 몸을 맡기기',
-        '새벽 2~3시, 물 한 잔으로 컨디션 체크',
-        `귀가 — ${venue.station} 방면 택시 또는 대리운전 호출`,
-      ],
-      [
-        '오늘 밤 목적지 확정 — 신분증과 카드 확인',
-        '드레스코드에 맞게 옷차림 점검, 불필요한 짐은 두고 출발',
-        `${venue.station}까지 이동 (지하철·택시·자가용)`,
-        `${venue.name} 입장 — 입구 스태프에게 신분증 보여주기`,
-        '클로크룸에 겉옷 맡기고 바에서 음료 한 잔',
-        '음악에 맞춰 플로어 합류 — 주변 에너지에 자연스럽게 동조',
-        '컨디션에 따라 라운지 영역에서 잠시 휴식',
-        `마무리 후 ${venue.station} 방면으로 안전 귀가`,
-      ],
-    ],
-    night: [
-      [
-        '저녁 식사를 가볍게 마치고 출발 준비',
-        `${venue.station} 방면 대중교통 이용 또는 자가용 출발`,
-        `${venue.name} 도착 — 입구에서 테이블 배정받기`,
-        '음료 주문 후 무대와 플로어 살펴보기',
-        '익숙한 곡이 나오면 플로어로 나가 함께 즐기기',
-        '중간중간 자리로 돌아와 물·간식으로 체력 보충',
-        '밤 12시~1시, 분위기 절정에서 마지막 한 곡 즐기기',
-        `귀가 — ${venue.station} 막차 또는 택시로 안전하게 이동`,
-      ],
-      [
-        '오늘 밤 계획 확정, 편한 신발과 카드 챙기기',
-        '저녁 8시 전후 출발 — 여유 있게 도착하기 위해',
-        `${venue.station}에서 하차, ${venue.name} 방향으로 도보 이동`,
-        '입장 후 원하는 좌석 확보 (테이블 vs 플로어 근처)',
-        '음료와 함께 첫 무대 감상 — 분위기 파악하기',
-        '리듬에 맞춰 플로어 참여, 옆 사람과 자연스럽게 어울리기',
-        '자정 전후 에너지가 절정 — 체력 배분 필요',
-        `새벽 귀가 — 택시 호출 또는 ${venue.station} 심야버스 확인`,
-      ],
-    ],
-    lounge: [
-      [
-        '예약 확인, 드레스코드에 맞춰 준비',
-        `${venue.station}까지 이동 — 택시가 가장 편리`,
-        `${venue.name} 도착 — 예약자 이름으로 체크인`,
-        '배정된 테이블에 앉아 메뉴 살펴보기',
-        '시그니처 칵테일 또는 위스키로 첫 잔 시작',
-        '대화와 음악을 즐기며 천천히 시간 보내기',
-        '추가 음료 또는 안주 주문으로 분위기 이어가기',
-        `적당한 시점에 계산 후 택시로 안전 귀가`,
-      ],
-    ],
-  };
-  const options = base[catEn] || base.lounge;
-  return options[h % options.length];
-}
-
-/* FAQ generation */
-function genFAQ(): { q: string; a: string }[] {
-  const stationInfo = venue.station || '확인 필요';
-  const addressInfo = venue.address || '확인 필요';
-
-  const qSets: Record<string, { q: string; a: string }[][]> = {
-    club: [
-      [
-        { q: `${venue.name} 위치와 가는 길을 알려 주세요.`, a: `${addressInfo} 근처입니다. ${stationInfo}에서 도보 이동 가능하며, 택시 이용 시 '${venue.name}'으로 검색하면 됩니다.` },
-        { q: `사전 예약 없이도 입장할 수 있나요?`, a: `워크인 입장이 가능하지만, 주말 자정 이후에는 대기가 생길 수 있습니다. 가능하면 사전 예약을 권합니다.` },
-        { q: `혼자 방문해도 분위기에 녹아들 수 있을까요?`, a: `1인 방문객도 있습니다. 바 카운터에 자리를 잡으면 자연스럽게 분위기를 즐길 수 있습니다.` },
-        { q: `복장 규정이 있다면 어느 수준인가요?`, a: `대부분 스마트캐주얼 이상을 권장합니다. 운동화·슬리퍼·반바지는 입장이 제한될 수 있으니 단정하게 준비하세요.` },
-        { q: `입장료와 음료 가격대가 궁금합니다.`, a: `입장료는 이벤트에 따라 1~3만 원 선이며, 음료는 잔당 1~2만 원 수준입니다. 정확한 가격은 당일 확인하세요.` },
-        { q: `주차할 곳이 있나요?`, a: `건물 내 주차장 또는 인근 유료 주차장을 이용할 수 있습니다. 주말 심야에는 대중교통·택시를 권장합니다.` },
-        { q: `가장 분위기가 좋은 시간대는 언제인가요?`, a: `금·토요일 자정~새벽 2시가 에너지가 가장 높습니다. 평일은 상대적으로 여유로워 첫 방문에 적합합니다.` },
-        { q: `클럽 초보자를 위한 팁이 있다면 알려 주세요.`, a: `오픈 직후 도착하면 여유롭게 내부를 살필 수 있습니다. 소지품은 최소화하고, 물을 충분히 마시며, 자기 페이스를 지키는 게 핵심입니다.` },
-      ],
-      [
-        { q: `${venue.name}까지 대중교통으로 어떻게 가나요?`, a: `${stationInfo}에서 하차 후 도보로 이동 가능합니다. 네이버 지도에서 '${venue.name}'을 검색하면 정확한 경로가 나옵니다.` },
-        { q: `예약 방법과 절차가 어떻게 되나요?`, a: `전화 또는 인스타그램 DM으로 예약할 수 있습니다. 주말은 2~3일 전 예약을 권합니다.` },
-        { q: `1인 방문 시 주의할 점이 있을까요?`, a: `혼자 와도 문제없습니다. 바 좌석을 이용하면 편하고, 바텐더와 가볍게 대화할 수도 있습니다.` },
-        { q: `어떤 옷을 입고 가야 입장이 가능한가요?`, a: `깔끔한 캐주얼 이상이면 됩니다. 슬리퍼·반바지·트레이닝복은 피하세요.` },
-        { q: `예산을 얼마 정도 잡으면 되나요?`, a: `입장료 + 음료 2잔 포함 3~5만 원이면 충분합니다. 테이블 이용 시 추가 비용이 발생할 수 있습니다.` },
-        { q: `자가용으로 갈 때 주차가 가능한가요?`, a: `인근 주차장 이용이 가능하지만, 음주 시 대리운전을 이용해야 하므로 대중교통을 추천합니다.` },
-        { q: `피크 타임을 피해 방문하려면 몇 시가 좋을까요?`, a: `오픈 직후인 밤 11시경, 또는 새벽 3시 이후가 비교적 한산합니다.` },
-        { q: `처음 가는데 미리 알면 좋은 것들이 있나요?`, a: `신분증은 필수입니다. 클로크룸이 있으면 겉옷을 맡기세요. 첫 곡에 맞춰 바로 플로어로 나갈 필요 없이 천천히 분위기를 익히면 됩니다.` },
-      ],
-    ],
-    night: [
-      [
-        { q: `${venue.name} 정확한 위치가 어디인가요?`, a: `${addressInfo}에 위치합니다. ${stationInfo}에서 접근 가능하며, 네이버 지도에 '${venue.name}'을 검색하면 됩니다.` },
-        { q: `예약 없이 바로 입장 가능한가요?`, a: `대부분 워크인 입장이 됩니다. 주말에는 자리가 빨리 차므로, 저녁 9시 이전 도착 또는 전화 예약을 권합니다.` },
-        { q: `혼자 가도 어색하지 않을까요?`, a: `1인 방문도 적지 않습니다. 평일 이른 시간대가 가장 편안하고, 스태프가 자리를 안내해 줍니다.` },
-        { q: `복장에 제한이 있나요?`, a: `편안한 캐주얼이면 충분합니다. 슬리퍼·반바지만 피하면 입장에 문제 없습니다.` },
-        { q: `입장료와 총 비용은 어느 정도인가요?`, a: `입장료 무료~2만 원 선이며, 음료 포함 1인 2~4만 원 정도면 충분합니다. 현금 소액을 챙기면 편리합니다.` },
-        { q: `주변에 주차장이 있나요?`, a: `건물 주차장 또는 인근 공영주차장 이용 가능합니다. 음주 예정이면 대중교통을 권합니다.` },
-        { q: `어느 시간대가 가장 활발한가요?`, a: `주말 밤 10시~자정이 피크 타임입니다. 여유로운 분위기를 원하면 평일 저녁 8시경 방문을 추천합니다.` },
-        { q: `나이트 첫 방문인데 어떻게 즐기면 될까요?`, a: `테이블에 앉아 음료를 즐기다가, 좋아하는 곡이 나오면 플로어에 합류하면 됩니다. 강제 참여는 없으니 자기 페이스로 즐기세요.` },
-      ],
-      [
-        { q: `${venue.name}에 가려면 어디서 내려야 하나요?`, a: `${stationInfo}이 가장 가깝습니다. 하차 후 도보 이동 가능하며, 택시 이용 시 '${venue.name}'으로 목적지를 설정하세요.` },
-        { q: `전화나 온라인으로 예약이 되나요?`, a: `전화 예약이 가장 확실합니다. 주말 방문이면 당일 오후에 미리 연락하는 것을 권합니다.` },
-        { q: `친구 없이 혼자 가 볼 만한 분위기인가요?`, a: `혼자 오는 분들도 있습니다. 바 좌석이나 작은 테이블에 앉으면 부담 없이 시간을 보낼 수 있습니다.` },
-        { q: `깔끔한 옷차림이 아니어도 괜찮은가요?`, a: `기본적인 캐주얼이면 됩니다. 반바지·슬리퍼 정도만 아니면 입장 제한은 거의 없습니다.` },
-        { q: `2인 방문 시 예산은 얼마면 될까요?`, a: `2인 방문 시 음료 + 간식 포함 5~8만 원이면 넉넉합니다. 테이블 지정석 이용 시 추가 요금이 있을 수 있습니다.` },
-        { q: `자가용을 가지고 가도 되나요?`, a: `주변 유료 주차장 이용이 가능합니다. 다만 음주 시 대리운전 비용까지 고려하면, 대중교통이 경제적입니다.` },
-        { q: `가장 붐비는 시간대를 피하고 싶습니다.`, a: `평일 저녁 8~9시가 가장 한산합니다. 주말이라면 오픈 직후나 새벽 1시 이후가 비교적 여유롭습니다.` },
-        { q: `나이트 경험이 처음인데 팁 좀 부탁드려요.`, a: `먼저 테이블에서 분위기를 익히고, 좋아하는 노래가 나올 때 플로어에 나가면 됩니다. 편한 신발, 물 한 잔, 그리고 가벼운 마음이 전부입니다.` },
-      ],
-    ],
-    lounge: [
-      [
-        { q: `${venue.name} 위치와 교통편을 알려 주세요.`, a: `${addressInfo} 근처입니다. ${stationInfo}에서 도보 또는 택시로 접근 가능합니다.` },
-        { q: `반드시 예약해야 입장이 되나요?`, a: `예약 없이도 입장 가능하지만, 주말 저녁에는 빈 테이블이 없을 수 있어 사전 예약을 강력히 권합니다.` },
-        { q: `혼자 방문해서 바 좌석에 앉아도 괜찮을까요?`, a: `물론입니다. 바 좌석은 1인 방문객에게 인기가 많으며, 바텐더와 대화하며 편하게 시간을 보낼 수 있습니다.` },
-        { q: `드레스코드가 엄격한 편인가요?`, a: `스마트캐주얼 이상을 권합니다. 남성은 셔츠+슬랙스, 여성은 원피스·블라우스 수준이면 무난합니다.` },
-        { q: `2인 방문 시 예산을 어느 정도 잡아야 하나요?`, a: `칵테일 2잔 + 안주 포함 5~10만 원이면 넉넉합니다. 위스키 보틀을 주문하면 비용이 올라갑니다.` },
-        { q: `주차 또는 발렛 서비스가 있나요?`, a: `일부 라운지는 발렛 서비스를 제공합니다. 없는 경우 인근 유료 주차장을 이용하세요.` },
-        { q: `프라이빗한 분위기를 원하면 몇 시가 좋을까요?`, a: `주중 저녁 7~9시가 가장 조용합니다. 주말 심야로 갈수록 볼륨과 인원이 올라갑니다.` },
-        { q: `라운지에 처음 가는데 주의사항이 있나요?`, a: `예약 시 테이블 위치를 요청할 수 있습니다. 최소 주문 금액이 있는지 미리 확인하고, 드레스코드만 지키면 됩니다.` },
-      ],
-    ],
-  };
-
-  const options = qSets[catEn] || qSets.lounge;
-  return options[h % options.length];
-}
-
-/* Practical guide table data */
-const guideRows = [
-  { label: '운영시간', value: venue.card_value?.match(/\d{1,2}시|오픈|마감|\d{2}:\d{2}/)?.[0] ? venue.card_value : '확인 필요 — 방문 전 전화 문의 권장' },
-  { label: '위치 / 교통', value: `${venue.address} · ${venue.station}` },
-  { label: '예약 / 입장', value: catEn === 'lounge' ? '사전 예약 권장 · 워크인 시 대기 가능' : catEn === 'club' ? '신분증 필수 · 주말은 사전 예약 유리' : '워크인 가능 · 주말 저녁은 일찍 도착 권장' },
-  { label: '복장 / 분위기', value: catEn === 'club' ? '스마트캐주얼 이상 · 운동화 제한 가능' : catEn === 'lounge' ? '스마트캐주얼 이상 · 슬리퍼/반바지 불가' : '깔끔한 캐주얼 · 슬리퍼만 피하면 OK' },
-  { label: '예산 감각', value: catEn === 'club' ? '입장료 1~3만 원 + 음료 1~2만 원/잔' : catEn === 'lounge' ? '음료 1.5~2.5만 원/잔 · 테이블 최소 주문 확인' : '입장료 0~2만 원 + 음료 0.5~1.5만 원/잔' },
-];
+const heroTag = heroTaglines[catEn]?.[h % (heroTaglines[catEn]?.length || 1)] || '밤의 에너지를 온몸으로 느끼다';
 
 /* Related venues */
 const relatedVenues = venuesData
@@ -355,14 +64,47 @@ const relatedVenues = venuesData
   .slice(0, 8);
 
 /* SEO */
-const catFullLabel = catLabel === '클럽' ? '클럽' : catLabel === '나이트' ? '나이트' : '라운지';
-const title = `${venue.name} — ${regionLabel} ${catFullLabel} 가이드`;
-const description = `${venue.name} 방문 전 꼭 확인할 위치·교통·복장·예산·예약 정보를 한 페이지에 정리했습니다. ${regionLabel} ${catFullLabel} 탐색에 실질적으로 도움이 되는 가이드.`;
+const title = `${venue.name} | ${regionLabel} ${venue.district} ${catFullLabel} 위치·영업시간·입장료 가이드 2026`;
+const stationShort = venue.station ? venue.station.split(',')[0].trim() : '';
+const descParts = [
+  `${venue.name}`,
+  `${regionLabel} ${venue.district} ${catFullLabel}`,
+  stationShort ? `${stationShort} 근처` : '',
+  venue.tags?.length ? venue.tags.slice(0, 3).join('·') : '',
+  '위치·영업시간·입장료·복장·예약 정보를 한 페이지에 정리',
+].filter(Boolean);
+const descRaw = descParts.join(' — ');
+const description = descRaw.length > 155 ? descRaw.slice(0, 152) + '...' : descRaw;
 
-const faqItems = genFAQ();
-const timelineSteps = genTimeline();
+/* Keywords meta */
+const baseKeywords = venue.keywords || [];
+const extraKeywords = [
+  venue.name,
+  `${regionLabel} ${catFullLabel}`,
+  `${venue.district} ${catFullLabel}`,
+  `${venue.name} 위치`,
+  `${venue.name} 영업시간`,
+  `${venue.name} 입장료`,
+  `${venue.name} 후기`,
+  `${regionLabel} ${venue.district} ${catFullLabel} 추천`,
+  stationShort ? `${stationShort} ${catFullLabel}` : '',
+].filter(Boolean);
+const allKeywords = [...new Set([...baseKeywords, ...extraKeywords])].join(',');
 
-/* JSON-LD with image + LocalBusiness */
+/* Article meta for Naver freshness signals */
+const publishedTime = '2025-12-01T00:00:00+09:00';
+const modifiedTime = new Date().toISOString();
+
+/* Practical guide rows */
+const guideRows = [
+  { label: '운영시간', value: venue.hours || '확인 필요 — 방문 전 전화 문의 권장' },
+  { label: '위치 / 교통', value: `${venue.address} · ${venue.station}` },
+  { label: '예약 / 입장', value: catEn === 'lounge' ? '사전 예약 권장 · 워크인 시 대기 가능' : catEn === 'club' ? '신분증 필수 · 주말은 사전 예약 유리' : '워크인 가능 · 주말 저녁은 일찍 도착 권장' },
+  { label: '복장 / 분위기', value: catEn === 'club' ? '스마트캐주얼 이상 · 운동화 제한 가능' : catEn === 'lounge' ? '스마트캐주얼 이상 · 슬리퍼/반바지 불가' : '깔끔한 캐주얼 · 슬리퍼만 피하면 OK' },
+  { label: '예산 감각', value: catEn === 'club' ? '입장료 1~3만 원 + 음료 1~2만 원/잔' : catEn === 'lounge' ? '음료 1.5~2.5만 원/잔 · 테이블 최소 주문 확인' : '입장료 0~2만 원 + 음료 0.5~1.5만 원/잔' },
+];
+
+/* JSON-LD */
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -371,10 +113,7 @@ const jsonLd = {
       "name": title,
       "url": pageUrl,
       "description": description,
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": thumbAbsolute,
-      },
+      "primaryImageOfPage": { "@type": "ImageObject", "url": thumbAbsolute },
     },
     {
       "@type": "LocalBusiness",
@@ -384,11 +123,13 @@ const jsonLd = {
       "address": {
         "@type": "PostalAddress",
         "streetAddress": venue.address || '',
+        "addressLocality": venue.district || '',
         "addressRegion": regionLabel,
         "addressCountry": "KR",
       },
-      ...(venue.map_url ? { hasMap: venue.map_url } : {}),
+      hasMap: mapUrl,
       ...(venue.phone ? { telephone: venue.phone } : {}),
+      ...(venue.hours ? { openingHours: venue.hours } : {}),
     },
     {
       "@type": "BreadcrumbList",
@@ -401,7 +142,7 @@ const jsonLd = {
     },
     {
       "@type": "FAQPage",
-      "mainEntity": faqItems.map((item: { q: string; a: string }) => ({
+      "mainEntity": content.faqItems.map((item) => ({
         "@type": "Question",
         "name": item.q,
         "acceptedAnswer": { "@type": "Answer", "text": item.a },
@@ -409,13 +150,41 @@ const jsonLd = {
     },
   ],
 };
+
+/* Section IDs for navigation */
+const sections = [
+  { id: 'ai-summary', label: '요약' },
+  { id: 'intro', label: '소개' },
+  { id: 'prologue', label: '프롤로그' },
+  { id: 'scene1', label: '선택의 순간' },
+  { id: 'scene2', label: '첫인상' },
+  { id: 'quick-plan', label: '퀵플랜' },
+  { id: 'checklist', label: '체크리스트' },
+  { id: 'faq-section', label: 'Q&A' },
+  { id: 'bottom-cta', label: '마무리' },
+];
 ---
 
 <BaseLayout title={title} description={description} ogImage={thumbPath} jsonLd={jsonLd}>
+  <Fragment slot="head">
+    <meta name="keywords" content={allKeywords} />
+    <meta property="article:section" content={`${regionLabel} ${catFullLabel}`} />
+    <meta property="article:published_time" content={publishedTime} />
+    <meta property="article:modified_time" content={modifiedTime} />
+    <meta property="article:tag" content={venue.name} />
+    <meta property="article:tag" content={`${regionLabel} ${catFullLabel}`} />
+    <meta property="og:image:alt" content={thumbAlt} />
+  </Fragment>
   <main id="main-content" class="detail-page">
 
-    {/* ── [0] Detail Hero: Thumbnail → Title → Meta → CTA ── */}
+    {/* ── Reading Progress Bar ── */}
+    <div class="reading-progress" id="reading-progress" aria-hidden="true">
+      <div class="reading-progress__bar" id="reading-progress-bar"></div>
+    </div>
+
+    {/* ── [0] Detail Hero ── */}
     <section class="detail-hero" data-reveal>
+      {/* 1) Thumbnail at top */}
       <figure class="detail-hero__figure">
         <img
           src={thumbPath}
@@ -426,48 +195,113 @@ const jsonLd = {
         />
       </figure>
 
+      {/* 2) H1 = Store Name */}
       <h1 class="detail-hero__title">{venue.name}</h1>
-      <p class="detail-hero__tagline">{heroTag}</p>
 
-      <div class="detail-hero__badges">
-        <span class="pill pill--accent">{catFullLabel}</span>
-        <span class="pill">{regionLabel}</span>
-        {venue.badge && <span class="pill pill--accent">{venue.badge}</span>}
+      {/* 3) Quick meta row */}
+      <div class="detail-hero__meta">
+        <span class="detail-hero__meta-item">{catFullLabel}</span>
+        <span class="detail-hero__meta-sep">·</span>
+        <span class="detail-hero__meta-item">{regionLabel} {venue.district}</span>
+        <span class="detail-hero__meta-sep">·</span>
+        <span class="detail-hero__meta-item detail-hero__meta-date">업데이트 {lastUpdated}</span>
       </div>
 
+      {/* 4) CTA row */}
       <div class="detail-hero__ctas">
-        <a href={venue.map_url} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
-        <a href="#faq-section" class="btn btn--outline">FAQ 바로가기</a>
-        <a href="/" class="btn btn--outline">목록으로</a>
+        <a href={mapUrl} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
+        <a href="/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">다른 장소 둘러보기</a>
       </div>
     </section>
 
-    {/* ── [0.5] Quick Summary (AEO) ── */}
-    <section class="detail-section" data-reveal>
+    {/* ── [0.5] Value Hook Intro ── */}
+    <section class="detail-hero-intro" data-reveal>
+      <p class="detail-hero-intro__tagline">{heroTag}</p>
       <div class="quick-summary">
         <h2 class="quick-summary__title">핵심 요약</h2>
         <ul>
           <li><strong>카테고리:</strong> {catFullLabel}</li>
           <li><strong>지역:</strong> {regionLabel} · {venue.address}</li>
           <li><strong>교통:</strong> {venue.station || '확인 필요'}</li>
-          <li><strong>운영 참고:</strong> {venue.card_value || '확인 필요'}</li>
+          <li><strong>운영 참고:</strong> {venue.hours || '확인 필요'}</li>
           {venue.phone && <li><strong>연락처:</strong> {venue.phone}</li>}
         </ul>
       </div>
     </section>
 
-    {/* ── [1] IntroBlock ── */}
-    <IntroBlock
-      hookHeadline={introHook}
-      bullets={genIntroBullets()}
-      declaration={pick(declarations[catEn] || declarations.club)}
-      storyVisible={genStoryVisible()}
-      storyHidden={genStoryHidden()}
-      ctas={[
-        { label: '지도에서 보기', href: venue.map_url },
-        { label: 'FAQ 바로가기', href: '#faq-section' },
-      ]}
-    />
+    {/* ── Reading Time + Section Nav ── */}
+    <div class="reading-meta" data-reveal>
+      <span class="reading-meta__time">약 {content.readingTimeMin}분</span>
+      <nav class="reading-meta__nav" aria-label="섹션 이동">
+        {sections.map(s => (
+          <a href={`#${s.id}`} class="reading-meta__link" target="_blank" rel="noopener noreferrer">{s.label}</a>
+        ))}
+      </nav>
+    </div>
+
+    {/* ── [AI] Summary Block ── */}
+    <section class="ai-summary" id="ai-summary" data-reveal>
+      <h2 class="ai-summary__title">{venue.name} — 핵심 정보 요약</h2>
+      <ul class="ai-summary__list">
+        {content.aiSummary.map(bullet => (
+          <li>{bullet}</li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ── [A] VALUE HOOK INTRO ── */}
+    <section class="value-intro" id="intro" data-reveal>
+      <p class="value-intro__hook">{content.introHook}</p>
+
+      <div class="value-intro__value-box">
+        <h2 class="value-intro__value-title">이 페이지에서 얻는 것</h2>
+        <ul class="value-intro__bullets">
+          {content.introBullets.map(b => <li>{b}</li>)}
+        </ul>
+      </div>
+
+      <div class="value-intro__teaser">
+        <p>{content.introTeaser}</p>
+      </div>
+    </section>
+
+    {/* ── [B-1] 3분 프롤로그 ── */}
+    <section class="story-section" id="prologue" data-reveal>
+      <h2 class="story-section__heading">3분 프롤로그</h2>
+      <div class="story-section__body">
+        <Fragment set:html={content.prologue} />
+      </div>
+    </section>
+
+    {/* ── [B-2] 장면 1: 선택의 순간 ── */}
+    <section class="story-section" id="scene1" data-reveal>
+      <h2 class="story-section__heading">{content.scene1Title}</h2>
+      <div class="story-section__body">
+        <Fragment set:html={content.scene1} />
+      </div>
+    </section>
+
+    {/* ── [B-3] 장면 2: 첫인상 디테일 ── */}
+    <section class="story-section" id="scene2" data-reveal>
+      <h2 class="story-section__heading">장면 2: 첫인상 디테일</h2>
+      <div class="story-section__body">
+        <Fragment set:html={content.scene2} />
+      </div>
+    </section>
+
+    {/* ── Extra: Tip Section ── */}
+    <section class="story-section" data-reveal>
+      <div class="story-section__body story-section__extra">
+        <Fragment set:html={content.tipSection} />
+      </div>
+    </section>
+
+    {/* ── Extra: Dialogue / Twist Section ── */}
+    <section class="story-section" data-reveal>
+      <div class="story-section__body story-section__extra">
+        <Fragment set:html={content.dialogueSection} />
+      </div>
+    </section>
 
     {/* ── [2] Practical Guide ── */}
     <section class="detail-section" data-reveal>
@@ -486,29 +320,72 @@ const jsonLd = {
       </div>
     </section>
 
-    {/* ── [3] Timeline ── */}
-    <section class="detail-section" data-reveal>
-      <h2 class="detail-section__heading">오늘 밤 플랜</h2>
-      <ol class="detail-timeline">
-        {timelineSteps.map((step: string, i: number) => (
-          <li class="detail-timeline__step">
-            <span class="detail-timeline__num">{i + 1}</span>
-            <span class="detail-timeline__text">{step}</span>
+    {/* ── [B-5] 처음 가는 사람 체크리스트 ── */}
+    <section class="detail-section" id="checklist" data-reveal>
+      <h2 class="detail-section__heading">처음 가는 사람 체크리스트</h2>
+      <ul class="checklist-list">
+        {content.checklist.map(item => (
+          <li class="checklist-list__item">
+            <span class="checklist-list__icon" aria-hidden="true">&#10003;</span>
+            <span>{item}</span>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
 
-    {/* ── [4] FAQ ── */}
-    <FAQ items={faqItems} />
+    {/* ── [QP] Quick Plan ── */}
+    <section class="detail-section quick-plan" id="quick-plan" data-reveal>
+      <h2 class="detail-section__heading">30초 결정표</h2>
+      <div class="quick-plan__table-wrap">
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th>항목</th>
+              <th>옵션 A</th>
+              <th>옵션 B</th>
+            </tr>
+          </thead>
+          <tbody>
+            {content.quickPlan.decisionTable.map(row => (
+              <tr>
+                <th>{row.label}</th>
+                <td>{row.optionA}</td>
+                <td>{row.optionB}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="quick-plan__sub">3가지 방문 시나리오</h3>
+      <div class="quick-plan__scenarios">
+        {content.quickPlan.scenarios.map(s => (
+          <div class="quick-plan__scenario">
+            <strong>{s.title}</strong>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="quick-plan__cost-note">{content.quickPlan.costNote}</p>
+    </section>
+
+    {/* ── [B-6] 실전 Q&A ── */}
+    <FAQ items={content.faqItems} />
 
     {/* ── [5] Trust Block ── */}
     <TrustBlock storeName={venue.name} />
 
-    {/* ── [6] Bottom CTA ── */}
-    <section class="detail-section detail-bottom-cta" id="bottom-cta" data-reveal>
-      <a href={venue.map_url} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
-      <a href="/" class="btn btn--outline">다른 장소 둘러보기</a>
+    {/* ── [B-7] 마무리(결론) ── */}
+    <section class="story-section detail-bottom-cta" id="bottom-cta" data-reveal>
+      <h2 class="story-section__heading">마무리</h2>
+      <div class="story-section__body">
+        <Fragment set:html={content.outro} />
+      </div>
+      <div class="story-section__ctas">
+        <a href={mapUrl} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 위치 확인하기</a>
+        <a href="/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">다른 장소 둘러보기</a>
+      </div>
     </section>
 
     {/* ── [7] Related Venues ── */}
@@ -518,8 +395,10 @@ const jsonLd = {
         <div class="detail-related">
           {relatedVenues.map((v: any) => (
             <a
-              href={v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`}
+              href={venueDetailPath(v)}
               class="detail-related__link"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <strong>{v.name}</strong>
               <span>{v.region} {v.category}</span>
@@ -531,3 +410,319 @@ const jsonLd = {
 
   </main>
 </BaseLayout>
+
+<style>
+/* ── Reading Progress Bar ── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 9999;
+  pointer-events: none;
+}
+.reading-progress__bar {
+  height: 100%;
+  width: 0%;
+  background: var(--c-accent, #c8a86e);
+  transition: width 80ms linear;
+}
+
+/* ── Reading Meta (time + nav) ── */
+.reading-meta {
+  margin: 0 auto var(--sp-lg);
+  padding: var(--sp-md) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-sm) var(--sp-lg);
+}
+.reading-meta__time {
+  font-size: var(--t-small);
+  color: var(--c-muted);
+  background: var(--c-bg-section);
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.reading-meta__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-xs);
+}
+.reading-meta__link {
+  font-size: var(--t-caption);
+  color: var(--c-text-soft);
+  text-decoration: none;
+  padding: 4px 10px;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  transition: all .15s;
+}
+.reading-meta__link:hover {
+  background: var(--c-accent-soft);
+  border-color: var(--c-accent);
+  color: var(--c-accent-text);
+}
+
+/* ── Value Hook Intro ── */
+.value-intro {
+  margin: 0 auto var(--section-gap);
+  padding: 0;
+  text-align: center;
+}
+.value-intro__hook {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  margin-bottom: var(--sp-lg);
+  padding: var(--sp-md) var(--sp-lg);
+  background: var(--c-bg-warm);
+  border-radius: var(--r-md);
+  border-top: 3px solid var(--c-accent);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.value-intro__value-box {
+  background: var(--c-bg-section);
+  border-radius: var(--r-md);
+  padding: var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.value-intro__value-title {
+  font-size: var(--t-body);
+  font-weight: 700;
+  margin-bottom: var(--sp-sm);
+  color: var(--c-text);
+  text-align: center;
+}
+.value-intro__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.value-intro__bullets li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: var(--sp-xs);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  color: var(--c-text-soft);
+}
+.value-intro__bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.value-intro__teaser {
+  background: var(--c-bg-warm);
+  border-radius: var(--r-md);
+  padding: var(--sp-lg);
+  font-style: italic;
+  color: var(--c-text-soft);
+  line-height: var(--lh-body);
+  border-top: 2px solid var(--c-accent-soft, rgba(200,168,110,.3));
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Story Sections ── */
+.story-section {
+  margin: 0 auto var(--section-gap);
+  padding: 0;
+}
+.story-section__heading {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  line-height: var(--lh-heading);
+  color: var(--c-navy);
+  margin-bottom: var(--sp-lg);
+  padding-bottom: var(--sp-sm);
+  border-bottom: 2px solid var(--c-accent-soft, rgba(200,168,110,.2));
+  text-align: center;
+}
+.story-section__body {
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  color: var(--c-text-soft);
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.story-section__body p {
+  margin-bottom: var(--sp-md);
+}
+.story-section__body h3 {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  color: var(--c-navy);
+  margin-top: var(--sp-xl);
+  margin-bottom: var(--sp-md);
+  text-align: center;
+}
+.story-section__body .dialogue {
+  background: var(--c-bg-section);
+  padding: var(--sp-md) var(--sp-lg);
+  border-radius: var(--r-md);
+  font-style: italic;
+  margin: var(--sp-lg) auto;
+  border-top: 3px solid var(--c-accent);
+  text-align: center;
+  max-width: 400px;
+}
+.story-section__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-xl);
+  justify-content: center;
+}
+
+/* ── Checklist ── */
+.checklist-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: var(--max-narrow, 720px);
+}
+.checklist-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-sm);
+  padding: var(--sp-sm) 0;
+  border-bottom: 1px solid var(--c-border-light);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  color: var(--c-text-soft);
+}
+.checklist-list__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-accent-soft);
+  color: var(--c-accent-text);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+/* ── AI Summary Block ── */
+.ai-summary {
+  margin: 0 auto var(--section-gap);
+  padding: var(--sp-lg);
+  background: var(--c-bg-section);
+  border-radius: var(--r-md, 12px);
+  border-top: 4px solid var(--c-accent);
+  max-width: 600px;
+}
+.ai-summary__title {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  color: var(--c-navy);
+  margin-bottom: var(--sp-md);
+  line-height: var(--lh-heading);
+  text-align: center;
+}
+.ai-summary__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+.ai-summary__list li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: var(--sp-xs);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  color: var(--c-text-soft);
+}
+.ai-summary__list li::before {
+  content: '•';
+  position: absolute;
+  left: 6px;
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* ── Quick Plan ── */
+.quick-plan__table-wrap {
+  overflow-x: auto;
+  margin-bottom: var(--sp-lg);
+}
+.quick-plan__sub {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  color: var(--c-navy);
+  margin-bottom: var(--sp-md);
+  text-align: center;
+}
+.quick-plan__scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
+}
+.quick-plan__scenario {
+  background: var(--c-bg-section);
+  border: 1px solid var(--c-border-light);
+  border-radius: var(--r-md, 12px);
+  padding: var(--sp-md);
+}
+.quick-plan__scenario strong {
+  display: block;
+  color: var(--c-navy);
+  margin-bottom: var(--sp-xs);
+  font-size: var(--t-body);
+}
+.quick-plan__scenario p {
+  margin: 0;
+  font-size: var(--t-small);
+  line-height: var(--lh-body);
+  color: var(--c-text-soft);
+}
+.quick-plan__cost-note {
+  font-size: var(--t-small);
+  color: var(--c-muted);
+  font-style: italic;
+  line-height: var(--lh-body);
+  padding: var(--sp-sm) var(--sp-md);
+  background: var(--c-bg-warm);
+  border-radius: var(--r-sm, 8px);
+  text-align: center;
+}
+</style>
+
+<script>
+  // Reading progress bar
+  const bar = document.getElementById('reading-progress-bar');
+  if (bar) {
+    const update = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        const pct = Math.min(100, (scrollTop / docHeight) * 100);
+        bar.style.width = pct + '%';
+      }
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+</script>

@@ -5,7 +5,7 @@ interface Props {
 
 const { items } = Astro.props;
 ---
-<section class="faq container" id="faq-section" data-reveal>
+<section class="faq" id="faq-section" data-reveal>
   <h2 class="faq__title">자주 묻는 질문</h2>
   {items.map(item => (
     <div class="faq__item">
