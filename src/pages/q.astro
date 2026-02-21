@@ -98,11 +98,11 @@ const galleryImages = [
 ];
 ---
 <BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
-  <main id="main-content">
-    <div class="detail-cta container">
-      <a href="/" class="btn btn--outline">&larr; 목록으로</a>
+  <main id="main-content" class="detail-page">
+    <div class="detail-cta">
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">&larr; 목록으로</a>
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="#bottom-cta" class="btn btn--outline">정정 요청</a>
+      <a href="#bottom-cta" target="_blank" rel="noopener noreferrer" class="btn btn--outline">정정 요청</a>
     </div>
 
     <IntroBlock
@@ -121,7 +121,6 @@ const galleryImages = [
       ]}
     />
 
-    <div class="container">
       <section id="intro-line" class="section">
         <h2>서론 — 첫 동선을 세우는 글</h2>
         <p>낯선 밤길은 속도보다 방향이 먼저입니다. 인덕원국빈관나이트를 처음 접했다면 출구와 큰길 방향을 먼저 정해 두는 것이 좋습니다. 밝은 지점과 표지판이 있는 구역을 참고점으로 삼으면 길이 조금 바뀌어도 방향이 흔들리지 않습니다.</p>
@@ -163,18 +162,17 @@ const galleryImages = [
         <p>인덕원국빈관나이트 정보를 참고하는 분이라면, 빠르게 움직이기보다 방향을 잘 잡는 것이 우선입니다. 동선의 큰 윤곽과 작은 참고점을 함께 떠올리면 현장에서의 선택이 훨씬 가볍고 명확해집니다.</p>
         <p>확인이 필요한 경우에는 카톡 문의(besta12)를 활용해 간단히 전달하세요. 현장 공지와 주변 안내를 먼저 참고하면 불필요한 이동이 줄어들고, 안정적인 마무리에 도움이 됩니다.</p>
       </section>
-    </div>
 
     <Gallery images={galleryImages} />
 
-    <div class="mid-cta container">
+    <div class="mid-cta">
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="/" class="btn btn--outline">다른 장소 둘러보기</a>
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">다른 장소 둘러보기</a>
     </div>
 
     <FAQ items={faqItems} />
 
-    <div class="detail-log container">
+    <div class="detail-log">
       <h3 class="detail-log__title">업데이트 기록</h3>
       <div class="detail-log__entry"><strong>2026.02.20</strong> Astro 마이그레이션</div>
       <div class="detail-log__entry"><strong>2026.02.02</strong> 초기 페이지 작성</div>
@@ -182,7 +180,7 @@ const galleryImages = [
 
     <TrustBlock storeName={storeName} />
 
-    <section class="related container" id="bottom-cta">
+    <section class="related" id="bottom-cta">
       <h3 class="related__title">관련 장소 안내</h3>
       <div class="related__grid">
         <a href="/j/" class="related__link" target="_blank" rel="noopener noreferrer">수원찬스돔 · 수원</a>
@@ -194,7 +192,7 @@ const galleryImages = [
         <a href="/t/" class="related__link" target="_blank" rel="noopener noreferrer">대전세븐 · 대전</a>
       </div>
       <div class="bottom-cta">
-        <a href="/" class="btn btn--outline">← 전체 목록으로</a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">← 전체 목록으로</a>
         <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
       </div>
     </section>

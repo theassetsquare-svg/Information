@@ -58,11 +58,11 @@ const galleryImages = [
 ];
 ---
 <BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
-  <main id="main-content">
-    <div class="detail-cta container">
-      <a href="/" class="btn btn--outline">&larr; 목록으로</a>
+  <main id="main-content" class="detail-page">
+    <div class="detail-cta">
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">&larr; 목록으로</a>
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="#bottom-cta" class="btn btn--outline">정정 요청</a>
+      <a href="#bottom-cta" target="_blank" rel="noopener noreferrer" class="btn btn--outline">정정 요청</a>
     </div>
 
     <IntroBlock
@@ -81,7 +81,6 @@ const galleryImages = [
       ]}
     />
 
-    <div class="container">
       <section>
         <h2>어떤 오해가 있을까?</h2>
         <p>청담h2o나이트를 검색하면 정보보다 추측이 더 많이 나와요. 아래는 자주 발견되는 오해와, 실제로 확인한 내용이에요.</p>
@@ -132,18 +131,17 @@ const galleryImages = [
         <p>이 글에서 정리한 다섯 가지 포인트와 시간대별 흐름을 참고해서, 본인에게 맞는지 직접 판단해 보세요. 분위기가 궁금하다면 평일 저녁에 가볍게 들러 보는 것도 방법이에요.</p>
         <p>추가로 궁금한 점이 있다면 아래 전화 번호로 직접 확인해 보세요.</p>
       </section>
-    </div>
 
     <Gallery images={galleryImages} />
 
-    <div class="mid-cta container">
+    <div class="mid-cta">
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="/" class="btn btn--outline">다른 장소 둘러보기</a>
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">다른 장소 둘러보기</a>
     </div>
 
     <FAQ items={faqItems} />
 
-    <div class="detail-log container">
+    <div class="detail-log">
       <h3 class="detail-log__title">업데이트 기록</h3>
       <div class="detail-log__entry"><strong>2026.02.20</strong> Astro 마이그레이션</div>
       <div class="detail-log__entry"><strong>2026.02.18</strong> FAQ·갤러리 추가</div>
@@ -152,7 +150,7 @@ const galleryImages = [
 
     <TrustBlock storeName={storeName} />
 
-    <section class="related container" id="bottom-cta">
+    <section class="related" id="bottom-cta">
       <h3 class="related__title">관련 장소</h3>
       <div class="related__grid">
         <a href="/b/" class="related__link" target="_blank">상봉동한국관 · 상봉</a>
@@ -165,7 +163,7 @@ const galleryImages = [
       </div>
       <div class="bottom-cta">
         <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-        <a href="/" class="btn btn--outline">전체 목록</a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">전체 목록</a>
       </div>
     </section>
   </main>

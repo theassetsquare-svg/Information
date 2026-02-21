@@ -76,11 +76,11 @@ const galleryImages = [
 ];
 ---
 <BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
-  <main id="main-content">
-    <div class="detail-cta container">
-      <a href="/" class="btn btn--outline">&larr; 목록으로</a>
+  <main id="main-content" class="detail-page">
+    <div class="detail-cta">
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">&larr; 목록으로</a>
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="#bottom-cta" class="btn btn--outline">정정 요청</a>
+      <a href="#bottom-cta" target="_blank" rel="noopener noreferrer" class="btn btn--outline">정정 요청</a>
     </div>
 
     <IntroBlock
@@ -99,7 +99,6 @@ const galleryImages = [
       ]}
     />
 
-    <div class="container">
       <section id="checkbook" class="section">
         <h2 class="sec-title">실수 7가지 체크리스트</h2>
 
@@ -187,18 +186,17 @@ const galleryImages = [
         <p>처음 방문하는 곳은 누구나 긴장됩니다. 하지만 미리 알고 가면 그 긴장이 설렘으로 바뀔 수 있습니다. 이 글이 그런 전환점이 되었으면 좋겠습니다. 완벽하게 준비할 필요는 없습니다. 적당히 알고, 적당히 열린 마음으로, 적당히 여유를 가지고 가면 됩니다.</p>
         <p>더 궁금한 게 있거나 현장 상황을 확인하고 싶다면 직접 문의해 보세요. 현장 상황은 수시로 바뀔 수 있으니, 방문 전 확인하는 게 가장 정확합니다. 이 체크북이 첫 방문의 불안을 조금이라도 덜어드렸기를 바랍니다.</p>
       </section>
-    </div>
 
     <Gallery images={galleryImages} />
 
-    <div class="mid-cta container">
+    <div class="mid-cta">
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="/" class="btn btn--outline">다른 장소 둘러보기</a>
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">다른 장소 둘러보기</a>
     </div>
 
     <FAQ items={faqItems} />
 
-    <div class="detail-log container">
+    <div class="detail-log">
       <h3 class="detail-log__title">업데이트 기록</h3>
       <div class="detail-log__entry"><strong>2026.02.20</strong> Astro 마이그레이션</div>
       <div class="detail-log__entry"><strong>2026.02.18</strong> FAQ·갤러리 추가</div>
@@ -207,7 +205,7 @@ const galleryImages = [
 
     <TrustBlock storeName={storeName} />
 
-    <section class="related container" id="bottom-cta">
+    <section class="related" id="bottom-cta">
       <h3 class="related__title">관련 장소 안내</h3>
       <div class="related__grid">
         <a href="/y/" class="related__link" target="_blank" rel="noopener noreferrer">수유샴푸 · 강북</a>
@@ -219,7 +217,7 @@ const galleryImages = [
         <a href="/f/" class="related__link" target="_blank" rel="noopener noreferrer">홍대펀나이트 · 홍대</a>
       </div>
       <div class="bottom-cta">
-        <a href="/" class="btn btn--outline">← 전체 목록으로</a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">← 전체 목록으로</a>
         <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
       </div>
     </section>

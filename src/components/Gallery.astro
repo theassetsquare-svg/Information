@@ -5,7 +5,7 @@ interface Props {
 
 const { images } = Astro.props;
 ---
-<div class="gallery container">
+<div class="gallery">
   {images.map(img => (
     <figure class="gallery__item">
       <img src={img.src} alt={img.alt} loading="lazy" width="400" height="400">

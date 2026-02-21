@@ -732,6 +732,111 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
   justify-content: center;
 }
 
+/* ── Legacy detail pages: general h2/section centering ── */
+.detail-page h2 {
+  text-align: center;
+}
+.detail-page section > p,
+.detail-page section > ul,
+.detail-page section > ol {
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.detail-page section > ul,
+.detail-page section > ol {
+  line-height: 1.8;
+}
+.detail-page .intro-block__hook {
+  text-align: center;
+}
+.detail-page .intro-block__ctas {
+  justify-content: center;
+}
+.detail-page .detail-cta {
+  justify-content: center;
+}
+.detail-page .mid-cta {
+  justify-content: center;
+}
+.detail-page .bottom-cta {
+  justify-content: center;
+}
+.detail-page .gallery {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.detail-page .detail-log {
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.detail-page .related {
+  border-top: 1px solid var(--c-border-light);
+  padding-top: var(--sp-xl);
+}
+.detail-page .related__title {
+  text-align: center;
+}
+/* Legacy check-item layout */
+.detail-page .check-item {
+  margin-bottom: var(--sp-lg);
+  padding: var(--sp-lg);
+  background: var(--c-bg-section);
+  border-radius: var(--r-md);
+  border-top: 3px solid var(--c-accent);
+}
+.detail-page .check-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-md);
+}
+.detail-page .check-num {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  background: var(--c-navy);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.detail-page .check-body .mistake {
+  background: var(--c-bg-warm);
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: var(--r-sm);
+  margin-bottom: var(--sp-sm);
+  color: var(--c-text-soft);
+  font-size: var(--t-small);
+  line-height: 1.7;
+}
+.detail-page .check-body .solution {
+  font-size: var(--t-body);
+  line-height: 1.8;
+  color: var(--c-text-soft);
+}
+.detail-page .closing-section {
+  padding: var(--sp-xl) 0;
+  border-top: 1px solid var(--c-border-light);
+}
+.detail-page .closing-section h2 {
+  text-align: center;
+  margin-bottom: var(--sp-lg);
+}
+.detail-page .closing-section p {
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+  color: var(--c-text-soft);
+  margin-bottom: var(--sp-md);
+}
+
 /* ── Detail Gallery (reusable) ── */
 .detail-gallery {
   display: grid;

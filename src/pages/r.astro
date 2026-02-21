@@ -125,11 +125,11 @@ const galleryImages = [
 ---
 
 <BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
-  <main id="main-content">
-    <div class="detail-cta container">
-      <a href="/" class="btn btn--outline">&larr; 목록으로</a>
+  <main id="main-content" class="detail-page">
+    <div class="detail-cta">
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">&larr; 목록으로</a>
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="#bottom-cta" class="btn btn--outline">정정 요청</a>
+      <a href="#bottom-cta" target="_blank" rel="noopener noreferrer" class="btn btn--outline">정정 요청</a>
     </div>
 
     <IntroBlock
@@ -148,7 +148,6 @@ const galleryImages = [
       ]}
     />
 
-    <div class="container">
       <section id="opening">
         <h2>첫 방향의 결</h2>
         <p>서론에서는 길의 첫 방향을 고정하는 방법을 설명합니다. 울산챔피언나이트에 대한 정보를 찾았다면, 출구와 주요 간선, 눈에 띄는 고정 지점을 참고로 삼아 큰 방향을 먼저 잡는 것이 좋습니다.</p>
@@ -178,18 +177,17 @@ const galleryImages = [
         <p>간판, 건물 이름, 가로등처럼 고정된 표식은 가장 확실한 나침반입니다. 길이 헷갈릴 때는 표식을 먼저 찾고, 최근에 지나온 지점을 참고로 방향을 다시 맞추세요.</p>
         <p>울산챔피언나이트 관련 정보를 보고 온 분이라면, 표식이 생각보다 큰 힌트가 된다는 점을 기억해 두면 좋습니다. 작은 표시 하나가 큰 길의 윤곽을 밝혀 줍니다.</p>
       </section>
-    </div>
 
     <Gallery images={galleryImages} />
 
-    <div class="mid-cta container">
+    <div class="mid-cta">
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="/" class="btn btn--outline">다른 장소 둘러보기</a>
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">다른 장소 둘러보기</a>
     </div>
 
     <FAQ items={faqItems} />
 
-    <div class="detail-log container">
+    <div class="detail-log">
       <h3 class="detail-log__title">업데이트 기록</h3>
       <div class="detail-log__entry"><strong>2026.02.20</strong> Astro 마이그레이션</div>
       <div class="detail-log__entry"><strong>2026.02.18</strong> FAQ·갤러리 추가</div>
@@ -198,7 +196,7 @@ const galleryImages = [
 
     <TrustBlock storeName={storeName} />
 
-    <section class="related container" id="bottom-cta">
+    <section class="related" id="bottom-cta">
       <h3 class="related__title">관련 장소</h3>
       <div class="related__grid">
         <a href="/b/" class="related__link" target="_blank" rel="noopener noreferrer">상봉동한국관 · 상봉</a>
@@ -211,7 +209,7 @@ const galleryImages = [
       </div>
       <div class="bottom-cta">
         <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-        <a href="/" class="btn btn--outline">전체 목록</a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">전체 목록</a>
       </div>
     </section>
   </main>

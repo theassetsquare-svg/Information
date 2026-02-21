@@ -93,11 +93,11 @@ const galleryImages = [
 ---
 
 <BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
-  <main id="main-content">
-    <div class="detail-cta container">
-      <a href="/" class="btn btn--outline">&larr; 목록으로</a>
+  <main id="main-content" class="detail-page">
+    <div class="detail-cta">
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">&larr; 목록으로</a>
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="#bottom-cta" class="btn btn--outline">정정 요청</a>
+      <a href="#bottom-cta" target="_blank" rel="noopener noreferrer" class="btn btn--outline">정정 요청</a>
     </div>
 
     <IntroBlock
@@ -116,7 +116,6 @@ const galleryImages = [
       ]}
     />
 
-    <div class="container">
       <section id="step-1">
         <h2>5분 판단표</h2>
         <p>아래 표를 훑어보세요. 3개 이상 충족하면 방문 가치가 있습니다.</p>
@@ -150,18 +149,17 @@ const galleryImages = [
           <li>간단한 겉옷 — 새벽 귀가 시 기온차 대비.</li>
         </ul>
       </section>
-    </div>
 
     <Gallery images={galleryImages} />
 
-    <div class="mid-cta container">
+    <div class="mid-cta">
       <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="/" class="btn btn--outline">다른 장소 둘러보기</a>
+      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">다른 장소 둘러보기</a>
     </div>
 
     <FAQ items={faqItems} />
 
-    <div class="detail-log container">
+    <div class="detail-log">
       <h3 class="detail-log__title">업데이트 기록</h3>
       <div class="detail-log__entry"><strong>2026.02.20</strong> Astro 마이그레이션</div>
       <div class="detail-log__entry"><strong>2026.02.18</strong> FAQ·갤러리 추가</div>
@@ -170,7 +168,7 @@ const galleryImages = [
 
     <TrustBlock storeName={storeName} />
 
-    <section class="related container" id="bottom-cta">
+    <section class="related" id="bottom-cta">
       <h3 class="related__title">관련 장소</h3>
       <div class="related__grid">
         <a href="/b/" class="related__link" target="_blank" rel="noopener noreferrer">상봉동한국관 · 상봉</a>
@@ -183,7 +181,7 @@ const galleryImages = [
       </div>
       <div class="bottom-cta">
         <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-        <a href="/" class="btn btn--outline">전체 목록</a>
+        <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">전체 목록</a>
       </div>
     </section>
   </main>
