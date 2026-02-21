@@ -747,6 +747,55 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
 .detail-page section > ol {
   line-height: 1.8;
 }
+
+/* ── Legacy detail pages: h3 / table / section spacing ── */
+.detail-page h3 {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  color: var(--c-navy);
+  margin-top: var(--sp-xl);
+  margin-bottom: var(--sp-md);
+}
+.detail-page > section {
+  padding: var(--sp-xl) 0;
+}
+.detail-page > section + section {
+  border-top: 1px solid var(--c-border-light);
+}
+.detail-page section table {
+  width: 100%;
+  max-width: 68ch;
+  margin: var(--sp-lg) auto;
+  border-collapse: collapse;
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+}
+.detail-page section table th,
+.detail-page section table td {
+  padding: var(--sp-sm) var(--sp-md);
+  border: 1px solid var(--c-border-light);
+  text-align: left;
+  color: var(--c-text-soft);
+}
+.detail-page section table th {
+  background: var(--c-bg-section);
+  color: var(--c-navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.detail-page section ol li {
+  padding: var(--sp-xs) 0;
+  color: var(--c-text-soft);
+}
+.detail-page section ol li strong {
+  color: var(--c-text);
+}
+.detail-page section > p {
+  text-align: center;
+  color: var(--c-text-soft);
+}
+
 .detail-page .intro-block__hook {
   text-align: center;
 }
