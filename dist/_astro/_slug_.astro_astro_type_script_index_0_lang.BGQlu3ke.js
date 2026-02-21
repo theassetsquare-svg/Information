@@ -1,0 +1,1 @@
+const n=document.getElementById("reading-progress-bar");if(n){const t=()=>{const o=window.scrollY,e=document.documentElement.scrollHeight-window.innerHeight;if(e>0){const s=Math.min(100,o/e*100);n.style.width=s+"%"}};window.addEventListener("scroll",t,{passive:!0}),t()}
