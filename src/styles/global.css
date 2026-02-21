@@ -441,6 +441,10 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
   margin: 0 auto;
   padding: 0 var(--pad);
 }
+/* Night detail: slightly wider for editorial feel */
+.detail-page--night {
+  max-width: 880px;
+}
 
 /* ── Detail Hero ── */
 .detail-hero {
@@ -1290,9 +1294,165 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
   object-fit: cover;
 }
 
+/* ═══════════════════════════════════════════════════
+   NIGHT DETAIL — Premium Editorial Overrides
+   ═══════════════════════════════════════════════════ */
+
+/* ── Night Hero: premium thumbnail card ── */
+.detail-page--night .detail-hero {
+  padding: var(--sp-2xl) 0 var(--sp-xl);
+}
+.detail-page--night .detail-hero__figure {
+  max-width: 360px;
+  margin: 0 auto var(--sp-xl);
+}
+.detail-page--night .detail-hero__figure img {
+  border-radius: 22px;
+  box-shadow:
+    0 4px 6px rgba(15,23,42,0.04),
+    0 12px 40px rgba(15,23,42,0.10);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.detail-page--night .detail-hero__figure img:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 12px rgba(15,23,42,0.06),
+    0 20px 48px rgba(15,23,42,0.14);
+}
+.detail-page--night .detail-hero__title {
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-md);
+}
+.detail-page--night .detail-hero__ctas {
+  gap: var(--sp-md);
+  margin-top: var(--sp-md);
+}
+.detail-page--night .detail-hero__ctas .btn {
+  font-size: var(--t-small);
+  padding: 10px 24px;
+  min-height: 44px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.detail-page--night .detail-hero__ctas .btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(200,168,110,0.3);
+}
+.detail-page--night .detail-hero__ctas .btn--outline {
+  border-width: 1.5px;
+}
+.detail-page--night .detail-hero__ctas .btn--outline:hover {
+  background: var(--c-bg-section);
+}
+
+/* ── Night Typography: editorial readability ── */
+.detail-page--night section > p,
+.detail-page--night section > ul,
+.detail-page--night section > ol {
+  font-size: clamp(1rem, 1.15vw, 1.125rem);
+  line-height: 1.85;
+  color: var(--c-text-soft);
+}
+.detail-page--night h2 {
+  font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  margin-bottom: var(--sp-lg);
+  position: relative;
+}
+.detail-page--night > section {
+  padding: var(--sp-2xl) 0;
+}
+.detail-page--night > section + section {
+  border-top-color: var(--c-border-light);
+}
+
+/* ── Night Gallery: consistent responsive grid ── */
+.detail-page--night .gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-md);
+  margin: var(--sp-xl) 0;
+  max-width: 100%;
+}
+.detail-page--night .gallery__item {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--c-bg-section);
+}
+.detail-page--night .gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.detail-page--night .gallery__item:hover img {
+  transform: scale(1.03);
+}
+
+/* ── Night CTA rows: consistent premium buttons ── */
+.detail-page--night .mid-cta,
+.detail-page--night .bottom-cta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+  padding: var(--sp-lg) 0;
+}
+.detail-page--night .mid-cta .btn,
+.detail-page--night .bottom-cta .btn {
+  font-size: var(--t-small);
+  padding: 10px 24px;
+  min-height: 44px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* ── Night Related: cleaner grid ── */
+.detail-page--night .related {
+  padding-top: var(--sp-2xl);
+}
+.detail-page--night .related__title {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  margin-bottom: var(--sp-lg);
+}
+.detail-page--night .related__grid {
+  gap: var(--sp-sm);
+}
+.detail-page--night .related__link {
+  border-radius: 10px;
+  padding: var(--sp-sm) var(--sp-md);
+  transition: all 0.2s ease;
+}
+.detail-page--night .related__link:hover {
+  background: var(--c-bg-section);
+  transform: translateY(-1px);
+}
+
+/* ── Night Detail Log: refined ── */
+.detail-page--night .detail-log {
+  border-radius: 14px;
+  border: 1px solid var(--c-border-light);
+}
+
+/* ── Night IntroBlock overrides ── */
+.detail-page--night .intro-block {
+  padding: var(--sp-xl) 0 var(--sp-2xl);
+}
+
+/* ═══════════════════════════════════════════════════
+   DETAIL PAGE — Responsive Overrides
+   ═══════════════════════════════════════════════════ */
+
 /* ── Detail Page Responsive ── */
 @media (max-width: 599px) {
   .detail-page { padding: 0 16px; }
+  .detail-page--night { padding: 0 20px; }
   .detail-hero { padding: var(--sp-md) 0 var(--sp-sm); }
   .detail-hero__figure { max-width: 100%; }
   .detail-hero__figure img { border-radius: 14px; }
@@ -1307,10 +1467,30 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
   .detail-bottom-cta { flex-direction: column; }
   .detail-bottom-cta .btn { width: 100%; text-align: center; }
   .detail-gallery { grid-template-columns: 1fr; }
+
+  /* Night mobile overrides */
+  .detail-page--night .detail-hero { padding: var(--sp-lg) 0 var(--sp-md); }
+  .detail-page--night .detail-hero__figure { max-width: 280px; }
+  .detail-page--night .detail-hero__figure img { border-radius: 16px; }
+  .detail-page--night .detail-hero__ctas { flex-direction: column; }
+  .detail-page--night .detail-hero__ctas .btn { width: 100%; text-align: center; }
+  .detail-page--night .gallery { gap: var(--sp-sm); }
+  .detail-page--night .gallery__item { border-radius: 12px; }
+  .detail-page--night > section { padding: var(--sp-xl) 0; }
+  .detail-page--night .mid-cta,
+  .detail-page--night .bottom-cta { flex-direction: column; }
+  .detail-page--night .mid-cta .btn,
+  .detail-page--night .bottom-cta .btn { width: 100%; text-align: center; }
+}
+@media (min-width: 640px) {
+  .detail-page--night .gallery { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 600px) {
   .detail-gallery { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 900px) {
   .detail-gallery { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .detail-page--night .gallery { grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
 }

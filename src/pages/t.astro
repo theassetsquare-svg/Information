@@ -17,7 +17,13 @@ const jsonLd = {
       "@type": "WebPage",
       "name": title,
       "url": "https://informationa.pages.dev/t/",
-      "description": description
+      "description": description,
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "contentUrl": "https://informationa.pages.dev/t/daejeon-seven-thumb.png",
+        "width": 520,
+        "height": 520
+      }
     },
     {
       "@type": "BreadcrumbList",
@@ -85,10 +91,10 @@ const galleryImages = [
 ---
 
 <BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
-  <main id="main-content" class="detail-page">
+  <main id="main-content" class="detail-page detail-page--night">
     <section class="detail-hero" data-reveal>
       <figure class="detail-hero__figure">
-        <img src={ogImage} alt={`${storeName} 대표 이미지`} width="520" height="520" loading="eager" />
+        <img src={ogImage} alt={`${storeName} 나이트 안내 썸네일`} width="520" height="520" loading="eager" decoding="async" fetchpriority="high" />
       </figure>
       <h1 class="detail-hero__title">{storeName}</h1>
       <div class="detail-hero__ctas">
