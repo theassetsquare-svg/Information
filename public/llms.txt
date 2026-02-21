@@ -1,0 +1,32 @@
+# 전국 클럽·나이트·라운지 디렉토리
+> 서울 강남 클럽, 홍대 클럽, 이태원 클럽, 나이트클럽, 라운지바를 현장 확인 토대로 비교하는 2026 나이트라이프 가이드
+
+이 사이트는 한국 전국의 클럽, 나이트, 라운지 59곳을 현장 확인 토대로 정리한 디렉토리입니다.
+각 상세 페이지는 AI 요약, 방문 가이드, FAQ, 비용 정보를 포함합니다.
+
+## 주요 페이지
+
+- 홈페이지: https://informationa.pages.dev/
+- 클럽 리스트: https://informationa.pages.dev/clubs/
+- 나이트 리스트: https://informationa.pages.dev/nights/
+- 라운지 리스트: https://informationa.pages.dev/lounges/
+- 사이트맵: https://informationa.pages.dev/sitemap.xml
+- RSS 피드: https://informationa.pages.dev/rss.xml
+
+## 콘텐츠 구조 (상세 페이지)
+
+각 업장 상세 페이지는 다음 섹션을 포함합니다:
+1. AI 요약 (핵심 정보 6-10개 불릿)
+2. 방문 가치 소개
+3. 스토리 본문 (프롤로그, 선택의 순간, 첫인상 디테일)
+4. 실전 준비 가이드 (테이블)
+5. 처음 가는 사람 체크리스트
+6. 30초 결정표 (Quick Plan)
+7. 실전 Q&A (FAQ 10-14개)
+8. 관련 장소
+
+## 데이터 정확성
+
+- 모든 정보는 현장 확인 토대로 작성
+- 가격·운영시간은 변동 가능 — 방문 전 직접 확인 권장
+- 최종 업데이트: 2026년 2월

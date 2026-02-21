@@ -1,18 +1,31 @@
 ---
+const path = Astro.url.pathname;
+const links = [
+  { href: '/nights/', label: '나이트' },
+  { href: '/clubs/', label: '클럽' },
+  { href: '/lounges/', label: '라운지' },
+  { href: '/#updates', label: '업데이트' },
+  { href: '/#policy', label: '정책' },
+];
 ---
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="container">
     <nav class="nav" aria-label="주요 메뉴">
-      <a href="/" class="nav__brand">
+      <a href="/" class="nav__brand" target="_blank" rel="noopener noreferrer">
         <strong class="nav__title">NIGHTLIFE DIRECTORY</strong>
         <span class="nav__sub">전국 나이트라이프 · 2026</span>
       </a>
-      <ul class="nav__links">
-        <li><a href="/nights/">나이트</a></li>
-        <li><a href="/clubs/">클럽</a></li>
-        <li><a href="/lounges/">라운지</a></li>
-        <li><a href="/#updates">업데이트</a></li>
-        <li><a href="/#policy">정책</a></li>
+      <ul class="nav__links" role="list">
+        {links.map(link => (
+          <li>
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              {...(path.startsWith(link.href) && !link.href.includes('#') ? { 'aria-current': 'page' } : {})}
+            >{link.label}</a>
+          </li>
+        ))}
       </ul>
     </nav>
   </div>

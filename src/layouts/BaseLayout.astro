@@ -43,6 +43,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
   <meta name="twitter:image" content={ogImageUrl}>
 
   <link rel="icon" href="/favicon.ico">
+  <link rel="alternate" type="application/rss+xml" title="전국 클럽·나이트·라운지 디렉토리 RSS" href={`${siteUrl}/rss.xml`}>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -52,6 +53,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
   {jsonLd && (
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
+  <slot name="head" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">본문 바로가기</a>

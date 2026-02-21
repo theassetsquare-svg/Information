@@ -3,14 +3,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import VenueCard from '../components/VenueCard.astro';
 import IntroBlock from '../components/IntroBlock.astro';
 import allVenues from '../data/venues.json';
+import { venueDetailPath } from '../lib/slug-utils';
 
 const venues = allVenues.filter(v => v.category === '클럽');
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://informationa.pages.dev";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "서울 클럽 추천 리스트 2026 — 강남·홍대·이태원·청담 클럽 순위",
+  "description": "강남 클럽, 홍대 클럽, 이태원 클럽, 청담 클럽을 현장 확인 토대로 비교 정리한 2026 클럽 추천 리스트",
+  "numberOfItems": venues.length,
+  "itemListElement": venues.map((v, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": v.name,
+    "url": `${siteUrl}${venueDetailPath(v)}`
+  }))
+};
 ---
 <BaseLayout
-  title="전국 클럽 리스트 — 강남·홍대·이태원·청담 클럽 가이드 | 2026"
-  description="Club RACE, Octagon, B1, Faust 등 전국 주요 클럽을 현장 확인 토대로 비교합니다."
+  title="서울 클럽 추천 2026 — 강남 클럽 순위, 홍대 클럽 리스트, 이태원·청담 나이트클럽 가이드"
+  description="강남 클럽 추천 순위, 홍대 클럽 리스트, 이태원 테크노 클럽, 청담 애프터클럽까지 — Octagon, RACE, B1, Faust, SABOTAGE 등 서울·전국 주요 클럽을 현장 확인 토대로 비교합니다. 2026년 최신 업데이트."
+  jsonLd={jsonLd}
 >
   <main id="main-content">
+    <section class="section section--page-title" aria-label="페이지 제목">
+      <div class="container">
+        <h1>서울 클럽 추천 — 강남·홍대·이태원·청담 클럽 리스트 2026</h1>
+      </div>
+    </section>
     <IntroBlock
       hookHeadline="서울 클럽, 간판만 보고 들어가면 입장료만 날린다"
       bullets={[
@@ -34,7 +56,7 @@ const venues = allVenues.filter(v => v.category === '클럽');
         </div>
         <div class="venue-grid">
           {venues.map(v => {
-            const detailUrl = v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`;
+            const detailUrl = venueDetailPath(v);
             return (
               <VenueCard
                 name={v.name} category={v.category} region={v.region}

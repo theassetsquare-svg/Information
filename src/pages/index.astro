@@ -3,30 +3,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import VenueCard from '../components/VenueCard.astro';
 import IntroBlock from '../components/IntroBlock.astro';
 import venues from '../data/venues.json';
+import { venueDetailPath } from '../lib/slug-utils';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://informationa.pages.dev";
+
+const itemListElements = venues.map((v, i) => ({
+  "@type": "ListItem",
+  "position": i + 1,
+  "name": v.name,
+  "url": `${siteUrl}${venueDetailPath(v)}`
+}));
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "전국 클럽·나이트·라운지 디렉토리",
-  "url": Astro.site?.toString() ?? "https://informationa.pages.dev/",
-  "inLanguage": "ko",
-  "description": "전국 주요 클럽·나이트·라운지를 비교하는 나이트라이프 디렉토리"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "전국 클럽·나이트·라운지 디렉토리",
+      "url": `${siteUrl}/`,
+      "inLanguage": "ko",
+      "description": "서울 강남 클럽, 홍대 클럽, 이태원 클럽, 나이트클럽, 라운지바를 현장 확인 토대로 비교하는 2026 나이트라이프 가이드",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "name": "전국 클럽·나이트·라운지 디렉토리",
+      "url": `${siteUrl}/`,
+      "logo": `${siteUrl}/images/og-thumb.jpg`,
+      "sameAs": []
+    },
+    {
+      "@type": "ItemList",
+      "name": "전국 클럽·나이트·라운지 추천 리스트 2026",
+      "description": "서울, 수도권, 지방 주요 클럽·나이트·라운지를 현장 확인 후 정리한 나이트라이프 디렉토리",
+      "numberOfItems": venues.length,
+      "itemListElement": itemListElements
+    }
+  ]
 };
 
 const regions = [...new Set(venues.map(v => v.region))];
 const categories = [...new Set(venues.map(v => v.category))];
 ---
 <BaseLayout
-  title="전국 클럽·나이트·라운지 디렉토리 | 2026 나이트라이프 가이드"
-  description="강남, 홍대, 이태원, 부산, 대구, 대전, 인천, 광주, 제주까지 — 전국 주요 클럽·나이트·라운지 현장 확인 가이드."
+  title="클럽·나이트·라운지 추천 — 서울 강남 홍대 이태원 전국 나이트라이프 가이드 2026"
+  description="서울 클럽 추천, 강남 나이트, 홍대 클럽, 이태원 라운지, 나이트클럽 순위부터 부산·대구·대전·인천·수원·제주까지 전국 주요 클럽·나이트·라운지 현장 확인 비교 가이드. 2026년 최신 업데이트."
   jsonLd={jsonLd}
 >
   <!-- HERO + SEARCH -->
   <section class="hero" aria-label="메인 검색">
     <div class="container">
       <div class="hero__inner">
-        <h1>전국 클럽·나이트·라운지<br>빠르게 찾기</h1>
-        <p class="hero__desc">서울·수도권·지방 57곳 현장 확인 · 지도 연결 · 2026 업데이트</p>
+        <h1>전국 클럽·나이트·라운지 추천<br>2026 나이트라이프 가이드</h1>
+        <p class="hero__desc">서울 강남·홍대·이태원부터 부산·대구·대전·인천까지 — {venues.length}곳 현장 확인 · 지도 연결 · 2026 최신 업데이트</p>
         <div class="search-box" role="search" aria-label="장소 검색">
           <input type="search" class="search-box__input" id="search-input" placeholder="클럽·나이트·라운지 이름 또는 지역 검색" autocomplete="off" aria-label="장소 검색">
           <button class="search-box__btn" type="button" aria-label="검색">⌕</button>
@@ -85,7 +118,7 @@ const categories = [...new Set(venues.map(v => v.category))];
         </div>
         <div class="venue-grid" id="venue-grid">
           {venues.map(v => {
-            const detailUrl = v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`;
+            const detailUrl = venueDetailPath(v);
             return (
               <VenueCard
                 name={v.name}
@@ -143,34 +176,75 @@ const categories = [...new Set(venues.map(v => v.category))];
     </section>
   </main>
 
-  <script type="application/json" id="venue-data" set:html={JSON.stringify(venues)} />
+  <script type="application/json" id="venue-data" set:html={JSON.stringify(venues.map(v => ({...v, _link: venueDetailPath(v)})))} />
   <script is:inline>
-    // Search Autocomplete
+    // ── Search Index ──
     var venueData = JSON.parse(document.getElementById('venue-data').textContent || '[]');
     var searchInput = document.getElementById('search-input');
     var searchResults = document.getElementById('search-results');
     var activeIdx = -1;
 
+    // Normalize: trim, lowercase, remove all whitespace for fuzzy matching
+    function norm(s) { return (s || '').trim().toLowerCase().replace(/\s+/g, ''); }
+
+    // Build search index: each venue gets a flat array of searchable tokens
+    var searchIndex = venueData.map(function(v) {
+      var tokens = [v.name, v.region, v.district, v.category];
+      if (v.keywords) tokens = tokens.concat(v.keywords);
+      if (v.tags) tokens = tokens.concat(v.tags);
+      if (v.card_tags) tokens = tokens.concat(v.card_tags);
+      return {
+        venue: v,
+        raw: tokens.join(' ').toLowerCase(),
+        norm: tokens.map(norm).join(' ')
+      };
+    });
+
+    function searchVenues(query) {
+      var q = query.trim().toLowerCase();
+      var qNorm = norm(query);
+      if (!q) return [];
+      var exact = [], partial = [];
+      searchIndex.forEach(function(entry) {
+        var v = entry.venue;
+        var nameLower = v.name.toLowerCase();
+        var nameNorm = norm(v.name);
+        // Exact name match (highest priority)
+        if (nameLower === q || nameNorm === qNorm) {
+          exact.push(v);
+        // Name contains query
+        } else if (nameLower.indexOf(q) !== -1 || nameNorm.indexOf(qNorm) !== -1) {
+          partial.unshift(v);
+        // Any field contains query (keywords, tags, region, etc.)
+        } else if (entry.raw.indexOf(q) !== -1 || entry.norm.indexOf(qNorm) !== -1) {
+          partial.push(v);
+        }
+      });
+      return exact.concat(partial);
+    }
+
+    function getLink(v) {
+      return v._link || v.detail_page || ('/' + v.cat_slug + '/' + v.region_slug + '/' + v.district_slug + '/' + v.slug + '/');
+    }
+
     function renderResults(matches) {
       if (!matches.length) { searchResults.classList.remove('is-open'); return; }
       searchResults.innerHTML = matches.slice(0, 8).map(function(v, i) {
-        var link = v.detail_page || ('/' + v.cat_slug + '/' + v.region_slug + '/' + v.district_slug + '/' + v.slug + '/');
-        return '<a class="search-item' + (i === activeIdx ? ' is-active' : '') + '" href="' + link + '" target="_blank" rel="noopener noreferrer" role="option">' +
+        return '<a class="search-item' + (i === activeIdx ? ' is-active' : '') + '" href="' + getLink(v) + '" target="_blank" rel="noopener noreferrer" role="option">' +
           '<div class="search-item__thumb"><img src="' + v.thumbnail + '" alt="' + v.name + '" width="40" height="40"></div>' +
-          '<div class="search-item__info"><div class="search-item__name">' + v.name + '</div><div class="search-item__meta">' + v.region + ' \u00B7 ' + v.category + '</div></div></a>';
+          '<div class="search-item__info"><div class="search-item__name">' + v.name + '</div>' +
+          '<div class="search-item__meta">' + v.region + ' ' + v.district + ' · ' + v.category + '</div></div>' +
+          '<span class="search-item__cta">상세보기 →</span></a>';
       }).join('');
       searchResults.classList.add('is-open');
     }
 
     if (searchInput) {
       searchInput.addEventListener('input', function() {
-        var q = searchInput.value.trim().toLowerCase();
+        var q = searchInput.value.trim();
         if (!q) { searchResults.classList.remove('is-open'); return; }
-        var m = venueData.filter(function(v) {
-          return v.name.toLowerCase().indexOf(q) !== -1 || v.region.indexOf(q) !== -1 || v.category.indexOf(q) !== -1;
-        });
         activeIdx = -1;
-        renderResults(m);
+        renderResults(searchVenues(q));
       });
 
       searchInput.addEventListener('keydown', function(e) {

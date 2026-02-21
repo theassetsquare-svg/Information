@@ -3,14 +3,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import VenueCard from '../components/VenueCard.astro';
 import IntroBlock from '../components/IntroBlock.astro';
 import allVenues from '../data/venues.json';
+import { venueDetailPath } from '../lib/slug-utils';
 
 const venues = allVenues.filter(v => v.category === '라운지');
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://informationa.pages.dev";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "서울 라운지 추천 리스트 2026 — 강남·압구정·청담 프리미엄 라운지바 가이드",
+  "description": "서울 라운지, 강남 라운지, 압구정 라운지바, 청담 라운지를 현장 확인 토대로 비교 정리한 2026 라운지 추천 리스트",
+  "numberOfItems": venues.length,
+  "itemListElement": venues.map((v, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": v.name,
+    "url": `${siteUrl}${venueDetailPath(v)}`
+  }))
+};
 ---
 <BaseLayout
-  title="전국 라운지 리스트 — 압구정·청담 프리미엄 라운지 가이드 | 2026"
-  description="CODE Lounge, HYPE Seoul 등 전국 프리미엄 라운지를 현장 확인 토대로 비교합니다."
+  title="라운지 추천 2026 — 서울 강남 라운지, 압구정 라운지바, 청담 프리미엄 라운지 가이드"
+  description="서울 라운지 추천, 강남 라운지바, 압구정 라운지, 청담 프리미엄 라운지, 이태원 라운지까지 — CODE Lounge, HYPE Seoul 등 전국 주요 라운지를 현장 확인 토대로 비교합니다. 2026년 최신 업데이트."
+  jsonLd={jsonLd}
 >
   <main id="main-content">
+    <section class="section section--page-title" aria-label="페이지 제목">
+      <div class="container">
+        <h1>라운지 추천 — 서울 강남·압구정·청담 프리미엄 라운지바 2026</h1>
+      </div>
+    </section>
     <IntroBlock
       hookHeadline="라운지는 '예약 없이 가면 빈 테이블이 없다'가 기본이다"
       bullets={[
@@ -34,7 +56,7 @@ const venues = allVenues.filter(v => v.category === '라운지');
         </div>
         <div class="venue-grid">
           {venues.map(v => {
-            const detailUrl = v.detail_page || `/${v.cat_slug}/${v.region_slug}/${v.district_slug}/${v.slug}/`;
+            const detailUrl = venueDetailPath(v);
             return (
               <VenueCard
                 name={v.name} category={v.category} region={v.region}
