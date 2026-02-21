@@ -85,11 +85,16 @@ const galleryImages = [
 
 <BaseLayout title={title} description={description} ogImage={ogImage} jsonLd={jsonLd}>
   <main id="main-content" class="detail-page">
-    <div class="detail-cta">
-      <a href="/" target="_blank" rel="noopener noreferrer" class="btn btn--outline">&larr; 목록으로</a>
-      <a href={mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">지도에서 보기</a>
-      <a href="#bottom-cta" target="_blank" rel="noopener noreferrer" class="btn btn--outline">정정 요청</a>
-    </div>
+    <section class="detail-hero" data-reveal>
+      <figure class="detail-hero__figure">
+        <img src={ogImage} alt={`${storeName} 대표 이미지`} width="520" height="520" loading="eager" />
+      </figure>
+      <h1 class="detail-hero__title">{storeName}</h1>
+      <div class="detail-hero__ctas">
+        <a href={mapUrl} class="btn btn--primary" target="_blank" rel="noopener noreferrer">지도에서 보기</a>
+        <a href="/" class="btn btn--outline">목록으로</a>
+      </div>
+    </section>
 
     <IntroBlock
       hookHeadline="파주야당스카이돔나이트, 이동의 체크 항목을 먼저 세우면 복잡한 길도 단순해집니다"
