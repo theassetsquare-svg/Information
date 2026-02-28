@@ -12,7 +12,7 @@
     "phone": "",
     "hours": "목·금·토·일 23:00~06:00",
     "station": "강남역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남레이스클럽 서울 서초 클럽 썸네일",
     "badge": "HOT",
     "tags": [
@@ -48,7 +48,7 @@
     "phone": "",
     "hours": "목·금·토·일 22:00~06:00",
     "station": "신논현역 도보 3분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남옥타곤클럽 서울 강남 클럽 썸네일",
     "badge": "MEGA",
     "tags": [
@@ -84,7 +84,7 @@
     "phone": "",
     "hours": "수·목·금·토 23:00~08:00",
     "station": "강남역 도보 3분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남아르테클럽 서울 서초 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -119,7 +119,7 @@
     "phone": "",
     "hours": "예약 시 안내",
     "station": "압구정로데오역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남무인클럽 서울 강남 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -154,7 +154,7 @@
     "phone": "",
     "hours": "월·화·수·토 23:00~06:00",
     "station": "신사역 도보 7분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남사운드클럽 서울 강남 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -190,7 +190,7 @@
     "phone": "",
     "hours": "금·토 23:00~06:00",
     "station": "강남역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남페이스클럽 서울 서초 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -225,7 +225,7 @@
     "phone": "",
     "hours": "23:00~10:00",
     "station": "신사역 3번 출구 직결",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남잭리빈클럽 서울 강남 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -260,7 +260,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "삼성역 도보 8분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "강남어게인클럽 서울 강남 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -295,7 +295,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "홍대입구역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대비원클럽 서울 마포 클럽 썸네일",
     "badge": "TOP",
     "tags": [
@@ -330,7 +330,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "홍대입구역 9번 출구 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대레이저클럽 서울 마포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -365,7 +365,7 @@
     "phone": "",
     "hours": "목·금·토 22:00~06:00",
     "station": "홍대입구역 도보 7분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대아우라클럽 서울 마포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -400,7 +400,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "홍대입구역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대사보타지클럽 서울 마포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -435,7 +435,7 @@
     "phone": "",
     "hours": "목~일 22:00~08:00",
     "station": "홍대입구역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대버뮤다클럽 서울 마포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -470,7 +470,7 @@
     "phone": "",
     "hours": "연중무휴 (평일 22:00, 주말 21:00)",
     "station": "홍대입구역 도보 6분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대퍼플클럽 서울 마포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -505,7 +505,7 @@
     "phone": "",
     "hours": "매일 22:00~06:30 (화 휴무)",
     "station": "홍대입구역 도보 4분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대오션클럽 서울 마포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -540,7 +540,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "홍대입구역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "홍대에프에프클럽 서울 마포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -575,7 +575,7 @@
     "phone": "",
     "hours": "금·토 23:00~05:00",
     "station": "이태원역 3번 출구 도보 7분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "이태원파우스트클럽 서울 용산 클럽 썸네일",
     "badge": "TECHNO",
     "tags": [
@@ -610,7 +610,7 @@
     "phone": "",
     "hours": "목~토 22:00~05:00",
     "station": "이태원역 도보 3분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "이태원케이크샵클럽 서울 용산 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -645,7 +645,7 @@
     "phone": "",
     "hours": "금·토 23:00~06:00",
     "station": "이태원역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "이태원볼노스트클럽 서울 용산 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -680,7 +680,7 @@
     "phone": "",
     "hours": "새벽 04:00~09:00",
     "station": "청담역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "청담82클럽 서울 강남 클럽 썸네일",
     "badge": "AFTER",
     "tags": [
@@ -715,7 +715,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "서면역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "서면아지트클럽 부산 부산진 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -750,7 +750,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "서면역 도보 7분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "서면그리드클럽 부산 부산진 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -785,7 +785,7 @@
     "phone": "",
     "hours": "21:00~07:00",
     "station": "서면역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "서면그루브클럽 부산 부산진 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -820,7 +820,7 @@
     "phone": "",
     "hours": "20:00~05:00",
     "station": "센텀시티역 도보 10분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "해운대빌리진클럽 부산 해운대 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -855,7 +855,7 @@
     "phone": "",
     "hours": "21:00~04:30",
     "station": "해운대역 도보 15분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "해운대멜트클럽 부산 해운대 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -890,7 +890,7 @@
     "phone": "",
     "hours": "연중무휴 21:00~05:00",
     "station": "죽전역 도보 10분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "대구바밤바클럽 대구 달서 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -925,7 +925,7 @@
     "phone": "",
     "hours": "목·금·토·일 22:00~06:00",
     "station": "둔산동 도보 10분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "대전올에어클럽 대전 서 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -960,7 +960,7 @@
     "phone": "",
     "hours": "금·토 22:00~05:00",
     "station": "제주시 연동 소재",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "제주커튼클럽 제주 제주 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -995,7 +995,7 @@
     "phone": "",
     "hours": "21:00~03:00",
     "station": "중문관광단지 인근",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "제주몽키비치클럽 제주 서귀포 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -1030,7 +1030,7 @@
     "phone": "",
     "hours": "금·토 22:00~06:00",
     "station": "이태원역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "이태원와이키키유토피아클럽 서울 용산 클럽 썸네일",
     "badge": null,
     "tags": [
@@ -1466,7 +1466,7 @@
     "phone": "",
     "hours": "24시간",
     "station": "온천장역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "부산아시아드나이트 부산 동래 나이트 썸네일",
     "badge": "24H",
     "tags": [
@@ -1502,7 +1502,7 @@
     "phone": "",
     "hours": "월~목 ~03:00, 금·토 ~05:00",
     "station": "두산동 소재",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "대구 룰루랄라 대구 수성 나이트 썸네일",
     "badge": null,
     "tags": [
@@ -1537,7 +1537,7 @@
     "phone": "",
     "hours": "20:00~03:00",
     "station": "압구정로데오역 5번 출구 도보 3분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "코드라운지 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1572,7 +1572,7 @@
     "phone": "",
     "hours": "20:00~03:00",
     "station": "압구정로데오역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "하이프서울 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1607,7 +1607,7 @@
     "phone": "",
     "hours": "19:00~02:00",
     "station": "압구정로데오역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "인트로라운지 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1642,7 +1642,7 @@
     "phone": "",
     "hours": "20:00~03:00",
     "station": "압구정로데오역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "DM라운지 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1677,7 +1677,7 @@
     "phone": "",
     "hours": "20:00~03:00",
     "station": "압구정로데오역 도보 7분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "컬러라운지 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1712,7 +1712,7 @@
     "phone": "",
     "hours": "19:00~03:00",
     "station": "청담역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "르클럽 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1747,7 +1747,7 @@
     "phone": "",
     "hours": "18:00~02:00",
     "station": "청담역 도보 7분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "더 시에나 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1782,7 +1782,7 @@
     "phone": "",
     "hours": "20:00~04:00",
     "station": "강남역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "엘빈에비뉴 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1817,7 +1817,7 @@
     "phone": "",
     "hours": "19:00~03:00",
     "station": "역삼역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "달리는토끼 서울 강남 라운지 썸네일",
     "badge": null,
     "tags": [
@@ -1852,7 +1852,7 @@
     "phone": "",
     "hours": "17:00~01:00",
     "station": "삼성역 도보 5분",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "스카이 라운지 서울 강남 라운지 썸네일",
     "badge": "VIEW",
     "tags": [
@@ -1887,7 +1887,7 @@
     "phone": "",
     "hours": "11:00~01:00",
     "station": "해운대 마린시티 소재",
-    "thumbnail": "/images/girl-model-party.png",
+    "thumbnail": "/images/og-thumb.jpg",
     "image_alt": "파크 하얏트 부산 리빙룸 부산 해운대 라운지 썸네일",
     "badge": "HOTEL",
     "tags": [
