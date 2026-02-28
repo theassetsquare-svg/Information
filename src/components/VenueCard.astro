@@ -17,6 +17,8 @@ const { name, category, region, thumbnail, image_alt, badge, card_hook, card_val
 const href = detail_page || map_url;
 const webpThumb = thumbnail.replace(/\.(png|jpe?g)$/i, '.webp');
 const hasWebp = webpThumb !== thumbnail;
+const catEnMap: Record<string, string> = { '클럽': 'Club', '라운지': 'Lounge', '나이트': 'Night' };
+const catEn = catEnMap[category] || category;
 ---
 <a class="venue-card" href={href} target="_blank" rel="noopener noreferrer">
   <div class="venue-card__thumb">
@@ -32,8 +34,7 @@ const hasWebp = webpThumb !== thumbnail;
   </div>
   <div class="venue-card__body">
     <div class="venue-card__meta">
-      <span class="venue-card__type">{category}</span>
-      <span class="venue-card__region">{region}</span>
+      <span class="venue-card__type">{catEn}</span>
     </div>
     <h3 class="venue-card__name">{name}</h3>
     <p class="venue-card__hook">{card_hook}</p>
@@ -41,6 +42,6 @@ const hasWebp = webpThumb !== thumbnail;
     <div class="venue-card__tags">
       {card_tags.map(tag => <span class="pill">{tag}</span>)}
     </div>
-    {detail_page && <span class="venue-card__cta">상세 가이드 보기</span>}
+    {detail_page && <span class="venue-card__cta">→</span>}
   </div>
 </a>
