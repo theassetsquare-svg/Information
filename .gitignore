@@ -1,4 +1,5 @@
 firebase-debug.log
 .vscode/
 .idx/
-node_modules/
+node_modules/gh_2.44.1_linux_amd64/
+node_modules
