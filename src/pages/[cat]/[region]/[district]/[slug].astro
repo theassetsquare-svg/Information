@@ -68,16 +68,15 @@ const stationShort = venue.station ? venue.station.split(',')[0].trim() : '';
 const hookDesc = hookDescs[venue.slug] || '';
 const description = hookDesc || (() => {
   const tagStr = venue.tags?.length ? venue.tags.slice(0, 3).join('·') : '';
-  const meetWord = catEn === 'club' ? '헌팅' : catEn === 'night' ? '부킹' : '만남';
   const hooks = [
-    `${venue.name} — 괜찮은 사람 만나려면 타이밍이 전부다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 이성 비율·${meetWord} 분위기·피크타임 정리.`,
-    `${venue.name} — 여기서 ${meetWord} 성공하려면 자리 선택부터 다르다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 현장 경험 토대로 정리.`,
-    `${venue.name} — 혼자 가도 만남이 되는 곳인가? 솔직하게 답한다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — ${meetWord} 분위기·남녀 비율 가이드.`,
-    `${venue.name} — ${meetWord} 잘 되는 시간대를 모르면 헛걸음이다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 시간대별 분위기 분석.`,
-    `${venue.name} — 마음에 드는 사람을 만날 확률이 가장 높은 곳. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — ${meetWord} 팁·분위기·이성 비율.`,
-    `${venue.name} — 장소 선택이 오늘 밤 만남을 결정한다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — ${meetWord} 성공 노하우 정리.`,
-    `${venue.name} — 여기 갈 거면 이성 비율 확인부터. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 피크타임·${meetWord} 분위기·현장 가이드.`,
-    `${venue.name} — 만남이 목적이라면 이 한 페이지로 충분하다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — ${meetWord}·분위기·타이밍 정리.`,
+    `${venue.name} — 가기 전에 타이밍부터 확인하자. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 이성 비율·분위기·피크타임 정리.`,
+    `${venue.name} — 자리 선택부터 다르게 가야 한다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 현장 경험 토대로 정리.`,
+    `${venue.name} — 혼자 가도 어울릴 수 있는 곳인가? 솔직하게 답한다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 분위기·남녀 비율 가이드.`,
+    `${venue.name} — 시간대를 모르면 헛걸음이다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 시간대별 분위기·이성 비율 분석.`,
+    `${venue.name} — 마음에 드는 사람을 만날 확률이 높은 곳. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 좌석 배치·분위기·피크타임.`,
+    `${venue.name} — 장소 선택이 오늘 밤 결과를 바꾼다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 좌석·타이밍·분위기 정리.`,
+    `${venue.name} — 이성 비율 확인 없이 가면 후회한다. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 피크타임·분위기·현장 가이드.`,
+    `${venue.name} — 이 한 페이지면 현장 파악 끝. ${regionLabel} ${venue.district} ${catFullLabel}${tagStr ? ' · ' + tagStr : ''} — 좌석·분위기·타이밍 정리.`,
   ];
   const descRaw = hooks[idx % hooks.length];
   return descRaw.length > 155 ? descRaw.slice(0, 152) + '...' : descRaw;
