@@ -3,8 +3,8 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import FAQ from '../../../../components/FAQ.astro';
 import TrustBlock from '../../../../components/TrustBlock.astro';
 import venuesData from '../../../../data/venues.json';
-import { generateAllContent, nameHash, hookTitles, hookDescs } from '../../../../lib/venue-content';
-import type { Venue } from '../../../../lib/venue-content';
+import { generateAllContent, hookTitles, hookDescs } from '../../../../lib/venue-content';
+import type { Venue } from '../../../../lib/venue-content-types';
 import { dedupeVenuePathParams, venueDetailPath } from '../../../../lib/slug-utils';
 
 /* ───────── getStaticPaths ───────── */
@@ -28,7 +28,6 @@ export function getStaticPaths() {
 /* ───────── props & content gen ───────── */
 const { venue } = Astro.props as { venue: Venue };
 const idx = venuesData.findIndex((v: any) => v.slug === venue.slug);
-const h = nameHash(venue.name);
 const content = generateAllContent(venue, idx);
 
 /* ───────── helpers ───────── */
@@ -50,13 +49,8 @@ const mapUrl = venue.map_url || `https://www.google.com/maps/search/?api=1&query
 /* Last updated date */
 const lastUpdated = '2026.02.21';
 
-/* Hero taglines */
-const heroTaglines: Record<string, string[]> = {
-  club: ['오늘 밤 선택할 비트의 목적지', '사운드가 몸을 깨우는 순간', '밤의 에너지를 온몸으로 느끼다', '비트 위에서 시작되는 새로운 밤', '음악과 조명이 만드는 비일상', '새벽까지 멈추지 않는 리듬'],
-  night: ['가요와 댄스가 흐르는 플로어', '익숙한 노래가 새롭게 울리는 밤', '모두가 하나 되는 댄스 플로어', '리듬에 맡기면 발이 저절로 움직인다', '밤의 열기 속으로 한 발짝'],
-  lounge: ['대화와 음악이 균형을 이루는 밤', '차분한 조명 아래 특별한 시간', '소리보다 분위기가 먼저 닿는 밤', '프라이빗한 시간을 위한 선택', '볼륨 대신 분위기를 높이다'],
-};
-const heroTag = heroTaglines[catEn]?.[h % (heroTaglines[catEn]?.length || 1)] || '밤의 에너지를 온몸으로 느끼다';
+/* Hero tagline — per-venue unique from JSON */
+const heroTag = content.heroTagline || '밤의 에너지를 온몸으로 느끼다';
 
 /* Related venues */
 const relatedVenues = venuesData
@@ -273,7 +267,7 @@ const sections = [
 
     {/* ── [B-1] 3분 프롤로그 ── */}
     <section class="story-section" id="prologue" data-reveal>
-      <h2 class="story-section__heading">3분 프롤로그</h2>
+      <h2 class="story-section__heading">{content.prologueTitle}</h2>
       <div class="story-section__body">
         <Fragment set:html={content.prologue} />
       </div>
@@ -289,7 +283,7 @@ const sections = [
 
     {/* ── [B-3] 장면 2: 첫인상 디테일 ── */}
     <section class="story-section" id="scene2" data-reveal>
-      <h2 class="story-section__heading">장면 2: 첫인상 디테일</h2>
+      <h2 class="story-section__heading">{content.scene2Title}</h2>
       <div class="story-section__body">
         <Fragment set:html={content.scene2} />
       </div>
@@ -328,7 +322,7 @@ const sections = [
 
     {/* ── [B-5] 처음 가는 사람 체크리스트 ── */}
     <section class="detail-section" id="checklist" data-reveal>
-      <h2 class="detail-section__heading">처음 가는 사람 체크리스트</h2>
+      <h2 class="detail-section__heading">{content.checklistTitle}</h2>
       <ul class="checklist-list">
         {content.checklist.map(item => (
           <li class="checklist-list__item">
@@ -384,7 +378,7 @@ const sections = [
 
     {/* ── [B-7] 마무리(결론) ── */}
     <section class="story-section detail-bottom-cta" id="bottom-cta" data-reveal>
-      <h2 class="story-section__heading">마무리</h2>
+      <h2 class="story-section__heading">{content.outroTitle}</h2>
       <div class="story-section__body">
         <Fragment set:html={content.outro} />
       </div>

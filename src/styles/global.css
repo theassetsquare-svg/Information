@@ -1494,3 +1494,15 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
 @media (min-width: 1024px) {
   .detail-page--night .gallery { grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
 }
+
+/* ── Region Guide / Etiquette / Genre sections (list pages) ── */
+.region-guide{display:grid;grid-template-columns:1fr;gap:var(--sp-lg)}
+.region-guide__item h3{font-size:var(--t-h4);margin-bottom:var(--sp-xs);color:var(--c-heading)}
+.region-guide__item p{font-size:var(--t-body);line-height:1.75;color:var(--c-text)}
+@media(min-width:768px){.region-guide{grid-template-columns:repeat(2,1fr)}}
+
+.compare-table{width:100%;border-collapse:collapse;font-size:var(--t-small);margin-top:var(--sp-md)}
+.compare-table th,.compare-table td{padding:var(--sp-xs) var(--sp-sm);border:1px solid var(--c-border);text-align:left;vertical-align:top}
+.compare-table th{background:var(--c-bg-soft);font-weight:700;color:var(--c-heading);white-space:nowrap}
+.compare-table td{color:var(--c-text);line-height:1.6}
+@media(max-width:640px){.compare-table{font-size:0.8rem}.compare-table th,.compare-table td{padding:0.4rem 0.5rem}}

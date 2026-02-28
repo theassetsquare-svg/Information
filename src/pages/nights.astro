@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import VenueCard from '../components/VenueCard.astro';
 import IntroBlock from '../components/IntroBlock.astro';
+import FAQ from '../components/FAQ.astro';
 import allVenues from '../data/venues.json';
 import { venueDetailPath } from '../lib/slug-utils';
 
@@ -69,5 +70,59 @@ const jsonLd = {
         </div>
       </div>
     </section>
+
+    <section class="section" aria-label="나이트 vs 클럽 비교">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <h2>나이트 vs 클럽 — 무엇이 다른가</h2>
+        </div>
+        <div class="compare-section" data-reveal>
+          <table class="compare-table">
+            <thead>
+              <tr><th>항목</th><th>나이트</th><th>클럽</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>음악 장르</td><td>가요·트로트·댄스 — 시간대별 전환</td><td>EDM·테크노·힙합 — DJ 셋 중심</td></tr>
+              <tr><td>연령대</td><td>30~50대 중심, 20대 혼재</td><td>20~30대 중심</td></tr>
+              <tr><td>좌석 구조</td><td>테이블·부스 지정석 중심</td><td>스탠딩 플로어 위주</td></tr>
+              <tr><td>오픈 시간</td><td>19~21시 오픈, 05시 마감</td><td>22~23시 오픈, 05~06시 마감</td></tr>
+              <tr><td>주문 방식</td><td>테이블에서 세트 메뉴·보틀 주문</td><td>바 카운터에서 잔 단위 주문</td></tr>
+              <tr><td>복장</td><td>단정한 평상복 OK</td><td>스마트캐주얼~드레스코드 적용</td></tr>
+              <tr><td>분위기</td><td>사교·만남 중심, MC 진행</td><td>음악·댄스 몰입 중심</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="지역 커버리지">
+      <div class="container">
+        <div class="section__header" data-reveal>
+          <h2>전국 나이트 지역별 현황 — 서울부터 울산까지</h2>
+        </div>
+        <div class="region-guide" data-reveal>
+          <div class="region-guide__item">
+            <h3>서울 나이트</h3>
+            <p>수유역 앞 수유샴푸나이트는 서울 강북 대표 나이트로 4호선 3번 출구 도보 4분 거리다. 19시 오픈으로 일찍 시작하며, 가요·댄스·트로트가 시간대별로 전환된다. 신림그랑프리나이트는 2호선 신림역 1번 출구 도보 3분으로 접근성이 뛰어나고, 첫 방문자도 편하게 즐길 수 있는 분위기다. 청담h2o나이트는 리베라호텔 B1에서 드레스코드를 적용하는 프리미엄 노선을 탄다.</p>
+          </div>
+          <div class="region-guide__item">
+            <h3>경기·수도권 나이트</h3>
+            <p>파주야당스카이돔나이트는 돔형 천장이 만드는 독특한 음향 덕에 수도권 서북부 원정객이 몰린다. 수원찬스돔나이트는 수원역 택시 10분, 20시 오픈이며 시간대별로 분위기가 전환되는 구조다. 일산샴푸나이트는 고양시 최대 규모 나이트로 백석역 도보 10분 거리다. 인덕원국빈관나이트는 4호선 인덕원역 도보 8분, 경기 남부 직장인 고정 방문객이 많다.</p>
+          </div>
+          <div class="region-guide__item">
+            <h3>인천·대전·울산</h3>
+            <p>인천아라비안나이트는 계양구 3개 층 규모에 발렛 주차·VIP룸까지 갖춘 인천 최대 나이트다. 대전세븐나이트는 충청권 유일 대형 나이트로 KTX를 타고 오는 원정 방문객이 주말마다 합류한다. 울산챔피언나이트는 남구 삼산동에서 영남권(부산·경주·창원) 단체 방문을 수용하며, 주말 밤 10시 이후 피크타임에 진입한다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <FAQ items={[
+      { q: "나이트에 처음 가는데 혼자 가도 괜찮을까요?", a: "혼자 방문하는 분도 적지 않습니다. 바 좌석에 앉아 분위기를 파악한 뒤, MC 진행 시간에 자연스럽게 합류하는 방법이 가장 편합니다. 수유샴푸나이트나 신림그랑프리나이트는 단독 방문 비율이 높은 편이라 어색함이 덜합니다." },
+      { q: "나이트 테이블 예약은 필수인가요?", a: "주말 밤 10시 이후에는 워크인 좌석이 빠르게 차기 때문에 사전 예약을 권합니다. 인천아라비안나이트·파주야당스카이돔나이트 등 대형 나이트는 카카오톡 채널에서 예약을 받으며, 예약 시 좌석 위치 선택이 가능한 곳도 있습니다." },
+      { q: "나이트 복장 규정이 있나요?", a: "대부분의 나이트는 단정한 평상복이면 입장 가능합니다. 청담h2o나이트처럼 드레스코드를 적용하는 곳은 슬리퍼·반바지가 제한되니 사전 확인이 필요합니다. 일반적으로 깔끔한 청바지에 셔츠면 어디든 무리 없습니다." },
+      { q: "나이트 1인당 예산은 어느 정도 잡아야 하나요?", a: "입장료 1~2만 원, 테이블 세트 메뉴 1인 기준 3~5만 원 선이 보편적입니다. 보틀을 주문하면 4~6인 기준 15~30만 원대이며, 현금과 카드 모두 사용 가능한 곳이 대부분입니다." },
+      { q: "수도권 외곽 나이트는 새벽에 교통이 끊기지 않나요?", a: "파주·수원·인천·인덕원 등 수도권 외곽 나이트는 자정 이후 대중교통이 사실상 끊깁니다. 자차 이용 시 대리운전 앱(카카오T 대리, 콜 대리)을 미리 설치하고, 택시 호출이 어려운 지역은 동행자와 교통편을 사전에 확정해두는 것이 안전합니다." }
+    ]} />
   </main>
 </BaseLayout>
