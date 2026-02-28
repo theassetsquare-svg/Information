@@ -349,6 +349,13 @@ p{color:var(--c-text);margin:0 0 var(--sp-sm)}
 .footer__links{display:flex;gap:var(--sp-md);font-size:var(--t-small)}
 .footer__links a{color:rgba(255,255,255,.8);transition:color .2s}
 .footer__links a:hover{color:#fff;text-decoration:none}
+.detail-hero__phone{margin-bottom:var(--sp-md);text-align:center}
+.detail-hero__phone a{font-family:'Courier New','SF Mono',monospace;font-size:1.5rem;font-weight:800;color:var(--c-accent,#c8a86e);letter-spacing:2px;text-decoration:none;padding:8px 24px;border:2px solid var(--c-accent,#c8a86e);border-radius:12px;display:inline-block;transition:all .2s}
+.detail-hero__phone a:hover{background:var(--c-accent,#c8a86e);color:#fff;text-decoration:none}
+.footer__partnership{width:100%;max-width:480px;margin-bottom:var(--sp-md)}
+.footer__partnership a{display:block;transition:transform .2s,opacity .2s}
+.footer__partnership a:hover{transform:scale(1.02);opacity:.9}
+.footer__partnership-img{width:100%;height:auto;border-radius:14px}
 .footer__age{font-size:var(--t-caption);color:rgba(255,255,255,.65);margin-top:var(--sp-sm)}
 .footer__disclaimer{font-size:var(--t-caption);color:rgba(255,255,255,.55)}
 

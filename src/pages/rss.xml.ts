@@ -27,9 +27,9 @@ export const GET: APIRoute = () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>전국 클럽·나이트·라운지 디렉토리</title>
+    <title>클럽 헌팅·나이트 부킹·라운지 만남 — 장소가 결과를 바꾼다</title>
     <link>${SITE}/</link>
-    <description>서울 강남 클럽, 홍대 클럽, 나이트클럽, 라운지바를 현장 확인 토대로 비교하는 2026 나이트라이프 가이드</description>
+    <description>괜찮은 사람 만나려면 어디로 가야 할까? 전국 클럽·나이트·라운지 이성 비율·분위기·타이밍 현장 비교</description>
     <language>ko</language>
     <lastBuildDate>${NOW}</lastBuildDate>
     <atom:link href="${SITE}/rss.xml" rel="self" type="application/rss+xml"/>

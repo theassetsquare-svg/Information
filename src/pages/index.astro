@@ -19,10 +19,10 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      "name": "전국 클럽·나이트·라운지 디렉토리",
+      "name": "클럽·나이트·라운지 가이드",
       "url": `${siteUrl}/`,
       "inLanguage": "ko",
-      "description": "서울 강남 클럽, 홍대 클럽, 이태원 클럽, 나이트클럽, 라운지바를 현장 확인 토대로 비교하는 2026 나이트라이프 가이드",
+      "description": "괜찮은 사람 만나려면 장소 선택이 전부다 — 클럽 헌팅, 나이트 부킹, 라운지 만남 현장 비교",
       "potentialAction": {
         "@type": "SearchAction",
         "target": `${siteUrl}/?q={search_term_string}`,
@@ -31,15 +31,14 @@ const jsonLd = {
     },
     {
       "@type": "Organization",
-      "name": "전국 클럽·나이트·라운지 디렉토리",
+      "name": "클럽·나이트·라운지 가이드",
       "url": `${siteUrl}/`,
-      "logo": `${siteUrl}/images/og-thumb.jpg`,
-      "sameAs": []
+      "logo": `${siteUrl}/images/og-thumb.jpg`
     },
     {
       "@type": "ItemList",
-      "name": "전국 클럽·나이트·라운지 추천 리스트 2026",
-      "description": "서울, 수도권, 지방 주요 클럽·나이트·라운지를 현장 확인 후 정리한 나이트라이프 디렉토리",
+      "name": "클럽·나이트·라운지 전체 리스트",
+      "description": "헌팅·부킹·만남 성공률 높은 곳만 추려 현장 비교한 전국 가이드",
       "numberOfItems": venues.length,
       "itemListElement": itemListElements
     }
@@ -50,19 +49,19 @@ const regions = [...new Set(venues.map(v => v.region))];
 const categories = [...new Set(venues.map(v => v.category))];
 ---
 <BaseLayout
-  title="클럽·나이트·라운지 추천 — 서울 강남 홍대 이태원 전국 나이트라이프 가이드 2026"
-  description="서울 클럽 추천, 강남 나이트, 홍대 클럽, 이태원 라운지, 나이트클럽 순위부터 부산·대구·대전·인천·수원·제주까지 전국 주요 클럽·나이트·라운지 현장 확인 비교 가이드. 2026년 최신 업데이트."
+  title="클럽 헌팅·나이트 부킹·라운지 만남 — 장소 선택이 결과를 바꾼다"
+  description={`괜찮은 사람 만나려면 어디로 가야 할까? 강남·홍대·이태원 클럽부터 전국 나이트까지 ${venues.length}곳 직접 가봤다. 이성 비율·분위기·타이밍 — 현장 경험 기반 솔직 비교.`}
   jsonLd={jsonLd}
 >
   <!-- HERO + SEARCH -->
   <section class="hero" aria-label="메인 검색">
     <div class="container">
       <div class="hero__inner">
-        <h1>전국 클럽·나이트·라운지 추천<br>2026 나이트라이프 가이드</h1>
-        <p class="hero__desc">서울 강남·홍대·이태원부터 부산·대구·대전·인천까지 — {venues.length}곳 현장 확인 · 지도 연결 · 2026 최신 업데이트</p>
+        <h1>클럽·나이트·라운지<br>괜찮은 사람 만나려면 여기부터</h1>
+        <p class="hero__desc">전국 {venues.length}곳 직접 확인 · 이성 비율·분위기·헌팅 타이밍 · 현장 경험 기반 비교</p>
         <div class="search-box" role="search" aria-label="장소 검색">
-          <input type="search" class="search-box__input" id="search-input" placeholder="클럽·나이트·라운지 이름 또는 지역 검색" autocomplete="off" aria-label="장소 검색">
-          <button class="search-box__btn" type="button" aria-label="검색">⌕</button>
+          <input type="search" class="search-box__input" id="search-input" placeholder="장소 이름 또는 지역 검색" autocomplete="off" aria-label="장소 검색">
+          <button class="search-box__btn" type="button" aria-label="찾기">⌕</button>
           <div class="search-results" id="search-results" role="listbox"></div>
         </div>
       </div>
@@ -71,15 +70,15 @@ const categories = [...new Set(venues.map(v => v.category))];
 
   <!-- INTRO BLOCK -->
   <IntroBlock
-    hookHeadline="서울 나이트라이프, 검색만으로 판단하면 절반은 운이다"
+    hookHeadline="장소 잘못 고르면, 오늘 밤 아무도 못 만난다"
     bullets={[
-      "피크타임: 금·토 23시~01시 — 입장 대기 30분 이상인 클럽이 절반을 넘는다",
-      "교통: 강남·홍대는 지하철 막차(23:40) 이후 택시 할증 구간, 호출 앱 필수",
-      "드레스코드: 강남·청담은 스마트캐주얼 기본, 홍대·이태원은 운동화 OK"
+      "클럽 헌팅: 강남은 자정 이후 이성 비율이 역전된다 — 타이밍이 성공률을 결정한다",
+      "나이트 부킹: 테이블 위치가 부킹 횟수의 80%를 좌우한다 — 자리 선택법이 핵심",
+      "라운지 만남: 예약석 배치로 옆 테이블과의 거리가 달라진다 — 좌석 구조 파악 필수"
     ]}
-    declaration={`이 페이지는 ${venues.length}개 장소를 현장 확인 토대로 정리했다. 끝까지 보면 오늘 밤 선택지가 좁혀진다.`}
-    storyVisible={'<p>금요일 밤 11시, 강남역 사거리. 택시에서 내린 사람들이 지하로 사라진다. 어디로 가는지 모르면 줄만 서다 새벽을 맞는다. 홍대 골목은 또 다르다 — 간판 없는 지하 계단 앞에서 귓속말처럼 번호를 불러야 문이 열리는 곳도 있다.</p><p>이태원 뒷골목 3층 테크노 성지부터, 청담 새벽 4시에 문을 여는 애프터클럽까지. 서울 나이트라이프는 "아는 만큼 보인다"는 말이 가장 잘 맞는 분야다.</p>'}
-    storyHidden={'<p>수유·상봉·신림 같은 로컬 나이트를 빼놓으면 서울 야간 문화의 절반을 놓치는 셈이다. 강남 클럽이 트렌드를 이끌지만, 30~50대가 주축인 로컬 나이트에서는 라이브 무대와 가성비 좌석 배치가 오히려 매력이다. 인천 아라비안나이트처럼 3개 층 규모에 발렛 주차까지 갖춘 곳도 있고, 파주 스카이돔처럼 돔형 천장이 음향을 완전히 바꾸는 구조도 있다.</p><p>이 디렉토리는 서울·수도권·지방 주요 나이트라이프를 한눈에 비교하도록 만들었다. 각 카드의 "상세 가이드 보기"를 누르면 교통·피크타임·좌석 배치·FAQ까지 확인할 수 있다.</p>'}
+    declaration={`이 페이지는 클럽·나이트·라운지 ${venues.length}곳을 직접 돌아보고, 만남이 잘 이루어지는 곳만 정리했다. 끝까지 보면 오늘 밤 갈 곳이 정해진다.`}
+    storyVisible={'<p>금요일 밤 11시, 강남역 사거리. 사람들이 지하 클럽으로 사라진다. 같은 강남이라도 어디를 가느냐에 따라 오늘 밤 누군가를 만나느냐, 혼자 춤만 추다 끝나느냐가 갈린다. 홍대 골목도 마찬가지 — 헌팅이 활발한 클럽과 음악만 듣는 클럽은 입구부터 분위기가 다르다.</p><p>나이트 부킹은 타이밍과 자리가 전부고, 라운지 만남은 분위기와 좌석 배치가 결정한다. 장소 선택이 곧 결과다.</p>'}
+    storyHidden={'<p>수유·상봉·신림 같은 로컬 나이트는 부킹 문화가 살아있는 곳이다. 강남 클럽의 헌팅과는 완전히 다른 방식으로 만남이 이루어진다. 웨이터가 직접 테이블을 연결해주는 전통 부킹 시스템이 아직 작동하고, 인천 아라비안나이트처럼 3개 층에서 각각 다른 분위기의 만남이 가능한 곳도 있다.</p><p>이 가이드는 클럽 헌팅, 나이트 부킹, 라운지 만남까지 전국을 한눈에 비교하도록 만들었다. 카드의 "상세 가이드 보기"를 누르면 이성 비율·분위기·좌석 배치·FAQ까지 확인 가능하다.</p>'}
     ctas={[
       { label: "나이트 전체 보기", href: "/nights/" },
       { label: "클럽 전체 보기", href: "/clubs/" },
@@ -114,7 +113,7 @@ const categories = [...new Set(venues.map(v => v.category))];
         <div class="section__header" data-reveal>
           <span class="section__eyebrow">All Venues</span>
           <h2>전체 {venues.length}곳</h2>
-          <p>서울·수도권·지방 주요 클럽·나이트·라운지를 한눈에.</p>
+          <p>전국 클럽·나이트·라운지를 한눈에.</p>
         </div>
         <div class="venue-grid" id="venue-grid">
           {venues.map(v => {
@@ -168,7 +167,7 @@ const categories = [...new Set(venues.map(v => v.category))];
         </div>
         <div class="policy-grid">
           <div class="policy-grid__item"><h3>비상업 원칙</h3><p>광고비·협찬 없이 작성합니다. 어떤 업소와도 상업적 관계가 없습니다.</p></div>
-          <div class="policy-grid__item"><h3>현장 확인</h3><p>정보는 2026년 1분기 현장 확인을 참고로 하며, 변경 사항은 즉시 반영합니다.</p></div>
+          <div class="policy-grid__item"><h3>현장 기반</h3><p>정보는 2026년 1분기 현장 방문을 참고로 하며, 변경 사항은 즉시 반영합니다.</p></div>
           <div class="policy-grid__item"><h3>정정 요청</h3><p>틀린 정보를 발견하면 각 페이지 하단 '정정 요청' 버튼을 이용해 주세요.</p></div>
           <div class="policy-grid__item"><h3>개인정보</h3><p>방문자 개인정보를 수집하지 않습니다. 쿠키는 분석 목적으로만 사용됩니다.</p></div>
         </div>
