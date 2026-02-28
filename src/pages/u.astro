@@ -219,4 +219,18 @@ const galleryImages = [
       </div>
     </section>
   </main>
+  <div class="sticky-phone-bar">
+    <a href="tel:010-2746-4852" class="sticky-phone-bar__link">
+      <span class="sticky-phone-bar__label">수유샴푸 막내</span>
+      <span class="sticky-phone-bar__number">010-2746-4852</span>
+    </a>
+  </div>
 </BaseLayout>
+<style>
+.sticky-phone-bar{position:fixed;bottom:0;left:0;width:100%;z-index:9998;background:linear-gradient(135deg,#1a0a2e,#16213e);border-top:2px solid #e8b84b;padding:10px 0;text-align:center;box-shadow:0 -4px 20px rgba(0,0,0,.4)}
+.sticky-phone-bar__link{display:flex;align-items:center;justify-content:center;gap:12px;text-decoration:none;padding:4px 20px}
+.sticky-phone-bar__label{font-size:15px;font-weight:700;color:#f5d78e;letter-spacing:1px}
+.sticky-phone-bar__number{font-family:'Courier New','SF Mono',monospace;font-size:20px;font-weight:900;color:#fff;letter-spacing:2px;background:rgba(232,184,75,.15);padding:4px 16px;border-radius:8px;border:1px solid rgba(232,184,75,.3)}
+.sticky-phone-bar__link:hover .sticky-phone-bar__number{background:#e8b84b;color:#1a0a2e}
+.site-footer{padding-bottom:80px}
+</style>
