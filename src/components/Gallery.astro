@@ -6,9 +6,20 @@ interface Props {
 const { images } = Astro.props;
 ---
 <div class="gallery">
-  {images.map(img => (
-    <figure class="gallery__item">
-      <img src={img.src} alt={img.alt} loading="lazy" width="400" height="400">
-    </figure>
-  ))}
+  {images.map(img => {
+    const webpSrc = img.src.replace(/\.(png|jpe?g)$/i, '.webp');
+    const hasWebp = webpSrc !== img.src;
+    return (
+      <figure class="gallery__item">
+        {hasWebp ? (
+          <picture>
+            <source srcset={webpSrc} type="image/webp" />
+            <img src={img.src} alt={img.alt} loading="lazy" width="400" height="400" decoding="async" />
+          </picture>
+        ) : (
+          <img src={img.src} alt={img.alt} loading="lazy" width="400" height="400" decoding="async" />
+        )}
+      </figure>
+    );
+  })}
 </div>

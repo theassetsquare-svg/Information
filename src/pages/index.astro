@@ -176,7 +176,11 @@ const categories = [...new Set(venues.map(v => v.category))];
     </section>
   </main>
 
-  <script type="application/json" id="venue-data" set:html={JSON.stringify(venues.map(v => ({...v, _link: venueDetailPath(v)})))} />
+  <script type="application/json" id="venue-data" set:html={JSON.stringify(venues.map(v => ({
+    name: v.name, region: v.region, district: v.district, category: v.category,
+    thumbnail: v.thumbnail, keywords: v.keywords, tags: v.tags, card_tags: v.card_tags,
+    _link: venueDetailPath(v)
+  })))} />
   <script is:inline>
     // ── Search Index ──
     var venueData = JSON.parse(document.getElementById('venue-data').textContent || '[]');

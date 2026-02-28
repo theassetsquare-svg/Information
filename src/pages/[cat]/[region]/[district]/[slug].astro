@@ -42,6 +42,8 @@ const catFullLabel = catLabel === '클럽' ? '클럽' : catLabel === '나이트'
 const thumbPath = venue.thumbnail || '/images/og-thumb.jpg';
 const thumbAbsolute = thumbPath.startsWith('http') ? thumbPath : `${siteUrl}${thumbPath}`;
 const thumbAlt = `${venue.name} ${regionLabel} ${venue.district} ${catFullLabel} — 내부 분위기와 인테리어`;
+const thumbWebp = thumbPath.replace(/\.(png|jpe?g)$/i, '.webp');
+const hasWebpThumb = thumbWebp !== thumbPath;
 
 /* Map URL: use venue.map_url if available, else Google Maps search fallback */
 const mapUrl = venue.map_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.name + ' ' + regionLabel)}`;
@@ -174,6 +176,8 @@ const sections = [
     <meta property="article:tag" content={venue.name} />
     <meta property="article:tag" content={`${regionLabel} ${catFullLabel}`} />
     <meta property="og:image:alt" content={thumbAlt} />
+    {hasWebpThumb && <link rel="preload" as="image" type="image/webp" href={thumbWebp} />}
+    {!hasWebpThumb && <link rel="preload" as="image" href={thumbPath} />}
   </Fragment>
   <main id="main-content" class="detail-page">
 
@@ -186,13 +190,18 @@ const sections = [
     <section class="detail-hero" data-reveal>
       {/* 1) Thumbnail at top */}
       <figure class="detail-hero__figure">
-        <img
-          src={thumbPath}
-          alt={thumbAlt}
-          width="520"
-          height="520"
-          loading="eager"
-        />
+        <picture>
+          {hasWebpThumb && <source srcset={thumbWebp} type="image/webp" />}
+          <img
+            src={thumbPath}
+            alt={thumbAlt}
+            width="520"
+            height="520"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
       </figure>
 
       {/* 2) H1 = Store Name */}

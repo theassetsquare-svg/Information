@@ -15,10 +15,19 @@ interface Props {
 
 const { name, category, region, thumbnail, image_alt, badge, card_hook, card_value, card_tags, detail_page, map_url } = Astro.props;
 const href = detail_page || map_url;
+const webpThumb = thumbnail.replace(/\.(png|jpe?g)$/i, '.webp');
+const hasWebp = webpThumb !== thumbnail;
 ---
 <a class="venue-card" href={href} target="_blank" rel="noopener noreferrer">
   <div class="venue-card__thumb">
-    <img src={thumbnail} alt={image_alt} width="100" height="100" loading="lazy">
+    {hasWebp ? (
+      <picture>
+        <source srcset={webpThumb} type="image/webp" />
+        <img src={thumbnail} alt={image_alt} width="100" height="100" loading="lazy" decoding="async" />
+      </picture>
+    ) : (
+      <img src={thumbnail} alt={image_alt} width="100" height="100" loading="lazy" decoding="async" />
+    )}
     {badge && <span class="venue-card__badge">{badge}</span>}
   </div>
   <div class="venue-card__body">
