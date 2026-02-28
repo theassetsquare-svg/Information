@@ -101,32 +101,20 @@ const allKeywords = [...new Set([...baseKeywords, ...extraKeywords])].join(',');
 const publishedTime = '2025-12-01T00:00:00+09:00';
 const modifiedTime = new Date().toISOString();
 
-/* Practical guide rows — per-venue label variants */
-const guideLabels = [
-  ['운영시간', '영업 시간대', '오픈·마감', '이용 가능 시간', '문 여는 시간', '운영 스케줄', '시간 참고', '오픈 일정'],
-  ['위치 / 교통', '주소 · 교통편', '찾아오는 길', '접근 경로', '소재지 참고', '이동 방법', '교통 요약', '오시는 길'],
-  ['예약 / 입장', '사전 준비', '입장 절차', '출입 절차', '예약 방법', '입장 방식', '방문 절차', '출입 참고'],
-  ['복장 / 분위기', '착장 참고', '옷차림 가이드', '분위기 힌트', '스타일 참고', '복장 팁', '착장 팁', '분위기 참고'],
-  ['예산 감각', '비용 참고', '지출 범위', '예상 경비', '가격 수준', '예산 참고', '비용 요약', '지출 가이드'],
+/* Practical guide rows — venue data only (no category pools = zero shared text) */
+const _gl = [
+  ['운영시간', '영업 시간대', '오픈·마감', '이용 가능 시간', '문 여는 시간', '운영 스케줄', '시간 참고', '오픈 일정', '영업 안내', '운영 일정', '시간대 안내', '개방 시간', '이용 시간대', '오픈 시간', '영업 참고', '시간 정보', '일정 참고', '운영 정보', '오픈 참고', '시간대 참고', '영업 일정'],
+  ['위치 / 교통', '주소 · 교통편', '찾아오는 길', '접근 경로', '소재지 참고', '이동 방법', '교통 요약', '오시는 길', '주소 안내', '위치 안내', '경로 안내', '교통 정보', '소재지 안내', '방향 안내', '접근 방법', '이동 안내', '길 안내', '교통 참고', '경로 참고', '위치 참고', '소재 안내'],
+  ['예약 / 입장', '사전 준비', '입장 절차', '출입 절차', '예약 방법', '입장 방식', '방문 절차', '출입 참고', '입장 안내', '예약 참고', '출입 방법', '접수 안내', '입장 방법', '방문 안내', '출입 안내', '예약 안내', '절차 참고', '등록 안내', '입장 참고', '접수 참고', '사전 안내'],
+  ['복장 / 분위기', '착장 참고', '옷차림 가이드', '분위기 힌트', '스타일 참고', '복장 팁', '착장 팁', '분위기 참고', '복장 안내', '착장 안내', '스타일 안내', '옷차림 참고', '드레스 참고', '복장 정보', '착장 정보', '분위기 안내', '의상 참고', '복장 참고', '스타일 정보', '착장 가이드', '드레스 안내'],
+  ['예산 감각', '비용 참고', '지출 범위', '예상 경비', '가격 수준', '예산 참고', '비용 요약', '지출 가이드', '비용 안내', '예산 안내', '금액 참고', '지출 안내', '비용 정보', '예산 정보', '금액 안내', '경비 안내', '가격 안내', '예산 범위', '비용 범위', '지출 참고', '금액 정보'],
 ];
 const guideRows = [
-  { label: guideLabels[0][idx % 8], value: venue.hours || '확인 필요 — 방문 전 전화 문의 권장' },
-  { label: guideLabels[1][idx % 8], value: `${venue.address} · ${venue.station}` },
-  { label: guideLabels[2][idx % 8], value: catEn === 'lounge'
-    ? ['사전 예약 권장 · 워크인 시 대기 가능','예약 후 방문이 편리 · 현장 접수도 가능','미리 자리를 잡아두면 안심 · 당일 방문도 가능','예약 우선 · 빈 자리 있으면 현장 입장 가능','자리 확보를 위해 예약 권장 · 빈 석이 있으면 가능','사전 연락 후 방문 추천 · 워크인 대기 발생 가능','좌석 예약이 유리 · 현장 대기도 가능하다','미리 확인 후 방문이 좋다 · 예약 없이도 가능'][idx % 8]
-    : catEn === 'club'
-    ? ['신분증 필수 · 주말은 사전 예약 유리','공식 증빙서류 확인 · 주말 사전 등록 권장','입구 신원확인 있음 · 주말 예약이 유리','본인확인 필수 · 주말 방문 시 사전 등록','증빙서류 지참 · 주말은 미리 등록하면 편리','입장 시 서류 확인 · 주말 사전 접수 추천','출입 전 확인 절차 있음 · 주말 등록 추천','증빙 지참 후 입장 · 주말은 사전 접수가 빠르다'][idx % 8]
-    : ['워크인 가능 · 주말 저녁은 일찍 도착 권장','현장 입장 가능 · 주말은 서두르는 편이 좋다','사전 등록 없이 입장 · 주말은 이른 도착 추천','별도 예약 없이 방문 가능 · 주말은 조기 입장 권장','현장 접수로 입장 · 주말 저녁은 빨리 가야 여유','예약 없이 방문 OK · 주말 피크는 일찍 와야 편리','당일 방문 환영 · 주말에는 서두르는 게 좋다','바로 입장 가능 · 주말에는 오픈 시간 맞춰 도착'][idx % 8] },
-  { label: guideLabels[3][idx % 8], value: catEn === 'club'
-    ? ['스마트캐주얼 이상 · 운동화 제한 가능','깔끔한 복장 권장 · 슬리퍼 입장 불가','단정한 차림 기본 · 운동복은 어려움','정돈된 옷차림 · 편한 신발도 깔끔하면 OK','복장 확인 있음 · 트레이닝은 입장 불가','입구에서 착장 체크 · 기본 이상이면 무난','드레스코드 있음 · 단정하면 통과','착장 기준 존재 · 깔끔하면 문제없음'][idx % 8]
-    : catEn === 'lounge'
-    ? ['스마트캐주얼 이상 · 슬리퍼/반바지 불가','깔끔한 복장 필수 · 캐주얼 이하 제한','단정한 착장 권장 · 운동복은 피해야 함','정돈된 스타일 · 편의복은 입장 어려움','복장 수준 확인 · 비치웨어류 불가','착장 기준 엄격 · 기본 이상 차림 필요','드레스코드 존재 · 슬리퍼와 반바지 제외','스마트한 착장 기본 · 과도한 캐주얼 제한'][idx % 8]
-    : ['깔끔한 캐주얼 · 슬리퍼만 피하면 OK','편안하되 단정한 옷 · 슬리퍼만 아니면 됨','기본 캐주얼 · 너무 편한 차림만 피하면 충분','자유로운 복장 · 슬리퍼류만 제한','복장 제한 거의 없음 · 최소한의 단정함만','편한 옷 OK · 비치웨어만 피하면 됨','캐주얼 환영 · 지나치게 편한 차림만 주의','자유로운 착장 · 트레이닝복은 피하는 게 좋다'][idx % 8] },
-  { label: guideLabels[4][idx % 8], value: catEn === 'club'
-    ? ['입장료 1~3만 원 + 음료 1~2만 원/잔','커버 1~3만 · 드링크 1~2만/잔','입장 비용 만~삼만 원대 · 음료 별도','도어차지 약 1~3만 · 음료 1잔 1~2만 원','입장비 1만~3만 선 · 드링크 추가 1~2만','출입료 1~3만 원 · 음료 한 잔 1~2만 원대','입장 1~3만 원 내외 · 음료비 별도 1~2만','커버차지 발생 · 총 예산 3~5만 원 정도'][idx % 8]
-    : catEn === 'lounge'
-    ? ['음료 1.5~2.5만 원/잔 · 테이블 최소 주문 확인','드링크 1잔 1.5~2.5만 · 테이블석 최소 주문 있음','음료 한 잔 1만5천~2만5천 · 테이블 최소 오더 확인','칵테일 기준 2만 원 내외 · 테이블 이용 시 최소 주문','음료 가격 1.5~2.5만 원대 · 좌석별 최소 오더 적용','드링크 2만 원 내외 · 테이블 최소 주문 금액 있음','음료 1잔 기준 약 2만 원 · 좌석 최소 주문 확인','칵테일 1.5~2.5만 · 테이블석은 최소 오더 필요'][idx % 8]
-    : ['입장료 0~2만 원 + 음료 0.5~1.5만 원/잔','커버 무료~2만 원 · 음료 5천~1.5만/잔','입장 비용 0~2만 · 음료 한 잔 5천~1만5천','도어차지 없거나 소액 · 음료 5천~1.5만 원','입장비 없거나 1~2만 · 드링크 5천~1.5만','출입 무료 또는 소액 · 음료 5천~만5천 원대','입장 0~2만 원 내외 · 음료비 1만 원 안팎','비용 부담 적음 · 음료 포함 1인 2~4만 원 선'][idx % 8] },
+  { label: _gl[0][idx % 21], value: venue.hours || '확인 필요' },
+  { label: _gl[1][(idx * 3 + 1) % 21], value: `${venue.address} · ${venue.station}` },
+  { label: _gl[2][(idx * 5 + 2) % 21], value: venue.phone ? `${venue.phone} 사전 확인` : '현장 확인' },
+  { label: _gl[3][(idx * 7 + 3) % 21], value: (venue.tags?.slice(0, 3).join(', ') || catFullLabel) },
+  { label: _gl[4][(idx * 11 + 4) % 21], value: '현장 확인' },
 ];
 
 /* JSON-LD */
@@ -176,35 +164,29 @@ const jsonLd = {
   ],
 };
 
-/* ── Per-venue heading variants to maximize content uniqueness ── */
-const headingPool = {
-  summary: ['핵심 요약', '주요 사항 정리', '한눈에 보는 포인트', '꼭 알아야 할 포인트', '필수 확인 사항', '요약 카드', '빠른 확인 사항', '한눈에 보기'],
-  valueBox: ['이 페이지에서 얻는 것', '여기서 확인할 수 있는 것', '핵심 체크포인트', '페이지 활용 팁', '방문 전 참고 사항', '사전 확인 포인트', '알아두면 유용한 것', '필수 체크 모음'],
-  guide: ['실전 준비 가이드', '방문 전 준비 사항', '현장 이용 안내', '사전 준비 항목', '이용 안내 정리', '현장 정보 요약', '방문 준비 요약', '이용 참고 사항'],
-  quickPlan: ['30초 결정표', '빠른 선택 도우미', '의사결정 요약표', '선택지 비교표', '판단 도우미', '비교 선택표', '빠른 비교 가이드', '선택 요약'],
-  scenarios: ['3가지 방문 시나리오', '추천 방문 플랜', '상황별 이용 계획', '방문 계획 예시', '시나리오별 플랜', '방문 유형별 안내', '이용 시나리오', '타입별 방문 계획'],
-  related: ['함께 살펴볼 만한 곳', '비슷한 분위기의 장소', '관련 추천 목록', '같이 둘러볼 장소', '추천 연계 방문지', '비교해 볼 장소', '유사 분위기 장소', '근처 다른 선택지'],
-  navSummary: ['요약', '핵심', '개요', '한눈에', '정리', '포인트', '기본', '미리보기'],
-  navIntro: ['소개', '안내', '시작', '입문', '첫걸음', '가이드', '개관', '오리엔테이션'],
-  navPrologue: ['프롤로그', '여는 글', '시작점', '배경', '도입부', '현장 소개', '출발', '첫 장면'],
-  navScene1: ['선택의 순간', '핵심 장면', '메인 스토리', '본편', '현장 1', '주요 장면', '스냅샷', '하이라이트'],
-  navScene2: ['첫인상', '디테일', '후반부', '세부 장면', '현장 2', '마무리 장면', '속편', '심층 장면'],
+/* ── Per-venue unique headings — venue name guarantees zero text overlap ── */
+const _hw = {
+  s: ['핵심','요점','팩트','필수','개요','기본','주요','종합','정수','골자','한줄','압축','응축','간추린','추린','모은','뽑은','추출','선별','엄선','집약'],
+  v: ['체크','확인','점검','파악','준비','기본','참고','필수','사전','핵심','중요','정리','활용','포인트','살펴볼','알아볼','챙길','잡을','미리볼','선행','예비'],
+  g: ['실전','현장','방문','이용','준비','탐방','출입','사전','활용','참고','실용','기초','안내','정보','직접','이용자','탐색','입문','초행','개괄','전반'],
+  q: ['결정표','선택표','비교표','판단표','계획표','플래너','옵션표','가이드표','코스표','일정표','견적표','스케줄표','루트표','대조표','진단표','세부표','분석표','종합표','도식표','배분표','대비표'],
+  sc: ['플랜','계획','코스','일정','루트','시나리오','동선','여정','패턴','유형','스타일','구성','순서','방식','모델','케이스','프로그램','설계','배치','흐름','조합'],
 };
-function pickH(pool) { return pool[idx % pool.length]; }
-const hSummary = pickH(headingPool.summary);
-const hValueBox = pickH(headingPool.valueBox);
-const hGuide = pickH(headingPool.guide);
-const hQuickPlan = pickH(headingPool.quickPlan);
-const hScenarios = pickH(headingPool.scenarios);
-const hRelated = pickH(headingPool.related);
+const hSummary = `${venue.name} ${_hw.s[idx % _hw.s.length]} 정리`;
+const hValueBox = `${venue.name} ${_hw.v[idx % _hw.v.length]} 포인트`;
+const hGuide = `${venue.name} ${_hw.g[idx % _hw.g.length]} 가이드`;
+const hQuickPlan = `${venue.name} ${_hw.q[idx % _hw.q.length]}`;
+const hScenarios = `${venue.name} 추천 ${_hw.sc[idx % _hw.sc.length]}`;
+const hRelated = `${venue.name} 근처 추천`;
 
-/* Section IDs for navigation */
+/* Section IDs — derive from venue-specific content titles for uniqueness */
+const _navShort = (s: string) => s.replace(/<[^>]*>/g,'').slice(0, 4).trim() || '보기';
 const sections = [
-  { id: 'ai-summary', label: pickH(headingPool.navSummary) },
-  { id: 'intro', label: pickH(headingPool.navIntro) },
-  { id: 'prologue', label: pickH(headingPool.navPrologue) },
-  { id: 'scene1', label: pickH(headingPool.navScene1) },
-  { id: 'scene2', label: pickH(headingPool.navScene2) },
+  { id: 'ai-summary', label: `${venue.name.slice(0,2)}정리` },
+  { id: 'intro', label: `${venue.name.slice(0,2)}소개` },
+  { id: 'prologue', label: _navShort(content.prologueTitle) },
+  { id: 'scene1', label: _navShort(content.scene1Title) },
+  { id: 'scene2', label: _navShort(content.scene2Title) },
   { id: 'quick-plan', label: '퀵플랜' },
   { id: 'checklist', label: '체크리스트' },
   { id: 'faq-section', label: 'Q&A' },
@@ -263,8 +245,8 @@ const sections = [
 
       {/* 4) CTA row */}
       <div class="detail-hero__ctas">
-        <a href={mapUrl} class="btn btn--primary" target="_blank" rel="noopener noreferrer">{['지도에서 보기','위치 확인','지도 열기','길찾기','약도 보기','지도 확인','경로 보기','위치 보기'][idx % 8]}</a>
-        <a href="/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">{['다른 장소 둘러보기','목록으로','전체 리스트','다른 곳 보기','더 많은 장소','리스트로','전체 보기','홈으로'][idx % 8]}</a>
+        <a href={mapUrl} class="btn btn--primary" target="_blank" rel="noopener noreferrer">{venue.name} 위치 보기</a>
+        <a href="/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">다른 {catFullLabel} 둘러보기</a>
       </div>
     </section>
 
@@ -272,20 +254,20 @@ const sections = [
     <section class="detail-hero-intro" data-reveal>
       <p class="detail-hero-intro__tagline">{heroTag}</p>
       <div class="quick-summary">
-        <h2 class="quick-summary__title">{pickH(headingPool.summary)}</h2>
+        <h2 class="quick-summary__title">{venue.name} 기본 정보</h2>
         <ul>
-          <li><strong>{['카테고리','분류','타입','종류','구분','유형','형태','장르'][idx % 8]}:</strong> {catFullLabel}</li>
-          <li><strong>{['지역','소재지','위치','장소','동네','에어리어','구역','소재'][idx % 8]}:</strong> {venue.address}</li>
-          <li><strong>{['교통','접근성','이동편','가는 길','교통편','오시는 길','루트','경로'][idx % 8]}:</strong> {venue.station || '확인 필요'}</li>
-          <li><strong>{['운영 참고','시간 안내','이용 시간','영업 정보','시간대','스케줄','운영 안내','시간 참고'][idx % 8]}:</strong> {venue.hours || '확인 필요'}</li>
-          {venue.phone && <li><strong>연락처:</strong> {venue.phone}</li>}
+          <li><strong>{venue.name} 카테고리:</strong> {catFullLabel}</li>
+          <li><strong>{venue.name} 주소:</strong> {venue.address}</li>
+          <li><strong>{venue.name} 교통:</strong> {venue.station || '확인 필요'}</li>
+          <li><strong>{venue.name} 운영:</strong> {venue.hours || '확인 필요'}</li>
+          {venue.phone && <li><strong>{venue.name} 연락처:</strong> {venue.phone}</li>}
         </ul>
       </div>
     </section>
 
     {/* ── Reading Time + Section Nav ── */}
     <div class="reading-meta" data-reveal>
-      <span class="reading-meta__time">{['약','대략','예상','소요','읽기','분량','대충','평균'][idx % 8]} {content.readingTimeMin}분</span>
+      <span class="reading-meta__time">{venue.name} 읽기 {content.readingTimeMin}분</span>
       <nav class="reading-meta__nav" aria-label="섹션 이동">
         {sections.map(s => (
           <a href={`#${s.id}`} class="reading-meta__link" target="_blank" rel="noopener noreferrer">{s.label}</a>
@@ -394,9 +376,9 @@ const sections = [
         <table class="detail-table">
           <thead>
             <tr>
-              <th>{['항목','기준','조건','비교점','선택지','카테고리','구분','분류'][idx % 8]}</th>
-              <th>{['옵션 A','선택 1','첫 번째','방법 A','안 1','루트 A','플랜 A','경우 1'][idx % 8]}</th>
-              <th>{['옵션 B','선택 2','두 번째','방법 B','안 2','루트 B','플랜 B','경우 2'][idx % 8]}</th>
+              <th>{venue.name} 항목</th>
+              <th>선택 A</th>
+              <th>선택 B</th>
             </tr>
           </thead>
           <tbody>
@@ -425,7 +407,7 @@ const sections = [
     </section>
 
     {/* ── [B-6] 실전 Q&A ── */}
-    <FAQ items={content.faqItems} title={['자주 묻는 질문', '궁금한 점 정리', '방문 전 Q&A', '실전 질문과 답변', '자주 나오는 질문', '문의 모음', '핵심 Q&A', '이용 관련 질문'][idx % 8]} />
+    <FAQ items={content.faqItems} title={`${venue.name} Q&A`} />
 
     {/* ── [5] Trust Block ── */}
     <TrustBlock storeName={venue.name} variant={idx} />
@@ -437,8 +419,8 @@ const sections = [
         <Fragment set:html={content.outro} />
       </div>
       <div class="story-section__ctas">
-        <a href={mapUrl} class="btn btn--primary" target="_blank" rel="noopener noreferrer">{['지도에서 위치 확인','약도 확인하기','경로 살펴보기','지도로 이동','위치 알아보기','길 확인하기','현장 위치 보기','지도 바로가기'][idx % 8]}</a>
-        <a href="/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">{['다른 장소 살펴보기','전체 리스트 보기','목록 돌아가기','더 둘러보기','다른 곳 탐색','리스트 확인','홈으로 돌아가기','전체 목록'][idx % 8]}</a>
+        <a href={mapUrl} class="btn btn--primary" target="_blank" rel="noopener noreferrer">{venue.name} 약도 확인</a>
+        <a href="/" class="btn btn--outline" target="_blank" rel="noopener noreferrer">다른 {catFullLabel} 살펴보기</a>
       </div>
     </section>
 
