@@ -1,11 +1,10 @@
-import Link from 'next/link';
 import { Venue } from '@/lib/venues';
 
 const taglines: Record<string, string> = {
-  race: '호텔 로비를 지나면 펼쳐지는 황금빛 언더그라운드',
+  race: '호텔 로비를 지나면 펼쳐지는 언더그라운드',
   octagon: '강남 한복판, 빛의 원형극장이 열리는 밤',
   arte: '미디어아트가 벽을 타고 흐르는 비밀 갤러리',
-  muin: '주소 없는 바, 초대받은 자만 아는 골드 리스트',
+  muin: '주소 없는 바, 초대받은 자만 아는 리스트',
   sound: '사운드 엔지니어가 설계한 주파수의 성역',
   face: '얼굴을 기억하는 프라이빗 플로어',
   'jack-livin': '재즈와 하우스가 교차하는 숨은 거실',
@@ -34,7 +33,7 @@ const taglines: Record<string, string> = {
   'waikiki-utopia': '하와이안 파라다이스가 이태원에 상륙',
   'suyu-shampoo': '세대를 잇는 밤의 살아있는 전설',
   hangukgwan: '검증된 밤의 격식이 시작되는 곳',
-  arabian: '인천의 밤에 펼쳐지는 골드 나잇',
+  arabian: '인천의 밤에 펼쳐지는 이국적 무대',
   'yadang-skydome': '하늘 아래, 돔 천장이 열리는 무대',
   chancedom: '기회의 문이 열리는 수원의 밤',
   grandprix: '신림의 밤을 질주하는 그랑프리',
@@ -50,7 +49,7 @@ const taglines: Record<string, string> = {
   intro: '처음 만나도 자연스럽게 대화가 되는 곳',
   dm: '은밀한 메시지가 오가는 밤의 응접실',
   color: '조명이 대화의 온도를 높이는 곳',
-  'le-club': '프렌치 감성의 골드빛 밤',
+  'le-club': '프렌치 감성이 내려앉은 밤',
   siena: '토스카나 황혼이 강남에 내려앉은 밤',
   'alvin-avenue': '와인잔 너머의 세련된 대화',
   'running-rabbit': '토끼를 따라가면 나오는 비밀 라운지',
@@ -60,24 +59,24 @@ const taglines: Record<string, string> = {
   'suyu-checklist': '이것만 체크하면 완벽한 밤',
 };
 
+const catLabels: Record<string, string> = {
+  club: 'Club', night: 'Night', lounge: 'Lounge',
+};
+
 export default function VenueCard({ venue }: { venue: Venue }) {
-  const catLabel = venue.cat_slug === 'club' ? 'Club'
-    : venue.cat_slug === 'night' ? 'Night' : 'Lounge';
   const hook = taglines[venue.slug] || venue.card_hook;
 
   return (
-    <Link
+    <a
       href={`/${venue.cat_slug}/${venue.slug}/`}
       target="_blank"
       rel="noopener noreferrer"
       className="venue-card"
-      style={{ textDecoration: 'none' }}
+      style={{ textDecoration: 'none', color: 'inherit' }}
     >
       <div className="venue-card-body">
-        {venue.badge && (
-          <span className="venue-card-badge">{venue.badge}</span>
-        )}
-        <span className="venue-card-meta">{catLabel}</span>
+        {venue.badge && <span className="venue-card-badge">{venue.badge}</span>}
+        <span className="venue-card-meta">{catLabels[venue.cat_slug] || venue.cat_slug}</span>
         <h3>{venue.name}</h3>
         <p className="venue-card-hook">{hook}</p>
         <div className="venue-card-tags">
@@ -86,6 +85,6 @@ export default function VenueCard({ venue }: { venue: Venue }) {
           ))}
         </div>
       </div>
-    </Link>
+    </a>
   );
 }

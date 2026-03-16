@@ -28,11 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body>
-        <a href="#main" className="sr-only" style={{
-          position: 'absolute', left: '-9999px', top: 0,
-          background: '#D4AF37', color: '#000', padding: '0.5rem 1rem',
-          zIndex: 9999,
-        }}>본문으로 건너뛰기</a>
+        <a href="#main" className="sr-only">본문으로 건너뛰기</a>
         <Header />
         <Banner />
         <main id="main">{children}</main>
