@@ -1,16 +1,20 @@
 {
-  "name": "nightlife-directory",
+  "name": "nightlife-gold",
   "version": "1.0.0",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "gen:card-copy": "node scripts/gen-card-copy.mjs",
-    "lint:card-copy": "node scripts/lint-card-copy.mjs"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "astro": "^5.17.3",
-    "sharp": "^0.34.5"
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "25.5.0",
+    "@types/react": "19.2.14",
+    "typescript": "5.9.3"
   }
 }
