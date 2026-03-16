@@ -33,7 +33,7 @@ export default function RankingClient() {
 
   const ranked = useMemo(() => {
     let list = activeCat === 'all' ? allVenues : allVenues.filter((v) => v.cat_slug === activeCat);
-    return list.slice(0, 20);
+    return list.slice(0, 5);
   }, [allVenues, activeCat]);
 
   return (

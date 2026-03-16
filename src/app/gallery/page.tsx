@@ -3,11 +3,11 @@ import { SITE_URL, SITE_NAME, getAllVenues } from '@/lib/venues';
 
 export const metadata: Metadata = {
   title: `갤러리 — 전국 밤문화 현장 스냅 | ${SITE_NAME}`,
-  description: '전국 클럽·나이트·라운지·룸·요정·호빠의 현장 분위기를 사진으로 만나보자.',
+  description: '전국 클럽·나이트·라운지·룸·요정·호빠의 현장 스냅을 모아보는 페이지.',
   alternates: { canonical: SITE_URL + '/gallery/' },
   openGraph: {
     title: `갤러리 — 전국 밤문화 현장 스냅 | ${SITE_NAME}`,
-    description: '전국 클럽·나이트·라운지·룸·요정·호빠의 현장 분위기를 사진으로 만나보자.',
+    description: '전국 클럽·나이트·라운지·룸·요정·호빠의 현장 스냅을 모아보는 페이지.',
     url: SITE_URL + '/gallery/',
     siteName: SITE_NAME,
     locale: 'ko_KR',
@@ -44,8 +44,20 @@ function hashHeight(slug: string): number {
   return heights[Math.abs(h) % heights.length];
 }
 
+/* 해시 기반 결정적 셔플로 12개 선택 */
+function selectShowcaseVenues(allVenues: ReturnType<typeof getAllVenues>) {
+  const seed = 42;
+  const indexed = allVenues.map((v, i) => ({
+    venue: v,
+    score: Math.abs(((seed * 2654435761 + i * 2246822519) | 0)) % 100000,
+  }));
+  indexed.sort((a, b) => a.score - b.score);
+  return indexed.slice(0, 6).map((x) => x.venue);
+}
+
 export default function GalleryPage() {
-  const venues = getAllVenues();
+  const allVenues = getAllVenues();
+  const venues = selectShowcaseVenues(allVenues);
 
   return (
     <>
@@ -62,14 +74,15 @@ export default function GalleryPage() {
         <div className="container">
           <h1 style={{ marginBottom: '0.5rem' }}>갤러리</h1>
           <p style={{ color: 'var(--text-sub)', marginBottom: '2rem', maxWidth: '600px' }}>
-            전국 밤문화 현장의 분위기를 사진으로 담을 예정이다. 현재 사진을 수집 중이며, 곧 업데이트된다.
+            전국 밤문화 현장의 스냅을 모아둘 예정이다. 현재 수집 중이며, 곧 업데이트된다.
           </p>
 
-          {/* Masonry 그리드 */}
+          {/* 대표 12곳 그리드 */}
           <div
             style={{
-              columns: '3 280px',
-              columnGap: '1rem',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+              gap: '1rem',
             }}
           >
             {venues.map((venue) => {
@@ -77,19 +90,21 @@ export default function GalleryPage() {
               const color = CAT_COLORS[venue.cat_slug] || '#8B5CF6';
 
               return (
-                <div
+                <a
                   key={venue.slug}
+                  href={`/${venue.cat_slug}/${venue.slug}/`}
                   style={{
-                    breakInside: 'avoid',
-                    marginBottom: '1rem',
+                    display: 'block',
                     borderRadius: '12px',
                     overflow: 'hidden',
                     border: '1px solid var(--border)',
                     background: 'var(--bg-card)',
+                    textDecoration: 'none',
+                    color: 'inherit',
                     transition: 'box-shadow 0.2s, transform 0.2s',
                   }}
                 >
-                  {/* 플레이스홀더 이미지 영역 */}
+                  {/* 플레이스홀더 영역 */}
                   <div
                     style={{
                       height: `${height}px`,
@@ -97,8 +112,6 @@ export default function GalleryPage() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      flexDirection: 'column',
-                      gap: '0.5rem',
                     }}
                   >
                     <div
@@ -116,12 +129,9 @@ export default function GalleryPage() {
                     >
                       &#9935;
                     </div>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                      분위기 사진 준비 중
-                    </span>
                   </div>
 
-                  {/* 하단 정보 */}
+                  {/* 하단 정보: 업소명 + 카테고리 */}
                   <div style={{ padding: '0.875rem 1rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.25rem' }}>
                       <span
@@ -144,7 +154,7 @@ export default function GalleryPage() {
                       {venue.region} {venue.district}
                     </div>
                   </div>
-                </div>
+                </a>
               );
             })}
           </div>
@@ -161,10 +171,10 @@ export default function GalleryPage() {
             }}
           >
             <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.5rem', color: 'var(--text)' }}>
-              현장 사진을 공유해주세요
+              현장 컷을 공유해주세요
             </p>
             <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)', marginBottom: '1rem' }}>
-              방문 사진이나 분위기 스냅을 커뮤니티에서 공유하면 갤러리에 반영됩니다.
+              방문 시 촬영한 컷을 커뮤니티에서 공유하면 갤러리에 반영됩니다.
             </p>
             <a
               href="/community/"
@@ -181,7 +191,7 @@ export default function GalleryPage() {
                 textDecoration: 'none',
               }}
             >
-              사진 제보는 커뮤니티에서
+              제보는 커뮤니티에서
             </a>
           </div>
         </div>

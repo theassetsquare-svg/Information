@@ -56,11 +56,11 @@ export function getCategories(): { slug: string; name: string; path: string; cou
   }));
 }
 
-export function getRelatedVenues(venue: Venue, limit = 4): Venue[] {
-  const sameCat = venues.filter(v => v.cat_slug === venue.cat_slug && v.slug !== venue.slug);
-  const sameRegion = sameCat.filter(v => v.region === venue.region);
-  const others = sameCat.filter(v => v.region !== venue.region);
-  return [...sameRegion, ...others].slice(0, limit);
+export function getRelatedVenues(venue: Venue, limit = 2): Venue[] {
+  // 완전히 다른 지역 + 다른 카테고리 우선 → 같은 단어 반복 최소화
+  const diffAll = venues.filter(v => v.cat_slug !== venue.cat_slug && v.region !== venue.region && v.slug !== venue.slug);
+  const diffRegionSameCat = venues.filter(v => v.cat_slug === venue.cat_slug && v.region !== venue.region && v.slug !== venue.slug);
+  return [...diffAll, ...diffRegionSameCat].slice(0, limit);
 }
 
 export const SITE_NAME = '골드나잇 가이드';

@@ -11,7 +11,7 @@ interface Venue {
   card_hook: string;
 }
 
-const popularTags = ['일산 룸', '일산 요정', '강남 클럽', '수원 나이트', '부산 나이트', '강남 호빠', '부산 룸'];
+const popularTags = ['일산 룸', '일산 요정', '강남 플로어', '수원', '부산', '강남 호빠', '해운대'];
 
 export default function SearchBar({ venues }: { venues: Venue[] }) {
   const [query, setQuery] = useState('');

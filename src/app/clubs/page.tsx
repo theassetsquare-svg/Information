@@ -27,18 +27,24 @@ export default function ClubsPage() {
 
         {/* 소개글 500자+ */}
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
-          <p>EDM, 힙합, 하우스, 테크노. 장르가 곧 그 클럽의 정체성이다. 강남은 대형 플로어와 프리미엄 서비스가 특징이고, 압구정은 세련된 분위기와 20~30대 직장인 중심. 홍대는 인디 감성과 소규모 공간의 밀도 높은 경험, 이태원은 글로벌 DJ가 자주 찾는 테크노 성지다. 지방도 놓칠 수 없다. 부천, 청주, 대전까지 각 지역 색이 뚜렷한 플레이스가 있다.</p>
-          <p style={{ marginTop: '1rem' }}>드레스코드가 있는 곳이 대부분이다. 슬리퍼와 트레이닝복은 입장이 제한된다. 피크타임은 금·토 자정 전후. 일찍 도착하면 대기 없이 들어갈 수 있다. 음료 가격은 지역마다 천차만별이니 미리 확인하고 가자. {year}년 기준 전국 {venues.length}곳의 플로어를 정리했다.</p>
+          <p>EDM, 힙합, 하우스, 테크노. 장르가 곧 플로어의 정체성이다. 각 지역마다 색이 다르다. 대형 사운드 시스템이 있는 곳, 소규모 공간에서 밀도 높은 경험을 주는 곳, 글로벌 DJ가 자주 찾는 곳까지 다양하다.</p>
+          <p style={{ marginTop: '1rem' }}>드레스코드가 있는 곳이 대부분이다. 슬리퍼와 트레이닝복은 입장이 제한된다. 피크타임은 금·토 자정 전후. 일찍 도착하면 대기 없이 들어갈 수 있다. 음료 가격은 지역마다 천차만별이니 미리 확인하고 가자.</p>
         </div>
 
         {regions.map(region => {
           const rv = venues.filter(v => v.region === region);
+          const show = rv.slice(0, 1);
           return (
             <div key={region} style={{ marginBottom: '2.5rem' }}>
               <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
                 {region} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{rv.length}곳</span>
               </h2>
-              <div className="venue-grid">{rv.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
+              <div className="venue-grid">{show.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
+              {rv.length > 3 && (
+                <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                  외 {rv.length - 3}곳 — 카드를 눌러 상세 확인
+                </p>
+              )}
             </div>
           );
         })}

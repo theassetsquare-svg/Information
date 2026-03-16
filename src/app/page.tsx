@@ -23,9 +23,10 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const year = new Date().getFullYear();
-  const top5 = allVenues.slice(0, 5);
-  const top10 = allVenues.slice(0, 10);
-  const hidden = allVenues.slice(50, 53);
+  // 카테고리별 1개씩 = 최대 4개 (같은 단어 반복 최소화)
+  const seen = new Set<string>();
+  const top5 = allVenues.filter(v => { if (seen.has(v.cat_slug)) return false; seen.add(v.cat_slug); return true; }).slice(0, 4);
+  const hidden = allVenues.slice(50, 51);
 
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'WebSite',
@@ -117,15 +118,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TOP10 */}
+      {/* 더 많은 업소는 카테고리에서 */}
       <section className="section">
-        <div className="container">
-          <h2>인기 업소 TOP 10</h2>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2>전국 {allVenues.length}곳 둘러보기</h2>
           <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-            {year}년 전국에서 가장 많이 조회된 곳
+            카테고리별로 정리된 전체 목록을 확인하세요.
           </p>
-          <div className="venue-grid">
-            {top10.map(v => <VenueCard key={v.slug} venue={v} />)}
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {cats.map(cat => (
+              <a key={cat.slug} href={cat.path} target="_blank" rel="noopener noreferrer"
+                style={{ padding: '0.6rem 1.25rem', background: 'var(--purple)', color: '#FFF',
+                  borderRadius: '8px', fontWeight: 600, textDecoration: 'none', fontSize: '0.9rem' }}>
+                {cat.name} {cat.count}곳 →
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -152,11 +159,11 @@ export default function HomePage() {
             </div>
             <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
               <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>22시~01시 · 피크타임</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>나이트와 클럽이 가장 활기찬 시간대. 일찍 도착해서 자리를 잡자.</p>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>사교장과 플로어가 가장 활기찬 시간대. 일찍 도착해서 자리를 잡자.</p>
             </div>
             <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
               <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>01시~05시 · 심야</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>진짜 밤은 자정 이후. 에너지가 높은 클럽과 나이트의 하이라이트.</p>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>진짜 밤은 자정 이후. 에너지가 가장 높아지는 하이라이트 시간.</p>
             </div>
           </div>
         </div>
@@ -171,8 +178,8 @@ export default function HomePage() {
               { name: '강남·서초', desc: '대형 플로어와 프리미엄 라운지 밀집. 드레스코드 있는 곳이 많다.' },
               { name: '압구정·청담', desc: '세련된 분위기의 클럽과 라운지. 20~30대 직장인이 주 고객.' },
               { name: '홍대·이태원', desc: '글로벌 감각의 인디 씬. 음악 장르 폭이 넓다.' },
-              { name: '수유·노원·상봉', desc: '전통 나이트의 본거지. 오랜 단골이 많은 지역.' },
-              { name: '수원·인덕원·성남', desc: '경기권 나이트 격전지. 접근성 좋은 곳이 많다.' },
+              { name: '수유·노원·상봉', desc: '전통 사교 문화의 본거지. 오랜 단골이 많은 지역.' },
+              { name: '수원·인덕원·성남', desc: '경기권 밤문화 격전지. 접근성 좋은 곳이 많다.' },
               { name: '부산·울산', desc: '연산동·해운대 중심. 서울과 다른 온도의 밤.' },
             ].map(r => (
               <div key={r.name} style={{ padding: '1rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
@@ -189,7 +196,7 @@ export default function HomePage() {
         <div className="container narrow">
           <h2>자주 묻는 질문</h2>
           {[
-            { q: '밤문화 처음인데 어디부터?', a: '나이트가 처음이면 수유샴푸나이트, 클럽이면 강남클럽 레이스, 조용한 곳이면 압구정코드라운지를 추천한다.' },
+            { q: '밤문화 처음인데 어디부터?', a: '테이블 문화가 궁금하면 수유 쪽, 플로어를 원하면 강남 쪽, 조용한 곳이면 압구정코드라운지를 추천한다.' },
             { q: '혼자 가도 어색하지 않을까?', a: '바 카운터가 있는 곳이면 괜찮다. 혼자 오는 손님이 생각보다 많다.' },
             { q: '복장 규정은?', a: '깔끔한 캐주얼이 기본. 강남권은 슬리퍼·트레이닝복 입장 제한된다.' },
             { q: '예산은 보통 얼마?', a: '장소마다 다르지만, 음료 2~3잔 기준 3~5만 원 선이 일반적이다.' },

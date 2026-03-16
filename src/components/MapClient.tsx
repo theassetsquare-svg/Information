@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { getAllVenues, CAT_SLUG_TO_LABEL } from '@/lib/venues';
 import type { Venue } from '@/lib/venues';
 
@@ -13,37 +13,49 @@ const CAT_COLORS: Record<string, string> = {
   hoppa: '#F472B6',
 };
 
-const CATEGORIES = [
-  { slug: 'all', label: '전체' },
-  { slug: 'club', label: '클럽' },
-  { slug: 'night', label: '나이트' },
-  { slug: 'lounge', label: '라운지' },
-  { slug: 'room', label: '룸' },
-  { slug: 'yojeong', label: '요정' },
-  { slug: 'hoppa', label: '호빠' },
-];
+const CAT_LINKS: Record<string, string> = {
+  club: '/clubs/',
+  night: '/nights/',
+  lounge: '/lounges/',
+  room: '/rooms/',
+  yojeong: '/yojeongs/',
+  hoppa: '/hoppas/',
+};
 
-function groupByRegion(venues: Venue[]): Record<string, Venue[]> {
-  const groups: Record<string, Venue[]> = {};
+interface RegionStat {
+  region: string;
+  count: number;
+}
+
+function getRegionStats(venues: Venue[]): RegionStat[] {
+  const map: Record<string, number> = {};
   for (const v of venues) {
-    const key = v.region;
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(v);
+    map[v.region] = (map[v.region] || 0) + 1;
   }
-  return groups;
+  return Object.entries(map)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([region, count]) => ({ region, count }));
 }
 
 export default function MapClient() {
   const allVenues = useMemo(() => getAllVenues(), []);
-  const [activeCat, setActiveCat] = useState('all');
 
-  const filtered = useMemo(() => {
-    if (activeCat === 'all') return allVenues;
-    return allVenues.filter((v) => v.cat_slug === activeCat);
-  }, [allVenues, activeCat]);
-
-  const grouped = useMemo(() => groupByRegion(filtered), [filtered]);
-  const regionOrder = Object.keys(grouped).sort();
+  const categoryCards = useMemo(() => {
+    const catSlugs = ['club', 'night', 'lounge', 'room', 'yojeong', 'hoppa'];
+    return catSlugs.map((slug) => {
+      const venues = allVenues.filter((v) => v.cat_slug === slug);
+      const topRegions = getRegionStats(venues);
+      return {
+        slug,
+        label: CAT_SLUG_TO_LABEL[slug],
+        color: CAT_COLORS[slug],
+        link: CAT_LINKS[slug],
+        total: venues.length,
+        topRegions,
+      };
+    }).filter((c) => c.total > 0);
+  }, [allVenues]);
 
   return (
     <div>
@@ -87,117 +99,81 @@ export default function MapClient() {
         </div>
       </div>
 
-      {/* 카테고리 필터 */}
-      <div className="filter-bar">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.slug}
-            className={`filter-btn${activeCat === cat.slug ? ' active' : ''}`}
-            onClick={() => setActiveCat(cat.slug)}
-            style={
-              cat.slug !== 'all' && activeCat === cat.slug
-                ? { borderColor: CAT_COLORS[cat.slug], color: CAT_COLORS[cat.slug] }
-                : undefined
-            }
-          >
-            {cat.slug !== 'all' && (
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  background: CAT_COLORS[cat.slug],
-                  marginRight: '0.4rem',
-                  verticalAlign: 'middle',
-                }}
-              />
-            )}
-            {cat.label}
-          </button>
-        ))}
-      </div>
-
-      {/* 카테고리 색상 범례 */}
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-        {Object.entries(CAT_COLORS).map(([slug, color]) => (
-          <span key={slug} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: color, flexShrink: 0 }} />
-            {CAT_SLUG_TO_LABEL[slug]}
-          </span>
-        ))}
-      </div>
-
       {/* 업소 수 */}
       <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-        총 <strong style={{ color: 'var(--purple)' }}>{filtered.length}</strong>곳
+        총 <strong style={{ color: 'var(--purple)' }}>{allVenues.length}</strong>곳
       </p>
 
-      {/* 지역별 그룹 목록 */}
-      {regionOrder.map((region) => (
-        <div key={region} style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.15rem', marginBottom: '0.75rem', paddingBottom: '0.5rem', borderBottom: '1px solid var(--border)' }}>
-            {region}
-            <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-muted)', marginLeft: '0.5rem' }}>
-              {grouped[region].length}곳
-            </span>
-          </h2>
-          <div
+      {/* 카테고리별 요약 카드 6장 */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: '1rem',
+        }}
+      >
+        {categoryCards.map((cat) => (
+          <a
+            key={cat.slug}
+            href={cat.link}
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '0.75rem',
+              display: 'block',
+              padding: '1.25rem 1.5rem',
+              border: `1px solid var(--border)`,
+              borderRadius: '14px',
+              textDecoration: 'none',
+              color: 'inherit',
+              background: 'var(--bg-card)',
+              transition: 'border-color 0.2s, box-shadow 0.2s',
             }}
           >
-            {grouped[region].map((venue) => (
-              <a
-                key={venue.slug}
-                href={`/${venue.cat_slug}/${venue.slug}/`}
-                target="_blank"
-                rel="noopener noreferrer"
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
+              <span
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  padding: '0.75rem 1rem',
-                  border: '1px solid var(--border)',
-                  borderRadius: '12px',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  transition: 'border-color 0.2s, box-shadow 0.2s',
-                  background: 'var(--bg-card)',
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  background: cat.color,
+                  flexShrink: 0,
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = CAT_COLORS[venue.cat_slug] || 'var(--purple)';
-                  e.currentTarget.style.boxShadow = `0 2px 12px ${CAT_COLORS[venue.cat_slug] || 'var(--purple)'}20`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--border)';
-                  e.currentTarget.style.boxShadow = 'none';
+              />
+              <span style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text)' }}>
+                {cat.label}
+              </span>
+              <span
+                style={{
+                  marginLeft: 'auto',
+                  fontSize: '1.3rem',
+                  fontWeight: 800,
+                  color: cat.color,
                 }}
               >
-                <span
-                  style={{
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '50%',
-                    background: CAT_COLORS[venue.cat_slug] || 'var(--purple)',
-                    flexShrink: 0,
-                  }}
-                />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text)' }}>
-                    {venue.name}
-                  </div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {CAT_SLUG_TO_LABEL[venue.cat_slug]} · {venue.district}
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      ))}
+                {cat.total}곳
+              </span>
+            </div>
+
+            {/* 주요 지역 */}
+            {cat.topRegions.length > 0 && (
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {cat.topRegions.map((r) => (
+                  <span
+                    key={r.region}
+                    style={{
+                      fontSize: '0.8rem',
+                      padding: '0.2rem 0.6rem',
+                      borderRadius: '6px',
+                      background: `${cat.color}10`,
+                      color: 'var(--text-muted)',
+                    }}
+                  >
+                    {r.region} {r.count}곳
+                  </span>
+                ))}
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }

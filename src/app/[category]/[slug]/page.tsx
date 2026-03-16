@@ -80,7 +80,7 @@ export default function VenueDetailPage({ params }: Props) {
           <a href="/" target="_blank" rel="noopener noreferrer">홈</a>
           <span>&rsaquo;</span>
           <a href={catPath} target="_blank" rel="noopener noreferrer">{catLabel}</a>
-          <span>&rsaquo;</span> {venue.name}
+          <span>&rsaquo;</span> 상세
         </div>
       </div>
 
@@ -97,7 +97,6 @@ export default function VenueDetailPage({ params }: Props) {
           )}
           <div className="detail-meta">
             <span>{venue.region} {venue.district}</span>
-            <span>{catLabel}</span>
             {venue.hours && <span>{venue.hours}</span>}
           </div>
         </div>
@@ -123,8 +122,6 @@ export default function VenueDetailPage({ params }: Props) {
               {venue.hours && <tr><th>영업시간</th><td>{venue.hours}</td></tr>}
               {venue.station && <tr><th>교통</th><td>{venue.station}</td></tr>}
               {hasPhone && <tr><th>담당</th><td>{venue.nickname} ({venue.nickname_phone})</td></tr>}
-              <tr><th>카테고리</th><td>{catLabel}</td></tr>
-              <tr><th>지역</th><td>{venue.region} {venue.district}</td></tr>
               {venue.tags.length > 0 && <tr><th>태그</th><td>{venue.tags.join(', ')}</td></tr>}
             </tbody>
           </table>
@@ -134,14 +131,14 @@ export default function VenueDetailPage({ params }: Props) {
       {/* [D] 첫 방문 가이드 */}
       <section className="detail-section" style={{ background: 'var(--bg-alt)', padding: '2rem 0' }}>
         <div className="container narrow">
-          <h2>{catLabel} 처음이세요?</h2>
+          <h2>처음 방문하세요?</h2>
           <p style={{ marginBottom: '1rem' }}>
-            {venue.cat_slug === 'night' && '나이트는 테이블 중심의 사교 문화다. 정해진 자리에 앉아 주문하면 된다. 복장은 깔끔하게, 신분증은 필수.'}
-            {venue.cat_slug === 'club' && '클럽은 서서 즐기는 플로어가 중심이다. 드레스코드 확인하고 가자. 피크타임 전에 도착하면 대기 없이 들어갈 수 있다.'}
-            {venue.cat_slug === 'lounge' && '라운지는 대화가 주인공인 공간이다. 볼륨이 낮아 편하게 이야기할 수 있다. 예약을 추천한다.'}
-            {venue.cat_slug === 'room' && '룸은 프라이빗 공간이다. 인원수에 맞는 사이즈를 미리 확인하자. 단체 모임이나 접대에 적합하다.'}
-            {venue.cat_slug === 'yojeong' && '요정은 한정식 코스와 함께하는 전통 접대 문화다. 대부분 예약제로 운영된다. 격식을 갖추고 방문하자.'}
-            {venue.cat_slug === 'hoppa' && '호빠는 여성 고객을 위한 공간이다. 시스템을 미리 이해하고 가면 첫 방문도 편하다. 예산을 미리 정해두자.'}
+            {venue.cat_slug === 'night' && '테이블 중심의 사교 문화다. 정해진 자리에 앉아 주문하면 된다. 복장은 깔끔하게, 신분증은 필수.'}
+            {venue.cat_slug === 'club' && '서서 즐기는 플로어가 중심이다. 드레스코드 확인하고 가자. 피크타임 전에 도착하면 대기 없이 들어간다.'}
+            {venue.cat_slug === 'lounge' && '대화가 주인공인 공간이다. 볼륨이 낮아 편하게 이야기할 수 있다. 예약을 추천한다.'}
+            {venue.cat_slug === 'room' && '프라이빗 공간이다. 인원수에 맞는 사이즈를 미리 확인하자. 단체 모임이나 접대에 적합하다.'}
+            {venue.cat_slug === 'yojeong' && '한정식 코스와 함께하는 전통 접대 문화다. 대부분 예약제로 운영된다. 격식을 갖추고 방문하자.'}
+            {venue.cat_slug === 'hoppa' && '여성 고객을 위한 공간이다. 시스템을 미리 이해하고 가면 첫 방문도 편하다. 예산을 미리 정해두자.'}
           </p>
           <ul className="checklist">
             <li>신분증 지참 (주민등록증·면허증·여권)</li>

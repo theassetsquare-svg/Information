@@ -8,10 +8,7 @@ export default function StickyPhoneBar({ name, nickname, phone }: { name: string
       boxShadow: '0 -2px 12px rgba(0,0,0,0.15)',
     }}>
       <div style={{ color: '#FFF', minWidth: 0, flex: 1 }}>
-        <div style={{ fontSize: '0.8rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {name}
-        </div>
-        <div style={{ fontSize: '0.75rem', opacity: 0.9 }}>
+        <div style={{ fontSize: '0.85rem', fontWeight: 700 }}>
           담당: {nickname}
         </div>
       </div>

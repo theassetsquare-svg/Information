@@ -26,24 +26,30 @@ export default function NightsPage() {
         <p style={{ maxWidth: '640px', marginBottom: '1.5rem' }}>{cat.intro}</p>
 
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
-          <p>나이트는 테이블 중심의 사교 문화다. 부스나 홀에 앉아 양주를 주문하고, 웨이터가 서비스를 제공한다. 부킹 시스템이 있는 곳이 많다. 자리 배치에 따라 하루 저녁의 경험이 달라지니 입장 후 위치 선정이 중요하다.</p>
-          <p style={{ marginTop: '1rem' }}>수유·상봉은 서울 전통 나이트 강세 지역이고, 수원·성남·인덕원은 경기권 격전지다. 부산 연산동, 대구, 대전, 광주 등 지방 도시에도 오래 역사를 가진 곳이 많다. 현지인 후기를 참고하되 직접 확인하는 게 최선이다. {year}년 기준 전국 {venues.length}곳을 정리했다.</p>
+          <p>테이블 중심의 사교 문화. 부스나 홀에 앉아 양주를 주문하고, 웨이터가 서비스를 제공한다. 자리 배치에 따라 하루 저녁의 경험이 달라지니 입장 후 위치 선정이 중요하다.</p>
+          <p style={{ marginTop: '1rem' }}>수유·상봉은 서울 전통 강세 지역이고, 수원·성남·인덕원은 경기권 격전지다. 부산 연산동, 대구, 대전, 광주 등 지방 도시에도 오래 역사를 가진 곳이 많다. 현지인 후기를 참고하되 직접 확인하는 게 최선이다.</p>
         </div>
 
         {regions.map(region => {
           const rv = venues.filter(v => v.region === region);
+          const show = rv.slice(0, 1);
           return (
             <div key={region} style={{ marginBottom: '2.5rem' }}>
               <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
                 {region} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{rv.length}곳</span>
               </h2>
-              <div className="venue-grid">{rv.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
+              <div className="venue-grid">{show.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
+              {rv.length > 3 && (
+                <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                  외 {rv.length - 3}곳 — 카드를 눌러 상세 확인
+                </p>
+              )}
             </div>
           );
         })}
 
         <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: 'var(--bg-alt)', borderRadius: '16px' }}>
-          <h2>나이트 처음이세요?</h2>
+          <h2>처음 방문하세요?</h2>
           <p style={{ marginBottom: '1rem' }}>테이블 문화가 낯설어도 괜찮다. 기본만 알면 된다.</p>
           <ul className="checklist">
             <li>입장하면 웨이터가 자리를 안내한다. 따라가면 됨</li>
