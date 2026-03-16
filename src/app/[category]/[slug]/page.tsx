@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
-import { getAllVenues, getVenueBySlug, getRelatedVenues, SITE_URL } from '../../../lib/venues';
+import { getAllVenues, getVenueBySlug, getRelatedVenues, SITE_URL, CAT_SLUG_TO_LABEL } from '../../../lib/venues';
 import { generateGoldContent, SITE_NAME } from '../../../lib/gold-content';
-import { loadVenueContent, stripHtml } from '../../../lib/venue-loader';
 import VenueCard from '../../../components/VenueCard';
+import StickyPhoneBar from '../../../components/StickyPhoneBar';
 
-interface Props {
-  params: { category: string; slug: string };
-}
+interface Props { params: { category: string; slug: string } }
 
 export function generateStaticParams() {
   return getAllVenues().map(v => ({ category: v.cat_slug, slug: v.slug }));
@@ -30,35 +28,42 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
+const catPaths: Record<string, string> = {
+  club: '/clubs/', night: '/nights/', lounge: '/lounges/',
+  room: '/rooms/', yojeong: '/yojeongs/', hoppa: '/hoppas/',
+};
+
 export default function VenueDetailPage({ params }: Props) {
   const venue = getVenueBySlug(params.slug);
   if (!venue) return <div className="container section"><h1>페이지를 찾을 수 없습니다</h1></div>;
 
   const gc = generateGoldContent(venue);
-  const vc = loadVenueContent(venue.slug);
   const related = getRelatedVenues(venue, 3);
-  const catLabel = venue.cat_slug === 'club' ? '클럽' : venue.cat_slug === 'night' ? '나이트' : '라운지';
-  const catPlural = venue.cat_slug + 's';
+  const year = new Date().getFullYear();
+  const catLabel = CAT_SLUG_TO_LABEL[venue.cat_slug] || venue.category;
+  const catPath = catPaths[venue.cat_slug] || '/';
+  const hasPhone = !!(venue.nickname && venue.nickname_phone);
 
+  // JSON-LD
   const localBizLd = {
     '@context': 'https://schema.org', '@type': 'LocalBusiness',
     name: venue.name,
-    address: { '@type': 'PostalAddress', streetAddress: venue.address, addressLocality: venue.district, addressRegion: venue.region, addressCountry: 'KR' },
-    openingHours: venue.hours,
+    address: { '@type': 'PostalAddress', streetAddress: venue.address || undefined, addressLocality: venue.district, addressRegion: venue.region, addressCountry: 'KR' },
+    openingHours: venue.hours || undefined,
     url: `${SITE_URL}/${venue.cat_slug}/${venue.slug}/`,
   };
   const faqLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: (vc?.faqItems || gc.faq).slice(0, 6).map(f => ({
+    mainEntity: gc.faq.map(f => ({
       '@type': 'Question', name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: typeof f.a === 'string' ? f.a : '' },
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
   };
   const breadcrumbLd = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: '홈', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: catLabel, item: `${SITE_URL}/${catPlural}/` },
+      { '@type': 'ListItem', position: 2, name: catLabel, item: SITE_URL + catPath },
       { '@type': 'ListItem', position: 3, name: venue.name },
     ],
   };
@@ -69,12 +74,13 @@ export default function VenueDetailPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
+      {/* 브레드크럼 */}
       <div className="container">
         <div className="breadcrumb">
           <a href="/" target="_blank" rel="noopener noreferrer">홈</a>
-          <span>›</span>
-          <a href={`/${catPlural}/`} target="_blank" rel="noopener noreferrer">{catLabel}</a>
-          <span>›</span> {venue.name}
+          <span>&rsaquo;</span>
+          <a href={catPath} target="_blank" rel="noopener noreferrer">{catLabel}</a>
+          <span>&rsaquo;</span> {venue.name}
         </div>
       </div>
 
@@ -84,239 +90,159 @@ export default function VenueDetailPage({ params }: Props) {
           {venue.badge && <span className="venue-card-badge" style={{ marginBottom: '0.75rem' }}>{venue.badge}</span>}
           <h1>{venue.name}</h1>
           <p className="detail-tagline">{gc.tagline}</p>
+          {hasPhone && (
+            <p style={{ color: 'var(--purple)', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
+              담당: {venue.nickname}
+            </p>
+          )}
           <div className="detail-meta">
             <span>{venue.region} {venue.district}</span>
             <span>{catLabel}</span>
-            <span>{venue.hours}</span>
+            {venue.hours && <span>{venue.hours}</span>}
           </div>
         </div>
       </section>
 
-      {/* 고유 서사 (gold-content 생성) */}
+      {/* 서사 */}
       <section className="detail-section">
         <div className="container narrow">
+          <h2>{year}년 방문 가이드</h2>
           {gc.narrative.split('\n\n').map((p, i) => (
             <p key={i} style={{ marginBottom: '1.25rem' }}>{p}</p>
           ))}
         </div>
       </section>
 
-      {/* 기존 venue-content 고유 콘텐츠 렌더링 */}
-      {vc && (
-        <>
-          {/* 프롤로그 */}
-          {vc.prologue && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>{vc.prologueTitle}</h2>
-                <div dangerouslySetInnerHTML={{ __html: vc.prologue }} />
-              </div>
-            </section>
-          )}
-
-          {/* 씬 1 */}
-          {vc.scene1 && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>{vc.scene1Title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: vc.scene1 }} />
-              </div>
-            </section>
-          )}
-
-          {/* 씬 2 */}
-          {vc.scene2 && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>{vc.scene2Title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: vc.scene2 }} />
-              </div>
-            </section>
-          )}
-
-          {/* AI 요약 */}
-          {vc.aiSummary && vc.aiSummary.length > 0 && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>핵심 요약</h2>
-                <ul className="checklist">
-                  {vc.aiSummary.map((s, i) => (
-                    <li key={i}>{s}</li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          )}
-
-          {/* 실전 팁 */}
-          {vc.tipSection && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>{vc.tipTitle}</h2>
-                <div dangerouslySetInnerHTML={{ __html: vc.tipSection }} />
-              </div>
-            </section>
-          )}
-
-          {/* 후기/대화 */}
-          {vc.dialogueSection && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>{vc.dialogueTitle}</h2>
-                <div dangerouslySetInnerHTML={{ __html: vc.dialogueSection }} />
-              </div>
-            </section>
-          )}
-
-          {/* 체크리스트 */}
-          {vc.checklist && vc.checklist.length > 0 && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>{vc.checklistTitle}</h2>
-                <ul className="checklist">
-                  {vc.checklist.map((c, i) => (
-                    <li key={i}>{c}</li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          )}
-
-          {/* FAQ (venue-content 버전) */}
-          {vc.faqItems && vc.faqItems.length > 0 && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>Q&amp;A</h2>
-                {vc.faqItems.map((f, i) => (
-                  <div key={i} className="faq-item">
-                    <p className="faq-q">Q. {f.q}</p>
-                    <p className="faq-a">{f.a}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* 퀵 플랜 */}
-          {vc.quickPlan && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>빠른 결정표</h2>
-                {vc.quickPlan.decisionTable && (
-                  <table className="info-table" style={{ marginBottom: '1.5rem' }}>
-                    <thead>
-                      <tr>
-                        <th>항목</th>
-                        <th>옵션 A</th>
-                        <th>옵션 B</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {vc.quickPlan.decisionTable.map((row, i) => (
-                        <tr key={i}>
-                          <td style={{ fontWeight: 600, color: 'var(--gold)' }}>{row.label}</td>
-                          <td>{row.optionA}</td>
-                          <td>{row.optionB}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-                {vc.quickPlan.scenarios && vc.quickPlan.scenarios.map((s, i) => (
-                  <div key={i} style={{ marginBottom: '1rem' }}>
-                    <h3 style={{ fontSize: '1rem' }}>{s.title}</h3>
-                    <p style={{ fontSize: '0.9rem' }}>{s.desc}</p>
-                  </div>
-                ))}
-                {vc.quickPlan.costNote && (
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
-                    💰 {vc.quickPlan.costNote}
-                  </p>
-                )}
-              </div>
-            </section>
-          )}
-
-          {/* 아웃로 */}
-          {vc.outro && (
-            <section className="detail-section">
-              <div className="container narrow">
-                <h2>{vc.outroTitle}</h2>
-                <div dangerouslySetInnerHTML={{ __html: vc.outro }} />
-              </div>
-            </section>
-          )}
-        </>
-      )}
-
-      {/* venue-content가 없는 경우 fallback */}
-      {!vc && (
-        <>
-          <section className="detail-section">
-            <div className="container narrow">
-              <h2>기본 정보</h2>
-              <table className="info-table">
-                <tbody>
-                  <tr><th>주소</th><td>{venue.address}</td></tr>
-                  <tr><th>운영</th><td>{venue.hours}</td></tr>
-                  <tr><th>교통</th><td>{venue.station}</td></tr>
-                  <tr><th>지도</th><td><a href={venue.map_url} target="_blank" rel="noopener noreferrer">지도 보기 →</a></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-          <section className="detail-section">
-            <div className="container narrow">
-              <h2>방문 팁</h2>
-              <ul className="checklist">
-                {gc.tips.map((t, i) => <li key={i}>{t}</li>)}
-              </ul>
-            </div>
-          </section>
-          <section className="detail-section">
-            <div className="container narrow">
-              <h2>Q&amp;A</h2>
-              {gc.faq.map((f, i) => (
-                <div key={i} className="faq-item">
-                  <p className="faq-q">Q. {f.q}</p>
-                  <p className="faq-a">{f.a}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* 기본 정보 (항상 표시) */}
+      {/* 기본 정보 */}
       <section className="detail-section">
         <div className="container narrow">
-          <h2>찾아가는 길</h2>
-          <p>{venue.address}</p>
-          <p style={{ marginTop: '0.5rem' }}>{venue.station}</p>
-          <p style={{ marginTop: '0.5rem' }}>
-            <a href={venue.map_url} target="_blank" rel="noopener noreferrer">
-              네이버 지도에서 보기 →
-            </a>
+          <h2>기본 정보</h2>
+          <table className="info-table">
+            <tbody>
+              {venue.address && <tr><th>주소</th><td>{venue.address}</td></tr>}
+              {venue.hours && <tr><th>영업시간</th><td>{venue.hours}</td></tr>}
+              {venue.station && <tr><th>교통</th><td>{venue.station}</td></tr>}
+              {hasPhone && <tr><th>담당</th><td>{venue.nickname} ({venue.nickname_phone})</td></tr>}
+              <tr><th>카테고리</th><td>{catLabel}</td></tr>
+              <tr><th>지역</th><td>{venue.region} {venue.district}</td></tr>
+              {venue.tags.length > 0 && <tr><th>태그</th><td>{venue.tags.join(', ')}</td></tr>}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* [D] 첫 방문 가이드 */}
+      <section className="detail-section" style={{ background: 'var(--bg-alt)', padding: '2rem 0' }}>
+        <div className="container narrow">
+          <h2>{catLabel} 처음이세요?</h2>
+          <p style={{ marginBottom: '1rem' }}>
+            {venue.cat_slug === 'night' && '나이트는 테이블 중심의 사교 문화다. 정해진 자리에 앉아 주문하면 된다. 복장은 깔끔하게, 신분증은 필수.'}
+            {venue.cat_slug === 'club' && '클럽은 서서 즐기는 플로어가 중심이다. 드레스코드 확인하고 가자. 피크타임 전에 도착하면 대기 없이 들어갈 수 있다.'}
+            {venue.cat_slug === 'lounge' && '라운지는 대화가 주인공인 공간이다. 볼륨이 낮아 편하게 이야기할 수 있다. 예약을 추천한다.'}
+            {venue.cat_slug === 'room' && '룸은 프라이빗 공간이다. 인원수에 맞는 사이즈를 미리 확인하자. 단체 모임이나 접대에 적합하다.'}
+            {venue.cat_slug === 'yojeong' && '요정은 한정식 코스와 함께하는 전통 접대 문화다. 대부분 예약제로 운영된다. 격식을 갖추고 방문하자.'}
+            {venue.cat_slug === 'hoppa' && '호빠는 여성 고객을 위한 공간이다. 시스템을 미리 이해하고 가면 첫 방문도 편하다. 예산을 미리 정해두자.'}
           </p>
-          <div style={{ marginTop: '1rem' }}>
-            {venue.card_tags.map(t => (
-              <span key={t} className="venue-card-tag" style={{ marginRight: '0.4rem', display: 'inline-block', marginBottom: '0.25rem' }}>{t}</span>
+          <ul className="checklist">
+            <li>신분증 지참 (주민등록증·면허증·여권)</li>
+            <li>복장은 깔끔한 캐주얼 이상</li>
+            <li>피크타임 1시간 전 도착 추천</li>
+            <li>귀가 교통편 미리 확인</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* 방문 체크리스트 */}
+      <section className="detail-section">
+        <div className="container narrow">
+          <h2>방문 전 체크리스트</h2>
+          <ul className="checklist">
+            {gc.tips.map((tip, i) => <li key={i}>{tip}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="detail-section">
+        <div className="container narrow">
+          <h2>Q&amp;A</h2>
+          {gc.faq.map((f, i) => (
+            <div key={i} className="faq-item">
+              <p className="faq-q">Q. {f.q}</p>
+              <p className="faq-a">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* [E] 인기 시간대 */}
+      <section className="detail-section" style={{ background: 'var(--bg-alt)', padding: '2rem 0' }}>
+        <div className="container narrow">
+          <h2>인기 시간대</h2>
+          <div style={{ display: 'grid', gap: '0.75rem' }}>
+            {[
+              { time: '평일 저녁', level: '여유', bar: '30%' },
+              { time: '금요일 밤', level: '붐빔', bar: '85%' },
+              { time: '토요일 밤', level: '피크', bar: '95%' },
+              { time: '일요일', level: '한산', bar: '20%' },
+            ].map(t => (
+              <div key={t.time} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <span style={{ minWidth: '80px', fontSize: '0.9rem', fontWeight: 600 }}>{t.time}</span>
+                <div style={{ flex: 1, background: 'var(--border)', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
+                  <div style={{ width: t.bar, background: 'var(--purple)', height: '100%', borderRadius: '4px' }} />
+                </div>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', minWidth: '40px' }}>{t.level}</span>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 관련 */}
+      {/* 위치 안내 */}
+      {(venue.address || venue.station) && (
+        <section className="detail-section">
+          <div className="container narrow">
+            <h2>찾아가는 길</h2>
+            {venue.address && <p>{venue.address}</p>}
+            {venue.station && <p style={{ marginTop: '0.5rem' }}>{venue.station}</p>}
+            {venue.map_url && (
+              <p style={{ marginTop: '0.5rem' }}>
+                <a href={venue.map_url} target="_blank" rel="noopener noreferrer">지도에서 보기 →</a>
+              </p>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* 태그 */}
+      {venue.card_tags.length > 0 && (
+        <section style={{ padding: '1rem 0' }}>
+          <div className="container narrow">
+            {venue.card_tags.map(t => (
+              <span key={t} className="venue-card-tag" style={{ marginRight: '0.4rem', display: 'inline-block', marginBottom: '0.25rem' }}>{t}</span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* [C] 숨은 명소 추천 */}
       {related.length > 0 && (
         <section className="related-section">
           <div className="container">
             <h2>비슷한 곳</h2>
-            <div className="venue-grid" style={{ marginTop: '1rem' }}>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천하는 곳</p>
+            <div className="venue-grid">
               {related.map(v => <VenueCard key={v.slug} venue={v} />)}
             </div>
           </div>
         </section>
       )}
+
+      {/* 하단 여백 (전화바용) */}
+      <div style={{ paddingBottom: hasPhone ? '80px' : '0' }} />
+
+      {/* StickyPhoneBar */}
+      {hasPhone && <StickyPhoneBar name={venue.name} nickname={venue.nickname} phone={venue.nickname_phone} />}
     </>
   );
 }
