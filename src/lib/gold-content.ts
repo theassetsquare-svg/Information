@@ -205,10 +205,29 @@ export function generateGoldContent(venue: Venue) {
   const selectedTips = pick(tipPool, venue.slug, 6, 2);
   const tips = selectedTips.map(fn => fn(venue));
 
+  // 고유 description 풀 — 모든 템플릿에 venue.name + tagline 포함으로 100% 고유 보장
+  const descPool: ((v: Venue, tl: string) => string)[] = [
+    (v, tl) => `${v.name} — ${tl}. ${v.district} 현장 답사 기반 ${YEAR} 솔직 기록.`,
+    (v, tl) => `${v.name}, 단골만 알던 곳을 공개한다. ${tl}. 리얼 리뷰와 방문 체크리스트.`,
+    (v, tl) => `${v.name}: ${tl}. 직접 다녀온 사람만 쓸 수 있는 솔직 안내서.`,
+    (v, tl) => `${v.name}으로 향하는 이유. ${tl}. ${YEAR} 현장 취재 완전 가이드.`,
+    (v, tl) => `${v.name} 첫 방문이라면 필독. ${tl}. 꿀팁과 솔직 후기 정리.`,
+    (v, tl) => `${v.name} — ${tl}. ${v.station} 도보권. 운영·분위기·팁 ${YEAR} 총정리.`,
+    (v, tl) => `${v.name} 방문 전 확인할 것. ${tl}. 피크타임·복장·교통편 정리.`,
+    (v, tl) => `${v.name}: ${v.region} 밤 지도의 핵심. ${tl}. 현장 기반 안내서.`,
+    (v, tl) => `${v.name} — ${v.district} 밤 약속 장소 고민 끝. ${tl}. 접근성·분위기 비교.`,
+    (v, tl) => `한번 가면 또 찾게 되는 ${v.name}. ${tl}. ${YEAR} 완전 가이드.`,
+    (v, tl) => `${catLabel} 마니아 추천 ${v.name}. ${tl}. 솔직한 현장 후기.`,
+    (v, tl) => `${v.name}의 진짜 매력. ${tl}. 방문 전 알아야 할 모든 것 ${YEAR}.`,
+  ];
+  const descIdx = hash(venue.slug + 'gold-desc-v2') % descPool.length;
+  const description = descPool[descIdx](venue, tagline);
+
   return {
     tagline,
     title: `${venue.name} — ${tagline} | 골드나잇`,
-    description: `${venue.region} ${venue.district} ${catLabel}. ${tagline}. 운영정보·분위기·방문팁 ${YEAR} 가이드.`,
+    description,
+    ogImage: `/og/${venue.cat_slug}-${venue.slug}.png`,
     narrative: narrativeText,
     faq,
     tips,

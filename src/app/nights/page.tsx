@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: cat.title, description: cat.description,
     url: SITE_URL + '/nights/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
-    images: [{ url: '/images/og-thumb.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/og/nights.png', width: 1200, height: 630 }],
   },
 };
 
