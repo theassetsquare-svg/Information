@@ -37,7 +37,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <h1>{content.heading}</h1>
-          <p style={{ fontSize: '1.1rem', color: 'var(--champagne)', marginBottom: '0.5rem' }}>
+          <p style={{ fontSize: '1.1rem', color: 'var(--text-sub)', marginBottom: '0.5rem' }}>
             {content.subheading}
           </p>
           <p style={{ maxWidth: '600px', marginBottom: '2.5rem' }}>
@@ -49,7 +49,7 @@ export default function HomePage() {
             {categories.map(cat => (
               <a
                 key={cat.slug}
-                href={`/${cat.slug}s/`}
+                href={cat.path}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -62,7 +62,7 @@ export default function HomePage() {
                   transition: 'border-color 0.2s',
                 }}
               >
-                <h2 style={{ color: 'var(--gold)', marginBottom: '0.5rem' }}>
+                <h2 style={{ color: 'var(--purple)', marginBottom: '0.5rem' }}>
                   {cat.name} <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{cat.count}곳</span>
                 </h2>
                 <p style={{ color: 'var(--text)' }}>
@@ -70,7 +70,7 @@ export default function HomePage() {
                   {cat.slug === 'night' && '테이블 하나가 오늘 밤의 무대가 된다. 격식과 흥이 공존하는 전통의 현장.'}
                   {cat.slug === 'lounge' && '잔을 기울이며 나누는 이야기가 밤의 주인공이 되는 곳.'}
                 </p>
-                <span style={{ color: 'var(--gold)', fontSize: '0.9rem', marginTop: '0.75rem', display: 'inline-block' }}>
+                <span style={{ color: 'var(--purple)', fontSize: '0.9rem', marginTop: '0.75rem', display: 'inline-block' }}>
                   전체 목록 보기 →
                 </span>
               </a>

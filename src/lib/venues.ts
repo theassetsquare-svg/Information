@@ -23,6 +23,8 @@ export interface Venue {
   card_tags: string[];
   keywords: string[];
   source_urls: string[];
+  nickname: string;
+  nickname_phone: string;
 }
 
 const venues: Venue[] = venuesData as Venue[];
@@ -39,11 +41,14 @@ export function getVenuesByCategory(catSlug: string): Venue[] {
   return venues.filter(v => v.cat_slug === catSlug);
 }
 
-export function getCategories(): { slug: string; name: string; count: number }[] {
+export function getCategories(): { slug: string; name: string; path: string; count: number }[] {
   const cats = [
-    { slug: 'club', name: '클럽' },
-    { slug: 'night', name: '나이트' },
-    { slug: 'lounge', name: '라운지' },
+    { slug: 'club', name: '클럽', path: '/clubs/' },
+    { slug: 'night', name: '나이트', path: '/nights/' },
+    { slug: 'lounge', name: '라운지', path: '/lounges/' },
+    { slug: 'room', name: '룸', path: '/rooms/' },
+    { slug: 'yojeong', name: '요정', path: '/yojeongs/' },
+    { slug: 'hoppa', name: '호빠', path: '/hoppas/' },
   ];
   return cats.map(c => ({
     ...c,
@@ -61,3 +66,8 @@ export function getRelatedVenues(venue: Venue, limit = 4): Venue[] {
 export const SITE_NAME = '골드나잇 가이드';
 export const SITE_URL = 'https://informationa.pages.dev';
 export const MAIN_SITE_URL = 'https://ilsanroom.pages.dev';
+
+export const CAT_SLUG_TO_LABEL: Record<string, string> = {
+  club: '클럽', night: '나이트', lounge: '라운지',
+  room: '룸', yojeong: '요정', hoppa: '호빠',
+};

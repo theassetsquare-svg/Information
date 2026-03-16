@@ -10,6 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL + '/clubs/', lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: SITE_URL + '/nights/', lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: SITE_URL + '/lounges/', lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: SITE_URL + '/rooms/', lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: SITE_URL + '/yojeongs/', lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: SITE_URL + '/hoppas/', lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
   ];
 
   const venuePages = venues.map(v => ({
