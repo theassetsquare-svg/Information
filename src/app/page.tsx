@@ -2,8 +2,13 @@ import type { Metadata } from 'next';
 import { getCategories, getAllVenues, SITE_NAME, SITE_URL } from '../lib/venues';
 import { getHomeContent } from '../lib/gold-content';
 import VenueCard from '../components/VenueCard';
+import SearchBar from '../components/SearchBar';
+import Roulette from '../components/Roulette';
+import VsBattle from '../components/VsBattle';
 
 const content = getHomeContent();
+const cats = getCategories();
+const allVenues = getAllVenues();
 
 export const metadata: Metadata = {
   title: content.title,
@@ -17,151 +22,184 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const categories = getCategories();
   const year = new Date().getFullYear();
-  const allVenues = getAllVenues();
-  // 카테고리별 2개씩 분산 선정 — clubs/nights/lounges 목록과 겹침 최소화
-  const featured = allVenues.filter(v =>
-    ['again', 'bermuda', 'arabian', 'chancedom', 'hype', 'siena'].includes(v.slug)
-  );
+  const top5 = allVenues.slice(0, 5);
+  const top10 = allVenues.slice(0, 10);
+  const hidden = allVenues.slice(50, 53);
 
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'WebSite',
     name: SITE_NAME, url: SITE_URL, description: content.description,
+    potentialAction: { '@type': 'SearchAction', target: `${SITE_URL}/search?q={search_term_string}`, 'query-input': 'required name=search_term_string' },
+  };
+
+  const catDescs: Record<string, string> = {
+    club: '비트 위에서 밤을 보내는 곳',
+    night: '테이블과 격식의 전통 문화',
+    lounge: '잔을 기울이며 나누는 대화',
+    room: '문 닫으면 우리만의 공간',
+    yojeong: '한정식과 국악의 풍류',
+    hoppa: '여성을 위한 프리미엄 선택',
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="section">
-        <div className="container">
-          <h1>{content.heading}</h1>
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-sub)', marginBottom: '0.5rem' }}>
-            {content.subheading}
-          </p>
-          <p style={{ maxWidth: '600px', marginBottom: '2.5rem' }}>
-            어두운 거리 끝에 빛나는 문 하나. 그 너머에 오늘 밤이 있다.
-            이 지도는 그 문을 찾는 사람을 위한 안내서다.
-          </p>
+      {/* 히어로 + 검색 */}
+      <section style={{ padding: '2.5rem 0 1.5rem', background: 'var(--bg-alt)' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', marginBottom: '0.5rem' }}>{content.heading}</h1>
+          <p style={{ color: 'var(--text-sub)', marginBottom: '1.5rem', fontSize: '1.05rem' }}>{content.subheading}</p>
+          <SearchBar venues={allVenues} />
+        </div>
+      </section>
 
-          <div style={{ display: 'grid', gap: '1.5rem' }}>
-            {categories.map(cat => (
-              <a
-                key={cat.slug}
-                href={cat.path}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block',
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border)',
-                  borderRadius: '10px',
-                  padding: '2rem',
-                  textDecoration: 'none',
-                  transition: 'border-color 0.2s',
-                }}
-              >
-                <h2 style={{ color: 'var(--purple)', marginBottom: '0.5rem' }}>
-                  {cat.name} <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{cat.count}곳</span>
-                </h2>
-                <p style={{ color: 'var(--text)' }}>
-                  {cat.slug === 'club' && '사운드가 몸을 감싸고, 조명이 시야를 지배하는 곳. 비트 위에서 밤이 시작된다.'}
-                  {cat.slug === 'night' && '테이블 하나가 오늘 밤의 무대가 된다. 격식과 흥이 공존하는 전통의 현장.'}
-                  {cat.slug === 'lounge' && '잔을 기울이며 나누는 이야기가 밤의 주인공이 되는 곳.'}
-                </p>
-                <span style={{ color: 'var(--purple)', fontSize: '0.9rem', marginTop: '0.75rem', display: 'inline-block' }}>
-                  전체 목록 보기 →
-                </span>
+      {/* 6종 카테고리 아이콘 */}
+      <section style={{ padding: '1.5rem 0' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+            {cats.map(cat => (
+              <a key={cat.slug} href={cat.path} target="_blank" rel="noopener noreferrer"
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem 0.5rem',
+                  background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px',
+                  textDecoration: 'none', color: 'var(--text)', transition: 'all 0.2s' }}>
+                <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>{cat.name}</span>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>{cat.count}곳</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>{catDescs[cat.slug]}</span>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 추천 업소 — 체류시간 증대 */}
+      {/* TOP5 핫한 곳 */}
       <section className="section">
         <div className="container">
-          <h2>에디터가 고른 이번 주 추천</h2>
-          <p style={{ marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
-            분위기, 접근성, 재방문율을 종합해 선정했다.
+          <h2>지금 핫한 곳 TOP 5</h2>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>조회수 기준 인기 업소</p>
+          <div className="venue-grid">
+            {top5.map(v => <VenueCard key={v.slug} venue={v} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* [A] 룰렛 */}
+      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+        <div className="container">
+          <Roulette venues={allVenues} />
+        </div>
+      </section>
+
+      {/* [B] VS 대결 */}
+      <section className="section">
+        <div className="container">
+          <VsBattle venues={allVenues} />
+        </div>
+      </section>
+
+      {/* [D] 첫 방문 가이드 배너 */}
+      <section style={{ padding: '1.5rem 0' }}>
+        <div className="container">
+          <div style={{ background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)', border: '1px solid var(--border-accent)',
+            borderRadius: '16px', padding: '1.5rem 2rem', textAlign: 'center' }}>
+            <h3 style={{ marginBottom: '0.5rem' }}>밤문화 처음이세요?</h3>
+            <p style={{ color: 'var(--text-sub)', marginBottom: '1rem', fontSize: '0.95rem' }}>
+              뭘 입고 가야 하는지, 얼마나 드는지, 혼자 가도 되는지. 궁금한 거 다 정리했다.
+            </p>
+            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{
+              display: 'inline-block', background: 'var(--purple)', color: '#FFF',
+              padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: 700,
+              textDecoration: 'none', fontSize: '0.95rem' }}>
+              첫 방문 가이드 보기 →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* TOP10 */}
+      <section className="section">
+        <div className="container">
+          <h2>인기 업소 TOP 10</h2>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+            {year}년 전국에서 가장 많이 조회된 곳
           </p>
           <div className="venue-grid">
-            {featured.map(v => <VenueCard key={v.slug} venue={v} />)}
+            {top10.map(v => <VenueCard key={v.slug} venue={v} />)}
           </div>
         </div>
       </section>
 
-      {/* 가이드 소개 — 체류시간 증대 */}
-      <section className="section">
-        <div className="container narrow">
-          <h2>이 가이드에 대하여</h2>
-          <p>
-            {year}년 현재, 전국 밤문화 현장을 발로 뛰며 기록한 결과물이다.
-            광고비를 받고 쓴 글이 아니라, 직접 방문한 뒤 느낀 그대로를 옮겼다.
-          </p>
-          <p style={{ marginTop: '1rem' }}>
-            영업시간이 바뀌었을 수도 있고, 분위기가 달라졌을 수도 있다.
-            가기 전에 한 번 더 확인하는 습관이 좋은 밤을 만든다.
-          </p>
-          <p style={{ marginTop: '1rem' }}>
-            세 가지 유형으로 분류했다. 비트 위에서 밤을 보내는 곳, 테이블에 앉아 격식을 갖추는 곳,
-            잔을 기울이며 대화하는 곳. 각 카드에는 핵심 태그와 한줄평을 달아 빠르게 비교할 수 있게 했다.
-          </p>
-          <p style={{ marginTop: '1rem' }}>
-            지역별로 정리해 동선 계획에 참고하도록 구성했다. 서울 강남·홍대·이태원은 물론
-            부산·대구·대전·인천·제주까지 포함한다. 방문 전 교통편과 운영 시간을 확인하길 권한다.
-          </p>
+      {/* 숨은 명소 */}
+      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+        <div className="container">
+          <h2>이 업소 몰랐지?</h2>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>아는 사람만 아는 숨은 명소</p>
+          <div className="venue-grid">
+            {hidden.map(v => <VenueCard key={v.slug} venue={v} />)}
+          </div>
         </div>
       </section>
 
-      {/* 지역별 간략 소개 — 체류시간 증대 */}
+      {/* [E] 인기 시간대 */}
       <section className="section">
+        <div className="container narrow">
+          <h2>시간대별 추천</h2>
+          <div style={{ display: 'grid', gap: '1rem' }}>
+            <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+              <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>19시~22시 · 저녁 시작</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>라운지나 요정이 좋다. 저녁 식사 후 자연스럽게 이어지는 동선.</p>
+            </div>
+            <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+              <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>22시~01시 · 피크타임</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>나이트와 클럽이 가장 활기찬 시간대. 일찍 도착해서 자리를 잡자.</p>
+            </div>
+            <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+              <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>01시~05시 · 심야</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>진짜 밤은 자정 이후. 에너지가 높은 클럽과 나이트의 하이라이트.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 지역별 가이드 */}
+      <section className="section" style={{ background: 'var(--bg-alt)' }}>
         <div className="container narrow">
           <h2>지역별 밤의 표정</h2>
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.1rem' }}>서울 강남·서초</h3>
-            <p>대형 플로어와 프리미엄 라운지가 밀집한 핵심 권역. 금요일 밤이면 강남역에서 논현까지 에너지가 이어진다. 드레스코드가 있는 곳이 많으니 복장에 신경 쓰자.</p>
-          </div>
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.1rem' }}>서울 마포·홍대</h3>
-            <p>언더그라운드 씬의 본거지. 소규모 공간에서 터지는 사운드가 매력이다. 골목마다 개성 있는 바와 클럽이 숨어 있다. 탐험하는 재미가 있는 동네.</p>
-          </div>
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.1rem' }}>서울 용산·이태원</h3>
-            <p>글로벌 감각이 살아 있는 유일한 거리. 세계 각국 DJ가 자주 찾는 전당이 이곳에 있다. 음악 장르의 폭이 넓어 취향을 시험하기 좋다.</p>
-          </div>
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.1rem' }}>부산·대구·지방 도시</h3>
-            <p>서면과 해운대는 부산 밤의 양대 축이다. 대구에는 리듬이 강한 밤이 있고, 제주에는 해안가 분위기의 장소가 기다린다. 서울과 다른 온도의 밤을 경험할 수 있다.</p>
+          <div style={{ display: 'grid', gap: '1rem' }}>
+            {[
+              { name: '강남·서초', desc: '대형 플로어와 프리미엄 라운지 밀집. 드레스코드 있는 곳이 많다.' },
+              { name: '압구정·청담', desc: '세련된 분위기의 클럽과 라운지. 20~30대 직장인이 주 고객.' },
+              { name: '홍대·이태원', desc: '글로벌 감각의 인디 씬. 음악 장르 폭이 넓다.' },
+              { name: '수유·노원·상봉', desc: '전통 나이트의 본거지. 오랜 단골이 많은 지역.' },
+              { name: '수원·인덕원·성남', desc: '경기권 나이트 격전지. 접근성 좋은 곳이 많다.' },
+              { name: '부산·울산', desc: '연산동·해운대 중심. 서울과 다른 온도의 밤.' },
+            ].map(r => (
+              <div key={r.name} style={{ padding: '1rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+                <h3 style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>{r.name}</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>{r.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 방문 FAQ — 체류시간 증대 */}
+      {/* FAQ */}
       <section className="section">
         <div className="container narrow">
-          <h2>밤문화 입문 Q&amp;A</h2>
-          <div className="faq-item">
-            <p className="faq-q">Q. 처음인데 어디부터 가면 좋을까?</p>
-            <p className="faq-a">분위기에 따라 다르다. 에너지 넘치는 밤을 원하면 홍대 비원, 격식 있는 사교를 원하면 수유샴푸나이트, 조용한 대화를 원하면 강남 코드라운지를 추천한다.</p>
-          </div>
-          <div className="faq-item">
-            <p className="faq-q">Q. 혼자 방문해도 어색하지 않을까?</p>
-            <p className="faq-a">전혀 그렇지 않다. 바 카운터에 앉으면 자연스럽고, 나이트는 테이블 하나면 충분하다. 혼자 오는 사람이 의외로 많다.</p>
-          </div>
-          <div className="faq-item">
-            <p className="faq-q">Q. 복장 규정은 어떻게 되나?</p>
-            <p className="faq-a">깔끔한 캐주얼이 기본이다. 강남권 클럽과 라운지는 슬리퍼·트레이닝복 입장이 제한된다. 셔츠에 깨끗한 신발이면 대부분 통과한다.</p>
-          </div>
-          <div className="faq-item">
-            <p className="faq-q">Q. 입장료는 보통 얼마인가?</p>
-            <p className="faq-a">장소마다 천차만별이다. 무료 입장부터 5만 원대까지 폭이 넓다. 주말이 비싸고, 게스트 리스트에 등록하면 할인받는 곳도 있다.</p>
-          </div>
-          <div className="faq-item">
-            <p className="faq-q">Q. 새벽에 귀가하려면?</p>
-            <p className="faq-a">카카오T나 타다 앱을 미리 설치하자. 지하철 막차는 보통 자정 전후다. 택시비를 아끼려면 함께 온 일행과 합승하는 것도 방법이다.</p>
-          </div>
+          <h2>자주 묻는 질문</h2>
+          {[
+            { q: '밤문화 처음인데 어디부터?', a: '나이트가 처음이면 수유샴푸나이트, 클럽이면 강남클럽 레이스, 조용한 곳이면 압구정코드라운지를 추천한다.' },
+            { q: '혼자 가도 어색하지 않을까?', a: '바 카운터가 있는 곳이면 괜찮다. 혼자 오는 손님이 생각보다 많다.' },
+            { q: '복장 규정은?', a: '깔끔한 캐주얼이 기본. 강남권은 슬리퍼·트레이닝복 입장 제한된다.' },
+            { q: '예산은 보통 얼마?', a: '장소마다 다르지만, 음료 2~3잔 기준 3~5만 원 선이 일반적이다.' },
+            { q: '새벽에 귀가는?', a: '카카오T나 타다 앱 미리 설치. 지하철 막차는 자정 전후.' },
+          ].map((f, i) => (
+            <div key={i} className="faq-item">
+              <p className="faq-q">Q. {f.q}</p>
+              <p className="faq-a">{f.a}</p>
+            </div>
+          ))}
         </div>
       </section>
     </>

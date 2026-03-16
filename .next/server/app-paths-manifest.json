@@ -1,12 +1,12 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/sitemap.xml/route": "app/sitemap.xml/route.js",
-  "/lounges/page": "app/lounges/page.js",
-  "/clubs/page": "app/clubs/page.js",
   "/hoppas/page": "app/hoppas/page.js",
+  "/nights/page": "app/nights/page.js",
+  "/clubs/page": "app/clubs/page.js",
+  "/lounges/page": "app/lounges/page.js",
+  "/yojeongs/page": "app/yojeongs/page.js",
   "/rooms/page": "app/rooms/page.js",
   "/page": "app/page.js",
-  "/nights/page": "app/nights/page.js",
-  "/yojeongs/page": "app/yojeongs/page.js",
   "/[category]/[slug]/page": "app/[category]/[slug]/page.js"
 }

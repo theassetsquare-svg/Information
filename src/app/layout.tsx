@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Banner from '../components/Banner';
+import KakaoFloat from '../components/KakaoFloat';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Banner />
         <Footer />
+        <KakaoFloat />
       </body>
     </html>
   );
