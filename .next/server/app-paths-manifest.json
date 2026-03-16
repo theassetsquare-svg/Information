@@ -2,13 +2,19 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/sitemap.xml/route": "app/sitemap.xml/route.js",
   "/community/guidelines/page": "app/community/guidelines/page.js",
-  "/community/page": "app/community/page.js",
+  "/chat/page": "app/chat/page.js",
+  "/dress-code/page": "app/dress-code/page.js",
   "/clubs/page": "app/clubs/page.js",
   "/lounges/page": "app/lounges/page.js",
-  "/hoppas/page": "app/hoppas/page.js",
+  "/community/page": "app/community/page.js",
   "/[category]/[slug]/page": "app/[category]/[slug]/page.js",
+  "/hoppas/page": "app/hoppas/page.js",
   "/rooms/page": "app/rooms/page.js",
-  "/yojeongs/page": "app/yojeongs/page.js",
   "/nights/page": "app/nights/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/vs/page": "app/vs/page.js",
+  "/quiz/page": "app/quiz/page.js",
+  "/roulette/page": "app/roulette/page.js",
+  "/safety/page": "app/safety/page.js",
+  "/yojeongs/page": "app/yojeongs/page.js"
 }
