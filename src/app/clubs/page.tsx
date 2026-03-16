@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { getVenuesByCategory, SITE_URL } from '../../lib/venues';
 import { getCategoryContent, SITE_NAME } from '../../lib/gold-content';
-import VenueCard from '../../components/VenueCard';
 
 const cat = getCategoryContent('club');
 const venues = getVenuesByCategory('club');
@@ -20,7 +19,7 @@ export default function ClubsPage() {
     <section className="section">
       <div className="container">
         <div className="breadcrumb">
-          <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 클럽
+          <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 플로어
         </div>
         <h1 style={{ marginTop: '1rem' }}>{cat.heading}</h1>
         <p style={{ maxWidth: '640px', marginBottom: '1.5rem' }}>{cat.intro}</p>
@@ -31,27 +30,25 @@ export default function ClubsPage() {
           <p style={{ marginTop: '1rem' }}>드레스코드가 있는 곳이 대부분이다. 슬리퍼와 트레이닝복은 입장이 제한된다. 피크타임은 금·토 자정 전후. 일찍 도착하면 대기 없이 들어갈 수 있다. 음료 가격은 지역마다 천차만별이니 미리 확인하고 가자.</p>
         </div>
 
-        {regions.map(region => {
-          const rv = venues.filter(v => v.region === region);
-          const show = rv.slice(0, 1);
-          return (
-            <div key={region} style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
-                {region} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{rv.length}곳</span>
-              </h2>
-              <div className="venue-grid">{show.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
-              {rv.length > 3 && (
-                <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                  외 {rv.length - 3}곳 — 카드를 눌러 상세 확인
-                </p>
-              )}
-            </div>
-          );
-        })}
+        {/* 지역별 요약 링크 */}
+        <div style={{ display: 'grid', gap: '0.75rem', marginBottom: '2.5rem' }}>
+          {regions.map(region => {
+            const rv = venues.filter(v => v.region === region);
+            return (
+              <div key={region} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+                <div>
+                  <span style={{ fontWeight: 700, fontSize: '1rem' }}>{region}</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginLeft: '0.5rem' }}>{rv.length}곳</span>
+                </div>
+                <a href={`/club/${rv[0].slug}/`} style={{ fontSize: '0.9rem', color: 'var(--purple)', textDecoration: 'none', fontWeight: 600 }}>→</a>
+              </div>
+            );
+          })}
+        </div>
 
-        {/* [D] 첫방문 가이드 */}
+        {/* 첫방문 안내 */}
         <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: 'var(--bg-alt)', borderRadius: '16px' }}>
-          <h2>클럽 처음이세요?</h2>
+          <h2>처음이세요?</h2>
           <p style={{ marginBottom: '1rem' }}>걱정 마. 이것만 알면 된다.</p>
           <ul className="checklist">
             <li>복장: 셔츠+깨끗한 신발이면 대부분 통과. 슬리퍼·반바지는 NO</li>
@@ -63,9 +60,9 @@ export default function ClubsPage() {
           </ul>
         </div>
 
-        {/* [E] 인기 시간대 */}
+        {/* 인기 시간대 */}
         <div className="narrow" style={{ marginTop: '2rem' }}>
-          <h2>클럽 인기 시간대</h2>
+          <h2>피크 시간대</h2>
           <div style={{ display: 'grid', gap: '0.75rem', marginTop: '1rem' }}>
             {[
               { time: '금요일 22~24시', bar: '75%', note: '오프닝' },

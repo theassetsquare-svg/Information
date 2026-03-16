@@ -3,12 +3,12 @@ import { SITE_URL, SITE_NAME } from '@/lib/venues';
 import RankingClient from '@/components/RankingClient';
 
 export const metadata: Metadata = {
-  title: `인기 랭킹 TOP 20 — 지금 가장 핫한 곳 | ${SITE_NAME}`,
-  description: '전국 밤문화 업소 인기 랭킹 TOP 20. 클럽·나이트·라운지·룸·요정·호빠 카테고리별 순위를 확인하자.',
+  title: `주간 순위표 — 조회수 기반 집계 | ${SITE_NAME}`,
+  description: '조회수 집계로 산출한 주간 순위표. 장르·기간별 필터를 걸어 확인할 수 있다.',
   alternates: { canonical: SITE_URL + '/ranking/' },
   openGraph: {
-    title: `인기 랭킹 TOP 20 — 지금 가장 핫한 곳 | ${SITE_NAME}`,
-    description: '전국 밤문화 업소 인기 랭킹 TOP 20. 카테고리별 순위를 확인하자.',
+    title: `주간 순위표 — 조회수 기반 집계 | ${SITE_NAME}`,
+    description: '조회수 집계로 산출한 주간 순위표.',
     url: SITE_URL + '/ranking/',
     siteName: SITE_NAME,
     locale: 'ko_KR',

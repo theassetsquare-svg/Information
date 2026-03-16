@@ -3,12 +3,12 @@ import { SITE_URL, SITE_NAME } from '../../lib/venues';
 import SafetyClient from '../../components/SafetyClient';
 
 export const metadata: Metadata = {
-  title: `안전 가이드 — 즐거운 밤을 위한 필수 정보 | ${SITE_NAME}`,
-  description: '혈중알코올농도 계산기, 긴급 연락처, 안전 귀가 가이드, 위치 공유 방법까지. 안전하게 놀고 안전하게 돌아오자.',
+  title: `귀가 수칙 — 알코올 계산기·긴급번호 | ${SITE_NAME}`,
+  description: '혈중농도 측정기, 긴급 전화번호부, 택시 호출 팁, 위치 공유 설정법. 무사 귀환을 위한 수칙.',
   alternates: { canonical: SITE_URL + '/safety/' },
   openGraph: {
-    title: `안전 가이드 — 즐거운 밤을 위한 필수 정보 | ${SITE_NAME}`,
-    description: '즐거운 밤을 위한 필수 안전 정보. 안전하게 놀고, 안전하게 돌아오자.',
+    title: `귀가 수칙 — 알코올 계산기·긴급번호 | ${SITE_NAME}`,
+    description: '혈중농도 측정기, 긴급 전화번호부, 택시 호출 팁.',
     url: SITE_URL + '/safety/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
   },

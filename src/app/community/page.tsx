@@ -4,12 +4,12 @@ import { SITE_NAME } from '../../lib/gold-content';
 import CommunityBoard from '../../components/CommunityBoard';
 
 export const metadata: Metadata = {
-  title: `커뮤니티 — 밤문화 이야기가 모이는 곳 | ${SITE_NAME}`,
-  description: '자유게시판, 후기, 파티모집, 꿀팁, 패션, Q&A. 밤문화 경험을 나누고 정보를 얻는 커뮤니티.',
+  title: `게시판 — 자유글·동행모집·질문답변 | ${SITE_NAME}`,
+  description: '자유글, 동행 모집, 질문 답변 게시판. 경험담을 올리고 댓글로 소통하는 열린 마당.',
   alternates: { canonical: SITE_URL + '/community/' },
   openGraph: {
-    title: `커뮤니티 — 밤문화 이야기가 모이는 곳 | ${SITE_NAME}`,
-    description: '자유게시판, 후기, 파티모집, 꿀팁, 패션, Q&A. 밤문화 경험을 나누고 정보를 얻는 커뮤니티.',
+    title: `게시판 — 자유글·동행모집·질문답변 | ${SITE_NAME}`,
+    description: '자유글, 동행 모집, 질문 답변 게시판.',
     url: SITE_URL + '/community/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
   },

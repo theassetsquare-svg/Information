@@ -3,12 +3,12 @@ import { SITE_URL, SITE_NAME } from '@/lib/venues';
 import MapClient from '@/components/MapClient';
 
 export const metadata: Metadata = {
-  title: `전국 밤문화 지도 — 내 주변 업소 찾기 | ${SITE_NAME}`,
-  description: '전국 103곳의 클럽·나이트·라운지·룸·요정·호빠를 지도에서 한눈에. 지역별·카테고리별 필터로 내 주변 업소를 찾아보자.',
+  title: `위치 탐색 — 반경 필터로 근처 검색 | ${SITE_NAME}`,
+  description: '반경 설정 후 근처 스팟을 핀으로 표시. 업종 필터와 거리순 정렬을 지원한다.',
   alternates: { canonical: SITE_URL + '/map/' },
   openGraph: {
-    title: `전국 밤문화 지도 — 내 주변 업소 찾기 | ${SITE_NAME}`,
-    description: '전국 103곳의 클럽·나이트·라운지·룸·요정·호빠를 지도에서 한눈에.',
+    title: `위치 탐색 — 반경 필터로 근처 검색 | ${SITE_NAME}`,
+    description: '반경 설정 후 근처 스팟을 핀으로 표시.',
     url: SITE_URL + '/map/',
     siteName: SITE_NAME,
     locale: 'ko_KR',

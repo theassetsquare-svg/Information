@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { SITE_URL, SITE_NAME } from '@/lib/venues';
 
 export const metadata: Metadata = {
-  title: `이벤트 캘린더 — 이번주 뭐 있지? | ${SITE_NAME}`,
-  description: '전국 밤문화 이벤트 캘린더. 매주 금토 피크타임부터 월말 파티까지, 이번주 일정을 확인하자.',
+  title: `캘린더 — 월간 스케줄 한눈에 | ${SITE_NAME}`,
+  description: '월간 스케줄 달력. 금토 오프닝부터 월말 스페셜까지 날짜별 일정 표기.',
   alternates: { canonical: SITE_URL + '/events/' },
   openGraph: {
-    title: `이벤트 캘린더 — 이번주 뭐 있지? | ${SITE_NAME}`,
-    description: '전국 밤문화 이벤트 캘린더. 매주 금토 피크타임부터 월말 파티까지.',
+    title: `캘린더 — 월간 스케줄 한눈에 | ${SITE_NAME}`,
+    description: '월간 스케줄 달력. 금토 오프닝부터 월말 스페셜까지.',
     url: SITE_URL + '/events/',
     siteName: SITE_NAME,
     locale: 'ko_KR',

@@ -3,8 +3,8 @@ import { getAllVenues, SITE_URL } from '../../lib/venues';
 import { SITE_NAME } from '../../lib/gold-content';
 
 export const metadata: Metadata = {
-  title: `사이트 상태 | ${SITE_NAME}`,
-  description: '골드나잇 가이드 서비스 상태 확인.',
+  title: `운영 현황 대시보드 | ${SITE_NAME}`,
+  description: '서버 가동률, 데이터 건수, 배포 이력을 보여주는 운영 현황 대시보드.',
   alternates: { canonical: SITE_URL + '/status/' },
 };
 

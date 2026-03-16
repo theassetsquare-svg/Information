@@ -3,12 +3,12 @@ import { SITE_URL, SITE_NAME } from '../../lib/venues';
 import RoulettePageClient from '../../components/RoulettePageClient';
 
 export const metadata: Metadata = {
-  title: `오늘 갈 곳 룰렛 — 운명이 정해준다 | ${SITE_NAME}`,
-  description: '어디 갈지 고민된다면 운명에 맡겨보자. 전체 랜덤 또는 카테고리별 랜덤으로 오늘의 행선지를 정한다.',
+  title: `랜덤 뽑기 — 행선지 자동 선정 | ${SITE_NAME}`,
+  description: '버튼 한 번으로 랜덤 행선지를 자동 선정. 선택 장애가 올 때 돌려보자.',
   alternates: { canonical: SITE_URL + '/roulette/' },
   openGraph: {
-    title: `오늘 갈 곳 룰렛 — 운명이 정해준다 | ${SITE_NAME}`,
-    description: '어디 갈지 고민된다면 운명에 맡겨보자. 버튼 하나로 오늘의 행선지가 정해진다.',
+    title: `랜덤 뽑기 — 행선지 자동 선정 | ${SITE_NAME}`,
+    description: '버튼 한 번으로 랜덤 행선지를 자동 선정.',
     url: SITE_URL + '/roulette/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
   },

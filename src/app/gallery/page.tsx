@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { SITE_URL, SITE_NAME, getAllVenues } from '@/lib/venues';
 
 export const metadata: Metadata = {
-  title: `갤러리 — 전국 밤문화 현장 스냅 | ${SITE_NAME}`,
-  description: '전국 클럽·나이트·라운지·룸·요정·호빠의 현장 스냅을 모아보는 페이지.',
+  title: `포토 아카이브 — 공간 분위기 미리보기 | ${SITE_NAME}`,
+  description: '업장 내부 컷과 외관 사진을 아카이브로 정리. 분위기 파악에 참고하세요.',
   alternates: { canonical: SITE_URL + '/gallery/' },
   openGraph: {
-    title: `갤러리 — 전국 밤문화 현장 스냅 | ${SITE_NAME}`,
-    description: '전국 클럽·나이트·라운지·룸·요정·호빠의 현장 스냅을 모아보는 페이지.',
+    title: `포토 아카이브 — 공간 분위기 미리보기 | ${SITE_NAME}`,
+    description: '업장 내부 컷과 외관 사진을 아카이브로 정리.',
     url: SITE_URL + '/gallery/',
     siteName: SITE_NAME,
     locale: 'ko_KR',

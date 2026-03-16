@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { getVenuesByCategory, SITE_URL } from '../../lib/venues';
 import { getCategoryContent, SITE_NAME } from '../../lib/gold-content';
-import VenueCard from '../../components/VenueCard';
 
 const cat = getCategoryContent('night');
 const venues = getVenuesByCategory('night');
@@ -20,33 +19,31 @@ export default function NightsPage() {
     <section className="section">
       <div className="container">
         <div className="breadcrumb">
-          <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 나이트
+          <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 테이블
         </div>
         <h1 style={{ marginTop: '1rem' }}>{cat.heading}</h1>
         <p style={{ maxWidth: '640px', marginBottom: '1.5rem' }}>{cat.intro}</p>
 
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
           <p>테이블 중심의 사교 문화. 부스나 홀에 앉아 양주를 주문하고, 웨이터가 서비스를 제공한다. 자리 배치에 따라 하루 저녁의 경험이 달라지니 입장 후 위치 선정이 중요하다.</p>
-          <p style={{ marginTop: '1rem' }}>수유·상봉은 서울 전통 강세 지역이고, 수원·성남·인덕원은 경기권 격전지다. 부산 연산동, 대구, 대전, 광주 등 지방 도시에도 오래 역사를 가진 곳이 많다. 현지인 후기를 참고하되 직접 확인하는 게 최선이다.</p>
+          <p style={{ marginTop: '1rem' }}>수유·상봉은 서울 전통 강세 지역이고, 수원·성남·인덕원은 경기권 격전지다. 부산 연산동, 대구, 대전, 광주 등 지방 도시에도 오래 역사를 가진 곳이 많다. 현지인 의견을 참고하되 직접 확인하는 게 최선이다.</p>
         </div>
 
-        {regions.map(region => {
-          const rv = venues.filter(v => v.region === region);
-          const show = rv.slice(0, 1);
-          return (
-            <div key={region} style={{ marginBottom: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
-                {region} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{rv.length}곳</span>
-              </h2>
-              <div className="venue-grid">{show.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
-              {rv.length > 3 && (
-                <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                  외 {rv.length - 3}곳 — 카드를 눌러 상세 확인
-                </p>
-              )}
-            </div>
-          );
-        })}
+        {/* 지역별 요약 링크 */}
+        <div style={{ display: 'grid', gap: '0.75rem', marginBottom: '2.5rem' }}>
+          {regions.map(region => {
+            const rv = venues.filter(v => v.region === region);
+            return (
+              <div key={region} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+                <div>
+                  <span style={{ fontWeight: 700, fontSize: '1rem' }}>{region}</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginLeft: '0.5rem' }}>{rv.length}곳</span>
+                </div>
+                <a href={`/night/${rv[0].slug}/`} style={{ fontSize: '0.9rem', color: 'var(--purple)', textDecoration: 'none', fontWeight: 600 }}>→</a>
+              </div>
+            );
+          })}
+        </div>
 
         <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: 'var(--bg-alt)', borderRadius: '16px' }}>
           <h2>처음 방문하세요?</h2>
@@ -62,7 +59,7 @@ export default function NightsPage() {
         </div>
 
         <div className="narrow" style={{ marginTop: '2rem' }}>
-          <h2>나이트 인기 시간대</h2>
+          <h2>피크 시간대</h2>
           <div style={{ display: 'grid', gap: '0.75rem', marginTop: '1rem' }}>
             {[
               { time: '금요일 22~24시', bar: '80%', note: '활발' },

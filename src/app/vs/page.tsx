@@ -3,12 +3,12 @@ import { SITE_URL, SITE_NAME } from '../../lib/venues';
 import VsPageClient from '../../components/VsPageClient';
 
 export const metadata: Metadata = {
-  title: `업소 VS 대결 — 어디가 더 나을까? | ${SITE_NAME}`,
-  description: '두 업소를 비교해서 투표하자. 이번주 대결, 지난주 결과, 명예의 전당까지 확인할 수 있다.',
+  title: `양자택일 투표 — 승자를 골라보자 | ${SITE_NAME}`,
+  description: '두 곳을 나란히 놓고 투표. 매주 새 대진표가 올라오며 승패 통계를 공개한다.',
   alternates: { canonical: SITE_URL + '/vs/' },
   openGraph: {
-    title: `업소 VS 대결 — 어디가 더 나을까? | ${SITE_NAME}`,
-    description: '두 업소를 비교해서 투표하자. 어디가 더 나을까?',
+    title: `양자택일 투표 — 승자를 골라보자 | ${SITE_NAME}`,
+    description: '두 곳을 나란히 놓고 투표. 매주 새 대진표.',
     url: SITE_URL + '/vs/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
   },

@@ -3,12 +3,12 @@ import { SITE_URL, SITE_NAME } from '../../lib/venues';
 import DressCodeClient from '../../components/DressCodeClient';
 
 export const metadata: Metadata = {
-  title: `드레스코드 가이드 — 뭘 입고 가야 할까? | ${SITE_NAME}`,
-  description: '클럽, 나이트, 라운지, 룸, 요정, 호빠 카테고리별 복장 가이드. DO & DON\'T 리스트와 외출 전 체크리스트.',
+  title: `착장 규정 정리 — 입장 허용 기준표 | ${SITE_NAME}`,
+  description: '착장 허용·불가 기준표와 계절별 코디 예시. 입구에서 돌아서지 않으려면 미리 읽자.',
   alternates: { canonical: SITE_URL + '/dress-code/' },
   openGraph: {
-    title: `드레스코드 가이드 — 뭘 입고 가야 할까? | ${SITE_NAME}`,
-    description: '카테고리별 복장 가이드. 이것만 알면 입장에서 막힐 일 없다.',
+    title: `착장 규정 정리 — 입장 허용 기준표 | ${SITE_NAME}`,
+    description: '착장 허용·불가 기준표와 계절별 코디 예시.',
     url: SITE_URL + '/dress-code/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
   },
