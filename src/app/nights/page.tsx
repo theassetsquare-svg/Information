@@ -7,14 +7,9 @@ const cat = getCategoryContent('night');
 const venues = getVenuesByCategory('night');
 
 export const metadata: Metadata = {
-  title: cat.title,
-  description: cat.description,
+  title: cat.title, description: cat.description,
   alternates: { canonical: SITE_URL + '/nights/' },
-  openGraph: {
-    title: cat.title, description: cat.description,
-    url: SITE_URL + '/nights/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
-    images: [{ url: '/og/nights.png', width: 1200, height: 630 }],
-  },
+  openGraph: { title: cat.title, description: cat.description, url: SITE_URL + '/nights/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website', images: [{ url: '/og/nights.png', width: 1200, height: 630 }] },
 };
 
 const regions = [...new Set(venues.map(v => v.region))];
@@ -25,14 +20,15 @@ export default function NightsPage() {
     <section className="section">
       <div className="container">
         <div className="breadcrumb">
-          <a href="/" target="_blank" rel="noopener noreferrer">홈</a>
-          <span>›</span> 나이트
+          <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 나이트
         </div>
         <h1 style={{ marginTop: '1rem' }}>{cat.heading}</h1>
-        <p style={{ maxWidth: '600px', marginBottom: '1rem' }}>{cat.intro}</p>
-        <p style={{ maxWidth: '600px', marginBottom: '2rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-          테이블 위치 선정부터 피크타임 공략, 매너 규칙까지. {year}년 기준 {venues.length}곳을 엄선했다. 각 카드를 누르면 상세 가이드로 이동한다.
-        </p>
+        <p style={{ maxWidth: '640px', marginBottom: '1.5rem' }}>{cat.intro}</p>
+
+        <div className="narrow" style={{ marginBottom: '2.5rem' }}>
+          <p>나이트는 테이블 중심의 사교 문화다. 부스나 홀에 앉아 양주를 주문하고, 웨이터가 서비스를 제공한다. 부킹 시스템이 있는 곳이 많다. 자리 배치에 따라 하루 저녁의 경험이 달라지니 입장 후 위치 선정이 중요하다.</p>
+          <p style={{ marginTop: '1rem' }}>수유·상봉은 서울 전통 나이트 강세 지역이고, 수원·성남·인덕원은 경기권 격전지다. 부산 연산동, 대구, 대전, 광주 등 지방 도시에도 오래 역사를 가진 곳이 많다. 현지인 후기를 참고하되 직접 확인하는 게 최선이다. {year}년 기준 전국 {venues.length}곳을 정리했다.</p>
+        </div>
 
         {regions.map(region => {
           const rv = venues.filter(v => v.region === region);
@@ -41,25 +37,42 @@ export default function NightsPage() {
               <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
                 {region} <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{rv.length}곳</span>
               </h2>
-              <div className="venue-grid">
-                {rv.map(v => <VenueCard key={v.slug} venue={v} />)}
-              </div>
+              <div className="venue-grid">{rv.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
             </div>
           );
         })}
 
+        <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: 'var(--bg-alt)', borderRadius: '16px' }}>
+          <h2>나이트 처음이세요?</h2>
+          <p style={{ marginBottom: '1rem' }}>테이블 문화가 낯설어도 괜찮다. 기본만 알면 된다.</p>
+          <ul className="checklist">
+            <li>입장하면 웨이터가 자리를 안내한다. 따라가면 됨</li>
+            <li>양주 1병이 기본 주문 단위. 안주는 별도</li>
+            <li>복장: 깔끔한 캐주얼. 정장까지는 아니어도 단정하게</li>
+            <li>혼자 가면 카운터석. 2인 이상이면 테이블 추천</li>
+            <li>피크타임 전(22시 전후) 도착이 좋은 자리 확보의 핵심</li>
+            <li>예산: 양주 1병 기준 10~30만 원대 (지역마다 다름)</li>
+          </ul>
+        </div>
+
         <div className="narrow" style={{ marginTop: '2rem' }}>
-          <h2>방문 전 알아두면 좋은 것</h2>
-          <p>피크 시간대는 보통 금·토 자정 전후다. 일찍 도착하면 좋은 자리를 선점할 수 있다.</p>
-          <p style={{ marginTop: '0.75rem' }}>신분증은 필수이며, 복장은 깔끔하게 챙기자. 첫인상이 전체 흐름을 좌우한다.</p>
-          <p style={{ marginTop: '0.75rem' }}>
-            수도권부터 지방까지, 각 지역 나이트의 특색은 뚜렷하다. 수유·상봉은 전통 강세 지역이고,
-            인천·수원·대전·울산에도 오랜 역사를 가진 곳이 있다. 현지인 후기를 참고하되 직접 확인이 최선이다.
-          </p>
-          <p style={{ marginTop: '0.75rem' }}>
-            테이블 위치에 따라 하루 저녁 경험이 달라진다. 입구 근처는 출입이 잦고, 안쪽은 조용하며,
-            무대 앞은 활기가 넘친다. 목적에 맞는 자리를 선택하는 것이 핵심이다.
-          </p>
+          <h2>나이트 인기 시간대</h2>
+          <div style={{ display: 'grid', gap: '0.75rem', marginTop: '1rem' }}>
+            {[
+              { time: '금요일 22~24시', bar: '80%', note: '활발' },
+              { time: '금요일 24~02시', bar: '95%', note: '피크' },
+              { time: '토요일 22~01시', bar: '90%', note: '피크' },
+              { time: '평일 저녁', bar: '30%', note: '여유' },
+            ].map(t => (
+              <div key={t.time} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ minWidth: '120px', fontSize: '0.9rem', fontWeight: 600 }}>{t.time}</span>
+                <div style={{ flex: 1, background: 'var(--border)', borderRadius: '4px', height: '8px' }}>
+                  <div style={{ width: t.bar, background: 'var(--purple)', height: '100%', borderRadius: '4px' }} />
+                </div>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t.note}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
