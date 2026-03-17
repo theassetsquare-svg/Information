@@ -2,31 +2,26 @@ export default function StickyPhoneBar({ name, nickname, phone }: { name: string
   return (
     <div style={{
       position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
-      background: 'linear-gradient(135deg, #7C3AED, #8B5CF6)',
-      padding: '0.4rem 0.75rem',
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      boxShadow: '0 -2px 12px rgba(0,0,0,0.15)',
-      maxWidth: '100vw',
-      height: '48px',
+      padding: '0.5rem 1rem',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      gap: '0.75rem',
     }}>
-      <div style={{ color: '#FFF', minWidth: 0, flex: 1, overflow: 'hidden' }}>
-        <div style={{ fontSize: '0.8rem', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {nickname}
-        </div>
-      </div>
       <a
         href={`tel:${phone}`}
         aria-label={`${nickname}에게 전화`}
         style={{
-          display: 'flex', alignItems: 'center', gap: '0.3rem',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
           background: '#10B981', color: '#FFF',
-          padding: '0.4rem 0.75rem', borderRadius: '6px',
-          fontWeight: 700, fontSize: '0.8rem',
+          padding: '0.75rem 1.5rem', borderRadius: '50px',
+          fontWeight: 700, fontSize: '0.9rem',
           textDecoration: 'none', whiteSpace: 'nowrap',
-          minHeight: '36px',
+          minHeight: '44px',
+          boxShadow: '0 4px 16px rgba(16, 185, 129, 0.4)',
+          maxWidth: '280px',
+          width: '100%',
         }}
       >
-        📞 전화
+        📞 {nickname} 전화하기
       </a>
     </div>
   );
