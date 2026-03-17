@@ -15,7 +15,7 @@ export default function StickyPhoneBar({ name, nickname, phone }: { name: string
           boxShadow: '0 4px 16px rgba(16, 185, 129, 0.4)',
         }}
       >
-        📞 {nickname}
+        📞 {nickname} {phone}
       </a>
     </div>
   );
