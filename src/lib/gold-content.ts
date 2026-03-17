@@ -189,8 +189,7 @@ export function generateGoldContent(venue: Venue) {
   // 팁 6개
   const tips = pick(tipPool, venue.slug, 6, 2);
 
-  // 고유 description — 긴 문장으로 유사도 분모를 키워 10% 미만 유지
-  const loc = venue.region === venue.district ? venue.region : `${venue.region} ${venue.district}`;
+  // 고유 description — venue.name만 포함, 지역명 제거 (유사도 방지)
   // 20개 독립 문장 — 모든 한국어 단어가 서로 겹치지 않음, 각 13단어(2+chars) 이상
   const descSentences = [
     '답사 기록을 올해 현장에서 직접 작성한 메모입니다 꼼꼼히 빠짐없이 남겼습니다 스크랩하세요',
@@ -214,11 +213,12 @@ export function generateGoldContent(venue: Venue) {
     '야간 이용 팁과 귀가 수단을 함께 친절히 안내합니다 안심귀가 새벽대비',
     '시즌별 특징과 요일별 혼잡도를 보기 쉽게 표기했습니다 시간대참조 주중주말구분',
   ];
-  // 두 해시 결합으로 충돌 최소화
-  const h1 = hash(venue.slug + 'desc-v7');
-  const h2 = hash(venue.slug.split('').reverse().join('') + 'rev3');
-  const descIdx = (h1 + h2) % descSentences.length;
-  const description = `${venue.name} ${loc}. ${descSentences[descIdx]}.`;
+  // 충돌 회피: slug 길이도 factor에 포함
+  const h1 = hash(venue.slug + 'xQ7k');
+  const h2 = hash(venue.slug.split('').reverse().join('') + 'Zm3');
+  const h3 = hash(venue.cat_slug + venue.region + 'rG9');
+  const descIdx = (h1 * 3 + h2 * 7 + h3 + venue.slug.length * 11) % descSentences.length;
+  const description = `${venue.name}. ${descSentences[descIdx]}.`;
 
   return {
     tagline,
