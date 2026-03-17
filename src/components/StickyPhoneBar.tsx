@@ -1,7 +1,7 @@
 export default function StickyPhoneBar({ name, nickname, phone }: { name: string; nickname: string; phone: string }) {
   return (
     <div style={{
-      position: 'fixed', bottom: '16px', right: '16px', zIndex: 50,
+      position: 'fixed', bottom: '16px', left: '50%', transform: 'translateX(-50%)', zIndex: 50,
     }}>
       <a
         href={`tel:${phone}`}
