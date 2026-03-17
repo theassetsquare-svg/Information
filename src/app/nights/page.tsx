@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getVenuesByCategory, SITE_URL } from '../../lib/venues';
 import { getCategoryContent, SITE_NAME } from '../../lib/gold-content';
 import VenueCard from '../../components/VenueCard';
+import { SlotMachine, DailyStreak, EndlessRecommend, LiveCounter } from '../../components/AddictionEngine';
 
 const cat = getCategoryContent('night');
 const venues = getVenuesByCategory('night');
@@ -41,6 +42,17 @@ export default function NightsPage() {
             <li>예산: 양주 1병 기준 10~30만 원대 (지역마다 다름)</li>
           </ul>
         </div>
+        {/* 슬롯머신 */}
+        <div style={{ marginTop: '2rem' }}>
+          <SlotMachine venues={venues} />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <DailyStreak />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <EndlessRecommend venues={venues} />
+        </div>
+
       </div>
     </section>
   );

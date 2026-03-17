@@ -3,6 +3,7 @@ import { getAllVenues, getVenueBySlug, getRelatedVenues, SITE_URL, CAT_SLUG_TO_L
 import { generateGoldContent, SITE_NAME } from '../../../lib/gold-content';
 import VenueCard from '../../../components/VenueCard';
 import StickyPhoneBar from '../../../components/StickyPhoneBar';
+import { ReadingProgress, AutoNext, EndlessRecommend, LiveCounter, SlotMachine } from '../../../components/AddictionEngine';
 
 interface Props { params: { category: string; slug: string } }
 
@@ -234,6 +235,35 @@ export default function VenueDetailPage({ params }: Props) {
           </div>
         </section>
       )}
+
+      {/* 📊 읽기 진행률 */}
+      <ReadingProgress />
+
+      {/* 🔴 실시간 카운터 */}
+      <section style={{ padding: '0.75rem 0', textAlign: 'center' }}>
+        <LiveCounter />
+      </section>
+
+      {/* 넷플릭스식 자동 다음 추천 */}
+      <section className="section">
+        <div className="container narrow">
+          <AutoNext venues={getAllVenues()} current={venue.slug} />
+        </div>
+      </section>
+
+      {/* 🎰 슬롯머신 */}
+      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+        <div className="container narrow">
+          <SlotMachine venues={getAllVenues()} />
+        </div>
+      </section>
+
+      {/* 끝없는 추천 */}
+      <section className="section">
+        <div className="container narrow">
+          <EndlessRecommend venues={getAllVenues()} />
+        </div>
+      </section>
 
       {/* 하단 여백 (전화바용) */}
       <div style={{ paddingBottom: hasPhone ? '80px' : '0' }} />

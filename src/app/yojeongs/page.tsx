@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getVenuesByCategory, SITE_URL } from '../../lib/venues';
 import { getCategoryContent, SITE_NAME } from '../../lib/gold-content';
 import VenueCard from '../../components/VenueCard';
+import { SlotMachine, DailyStreak, EndlessRecommend, LiveCounter } from '../../components/AddictionEngine';
 
 const cat = getCategoryContent('yojeong');
 const venues = getVenuesByCategory('yojeong');
@@ -41,6 +42,17 @@ export default function YojeongsPage() {
             <li>접대 목적이면 좌석 배치와 동선을 미리 확인하는 게 좋다</li>
           </ul>
         </div>
+        {/* 슬롯머신 */}
+        <div style={{ marginTop: '2rem' }}>
+          <SlotMachine venues={venues} />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <DailyStreak />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <EndlessRecommend venues={venues} />
+        </div>
+
       </div>
     </section>
   );

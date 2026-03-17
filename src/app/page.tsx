@@ -5,6 +5,7 @@ import VenueCard from '../components/VenueCard';
 import SearchBar from '../components/SearchBar';
 import Roulette from '../components/Roulette';
 import VsBattle from '../components/VsBattle';
+import { SlotMachine, DailyStreak, LiveCounter, InfiniteFeed, EndlessRecommend } from '../components/AddictionEngine';
 
 const content = getHomeContent();
 const cats = getCategories();
@@ -207,6 +208,38 @@ export default function HomePage() {
               <p className="faq-a">{f.a}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 🎰 슬롯머신 — 변동 보상 */}
+      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+        <div className="container">
+          <SlotMachine venues={allVenues} />
+        </div>
+      </section>
+
+      {/* 출석 스트릭 */}
+      <section className="section">
+        <div className="container narrow">
+          <DailyStreak />
+        </div>
+      </section>
+
+      {/* 무한 피드 — 틱톡식 */}
+      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+        <div className="container">
+          <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>전체 업소 둘러보기</h2>
+          <LiveCounter />
+          <div style={{ marginTop: '1rem' }}>
+            <InfiniteFeed venues={allVenues} />
+          </div>
+        </div>
+      </section>
+
+      {/* 끝없는 추천 */}
+      <section className="section">
+        <div className="container narrow">
+          <EndlessRecommend venues={allVenues} />
         </div>
       </section>
     </>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getVenuesByCategory, SITE_URL } from '../../lib/venues';
 import { getCategoryContent, SITE_NAME } from '../../lib/gold-content';
 import VenueCard from '../../components/VenueCard';
+import { SlotMachine, DailyStreak, EndlessRecommend, LiveCounter } from '../../components/AddictionEngine';
 
 const cat = getCategoryContent('room');
 const venues = getVenuesByCategory('room');
@@ -40,6 +41,17 @@ export default function RoomsPage() {
             <li>픽업 서비스가 있는 곳도 있다. 전화로 문의하자</li>
           </ul>
         </div>
+        {/* 슬롯머신 */}
+        <div style={{ marginTop: '2rem' }}>
+          <SlotMachine venues={venues} />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <DailyStreak />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <EndlessRecommend venues={venues} />
+        </div>
+
       </div>
     </section>
   );

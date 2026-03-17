@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getVenuesByCategory, SITE_URL } from '../../lib/venues';
 import { getCategoryContent, SITE_NAME } from '../../lib/gold-content';
 import VenueCard from '../../components/VenueCard';
+import { SlotMachine, DailyStreak, EndlessRecommend, LiveCounter } from '../../components/AddictionEngine';
 
 const cat = getCategoryContent('club');
 const venues = getVenuesByCategory('club');
@@ -40,6 +41,17 @@ export default function ClubsPage() {
             <li>예산: 입장료 무료~3만 원, 음료 1~2만 원대가 일반적</li>
           </ul>
         </div>
+        {/* 슬롯머신 */}
+        <div style={{ marginTop: '2rem' }}>
+          <SlotMachine venues={venues} />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <DailyStreak />
+        </div>
+        <div style={{ marginTop: '2rem' }}>
+          <EndlessRecommend venues={venues} />
+        </div>
+
       </div>
     </section>
   );
