@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 /* ═══ 틱톡식 무한 피드 ═══ */
 export function InfiniteFeed({ venues }: { venues: any[] }) {
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(3);
   const loader = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

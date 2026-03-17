@@ -26,10 +26,13 @@ export default function LoungesPage() {
 
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
           <p>라운지는 음악이 배경이고 대화가 주인공인 곳이다. 볼륨이 낮아 옆 사람 말이 들린다. 와인, 칵테일, 위스키 등 음료 퀄리티가 핵심이다. 소개팅, 비즈니스 미팅, 소규모 모임 장소로 많이 택한다.</p>
-          <p style={{ marginTop: '1rem' }}>압구정·청담 일대가 주 무대다. 바텐더의 실력이 곧 그 집의 수준. 시그니처 한 잔을 주문해보면 분위기를 가늠할 수 있다. 예약을 추천한다. 주말 저녁에는 자리가 빨리 찬다. {year}년 기준 {venues.length}곳을 비교했다.</p>
+          <p style={{ marginTop: '1rem' }}>강남권 일대가 주 무대다. 바텐더의 실력이 곧 그 집의 수준. 시그니처 한 잔을 주문해보면 분위기를 가늠할 수 있다. 예약을 추천한다. 주말 저녁에는 자리가 빨리 찬다. {year}년 기준 {venues.length}곳을 비교했다.</p>
         </div>
 
-        <div className="venue-grid">{venues.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
+        <div className="venue-grid">{venues.slice(0, 2).map(v => <VenueCard key={v.slug} venue={v} />)}</div>
+        <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+          전체 {venues.length}곳 — 카드를 눌러 상세 확인
+        </p>
 
         <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: 'var(--bg-alt)', borderRadius: '16px' }}>
           <h2>라운지 처음이세요?</h2>

@@ -24,10 +24,18 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const year = new Date().getFullYear();
-  // 카테고리별 1개씩 = 최대 4개 (같은 단어 반복 최소화)
-  const seen = new Set<string>();
-  const top5 = allVenues.filter(v => { if (seen.has(v.cat_slug)) return false; seen.add(v.cat_slug); return true; }).slice(0, 4);
-  const hidden = allVenues.slice(50, 51);
+  // 카테고리+지역 분산, 같은 지역단어 2회 초과 방지
+  const seenCat = new Set<string>();
+  const seenRegion = new Set<string>();
+  const top5 = allVenues.filter(v => {
+    if (seenCat.has(v.cat_slug) || seenRegion.has(v.region)) return false;
+    // 이름에서 지역명 추출하여 중복 방지
+    const regionWords = v.region.split('').filter((_:string,i:number) => i < 2).join('');
+    if (seenRegion.has(regionWords)) return false;
+    seenCat.add(v.cat_slug); seenRegion.add(v.region); seenRegion.add(regionWords);
+    return true;
+  }).slice(0, 3);
+  const hidden: typeof allVenues = [];
 
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'WebSite',

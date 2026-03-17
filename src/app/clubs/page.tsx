@@ -29,7 +29,16 @@ export default function ClubsPage() {
           <p style={{ marginTop: '1rem' }}>드레스코드가 있는 곳이 대부분이다. 슬리퍼와 트레이닝복은 입장이 제한된다. 피크타임은 금·토 자정 전후. 일찍 도착하면 대기 없이 들어갈 수 있다. {year}년 기준 {venues.length}곳을 정리했다.</p>
         </div>
 
-        <div className="venue-grid">{venues.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
+        <div className="venue-grid">{(() => {
+          const seen: Record<string, number> = {};
+          return venues.filter(v => {
+            seen[v.region] = (seen[v.region] || 0) + 1;
+            return seen[v.region] <= 1;
+          }).map(v => <VenueCard key={v.slug} venue={v} />);
+        })()}</div>
+        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+          전체 {venues.length}곳 — 각 카드를 눌러 상세 확인
+        </p>
 
         <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: 'var(--bg-alt)', borderRadius: '16px' }}>
           <h2>처음이세요?</h2>
