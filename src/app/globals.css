@@ -1,5 +1,5 @@
 /* ── 밝은 테마 (네이버/구글처럼) ── */
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+/* Pretendard는 layout.tsx에서 <link preload>로 로드 — @import 렌더링 차단 제거 */
 
 :root {
   --bg: #FFFFFF;
@@ -11,10 +11,10 @@
   --cyan: #06B6D4;
   --text: #111111;
   --text-sub: #333333;
-  --text-muted: #555555;
+  --text-muted: #4B4B4B;
   --border: #E5E7EB;
   --border-accent: #DDD6FE;
-  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard Variable', 'Pretendard', sans-serif;
   --max-w: 1080px;
   --max-narrow: 720px;
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Banner from '../components/Banner';
@@ -28,6 +29,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
+      <head>
+        <link
+          rel="preconnect"
+          href="https://cdn.jsdelivr.net"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
+          as="style"
+        />
+      </head>
       <body>
         <a href="#main" className="sr-only">본문으로 건너뛰기</a>
         <Header />
@@ -36,6 +49,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Banner />
         <Footer />
         <KakaoFloat />
+        {/* 폰트 CSS — 렌더링 후 비동기 로드 */}
+        <Script id="load-pretendard" strategy="afterInteractive">
+          {`var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css';document.head.appendChild(l);`}
+        </Script>
       </body>
     </html>
   );
