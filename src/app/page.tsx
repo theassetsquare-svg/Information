@@ -6,10 +6,26 @@ import SearchBar from '../components/SearchBar';
 import Roulette from '../components/Roulette';
 import VsBattle from '../components/VsBattle';
 import { SlotMachine, DailyStreak, LiveCounter, InfiniteFeed, EndlessRecommend } from '../components/AddictionEngine';
+import { AIRecommendHook, FullCompareHook, MidContentHook, SimilarVenuesHook } from '../components/HookingCTAs';
 
 const content = getHomeContent();
 const cats = getCategories();
 const allVenues = getAllVenues();
+
+/* 닉네임+전화 7개 — 상단 노출 */
+const PRIORITY_SLUGS = [
+  'busan-yeonsandong-mul-night',
+  'seongnam-shampoo-night',
+  'suwon-chancedom-night',
+  'sillim-grandprix-night',
+  'cheongdam-h2o-night',
+  'paju-yadang-skydome-night',
+  'ulsan-champion-night',
+];
+
+const priorityVenues = PRIORITY_SLUGS
+  .map(slug => allVenues.find(v => v.slug === slug))
+  .filter(Boolean) as typeof allVenues;
 
 export const metadata: Metadata = {
   title: content.title,
@@ -24,18 +40,6 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const year = new Date().getFullYear();
-  // 카테고리+지역 분산, 같은 지역단어 2회 초과 방지
-  const seenCat = new Set<string>();
-  const seenRegion = new Set<string>();
-  const top5 = allVenues.filter(v => {
-    if (seenCat.has(v.cat_slug) || seenRegion.has(v.region)) return false;
-    // 이름에서 지역명 추출하여 중복 방지
-    const regionWords = v.region.split('').filter((_:string,i:number) => i < 2).join('');
-    if (seenRegion.has(regionWords)) return false;
-    seenCat.add(v.cat_slug); seenRegion.add(v.region); seenRegion.add(regionWords);
-    return true;
-  }).slice(0, 3);
-  const hidden: typeof allVenues = [];
 
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'WebSite',
@@ -57,10 +61,15 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* 히어로 + 검색 */}
-      <section style={{ padding: '2.5rem 0 1.5rem', background: 'var(--bg-alt)' }}>
+      <section style={{ padding: '2.5rem 0 1.5rem', background: '#111' }}>
         <div className="container" style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', marginBottom: '0.5rem' }}>{content.heading}</h1>
-          <p style={{ color: 'var(--text-sub)', marginBottom: '1.5rem', fontSize: '1.05rem' }}>{content.subheading}</p>
+          <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', marginBottom: '0.5rem', color: '#D4AF37' }}>
+            {content.heading}
+          </h1>
+          <p style={{ color: '#D4C5A9', marginBottom: '0.5rem', fontSize: '1.05rem' }}>
+            밤의 격이 다른 선택
+          </p>
+          <p style={{ color: '#A89B80', marginBottom: '1.5rem', fontSize: '0.9rem' }}>{content.subheading}</p>
           <SearchBar venues={allVenues} />
         </div>
       </section>
@@ -72,30 +81,37 @@ export default function HomePage() {
             {cats.map(cat => (
               <a key={cat.slug} href={cat.path} target="_blank" rel="noopener noreferrer"
                 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem 0.5rem',
-                  background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px',
-                  textDecoration: 'none', color: 'var(--text)', transition: 'all 0.2s' }}>
-                <span style={{ fontSize: '1.1rem', fontWeight: 700 }}>{cat.name}</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>{cat.count}곳</span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>{catDescs[cat.slug]}</span>
+                  background: '#1A1A1A', border: '1px solid #333', borderRadius: '16px',
+                  textDecoration: 'none', color: '#F0E6D3', transition: 'all 0.2s' }}>
+                <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#D4AF37' }}>{cat.name}</span>
+                <span style={{ fontSize: '0.8rem', color: '#A89B80', marginTop: '0.25rem' }}>{cat.count}곳</span>
+                <span style={{ fontSize: '0.75rem', color: '#A89B80', marginTop: '0.25rem' }}>{catDescs[cat.slug]}</span>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TOP5 핫한 곳 */}
+      {/* 닉네임+전화 7개 — 상단 노출 */}
       <section className="section">
         <div className="container">
-          <h2>지금 핫한 곳 TOP 5</h2>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>조회수 기준 인기 업소</p>
+          <h2 style={{ color: '#D4AF37' }}>담당 직통 연결 가능</h2>
+          <p style={{ color: '#A89B80', marginBottom: '1.5rem', fontSize: '0.9rem' }}>전화 한 통으로 바로 상담</p>
           <div className="venue-grid">
-            {top5.map(v => <VenueCard key={v.slug} venue={v} />)}
+            {priorityVenues.map(v => <VenueCard key={v.slug} venue={v} />)}
           </div>
         </div>
       </section>
 
+      {/* [후킹4] AI 추천 티저 */}
+      <section style={{ padding: '1rem 0' }}>
+        <div className="container">
+          <AIRecommendHook />
+        </div>
+      </section>
+
       {/* [A] 룰렛 */}
-      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+      <section className="section" style={{ background: '#111' }}>
         <div className="container">
           <Roulette venues={allVenues} />
         </div>
@@ -108,17 +124,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* [D] 첫 방문 가이드 배너 */}
+      {/* [후킹2] 중간 끊기 */}
+      <section style={{ padding: '1rem 0' }}>
+        <div className="container">
+          <MidContentHook />
+        </div>
+      </section>
+
+      {/* 첫 방문 가이드 배너 */}
       <section style={{ padding: '1.5rem 0' }}>
         <div className="container">
-          <div style={{ background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)', border: '1px solid var(--border-accent)',
+          <div style={{ background: 'linear-gradient(135deg, #1A1520, #2D1B3D)', border: '1px solid #D4AF37',
             borderRadius: '16px', padding: '1.5rem 2rem', textAlign: 'center' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>밤문화 처음이세요?</h3>
-            <p style={{ color: 'var(--text-sub)', marginBottom: '1rem', fontSize: '0.95rem' }}>
+            <h3 style={{ marginBottom: '0.5rem', color: '#D4AF37' }}>밤문화 처음이세요?</h3>
+            <p style={{ color: '#D4C5A9', marginBottom: '1rem', fontSize: '0.95rem' }}>
               뭘 입고 가야 하는지, 얼마나 드는지, 혼자 가도 되는지. 궁금한 거 다 정리했다.
             </p>
             <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{
-              display: 'inline-block', background: 'var(--purple)', color: '#FFF',
+              display: 'inline-block', background: '#D4AF37', color: '#0A0A0A',
               padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: 700,
               textDecoration: 'none', fontSize: '0.95rem' }}>
               첫 방문 가이드 보기 →
@@ -127,17 +150,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 더 많은 업소는 카테고리에서 */}
+      {/* 전국 업소 둘러보기 */}
       <section className="section">
         <div className="container" style={{ textAlign: 'center' }}>
-          <h2>전국 {allVenues.length}곳 둘러보기</h2>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+          <h2 style={{ color: '#D4AF37' }}>전국 {allVenues.length}곳 둘러보기</h2>
+          <p style={{ color: '#A89B80', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
             카테고리별로 정리된 전체 목록을 확인하세요.
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             {cats.map(cat => (
               <a key={cat.slug} href={cat.path} target="_blank" rel="noopener noreferrer"
-                style={{ padding: '0.6rem 1.25rem', background: 'var(--purple)', color: '#FFF',
+                style={{ padding: '0.6rem 1.25rem', background: '#D4AF37', color: '#0A0A0A',
                   borderRadius: '8px', fontWeight: 600, textDecoration: 'none', fontSize: '0.9rem' }}>
                 {cat.name} {cat.count}곳 →
               </a>
@@ -146,42 +169,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 숨은 명소 */}
-      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+      {/* [후킹5] 전체 비교 */}
+      <section style={{ padding: '1rem 0' }}>
         <div className="container">
-          <h2>이 업소 몰랐지?</h2>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>아는 사람만 아는 숨은 명소</p>
-          <div className="venue-grid">
-            {hidden.map(v => <VenueCard key={v.slug} venue={v} />)}
-          </div>
+          <FullCompareHook />
         </div>
       </section>
 
-      {/* [E] 인기 시간대 */}
+      {/* 시간대별 추천 */}
       <section className="section">
         <div className="container narrow">
-          <h2>시간대별 추천</h2>
+          <h2 style={{ color: '#D4AF37' }}>시간대별 추천</h2>
           <div style={{ display: 'grid', gap: '1rem' }}>
-            <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+            <div style={{ padding: '1.25rem', background: '#1A1A1A', border: '1px solid #333', borderRadius: '12px' }}>
               <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>19시~22시 · 저녁 시작</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>라운지나 요정이 좋다. 저녁 식사 후 자연스럽게 이어지는 동선.</p>
+              <p style={{ fontSize: '0.9rem', color: '#D4C5A9' }}>라운지나 요정이 좋다. 저녁 식사 후 자연스럽게 이어지는 동선.</p>
             </div>
-            <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+            <div style={{ padding: '1.25rem', background: '#1A1A1A', border: '1px solid #333', borderRadius: '12px' }}>
               <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>22시~01시 · 피크타임</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>사교장과 플로어가 가장 활기찬 시간대. 일찍 도착해서 자리를 잡자.</p>
+              <p style={{ fontSize: '0.9rem', color: '#D4C5A9' }}>사교장과 플로어가 가장 활기찬 시간대. 일찍 도착해서 자리를 잡자.</p>
             </div>
-            <div style={{ padding: '1.25rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+            <div style={{ padding: '1.25rem', background: '#1A1A1A', border: '1px solid #333', borderRadius: '12px' }}>
               <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>01시~05시 · 심야</h3>
-            <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>진짜 밤은 자정 이후. 에너지가 가장 높아지는 하이라이트 시간.</p>
+              <p style={{ fontSize: '0.9rem', color: '#D4C5A9' }}>진짜 밤은 자정 이후. 에너지가 가장 높아지는 하이라이트 시간.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* 지역별 가이드 */}
-      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+      <section className="section" style={{ background: '#111' }}>
         <div className="container narrow">
-          <h2>지역별 밤의 표정</h2>
+          <h2 style={{ color: '#D4AF37' }}>지역별 밤의 표정</h2>
           <div style={{ display: 'grid', gap: '1rem' }}>
             {[
               { name: '강남·서초', desc: '대형 플로어와 프리미엄 라운지 밀집. 드레스코드 있는 곳이 많다.' },
@@ -191,9 +210,9 @@ export default function HomePage() {
               { name: '수원·인덕원·성남', desc: '경기권 밤문화 격전지. 접근성 좋은 곳이 많다.' },
               { name: '부산·울산', desc: '연산동·해운대 중심. 서울과 다른 온도의 밤.' },
             ].map(r => (
-              <div key={r.name} style={{ padding: '1rem', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px' }}>
+              <div key={r.name} style={{ padding: '1rem', background: '#1A1A1A', border: '1px solid #333', borderRadius: '12px' }}>
                 <h3 style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>{r.name}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-sub)' }}>{r.desc}</p>
+                <p style={{ fontSize: '0.9rem', color: '#D4C5A9' }}>{r.desc}</p>
               </div>
             ))}
           </div>
@@ -203,7 +222,7 @@ export default function HomePage() {
       {/* FAQ */}
       <section className="section">
         <div className="container narrow">
-          <h2>자주 묻는 질문</h2>
+          <h2 style={{ color: '#D4AF37' }}>자주 묻는 질문</h2>
           {[
             { q: '밤문화 처음인데 어디부터?', a: '테이블 문화가 궁금하면 수유 쪽, 플로어를 원하면 강남 쪽, 조용한 곳이면 압구정코드라운지를 추천한다.' },
             { q: '혼자 가도 어색하지 않을까?', a: '바 카운터가 있는 곳이면 괜찮다. 혼자 오는 손님이 생각보다 많다.' },
@@ -219,8 +238,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🎰 슬롯머신 — 변동 보상 */}
-      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+      {/* [후킹3] 비슷한 업소 추천 → 메인 */}
+      <section style={{ padding: '1rem 0' }}>
+        <div className="container">
+          <SimilarVenuesHook />
+        </div>
+      </section>
+
+      {/* 슬롯머신 */}
+      <section className="section" style={{ background: '#111' }}>
         <div className="container">
           <SlotMachine venues={allVenues} />
         </div>
@@ -233,10 +259,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 무한 피드 — 틱톡식 */}
-      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+      {/* 무한 피드 */}
+      <section className="section" style={{ background: '#111' }}>
         <div className="container">
-          <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>전체 업소 둘러보기</h2>
+          <h2 style={{ textAlign: 'center', marginBottom: '0.5rem', color: '#D4AF37' }}>전체 업소 둘러보기</h2>
           <LiveCounter />
           <div style={{ marginTop: '1rem' }}>
             <InfiniteFeed venues={allVenues} />

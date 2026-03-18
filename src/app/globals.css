@@ -1,22 +1,28 @@
-/* ── 밝은 테마 (네이버/구글처럼) ── */
-/* Pretendard는 layout.tsx에서 <link preload>로 로드 — @import 렌더링 차단 제거 */
+/* ── 럭셔리 골드 다크 테마 — "밤의 격이 다른 선택" ── */
+/* Pretendard는 layout.tsx에서 <link preload>로 로드 */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap');
 
 :root {
-  --bg: #FFFFFF;
-  --bg-alt: #F5F5F5;
-  --bg-card: #FFFFFF;
-  --bg-card-hover: #F9FAFB;
+  --bg: #0A0A0A;
+  --bg-alt: #111111;
+  --bg-card: #1A1A1A;
+  --bg-card-hover: #222222;
+  --gold: #D4AF37;
+  --gold-dim: #B8941F;
+  --gold-light: #F7E7CE;
+  --champagne: #F7E7CE;
+  --text: #F0E6D3;
+  --text-sub: #D4C5A9;
+  --text-muted: #A89B80;
+  --border: #333333;
+  --border-accent: #D4AF37;
   --purple: #8B5CF6;
-  --purple-dim: #7C3AED;
-  --cyan: #06B6D4;
-  --text: #111111;
-  --text-sub: #333333;
-  --text-muted: #4B4B4B;
-  --border: #E5E7EB;
-  --border-accent: #DDD6FE;
+  --main-cta: #8B5CF6;
+  --font-serif: 'Noto Serif KR', Georgia, 'Times New Roman', serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard Variable', 'Pretendard', sans-serif;
-  --max-w: 1080px;
-  --max-narrow: 720px;
+  --max-w: 480px;
+  --max-narrow: 480px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,17 +34,26 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   background: var(--bg);
   color: var(--text);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body > * {
+  width: 100%;
+  max-width: 480px;
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-sans);
-  color: var(--text);
+  font-family: var(--font-serif);
+  color: var(--gold);
   line-height: 1.35;
   word-break: keep-all;
   font-weight: 700;
@@ -56,13 +71,13 @@ p {
 }
 
 a {
-  color: var(--purple);
+  color: var(--gold);
   text-decoration: none;
   transition: color 0.2s;
 }
-a:hover { color: var(--purple-dim); }
+a:hover { color: var(--gold-light); }
 a:focus-visible {
-  outline: 2px solid var(--purple);
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -82,12 +97,29 @@ img { max-width: 100%; height: auto; display: block; }
 .section { padding: 3rem 0; }
 .section + .section { border-top: 1px solid var(--border); }
 
+/* ── 상단 고정 배너 (메인사이트 유도) ── */
+.top-banner {
+  background: var(--purple);
+  padding: 0.75rem 1rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.top-banner a {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.top-banner a:hover { color: var(--champagne); }
+
 /* ── 헤더 ── */
 .header {
   position: sticky;
-  top: 0;
+  top: 44px;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(10, 10, 10, 0.97);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   padding: 0.875rem 0;
@@ -104,9 +136,10 @@ img { max-width: 100%; height: auto; display: block; }
 
 .logo {
   font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--purple);
+  font-weight: 900;
+  color: var(--gold);
   letter-spacing: -0.02em;
+  font-family: var(--font-serif);
 }
 
 .logo span {
@@ -119,12 +152,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
 nav a { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
-nav a:hover { color: var(--purple); }
+nav a:hover { color: var(--gold); }
 
 /* ── 배너 (메인사이트 유도) ── */
 .promo-banner {
-  background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
-  border: 1px solid var(--border-accent);
+  background: linear-gradient(135deg, #1A1520, #2D1B3D);
+  border: 1px solid var(--gold);
   border-radius: 12px;
   padding: 0.875rem 1.25rem;
   text-align: center;
@@ -134,10 +167,10 @@ nav a:hover { color: var(--purple); }
 
 .promo-banner a {
   font-size: 0.95rem;
-  color: var(--purple);
+  color: var(--gold);
   font-weight: 700;
 }
-.promo-banner a:hover { color: var(--purple-dim); }
+.promo-banner a:hover { color: var(--gold-light); }
 
 /* ── 푸터 ── */
 .footer {
@@ -158,7 +191,7 @@ nav a:hover { color: var(--purple); }
 }
 
 .footer-links a { color: var(--text-muted); font-size: 0.85rem; }
-.footer-links a:hover { color: var(--purple); }
+.footer-links a:hover { color: var(--gold); }
 
 /* ── 업소 카드 — PC/모바일 동일 1열 모바일 사이즈 ── */
 .venue-grid {
@@ -183,8 +216,8 @@ nav a:hover { color: var(--purple); }
   cursor: pointer;
 }
 .venue-card:hover {
-  border-color: var(--border-accent);
-  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
   transform: translateY(-2px);
 }
 
@@ -197,8 +230,8 @@ nav a:hover { color: var(--purple); }
 
 .venue-card-badge {
   display: inline-block;
-  background: var(--purple);
-  color: #FFF;
+  background: var(--gold);
+  color: #0A0A0A;
   font-size: 0.65rem;
   font-weight: 700;
   padding: 0.2rem 0.5rem;
@@ -218,7 +251,7 @@ nav a:hover { color: var(--purple); }
 
 .venue-card h3 {
   font-size: 1.1rem;
-  color: var(--text);
+  color: var(--gold);
   margin-bottom: 0.5rem;
   line-height: 1.3;
 }
@@ -244,9 +277,9 @@ nav a:hover { color: var(--purple); }
 
 .venue-card-tag {
   font-size: 0.7rem;
-  color: var(--purple);
-  background: rgba(139, 92, 246, 0.06);
-  border: 1px solid rgba(139, 92, 246, 0.15);
+  color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.25);
   padding: 0.15rem 0.5rem;
   border-radius: 12px;
 }
@@ -262,12 +295,12 @@ nav a:hover { color: var(--purple); }
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
 }
 .filter-btn:hover, .filter-btn.active {
-  border-color: var(--purple);
-  color: var(--purple);
-  background: rgba(139, 92, 246, 0.06);
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 /* ── 상세페이지 ── */
@@ -277,13 +310,13 @@ nav a:hover { color: var(--purple); }
 }
 
 .detail-hero h1 {
-  color: var(--text);
+  color: var(--gold);
   margin-bottom: 0.5rem;
 }
 
 .detail-tagline {
   font-size: 1.125rem;
-  color: var(--purple);
+  color: var(--champagne);
   font-style: italic;
   margin-bottom: 1rem;
 }
@@ -301,7 +334,7 @@ nav a:hover { color: var(--purple); }
   display: inline-block;
   width: 4px;
   height: 4px;
-  background: var(--purple);
+  background: var(--gold);
   border-radius: 50%;
   margin-right: 0.4rem;
   vertical-align: middle;
@@ -309,7 +342,7 @@ nav a:hover { color: var(--purple); }
 
 .detail-section { padding: 2rem 0; }
 .detail-section + .detail-section { border-top: 1px solid var(--border); }
-.detail-section h2 { color: var(--text); margin-bottom: 1rem; }
+.detail-section h2 { color: var(--gold); margin-bottom: 1rem; }
 
 /* ── 정보 테이블 ── */
 .info-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
@@ -319,13 +352,13 @@ nav a:hover { color: var(--purple); }
   border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
 }
-.info-table th { color: var(--purple); font-weight: 600; width: 30%; white-space: nowrap; }
+.info-table th { color: var(--gold); font-weight: 600; width: 30%; white-space: nowrap; }
 .info-table td { color: var(--text); }
 
 /* ── FAQ ── */
 .faq-item { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
 .faq-item:last-child { border-bottom: none; }
-.faq-q { font-weight: 700; color: var(--text); margin-bottom: 0.5rem; font-size: 1rem; }
+.faq-q { font-weight: 700; color: var(--gold); margin-bottom: 0.5rem; font-size: 1rem; }
 .faq-a { color: var(--text-sub); font-size: 0.95rem; line-height: 1.7; }
 
 /* ── 체크리스트 ── */
@@ -341,7 +374,7 @@ nav a:hover { color: var(--purple); }
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--purple);
+  color: var(--gold);
   font-weight: 700;
 }
 
@@ -355,11 +388,52 @@ nav a:hover { color: var(--purple); }
 /* ── 빵부스러기 ── */
 .breadcrumb { font-size: 0.8rem; color: var(--text-muted); padding: 1rem 0 0; }
 .breadcrumb a { color: var(--text-muted); }
-.breadcrumb a:hover { color: var(--purple); }
+.breadcrumb a:hover { color: var(--gold); }
 .breadcrumb span { margin: 0 0.4rem; }
 
-/* ── 반응형 ── */
-@media (max-width: 640px) {
+/* ── 후킹 CTA ── */
+.hooking-mid {
+  background: linear-gradient(135deg, #1A1520, #2D1B3D);
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+.hooking-mid p { color: var(--champagne); margin-bottom: 1rem; font-size: 0.95rem; }
+.hooking-mid a {
+  display: inline-block;
+  background: var(--purple);
+  color: #FFF;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.hooking-large {
+  background: linear-gradient(135deg, #0A0A0A, #1A1520);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+.hooking-large h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 0.75rem; }
+.hooking-large p { color: var(--champagne); margin-bottom: 1.25rem; }
+.hooking-large a {
+  display: inline-block;
+  background: var(--gold);
+  color: #0A0A0A;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  font-family: var(--font-serif);
+}
+
+/* ── 반응형 (이미 480px 기준이라 최소한만) ── */
+@media (max-width: 480px) {
   nav { gap: 0.75rem; }
   nav a { font-size: 0.8rem; }
   .detail-meta { flex-direction: column; gap: 0.5rem; }

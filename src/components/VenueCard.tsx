@@ -20,6 +20,11 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         {venue.badge && <span className="venue-card-badge">{venue.badge}</span>}
         <span className="venue-card-meta">{catLabels[venue.cat_slug] || venue.cat_slug}</span>
         <h3>{venue.name}</h3>
+        {venue.nickname && (
+          <p style={{ fontSize: '0.8rem', color: '#D4AF37', fontWeight: 600, marginBottom: '0.25rem' }}>
+            담당: {venue.nickname}
+          </p>
+        )}
         <p className="venue-card-hook">{hook}</p>
         <div className="venue-card-tags">
           {venue.card_tags.slice(0, 3).map(tag => (

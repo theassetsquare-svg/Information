@@ -1,17 +1,25 @@
 export default function Header() {
   return (
-    <header className="header">
-      <div className="header-inner">
-        <a href="/" target="_blank" rel="noopener noreferrer" className="logo" style={{ textDecoration: 'none' }}>
-          골드나잇
-          <span>Club · Night · Lounge Guide</span>
+    <>
+      {/* [후킹1] 상단 고정 배너 — 모든 페이지 최상단 */}
+      <div className="top-banner">
+        <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer">
+          프리미엄 정보+실시간 예약은 ★오늘밤어디★에서 →
         </a>
-        <nav>
-          <a href="/clubs/" target="_blank" rel="noopener noreferrer">클럽</a>
-          <a href="/nights/" target="_blank" rel="noopener noreferrer">나이트</a>
-          <a href="/lounges/" target="_blank" rel="noopener noreferrer">라운지</a>
-        </nav>
       </div>
-    </header>
+      <header className="header">
+        <div className="header-inner">
+          <a href="/" className="logo" style={{ textDecoration: 'none' }}>
+            골드나잇
+            <span>밤의 격이 다른 선택</span>
+          </a>
+          <nav>
+            <a href="/clubs/" target="_blank" rel="noopener noreferrer">클럽</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer">나이트</a>
+            <a href="/lounges/" target="_blank" rel="noopener noreferrer">라운지</a>
+          </nav>
+        </div>
+      </header>
+    </>
   );
 }

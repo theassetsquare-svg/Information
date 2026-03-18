@@ -15,20 +15,20 @@ export default function KakaoFloat() {
         display: 'flex',
         alignItems: 'center',
         gap: '0.5rem',
-        background: '#FEE500',
-        color: '#3C1E1E',
+        background: '#D4AF37',
+        color: '#0A0A0A',
         padding: '0.75rem 1.25rem',
         borderRadius: '50px',
         fontWeight: 700,
         fontSize: '0.9rem',
         textDecoration: 'none',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+        boxShadow: '0 4px 12px rgba(212,175,55,0.3)',
         transition: 'transform 0.2s',
-        fontFamily: 'var(--font-sans)',
+        fontFamily: 'var(--font-serif)',
       }}
     >
       <svg width="20" height="20" viewBox="0 0 256 256" fill="none">
-        <path d="M128 36C70.562 36 24 72.713 24 118c0 29.279 19.466 54.97 48.748 69.477-1.593 5.494-10.237 35.344-10.581 37.689 0 0-.207 1.744.923 2.4 1.13.656 2.456.136 2.456.136 3.236-.453 37.542-24.498 43.554-28.734A178.57 178.57 0 00128 200c57.438 0 104-36.713 104-82S185.438 36 128 36z" fill="#3C1E1E"/>
+        <path d="M128 36C70.562 36 24 72.713 24 118c0 29.279 19.466 54.97 48.748 69.477-1.593 5.494-10.237 35.344-10.581 37.689 0 0-.207 1.744.923 2.4 1.13.656 2.456.136 2.456.136 3.236-.453 37.542-24.498 43.554-28.734A178.57 178.57 0 00128 200c57.438 0 104-36.713 104-82S185.438 36 128 36z" fill="#0A0A0A"/>
       </svg>
       카톡 상담
     </a>

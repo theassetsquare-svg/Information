@@ -4,6 +4,7 @@ import { generateGoldContent, SITE_NAME } from '../../../lib/gold-content';
 import VenueCard from '../../../components/VenueCard';
 import StickyPhoneBar from '../../../components/StickyPhoneBar';
 import { ReadingProgress, AutoNext, EndlessRecommend, LiveCounter, SlotMachine } from '../../../components/AddictionEngine';
+import { MidContentHook, SimilarVenuesHook, AIRecommendHook, FullCompareHook } from '../../../components/HookingCTAs';
 
 interface Props { params: { category: string; slug: string } }
 
@@ -92,7 +93,7 @@ export default function VenueDetailPage({ params }: Props) {
           <h1>{venue.name}</h1>
           <p className="detail-tagline">{gc.tagline}</p>
           {hasPhone && (
-            <p style={{ color: 'var(--purple)', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
+            <p style={{ color: '#D4AF37', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
               담당: {venue.nickname}
             </p>
           )}
@@ -113,6 +114,11 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
+      {/* [후킹2] 상세페이지 중간 끊기 */}
+      <div className="container">
+        <MidContentHook />
+      </div>
+
       {/* 기본 정보 */}
       <section className="detail-section">
         <div className="container narrow">
@@ -129,8 +135,8 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* [D] 첫 방문 가이드 */}
-      <section className="detail-section" style={{ background: 'var(--bg-alt)', padding: '2rem 0' }}>
+      {/* 첫 방문 가이드 */}
+      <section className="detail-section" style={{ background: '#111', padding: '2rem 0' }}>
         <div className="container narrow">
           <h2>처음 방문하세요?</h2>
           <p style={{ marginBottom: '1rem' }}>
@@ -149,6 +155,11 @@ export default function VenueDetailPage({ params }: Props) {
           </ul>
         </div>
       </section>
+
+      {/* [후킹4] AI 추천 티저 */}
+      <div className="container">
+        <AIRecommendHook />
+      </div>
 
       {/* 방문 체크리스트 */}
       <section className="detail-section">
@@ -173,8 +184,8 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* [E] 인기 시간대 */}
-      <section className="detail-section" style={{ background: 'var(--bg-alt)', padding: '2rem 0' }}>
+      {/* 인기 시간대 */}
+      <section className="detail-section" style={{ background: '#111', padding: '2rem 0' }}>
         <div className="container narrow">
           <h2>인기 시간대</h2>
           <div style={{ display: 'grid', gap: '0.75rem' }}>
@@ -185,11 +196,11 @@ export default function VenueDetailPage({ params }: Props) {
               { time: '일요일', level: '한산', bar: '20%' },
             ].map(t => (
               <div key={t.time} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <span style={{ minWidth: '80px', fontSize: '0.9rem', fontWeight: 600 }}>{t.time}</span>
-                <div style={{ flex: 1, background: 'var(--border)', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
-                  <div style={{ width: t.bar, background: 'var(--purple)', height: '100%', borderRadius: '4px' }} />
+                <span style={{ minWidth: '80px', fontSize: '0.9rem', fontWeight: 600, color: '#F0E6D3' }}>{t.time}</span>
+                <div style={{ flex: 1, background: '#333', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
+                  <div style={{ width: t.bar, background: '#D4AF37', height: '100%', borderRadius: '4px' }} />
                 </div>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', minWidth: '40px' }}>{t.level}</span>
+                <span style={{ fontSize: '0.8rem', color: '#A89B80', minWidth: '40px' }}>{t.level}</span>
               </div>
             ))}
           </div>
@@ -223,12 +234,17 @@ export default function VenueDetailPage({ params }: Props) {
         </section>
       )}
 
-      {/* [C] 숨은 명소 추천 */}
+      {/* [후킹3] 비슷한 업소 추천 → 메인 */}
+      <div className="container">
+        <SimilarVenuesHook />
+      </div>
+
+      {/* 관련 업소 (서브 내부) */}
       {related.length > 0 && (
         <section className="related-section">
           <div className="container">
             <h2>비슷한 곳</h2>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천하는 곳</p>
+            <p style={{ color: '#A89B80', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천하는 곳</p>
             <div className="venue-grid">
               {related.map(v => <VenueCard key={v.slug} venue={v} />)}
             </div>
@@ -236,13 +252,18 @@ export default function VenueDetailPage({ params }: Props) {
         </section>
       )}
 
-      {/* 📊 읽기 진행률 */}
+      {/* 읽기 진행률 */}
       <ReadingProgress />
 
-      {/* 🔴 실시간 카운터 */}
+      {/* 실시간 카운터 */}
       <section style={{ padding: '0.75rem 0', textAlign: 'center' }}>
         <LiveCounter />
       </section>
+
+      {/* [후킹5] 전체 비교 */}
+      <div className="container">
+        <FullCompareHook />
+      </div>
 
       {/* 넷플릭스식 자동 다음 추천 */}
       <section className="section">
@@ -251,8 +272,8 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* 🎰 슬롯머신 */}
-      <section className="section" style={{ background: 'var(--bg-alt)' }}>
+      {/* 슬롯머신 */}
+      <section className="section" style={{ background: '#111' }}>
         <div className="container narrow">
           <SlotMachine venues={getAllVenues()} />
         </div>
@@ -265,7 +286,7 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* 하단 여백 (전화바용) */}
+      {/* 하단 여백 */}
       <div style={{ paddingBottom: hasPhone ? '80px' : '0' }} />
 
       {/* StickyPhoneBar */}

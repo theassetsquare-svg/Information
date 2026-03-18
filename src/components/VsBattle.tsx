@@ -31,30 +31,30 @@ export default function VsBattle({ venues }: { venues: Venue[] }) {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <h2>이번주 VS 대결</h2>
-      <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+      <h2 style={{ color: '#D4AF37' }}>이번주 VS 대결</h2>
+      <p style={{ color: '#A89B80', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
         어디가 더 나을까? 투표하고 결과를 확인하자.
       </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'center', maxWidth: '600px', margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'center', maxWidth: '480px', margin: '0 auto' }}>
         {pair.map((v, i) => (
           <button
             key={v.slug}
             onClick={() => vote(i)}
             style={{
-              padding: '1.5rem 1rem', background: voted === i ? 'var(--purple)' : 'var(--bg-card)',
-              color: voted === i ? '#FFF' : 'var(--text)',
-              border: voted === i ? '2px solid var(--purple)' : '2px solid var(--border)',
+              padding: '1.5rem 1rem', background: voted === i ? '#D4AF37' : '#1A1A1A',
+              color: voted === i ? '#0A0A0A' : '#F0E6D3',
+              border: voted === i ? '2px solid #D4AF37' : '2px solid #333',
               borderRadius: '16px', cursor: voted !== null ? 'default' : 'pointer',
-              fontFamily: 'var(--font-sans)', transition: 'all 0.2s',
+              fontFamily: 'var(--font-serif)', transition: 'all 0.2s',
             }}
           >
             <span style={{ display: 'block', fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.25rem' }}>{v.name}</span>
             <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>{v.region}</span>
             {voted !== null && (
               <div style={{ marginTop: '0.75rem' }}>
-                <div style={{ background: voted === i ? 'rgba(255,255,255,0.3)' : 'var(--border)', borderRadius: '4px', height: '6px', overflow: 'hidden' }}>
-                  <div style={{ width: `${Math.round(counts[i] / total * 100)}%`, background: voted === i ? '#FFF' : 'var(--purple)', height: '100%', borderRadius: '4px', transition: 'width 0.5s' }} />
+                <div style={{ background: voted === i ? 'rgba(0,0,0,0.2)' : '#333', borderRadius: '4px', height: '6px', overflow: 'hidden' }}>
+                  <div style={{ width: `${Math.round(counts[i] / total * 100)}%`, background: voted === i ? '#0A0A0A' : '#D4AF37', height: '100%', borderRadius: '4px', transition: 'width 0.5s' }} />
                 </div>
                 <span style={{ fontSize: '0.85rem', fontWeight: 600, marginTop: '0.25rem', display: 'block' }}>
                   {Math.round(counts[i] / total * 100)}%
@@ -63,11 +63,11 @@ export default function VsBattle({ venues }: { venues: Venue[] }) {
             )}
           </button>
         ))}
-        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--purple)', gridColumn: '2', gridRow: '1' }}>VS</span>
+        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#D4AF37', gridColumn: '2', gridRow: '1' }}>VS</span>
       </div>
 
       {voted !== null && (
-        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#A89B80' }}>
           투표 완료. 총 {total}명 참여.
         </p>
       )}

@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Banner from '../components/Banner';
-import KakaoFloat from '../components/KakaoFloat';
+import { SlideUpHook, ScrollBannerHook } from '../components/HookingCTAs';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -44,11 +43,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a href="#main" className="sr-only">본문으로 건너뛰기</a>
         <Header />
-        <Banner />
         <main id="main">{children}</main>
-        <Banner />
         <Footer />
-        <KakaoFloat />
+        {/* [후킹6] 3분 체류 후 슬라이드업 */}
+        <SlideUpHook />
+        {/* [후킹7] 스크롤 80% 배너 */}
+        <ScrollBannerHook />
         {/* 폰트 CSS — 렌더링 후 비동기 로드 */}
         <Script id="load-pretendard" strategy="afterInteractive">
           {`var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css';document.head.appendChild(l);`}
