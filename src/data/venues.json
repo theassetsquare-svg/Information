@@ -2534,37 +2534,37 @@
     "nickname_phone": ""
   },
   {
-    "name": "강남라운지 하입",
-    "category": "라운지",
-    "cat_slug": "lounge",
-    "region": "강남",
-    "region_slug": "gangnam",
+    "name": "압구정클럽 하입",
+    "category": "클럽",
+    "cat_slug": "club",
+    "region": "압구정",
+    "region_slug": "apgujeong",
     "district": "압구정",
     "district_slug": "apgujeong",
-    "slug": "gangnam-lounge-hype",
+    "slug": "apgujeong-club-hype",
     "address": "",
     "phone": "",
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "강남라운지 하입",
+    "image_alt": "압구정클럽 하입",
     "badge": null,
     "tags": [
-      "라운지",
-      "강남"
+      "클럽",
+      "압구정"
     ],
     "map_url": "",
     "card_hook": "압구정 하입, 트렌드를 선도하는 힙의 진원지",
     "card_value": "",
     "card_tags": [
-      "라운지",
-      "강남",
+      "클럽",
+      "압구정",
       "프리미엄"
     ],
     "keywords": [
-      "강남라운지하입",
-      "강남",
-      "라운지"
+      "압구정클럽 하입",
+      "압구정",
+      "클럽"
     ],
     "source_urls": [],
     "nickname": "",
@@ -2608,37 +2608,37 @@
     "nickname_phone": ""
   },
   {
-    "name": "강남라운지 컬러",
-    "category": "라운지",
-    "cat_slug": "lounge",
-    "region": "강남",
-    "region_slug": "gangnam",
+    "name": "압구정클럽 컬러",
+    "category": "클럽",
+    "cat_slug": "club",
+    "region": "압구정",
+    "region_slug": "apgujeong",
     "district": "압구정",
     "district_slug": "apgujeong",
-    "slug": "gangnam-lounge-color",
+    "slug": "apgujeong-club-color",
     "address": "",
     "phone": "",
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "강남라운지 컬러",
+    "image_alt": "압구정클럽 컬러",
     "badge": null,
     "tags": [
-      "라운지",
-      "강남"
+      "클럽",
+      "압구정"
     ],
     "map_url": "",
     "card_hook": "압구정 컬러, 오색 조명이 물드는 감각의 밤",
     "card_value": "",
     "card_tags": [
-      "라운지",
-      "강남",
+      "클럽",
+      "압구정",
       "분위기"
     ],
     "keywords": [
-      "강남라운지컬러",
-      "강남",
-      "라운지"
+      "압구정클럽 컬러",
+      "압구정",
+      "클럽"
     ],
     "source_urls": [],
     "nickname": "",
@@ -2756,94 +2756,57 @@
     "nickname_phone": ""
   },
   {
-    "name": "압구정코드라운지",
-    "category": "라운지",
-    "cat_slug": "lounge",
-    "region": "압구정",
-    "region_slug": "apgujeong",
-    "district": "압구정",
-    "district_slug": "apgujeong",
-    "slug": "apgujeong-code-lounge",
-    "address": "",
-    "phone": "",
-    "hours": "",
-    "station": "",
-    "thumbnail": "",
-    "image_alt": "압구정코드라운지",
-    "badge": null,
-    "tags": [
-      "칵테일",
-      "압구정"
-    ],
-    "map_url": "",
-    "card_hook": "압구정 코드, 암호를 아는 사람만 입장하는 라운지",
-    "card_value": "",
-    "card_tags": [
-      "압구정",
-      "코드"
-    ],
-    "keywords": [
-      "압구정코드라운지",
-      "압구정",
-      "라운지"
-    ],
-    "source_urls": [],
-    "nickname": "",
-    "nickname_phone": ""
-  },
-  {
-    "name": "강남라운지 아르쥬",
-    "category": "라운지",
-    "cat_slug": "lounge",
-    "region": "강남",
-    "region_slug": "gangnam",
+    "name": "청담클럽 아르쥬",
+    "category": "클럽",
+    "cat_slug": "club",
+    "region": "청담",
+    "region_slug": "cheongdam",
     "district": "청담",
     "district_slug": "cheongdam",
-    "slug": "gangnam-lounge-arjou",
+    "slug": "cheongdam-club-arjou",
     "address": "",
     "phone": "",
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "강남라운지 아르쥬",
+    "image_alt": "청담클럽 아르쥬",
     "badge": null,
     "tags": [
-      "라운지",
-      "강남"
+      "클럽",
+      "청담"
     ],
     "map_url": "",
-    "card_hook": "청담 아르쥬, 셀럽들이 사랑하는 프라이빗 나이트",
+    "card_hook": "청담 아르쥬, 셀럽들이 사랑하는 프라이빗 클럽",
     "card_value": "",
     "card_tags": [
-      "라운지",
-      "강남",
+      "클럽",
+      "청담",
       "프리미엄"
     ],
     "keywords": [
-      "강남라운지아르쥬",
-      "강남",
-      "라운지",
-      "아르쥬"
+      "청담클럽 아르쥬",
+      "청담",
+      "클럽"
     ],
     "source_urls": [],
     "nickname": "",
     "nickname_phone": ""
   },
   {
-    "name": "이태원클럽 와이키키유토피아",
+    "name": "이태원클럽 유토피아",
     "category": "클럽",
     "cat_slug": "club",
     "region": "이태원",
     "region_slug": "itaewon",
     "district": "이태원",
     "district_slug": "itaewon",
-    "slug": "itaewon-club-waikiki-utopia",
+    "slug": "itaewon-club-utopia",
     "address": "",
     "phone": "",
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "이태원클럽 와이키키유토피아",
+    "image_alt": "이태원클럽 유토피아",
     "badge": null,
     "tags": [
       "EDM",
@@ -2858,10 +2821,9 @@
       "유토피아"
     ],
     "keywords": [
-      "이태원클럽와이키키유토피아",
+      "이태원클럽 유토피아",
       "이태원",
-      "클럽",
-      "와이키키"
+      "클럽"
     ],
     "source_urls": [],
     "nickname": "",
@@ -3495,6 +3457,42 @@
     "nickname_phone": ""
   },
   {
+    "name": "압구정코드라운지",
+    "category": "라운지",
+    "cat_slug": "lounge",
+    "region": "압구정",
+    "region_slug": "apgujeong",
+    "district": "압구정",
+    "district_slug": "apgujeong",
+    "slug": "apgujeong-code-lounge",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "압구정코드라운지",
+    "badge": null,
+    "tags": [
+      "칵테일",
+      "압구정"
+    ],
+    "map_url": "",
+    "card_hook": "압구정 코드, 암호를 아는 사람만 입장하는 라운지",
+    "card_value": "",
+    "card_tags": [
+      "압구정",
+      "코드"
+    ],
+    "keywords": [
+      "압구정코드라운지",
+      "압구정",
+      "라운지"
+    ],
+    "source_urls": [],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
     "name": "압구정라운지 디엠",
     "category": "라운지",
     "cat_slug": "lounge",
@@ -3703,6 +3701,228 @@
     "keywords": [
       "건대호빠 W",
       "건대",
+      "호빠"
+    ],
+    "source_urls": [],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "강남호빠 보스턴",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "강남",
+    "region_slug": "강남",
+    "district": "강남",
+    "district_slug": "강남",
+    "slug": "gangnam-hoppa-boston",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "강남호빠 보스턴",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "강남"
+    ],
+    "map_url": "",
+    "card_hook": "강남 보스턴, 전설이 된 데는 이유가 있다",
+    "card_value": "",
+    "card_tags": [
+      "호빠",
+      "강남",
+      "프리미엄"
+    ],
+    "keywords": [
+      "강남호빠 보스턴",
+      "강남",
+      "호빠"
+    ],
+    "source_urls": [],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "강남호빠 블랙홀",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "강남",
+    "region_slug": "강남",
+    "district": "강남",
+    "district_slug": "강남",
+    "slug": "gangnam-hoppa-blackhole",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "강남호빠 블랙홀",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "강남"
+    ],
+    "map_url": "",
+    "card_hook": "한 번 빠지면 헤어나올 수 없는 매력",
+    "card_value": "",
+    "card_tags": [
+      "호빠",
+      "강남",
+      "프리미엄"
+    ],
+    "keywords": [
+      "강남호빠 블랙홀",
+      "강남",
+      "호빠"
+    ],
+    "source_urls": [],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "수원호빠 비스트",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "수원",
+    "region_slug": "수원",
+    "district": "수원",
+    "district_slug": "수원",
+    "slug": "suwon-hoppa-beast",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "수원호빠 비스트",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "수원"
+    ],
+    "map_url": "",
+    "card_hook": "인계동 1등, 50명 선수 항시 대기",
+    "card_value": "",
+    "card_tags": [
+      "호빠",
+      "수원",
+      "프리미엄"
+    ],
+    "keywords": [
+      "수원호빠 비스트",
+      "수원",
+      "호빠"
+    ],
+    "source_urls": [],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "해운대호빠 깐따삐야",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "해운대",
+    "region_slug": "해운대",
+    "district": "해운대",
+    "district_slug": "해운대",
+    "slug": "haeundae-hoppa-kkantappiya",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "해운대호빠 깐따삐야",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "해운대"
+    ],
+    "map_url": "",
+    "card_hook": "해운대 1번가게, 바다 보이는 프리미엄",
+    "card_value": "",
+    "card_tags": [
+      "호빠",
+      "해운대",
+      "프리미엄"
+    ],
+    "keywords": [
+      "해운대호빠 깐따삐야",
+      "해운대",
+      "호빠"
+    ],
+    "source_urls": [],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "부산호빠 아우라",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "부산",
+    "region_slug": "부산",
+    "district": "부산",
+    "district_slug": "부산",
+    "slug": "busan-hoppa-aura",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "부산호빠 아우라",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "부산"
+    ],
+    "map_url": "",
+    "card_hook": "광안리 뷰와 함께하는 특별한 밤",
+    "card_value": "",
+    "card_tags": [
+      "호빠",
+      "부산",
+      "프리미엄"
+    ],
+    "keywords": [
+      "부산호빠 아우라",
+      "부산",
+      "호빠"
+    ],
+    "source_urls": [],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "부산호빠 맨즈",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "부산",
+    "region_slug": "부산",
+    "district": "부산",
+    "district_slug": "부산",
+    "slug": "busan-hoppa-menz",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "부산호빠 맨즈",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "부산"
+    ],
+    "map_url": "",
+    "card_hook": "부산 대표, 24시간 프리미엄 서비스",
+    "card_value": "",
+    "card_tags": [
+      "호빠",
+      "부산",
+      "프리미엄"
+    ],
+    "keywords": [
+      "부산호빠 맨즈",
+      "부산",
       "호빠"
     ],
     "source_urls": [],
