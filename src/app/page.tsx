@@ -5,7 +5,7 @@ import VenueCard from '../components/VenueCard';
 import SearchBar from '../components/SearchBar';
 import Roulette from '../components/Roulette';
 import VsBattle from '../components/VsBattle';
-import { SlotMachine, DailyStreak, LiveCounter, InfiniteFeed, EndlessRecommend } from '../components/AddictionEngine';
+import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend } from '../components/AddictionEngine';
 import { AIRecommendHook, FullCompareHook, MidContentHook, SimilarVenuesHook } from '../components/HookingCTAs';
 
 const content = getHomeContent();
@@ -248,7 +248,7 @@ export default function HomePage() {
       {/* 슬롯머신 */}
       <section className="section" style={{ background: '#111' }}>
         <div className="container">
-          <SlotMachine venues={allVenues} />
+          <SlotMachine venues={priorityVenues} />
         </div>
       </section>
 
@@ -263,7 +263,6 @@ export default function HomePage() {
       <section className="section" style={{ background: '#111' }}>
         <div className="container">
           <h2 style={{ textAlign: 'center', marginBottom: '0.5rem', color: '#D4AF37' }}>전체 업소 둘러보기</h2>
-          <LiveCounter />
           <div style={{ marginTop: '1rem' }}>
             <InfiniteFeed venues={allVenues} />
           </div>
@@ -273,7 +272,7 @@ export default function HomePage() {
       {/* 끝없는 추천 */}
       <section className="section">
         <div className="container narrow">
-          <EndlessRecommend venues={allVenues} />
+          <EndlessRecommend venues={priorityVenues} />
         </div>
       </section>
     </>

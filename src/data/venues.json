@@ -2534,7 +2534,7 @@
     "nickname_phone": ""
   },
   {
-    "name": "강남라운지하입",
+    "name": "강남라운지 하입",
     "category": "라운지",
     "cat_slug": "lounge",
     "region": "강남",
@@ -2547,7 +2547,7 @@
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "강남라운지하입",
+    "image_alt": "강남라운지 하입",
     "badge": null,
     "tags": [
       "라운지",
@@ -2608,7 +2608,7 @@
     "nickname_phone": ""
   },
   {
-    "name": "강남라운지컬러",
+    "name": "강남라운지 컬러",
     "category": "라운지",
     "cat_slug": "lounge",
     "region": "강남",
@@ -2621,7 +2621,7 @@
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "강남라운지컬러",
+    "image_alt": "강남라운지 컬러",
     "badge": null,
     "tags": [
       "라운지",
@@ -2792,7 +2792,7 @@
     "nickname_phone": ""
   },
   {
-    "name": "강남라운지아르쥬",
+    "name": "강남라운지 아르쥬",
     "category": "라운지",
     "cat_slug": "lounge",
     "region": "강남",
@@ -2805,7 +2805,7 @@
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "강남라운지아르쥬",
+    "image_alt": "강남라운지 아르쥬",
     "badge": null,
     "tags": [
       "라운지",
@@ -2830,7 +2830,7 @@
     "nickname_phone": ""
   },
   {
-    "name": "이태원클럽와이키키유토피아",
+    "name": "이태원클럽 와이키키유토피아",
     "category": "클럽",
     "cat_slug": "club",
     "region": "이태원",
@@ -2843,7 +2843,7 @@
     "hours": "",
     "station": "",
     "thumbnail": "",
-    "image_alt": "이태원클럽와이키키유토피아",
+    "image_alt": "이태원클럽 와이키키유토피아",
     "badge": null,
     "tags": [
       "EDM",

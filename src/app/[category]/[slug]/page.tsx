@@ -3,7 +3,7 @@ import { getAllVenues, getVenueBySlug, getRelatedVenues, SITE_URL, CAT_SLUG_TO_L
 import { generateGoldContent, SITE_NAME } from '../../../lib/gold-content';
 import VenueCard from '../../../components/VenueCard';
 import StickyPhoneBar from '../../../components/StickyPhoneBar';
-import { ReadingProgress, AutoNext, EndlessRecommend, LiveCounter, SlotMachine } from '../../../components/AddictionEngine';
+import { ReadingProgress, AutoNext, EndlessRecommend, SlotMachine } from '../../../components/AddictionEngine';
 import { MidContentHook, SimilarVenuesHook, AIRecommendHook, FullCompareHook } from '../../../components/HookingCTAs';
 
 interface Props { params: { category: string; slug: string } }
@@ -255,11 +255,6 @@ export default function VenueDetailPage({ params }: Props) {
       {/* 읽기 진행률 */}
       <ReadingProgress />
 
-      {/* 실시간 카운터 */}
-      <section style={{ padding: '0.75rem 0', textAlign: 'center' }}>
-        <LiveCounter />
-      </section>
-
       {/* [후킹5] 전체 비교 */}
       <div className="container">
         <FullCompareHook />
@@ -268,21 +263,21 @@ export default function VenueDetailPage({ params }: Props) {
       {/* 넷플릭스식 자동 다음 추천 */}
       <section className="section">
         <div className="container narrow">
-          <AutoNext venues={getAllVenues()} current={venue.slug} />
+          <AutoNext venues={related} current={venue.slug} />
         </div>
       </section>
 
       {/* 슬롯머신 */}
       <section className="section" style={{ background: '#111' }}>
         <div className="container narrow">
-          <SlotMachine venues={getAllVenues()} />
+          <SlotMachine venues={related} />
         </div>
       </section>
 
       {/* 끝없는 추천 */}
       <section className="section">
         <div className="container narrow">
-          <EndlessRecommend venues={getAllVenues()} />
+          <EndlessRecommend venues={related} />
         </div>
       </section>
 

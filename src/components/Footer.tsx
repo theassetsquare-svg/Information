@@ -5,10 +5,10 @@ export default function Footer() {
     <>
       {/* [후킹8] 푸터 직전 대형 CTA */}
       <div className="hooking-large">
-        <h3>103개 업소 실시간 순위+AI추천+리뷰</h3>
+        <h3>103곳 실시간 순위+AI추천+리뷰</h3>
         <p>당신의 완벽한 밤을 위한 모든 정보가 한곳에</p>
         <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer">
-          오늘밤어디 바로가기 →
+          프리미엄 가이드 바로가기 →
         </a>
       </div>
 

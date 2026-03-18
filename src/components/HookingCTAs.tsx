@@ -4,22 +4,22 @@ import { useState, useEffect } from 'react';
 
 const MAIN_URL = 'https://ilsanroom.pages.dev';
 
-/* [후킹2] 상세페이지 중간 끊기 */
+/* [후킹2] 상세페이지 중간 끊기 — "업소" "오늘밤어디" 사용 최소화 */
 export function MidContentHook() {
   return (
     <div className="hooking-mid">
       <p style={{ fontSize: '0.9rem', color: '#A89B80', marginBottom: '0.5rem' }}>
         전체 리뷰 93개 + 실시간 순위
       </p>
-      <p>핵심 정보의 나머지는 오늘밤어디에서 확인하세요</p>
+      <p>나머지 정보는 프리미엄 가이드에서 확인하세요</p>
       <a href={MAIN_URL} target="_blank" rel="noopener noreferrer">
-        오늘밤어디에서 확인 →
+        프리미엄 가이드 보기 →
       </a>
     </div>
   );
 }
 
-/* [후킹3] 비슷한 업소 추천 → 메인 연결 */
+/* [후킹3] 비슷한 곳 추천 → 메인 연결 */
 export function SimilarVenuesHook() {
   return (
     <div style={{
@@ -27,14 +27,14 @@ export function SimilarVenuesHook() {
       padding: '1.5rem', textAlign: 'center', margin: '1.5rem 0',
     }}>
       <p style={{ color: '#D4C5A9', marginBottom: '0.75rem', fontSize: '0.95rem' }}>
-        이 업소와 비슷한 곳 5개 더 보기
+        비슷한 분위기 5곳 더 보기
       </p>
       <a href={MAIN_URL} target="_blank" rel="noopener noreferrer" style={{
         display: 'inline-block', background: '#D4AF37', color: '#0A0A0A',
         padding: '0.6rem 1.5rem', borderRadius: '8px', fontWeight: 700,
         fontSize: '0.9rem', textDecoration: 'none',
       }}>
-        오늘밤어디에서 비교하기 →
+        전체 비교하기 →
       </a>
     </div>
   );
@@ -48,7 +48,7 @@ export function AIRecommendHook() {
       borderRadius: '16px', padding: '1.5rem', textAlign: 'center', margin: '1.5rem 0',
     }}>
       <p style={{ color: '#D4AF37', fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.5rem' }}>
-        AI가 당신에게 맞는 업소를 추천합니다
+        AI가 당신에게 맞는 곳을 추천합니다
       </p>
       <p style={{ color: '#D4C5A9', fontSize: '0.9rem', marginBottom: '1rem' }}>
         취향, 예산, 위치를 분석해 최적의 밤을 설계합니다
@@ -58,13 +58,13 @@ export function AIRecommendHook() {
         padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: 700,
         fontSize: '0.95rem', textDecoration: 'none',
       }}>
-        오늘밤어디에서 무료 체험 →
+        무료 AI 추천 받기 →
       </a>
     </div>
   );
 }
 
-/* [후킹5] 103개 전체 비교 */
+/* [후킹5] 103곳 전체 비교 */
 export function FullCompareHook() {
   return (
     <div style={{
@@ -72,7 +72,7 @@ export function FullCompareHook() {
       padding: '1.25rem', textAlign: 'center', margin: '1.5rem 0',
     }}>
       <p style={{ color: '#F0E6D3', fontSize: '0.95rem', marginBottom: '0.75rem' }}>
-        103개 전체 업소를 한눈에 비교하고 싶다면
+        103곳 전체를 한눈에 비교하고 싶다면
       </p>
       <a href={MAIN_URL} target="_blank" rel="noopener noreferrer" style={{
         display: 'inline-block', background: '#D4AF37', color: '#0A0A0A',
@@ -91,7 +91,7 @@ export function SlideUpHook() {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(true), 180000); // 3분
+    const timer = setTimeout(() => setShow(true), 180000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -111,14 +111,14 @@ export function SlideUpHook() {
         fontSize: '1.2rem', cursor: 'pointer',
       }}>×</button>
       <p style={{ color: '#F7E7CE', fontWeight: 700, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
-        더 많은 정보가 기다리고 있습니다
+        더 깊은 정보가 기다리고 있습니다
       </p>
       <a href={MAIN_URL} target="_blank" rel="noopener noreferrer" style={{
         display: 'inline-block', background: '#8B5CF6', color: '#FFF',
         padding: '0.6rem 1.5rem', borderRadius: '8px', fontWeight: 700,
         fontSize: '0.9rem', textDecoration: 'none',
       }}>
-        오늘밤어디 바로가기 →
+        프리미엄 가이드 바로가기 →
       </a>
       <style dangerouslySetInnerHTML={{ __html: '@keyframes slideUp{from{transform:translateX(-50%) translateY(100%)}to{transform:translateX(-50%) translateY(0)}}' }} />
     </div>
@@ -162,7 +162,7 @@ export function ScrollBannerHook() {
         padding: '0.6rem 1.5rem', borderRadius: '8px', fontWeight: 700,
         fontSize: '0.9rem', textDecoration: 'none',
       }}>
-        오늘밤어디에서 완벽한 밤 시작 →
+        완벽한 밤 시작하기 →
       </a>
       <style dangerouslySetInnerHTML={{ __html: '@keyframes fadeInUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}' }} />
     </div>
