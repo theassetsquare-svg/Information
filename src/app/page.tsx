@@ -5,7 +5,7 @@ import VenueCard from '../components/VenueCard';
 import SearchBar from '../components/SearchBar';
 import Roulette from '../components/Roulette';
 import VsBattle from '../components/VsBattle';
-import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend } from '../components/AddictionEngine';
+import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend, PersonalizedFeed } from '../components/AddictionEngine';
 import { AIRecommendHook, FullCompareHook, MidContentHook, SimilarVenuesHook } from '../components/HookingCTAs';
 
 const content = getHomeContent();
@@ -94,6 +94,13 @@ export default function HomePage() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ═══ 개인화 추천 (방문 기록 기반) ═══ */}
+      <section style={{ padding: '1rem 0' }}>
+        <div className="container">
+          <PersonalizedFeed venues={allVenues} />
         </div>
       </section>
 

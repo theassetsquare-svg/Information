@@ -5,6 +5,7 @@ import VenueCard from '../../../components/VenueCard';
 import StickyPhoneBar from '../../../components/StickyPhoneBar';
 import { ReadingProgress, AutoNext, EndlessRecommend } from '../../../components/AddictionEngine';
 import { MidContentHook, SimilarVenuesHook, AIRecommendHook, FullCompareHook } from '../../../components/HookingCTAs';
+import RecentTracker from '../../../components/RecentTracker';
 
 interface Props { params: { category: string; slug: string } }
 
@@ -103,6 +104,9 @@ export default function VenueDetailPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBizLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+
+      {/* 방문 기록 저장 (개인화 추천용) */}
+      <RecentTracker slug={venue.slug} />
 
       {/* 브레드크럼 */}
       <div className="container">
