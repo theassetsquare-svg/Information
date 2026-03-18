@@ -3,7 +3,7 @@ import { getAllVenues, getVenueBySlug, getRelatedVenues, SITE_URL, CAT_SLUG_TO_L
 import { generateGoldContent, SITE_NAME } from '../../../lib/gold-content';
 import VenueCard from '../../../components/VenueCard';
 import StickyPhoneBar from '../../../components/StickyPhoneBar';
-import { ReadingProgress, AutoNext, EndlessRecommend, SlotMachine } from '../../../components/AddictionEngine';
+import { ReadingProgress, AutoNext, EndlessRecommend } from '../../../components/AddictionEngine';
 import { MidContentHook, SimilarVenuesHook, AIRecommendHook, FullCompareHook } from '../../../components/HookingCTAs';
 
 interface Props { params: { category: string; slug: string } }
@@ -35,6 +35,33 @@ const catPaths: Record<string, string> = {
   room: '/rooms/', yojeong: '/yojeongs/', hoppa: '/hoppas/',
 };
 
+const catGuide: Record<string, { intro: string; tips: string[] }> = {
+  night: {
+    intro: '테이블 중심의 사교 문화. 웨이터가 자리를 안내한다. 복장은 깔끔하게, 신분증 필수.',
+    tips: ['양주 1병이 기본 주문 단위', '테이블 위치가 경험을 좌우한다', '피크타임(22~01시) 전에 도착하면 좋은 자리'],
+  },
+  club: {
+    intro: '서서 즐기는 플로어 중심. 드레스코드 확인 필수. 일찍 가면 대기 없이 입장.',
+    tips: ['슬리퍼·운동복 입장 불가', '입장료+음료 별도인 곳 대부분', '귀중품은 최소한으로'],
+  },
+  lounge: {
+    intro: '대화가 주인공인 공간. 볼륨 낮고 분위기 좋다. 예약 추천.',
+    tips: ['시그니처 칵테일부터 시도해보자', '바 카운터는 1인 손님 환영', '주말 저녁은 예약 필수'],
+  },
+  room: {
+    intro: '프라이빗 공간. 인원수에 맞는 사이즈를 미리 확인. 단체 모임·접대에 적합.',
+    tips: ['전화로 인원·예산·목적 미리 전달', '정찰제 확인하면 가격 투명', '픽업 서비스 있는 곳도 있다'],
+  },
+  yojeong: {
+    intro: '한정식 코스와 국악 공연. 예약제 운영. 격식을 갖추고 방문하자.',
+    tips: ['사전 예약 필수 (당일 워크인 거의 불가)', '정장 또는 비즈니스 캐주얼', '알레르기 있으면 미리 알려주자'],
+  },
+  hoppa: {
+    intro: '여성 고객을 위한 공간. 시스템을 미리 이해하면 첫 방문도 편하다.',
+    tips: ['매니저가 시스템 설명해준다', '호스트 지명은 선택사항', '예산 미리 정해두면 부담 없다'],
+  },
+};
+
 export default function VenueDetailPage({ params }: Props) {
   const venue = getVenueBySlug(params.slug);
   if (!venue) return <div className="container section"><h1>페이지를 찾을 수 없습니다</h1></div>;
@@ -45,6 +72,7 @@ export default function VenueDetailPage({ params }: Props) {
   const catLabel = CAT_SLUG_TO_LABEL[venue.cat_slug] || venue.category;
   const catPath = catPaths[venue.cat_slug] || '/';
   const hasPhone = !!(venue.nickname && venue.nickname_phone);
+  const guide = catGuide[venue.cat_slug] || catGuide.night;
 
   // JSON-LD
   const localBizLd = {
@@ -82,7 +110,7 @@ export default function VenueDetailPage({ params }: Props) {
           <a href="/" target="_blank" rel="noopener noreferrer">홈</a>
           <span>&rsaquo;</span>
           <a href={catPath} target="_blank" rel="noopener noreferrer">{catLabel}</a>
-          <span>&rsaquo;</span> 상세
+          <span>&rsaquo;</span> {venue.name}
         </div>
       </div>
 
@@ -98,7 +126,7 @@ export default function VenueDetailPage({ params }: Props) {
             </p>
           )}
           <div className="detail-meta">
-            <span>{venue.region} {venue.district}</span>
+            <span>{venue.region}</span>
             {venue.hours && <span>{venue.hours}</span>}
           </div>
         </div>
@@ -114,10 +142,8 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* [후킹2] 상세페이지 중간 끊기 */}
-      <div className="container">
-        <MidContentHook />
-      </div>
+      {/* [후킹2] 중간 끊기 */}
+      <div className="container"><MidContentHook /></div>
 
       {/* 기본 정보 */}
       <section className="detail-section">
@@ -135,31 +161,21 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* 첫 방문 가이드 */}
+      {/* [D] 첫 방문 가이드 */}
       <section className="detail-section" style={{ background: '#F5F5F5', padding: '2rem 0' }}>
         <div className="container narrow">
           <h2>처음 방문하세요?</h2>
-          <p style={{ marginBottom: '1rem' }}>
-            {venue.cat_slug === 'night' && '테이블 중심의 사교 문화다. 정해진 자리에 앉아 주문하면 된다. 복장은 깔끔하게, 신분증은 필수.'}
-            {venue.cat_slug === 'club' && '서서 즐기는 플로어가 중심이다. 드레스코드 확인하고 가자. 피크타임 전에 도착하면 대기 없이 들어간다.'}
-            {venue.cat_slug === 'lounge' && '대화가 주인공인 공간이다. 볼륨이 낮아 편하게 이야기할 수 있다. 예약을 추천한다.'}
-            {venue.cat_slug === 'room' && '프라이빗 공간이다. 인원수에 맞는 사이즈를 미리 확인하자. 단체 모임이나 접대에 적합하다.'}
-            {venue.cat_slug === 'yojeong' && '한정식 코스와 함께하는 전통 접대 문화다. 대부분 예약제로 운영된다. 격식을 갖추고 방문하자.'}
-            {venue.cat_slug === 'hoppa' && '여성 고객을 위한 공간이다. 시스템을 미리 이해하고 가면 첫 방문도 편하다. 예산을 미리 정해두자.'}
-          </p>
+          <p style={{ marginBottom: '1rem' }}>{guide.intro}</p>
           <ul className="checklist">
             <li>신분증 지참 (주민등록증·면허증·여권)</li>
-            <li>복장은 깔끔한 캐주얼 이상</li>
-            <li>피크타임 1시간 전 도착 추천</li>
+            {guide.tips.map((tip, i) => <li key={i}>{tip}</li>)}
             <li>귀가 교통편 미리 확인</li>
           </ul>
         </div>
       </section>
 
-      {/* [후킹4] AI 추천 티저 */}
-      <div className="container">
-        <AIRecommendHook />
-      </div>
+      {/* [후킹4] AI 추천 */}
+      <div className="container"><AIRecommendHook /></div>
 
       {/* 방문 체크리스트 */}
       <section className="detail-section">
@@ -184,7 +200,7 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* 인기 시간대 */}
+      {/* [E] 인기 시간대 */}
       <section className="detail-section" style={{ background: '#F5F5F5', padding: '2rem 0' }}>
         <div className="container narrow">
           <h2>인기 시간대</h2>
@@ -196,9 +212,9 @@ export default function VenueDetailPage({ params }: Props) {
               { time: '일요일', level: '한산', bar: '20%' },
             ].map(t => (
               <div key={t.time} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <span style={{ minWidth: '80px', fontSize: '0.9rem', fontWeight: 600, color: '#111' }}>{t.time}</span>
-                <div style={{ flex: 1, background: '#333', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
-                  <div style={{ width: t.bar, background: '#D4AF37', height: '100%', borderRadius: '4px' }} />
+                <span style={{ minWidth: '80px', fontSize: '0.9rem', fontWeight: 600 }}>{t.time}</span>
+                <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
+                  <div style={{ width: t.bar, background: '#8B5CF6', height: '100%', borderRadius: '4px' }} />
                 </div>
                 <span style={{ fontSize: '0.8rem', color: '#555', minWidth: '40px' }}>{t.level}</span>
               </div>
@@ -234,17 +250,15 @@ export default function VenueDetailPage({ params }: Props) {
         </section>
       )}
 
-      {/* [후킹3] 비슷한 업소 추천 → 메인 */}
-      <div className="container">
-        <SimilarVenuesHook />
-      </div>
+      {/* [후킹3] 비슷한 곳 → 메인 */}
+      <div className="container"><SimilarVenuesHook /></div>
 
-      {/* 관련 업소 (서브 내부) */}
+      {/* 관련 업소 */}
       {related.length > 0 && (
         <section className="related-section">
           <div className="container">
             <h2>비슷한 곳</h2>
-            <p style={{ color: '#555', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천하는 곳</p>
+            <p style={{ color: '#555', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천</p>
             <div className="venue-grid">
               {related.map(v => <VenueCard key={v.slug} venue={v} />)}
             </div>
@@ -256,21 +270,12 @@ export default function VenueDetailPage({ params }: Props) {
       <ReadingProgress />
 
       {/* [후킹5] 전체 비교 */}
-      <div className="container">
-        <FullCompareHook />
-      </div>
+      <div className="container"><FullCompareHook /></div>
 
-      {/* 넷플릭스식 자동 다음 추천 */}
+      {/* 자동 다음 추천 */}
       <section className="section">
         <div className="container narrow">
           <AutoNext venues={related} current={venue.slug} />
-        </div>
-      </section>
-
-      {/* 슬롯머신 */}
-      <section className="section" style={{ background: '#F5F5F5' }}>
-        <div className="container narrow">
-          <SlotMachine venues={related} />
         </div>
       </section>
 
