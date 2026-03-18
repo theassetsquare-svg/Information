@@ -22,18 +22,18 @@ export default function YojeongsPage() {
         <div className="breadcrumb">
           <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 요정
         </div>
-        <h1 style={{ marginTop: '1rem', color: '#D4AF37' }}>{cat.heading}</h1>
-        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#D4C5A9' }}>{cat.intro}</p>
+        <h1 style={{ marginTop: '1rem', color: '#8B5CF6' }}>{cat.heading}</h1>
+        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#333' }}>{cat.intro}</p>
 
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
-          <p style={{ color: '#F0E6D3' }}>요정은 한국 전통 접대 문화의 정수다. 한정식 코스가 기본이며, 국악 라이브 공연이 함께하는 곳도 있다. 프라이빗 룸에서 격식을 갖추고 대화하는 자리에 적합하다. 대부분 예약제로 운영되며, 가격대가 높은 편이다.</p>
-          <p style={{ marginTop: '1rem', color: '#F0E6D3' }}>{year}년 기준 {venues.length}곳을 정리했다.</p>
+          <p style={{ color: '#111' }}>요정은 한국 전통 접대 문화의 정수다. 한정식 코스가 기본이며, 국악 라이브 공연이 함께하는 곳도 있다. 프라이빗 룸에서 격식을 갖추고 대화하는 자리에 적합하다. 대부분 예약제로 운영되며, 가격대가 높은 편이다.</p>
+          <p style={{ marginTop: '1rem', color: '#111' }}>{year}년 기준 {venues.length}곳을 정리했다.</p>
         </div>
 
         <div className="venue-grid">{venues.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
 
-        <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: '#111', borderRadius: '16px', border: '1px solid #333' }}>
-          <h2 style={{ color: '#D4AF37' }}>요정 처음이세요?</h2>
+        <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: '#F5F5F5', borderRadius: '16px', border: '1px solid #E5E7EB' }}>
+          <h2 style={{ color: '#8B5CF6' }}>요정 처음이세요?</h2>
           <ul className="checklist">
             <li>반드시 사전 예약. 당일 워크인은 거의 불가능하다</li>
             <li>복장: 격식 있게. 정장이나 깔끔한 비즈니스 캐주얼</li>

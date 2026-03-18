@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <>
-      {/* [후킹1] 상단 고정 배너 — 모든 페이지 최상단 */}
+      {/* [후킹1] 상단 고정 배너 */}
       <div className="top-banner">
         <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer">
           프리미엄 정보+실시간 예약은 ★오늘밤어디★에서 →

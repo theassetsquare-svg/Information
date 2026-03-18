@@ -1,26 +1,20 @@
-/* ── 럭셔리 골드 다크 테마 — "밤의 격이 다른 선택" ── */
-/* Pretendard는 layout.tsx에서 <link preload>로 로드 */
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap');
+/* ── 밝은 테마 — 네이버/구글처럼 ── */
+/* Pretendard Variable: layout.tsx에서 preload */
 
 :root {
-  --bg: #0A0A0A;
-  --bg-alt: #111111;
-  --bg-card: #1A1A1A;
-  --bg-card-hover: #222222;
-  --gold: #D4AF37;
-  --gold-dim: #B8941F;
-  --gold-light: #F7E7CE;
-  --champagne: #F7E7CE;
-  --text: #F0E6D3;
-  --text-sub: #D4C5A9;
-  --text-muted: #A89B80;
-  --border: #333333;
-  --border-accent: #D4AF37;
+  --bg: #FFFFFF;
+  --bg-alt: #F5F5F5;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F9FAFB;
   --purple: #8B5CF6;
-  --main-cta: #8B5CF6;
-  --font-serif: 'Noto Serif KR', Georgia, 'Times New Roman', serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard Variable', 'Pretendard', sans-serif;
+  --purple-dim: #7C3AED;
+  --cyan: #06B6D4;
+  --text: #111111;
+  --text-sub: #333333;
+  --text-muted: #555555;
+  --border: #E5E7EB;
+  --border-accent: #DDD6FE;
+  --font-sans: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --max-w: 480px;
   --max-narrow: 480px;
 }
@@ -34,7 +28,7 @@ html {
 }
 
 body {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
   line-height: 1.75;
@@ -52,8 +46,8 @@ body > * {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-serif);
-  color: var(--gold);
+  font-family: var(--font-sans);
+  color: var(--text);
   line-height: 1.35;
   word-break: keep-all;
   font-weight: 700;
@@ -71,13 +65,13 @@ p {
 }
 
 a {
-  color: var(--gold);
+  color: var(--purple);
   text-decoration: none;
   transition: color 0.2s;
 }
-a:hover { color: var(--gold-light); }
+a:hover { color: var(--purple-dim); }
 a:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--purple);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -97,7 +91,7 @@ img { max-width: 100%; height: auto; display: block; }
 .section { padding: 3rem 0; }
 .section + .section { border-top: 1px solid var(--border); }
 
-/* ── 상단 고정 배너 (메인사이트 유도) ── */
+/* ── 상단 고정 배너 ── */
 .top-banner {
   background: var(--purple);
   padding: 0.75rem 1rem;
@@ -112,14 +106,14 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 0.95rem;
   text-decoration: none;
 }
-.top-banner a:hover { color: var(--champagne); }
+.top-banner a:hover { opacity: 0.9; }
 
 /* ── 헤더 ── */
 .header {
   position: sticky;
   top: 44px;
   z-index: 100;
-  background: rgba(10, 10, 10, 0.97);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   padding: 0.875rem 0;
@@ -136,10 +130,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 .logo {
   font-size: 1.25rem;
-  font-weight: 900;
-  color: var(--gold);
+  font-weight: 800;
+  color: var(--purple);
   letter-spacing: -0.02em;
-  font-family: var(--font-serif);
 }
 
 .logo span {
@@ -152,12 +145,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
 nav a { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
-nav a:hover { color: var(--gold); }
+nav a:hover { color: var(--purple); }
 
-/* ── 배너 (메인사이트 유도) ── */
+/* ── 배너 ── */
 .promo-banner {
-  background: linear-gradient(135deg, #1A1520, #2D1B3D);
-  border: 1px solid var(--gold);
+  background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+  border: 1px solid var(--border-accent);
   border-radius: 12px;
   padding: 0.875rem 1.25rem;
   text-align: center;
@@ -167,10 +160,10 @@ nav a:hover { color: var(--gold); }
 
 .promo-banner a {
   font-size: 0.95rem;
-  color: var(--gold);
+  color: var(--purple);
   font-weight: 700;
 }
-.promo-banner a:hover { color: var(--gold-light); }
+.promo-banner a:hover { color: var(--purple-dim); }
 
 /* ── 푸터 ── */
 .footer {
@@ -191,9 +184,9 @@ nav a:hover { color: var(--gold); }
 }
 
 .footer-links a { color: var(--text-muted); font-size: 0.85rem; }
-.footer-links a:hover { color: var(--gold); }
+.footer-links a:hover { color: var(--purple); }
 
-/* ── 업소 카드 — PC/모바일 동일 1열 모바일 사이즈 ── */
+/* ── 업소 카드 ── */
 .venue-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -217,8 +210,8 @@ nav a:hover { color: var(--gold); }
   cursor: pointer;
 }
 .venue-card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+  border-color: var(--border-accent);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
   transform: translateY(-2px);
 }
 
@@ -231,8 +224,8 @@ nav a:hover { color: var(--gold); }
 
 .venue-card-badge {
   display: inline-block;
-  background: var(--gold);
-  color: #0A0A0A;
+  background: var(--purple);
+  color: #FFF;
   font-size: 0.65rem;
   font-weight: 700;
   padding: 0.2rem 0.5rem;
@@ -252,7 +245,7 @@ nav a:hover { color: var(--gold); }
 
 .venue-card h3 {
   font-size: 1.1rem;
-  color: var(--gold);
+  color: var(--text);
   margin-bottom: 0.5rem;
   line-height: 1.3;
   white-space: nowrap;
@@ -267,7 +260,7 @@ nav a:hover { color: var(--gold); }
   flex: 1;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -281,14 +274,14 @@ nav a:hover { color: var(--gold); }
 
 .venue-card-tag {
   font-size: 0.7rem;
-  color: var(--gold);
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: var(--purple);
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.15);
   padding: 0.15rem 0.5rem;
   border-radius: 12px;
 }
 
-/* ── 카테고리 필터 ── */
+/* ── 필터 ── */
 .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
 .filter-btn {
   background: transparent;
@@ -299,12 +292,12 @@ nav a:hover { color: var(--gold); }
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 .filter-btn:hover, .filter-btn.active {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--purple);
+  color: var(--purple);
+  background: rgba(139, 92, 246, 0.06);
 }
 
 /* ── 상세페이지 ── */
@@ -313,14 +306,11 @@ nav a:hover { color: var(--gold); }
   border-bottom: 1px solid var(--border);
 }
 
-.detail-hero h1 {
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
+.detail-hero h1 { color: var(--text); margin-bottom: 0.5rem; }
 
 .detail-tagline {
   font-size: 1.125rem;
-  color: var(--champagne);
+  color: var(--purple);
   font-style: italic;
   margin-bottom: 1rem;
 }
@@ -338,7 +328,7 @@ nav a:hover { color: var(--gold); }
   display: inline-block;
   width: 4px;
   height: 4px;
-  background: var(--gold);
+  background: var(--purple);
   border-radius: 50%;
   margin-right: 0.4rem;
   vertical-align: middle;
@@ -346,7 +336,7 @@ nav a:hover { color: var(--gold); }
 
 .detail-section { padding: 2rem 0; }
 .detail-section + .detail-section { border-top: 1px solid var(--border); }
-.detail-section h2 { color: var(--gold); margin-bottom: 1rem; }
+.detail-section h2 { color: var(--text); margin-bottom: 1rem; }
 
 /* ── 정보 테이블 ── */
 .info-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
@@ -356,13 +346,13 @@ nav a:hover { color: var(--gold); }
   border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
 }
-.info-table th { color: var(--gold); font-weight: 600; width: 30%; white-space: nowrap; }
+.info-table th { color: var(--purple); font-weight: 600; width: 30%; white-space: nowrap; }
 .info-table td { color: var(--text); }
 
 /* ── FAQ ── */
 .faq-item { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
 .faq-item:last-child { border-bottom: none; }
-.faq-q { font-weight: 700; color: var(--gold); margin-bottom: 0.5rem; font-size: 1rem; }
+.faq-q { font-weight: 700; color: var(--text); margin-bottom: 0.5rem; font-size: 1rem; }
 .faq-a { color: var(--text-sub); font-size: 0.95rem; line-height: 1.7; }
 
 /* ── 체크리스트 ── */
@@ -378,7 +368,7 @@ nav a:hover { color: var(--gold); }
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--gold);
+  color: var(--purple);
   font-weight: 700;
 }
 
@@ -392,19 +382,19 @@ nav a:hover { color: var(--gold); }
 /* ── 빵부스러기 ── */
 .breadcrumb { font-size: 0.8rem; color: var(--text-muted); padding: 1rem 0 0; }
 .breadcrumb a { color: var(--text-muted); }
-.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb a:hover { color: var(--purple); }
 .breadcrumb span { margin: 0 0.4rem; }
 
 /* ── 후킹 CTA ── */
 .hooking-mid {
-  background: linear-gradient(135deg, #1A1520, #2D1B3D);
-  border: 1px solid var(--gold);
+  background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+  border: 1px solid var(--border-accent);
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
   margin: 2rem 0;
 }
-.hooking-mid p { color: var(--champagne); margin-bottom: 1rem; font-size: 0.95rem; }
+.hooking-mid p { color: var(--text-sub); margin-bottom: 1rem; font-size: 0.95rem; }
 .hooking-mid a {
   display: inline-block;
   background: var(--purple);
@@ -416,27 +406,26 @@ nav a:hover { color: var(--gold); }
 }
 
 .hooking-large {
-  background: linear-gradient(135deg, #0A0A0A, #1A1520);
-  border: 2px solid var(--gold);
+  background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+  border: 2px solid var(--border-accent);
   border-radius: 16px;
   padding: 2.5rem 1.5rem;
   text-align: center;
   margin: 2rem 0;
 }
-.hooking-large h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 0.75rem; }
-.hooking-large p { color: var(--champagne); margin-bottom: 1.25rem; }
+.hooking-large h3 { color: var(--purple); font-size: 1.3rem; margin-bottom: 0.75rem; }
+.hooking-large p { color: var(--text-sub); margin-bottom: 1.25rem; }
 .hooking-large a {
   display: inline-block;
-  background: var(--gold);
-  color: #0A0A0A;
+  background: var(--purple);
+  color: #FFF;
   padding: 1rem 2.5rem;
   border-radius: 8px;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 1.1rem;
-  font-family: var(--font-serif);
 }
 
-/* ── 반응형 (이미 480px 기준이라 최소한만) ── */
+/* ── 반응형 ── */
 @media (max-width: 480px) {
   nav { gap: 0.75rem; }
   nav a { font-size: 0.8rem; }

@@ -37,17 +37,17 @@ export default function SearchBar({ venues }: { venues: Venue[] }) {
         placeholder="업소명, 지역으로 검색"
         style={{
           width: '100%', padding: '0.875rem 1.25rem', fontSize: '1rem',
-          border: '2px solid #333', borderRadius: '12px',
-          outline: 'none', background: '#1A1A1A', color: '#F0E6D3',
-          fontFamily: 'var(--font-serif)',
+          border: '2px solid #E5E7EB', borderRadius: '12px',
+          outline: 'none', background: '#FFF', color: '#111',
+          fontFamily: 'var(--font-sans)',
         }}
       />
 
       {open && results.length > 0 && (
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50,
-          background: '#1A1A1A', border: '1px solid #333', borderRadius: '12px',
-          marginTop: '0.5rem', boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden',
+          background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '12px',
+          marginTop: '0.5rem', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', overflow: 'hidden',
         }}>
           {results.map(v => (
             <a
@@ -58,14 +58,14 @@ export default function SearchBar({ venues }: { venues: Venue[] }) {
               onClick={() => setOpen(false)}
               style={{
                 display: 'block', padding: '0.75rem 1rem',
-                borderBottom: '1px solid #333', textDecoration: 'none',
-                color: '#F0E6D3', transition: 'background 0.15s',
+                borderBottom: '1px solid #E5E7EB', textDecoration: 'none',
+                color: '#111', transition: 'background 0.15s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#222')}
-              onMouseLeave={e => (e.currentTarget.style.background = '#1A1A1A')}
+              onMouseEnter={e => (e.currentTarget.style.background = '#F5F5F5')}
+              onMouseLeave={e => (e.currentTarget.style.background = '#FFF')}
             >
-              <span style={{ fontWeight: 600, color: '#D4AF37' }}>{v.name}</span>
-              <span style={{ fontSize: '0.8rem', color: '#A89B80', marginLeft: '0.5rem' }}>
+              <span style={{ fontWeight: 600 }}>{v.name}</span>
+              <span style={{ fontSize: '0.8rem', color: '#555', marginLeft: '0.5rem' }}>
                 {v.region}
               </span>
             </a>
@@ -76,23 +76,22 @@ export default function SearchBar({ venues }: { venues: Venue[] }) {
       {open && query.trim() && results.length === 0 && (
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 50,
-          background: '#1A1A1A', border: '1px solid #333', borderRadius: '12px',
-          marginTop: '0.5rem', padding: '1rem', textAlign: 'center', color: '#A89B80',
+          background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '12px',
+          marginTop: '0.5rem', padding: '1rem', textAlign: 'center', color: '#555',
         }}>
           검색 결과가 없습니다.
         </div>
       )}
 
-      {/* 인기검색어 태그 */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem', justifyContent: 'center' }}>
         {popularTags.map(tag => (
           <button
             key={tag}
             onClick={() => { setQuery(tag); setOpen(true); }}
             style={{
-              background: '#1A1A1A', border: '1px solid #333',
+              background: '#FFF', border: '1px solid #E5E7EB',
               borderRadius: '20px', padding: '0.4rem 0.875rem', fontSize: '0.85rem',
-              color: '#D4C5A9', cursor: 'pointer', fontFamily: 'var(--font-serif)',
+              color: '#333', cursor: 'pointer', fontFamily: 'var(--font-sans)',
               transition: 'all 0.2s',
             }}
           >

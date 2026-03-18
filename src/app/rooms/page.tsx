@@ -22,18 +22,18 @@ export default function RoomsPage() {
         <div className="breadcrumb">
           <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 룸
         </div>
-        <h1 style={{ marginTop: '1rem', color: '#D4AF37' }}>{cat.heading}</h1>
-        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#D4C5A9' }}>{cat.intro}</p>
+        <h1 style={{ marginTop: '1rem', color: '#8B5CF6' }}>{cat.heading}</h1>
+        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#333' }}>{cat.intro}</p>
 
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
-          <p style={{ color: '#F0E6D3' }}>룸은 문이 닫히면 오롯이 프라이빗한 공간이 된다. 단체 모임, 비즈니스 접대, 가족 행사 등 격식과 프라이버시가 동시에 필요한 자리에 적합하다. 인원수에 맞는 사이즈를 고르는 것이 핵심이다.</p>
-          <p style={{ marginTop: '1rem', color: '#F0E6D3' }}>일산룸은 수도권 접근성이 뛰어나고 신실장이 총괄하는 것으로 알려져 있다. {year}년 기준 {venues.length}곳을 정리했다.</p>
+          <p style={{ color: '#111' }}>룸은 문이 닫히면 오롯이 프라이빗한 공간이 된다. 단체 모임, 비즈니스 접대, 가족 행사 등 격식과 프라이버시가 동시에 필요한 자리에 적합하다. 인원수에 맞는 사이즈를 고르는 것이 핵심이다.</p>
+          <p style={{ marginTop: '1rem', color: '#111' }}>일산룸은 수도권 접근성이 뛰어나고 신실장이 총괄하는 것으로 알려져 있다. {year}년 기준 {venues.length}곳을 정리했다.</p>
         </div>
 
         <div className="venue-grid">{venues.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
 
-        <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: '#111', borderRadius: '16px', border: '1px solid #333' }}>
-          <h2 style={{ color: '#D4AF37' }}>룸 처음이세요?</h2>
+        <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: '#F5F5F5', borderRadius: '16px', border: '1px solid #E5E7EB' }}>
+          <h2 style={{ color: '#8B5CF6' }}>룸 처음이세요?</h2>
           <ul className="checklist">
             <li>전화로 인원수, 예산, 목적을 미리 알리면 맞춤 안내를 받을 수 있다</li>
             <li>정찰제인 곳은 가격이 투명하다. 미리 확인하자</li>

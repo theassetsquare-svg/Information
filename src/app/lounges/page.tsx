@@ -22,16 +22,16 @@ export default function LoungesPage() {
         <div className="breadcrumb">
           <a href="/" target="_blank" rel="noopener noreferrer">홈</a><span>&rsaquo;</span> 라운지
         </div>
-        <h1 style={{ marginTop: '1rem', color: '#D4AF37' }}>{cat.heading}</h1>
-        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#D4C5A9' }}>{cat.intro}</p>
+        <h1 style={{ marginTop: '1rem', color: '#8B5CF6' }}>{cat.heading}</h1>
+        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#333' }}>{cat.intro}</p>
 
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
-          <p style={{ color: '#F0E6D3' }}>라운지는 음악이 배경이고 대화가 주인공인 곳이다. 볼륨이 낮아 옆 사람 말이 들린다. 와인, 칵테일, 위스키 등 음료 퀄리티가 핵심이다. 소개팅, 비즈니스 미팅, 소규모 모임 장소로 많이 택한다.</p>
-          <p style={{ marginTop: '1rem', color: '#F0E6D3' }}>강남권 일대가 주 무대다. 바텐더의 실력이 곧 그 집의 수준. 시그니처 한 잔을 주문해보면 분위기를 가늠할 수 있다. 예약을 추천한다. 주말 저녁에는 자리가 빨리 찬다. {year}년 기준 {venues.length}곳을 비교했다.</p>
+          <p style={{ color: '#111' }}>라운지는 음악이 배경이고 대화가 주인공인 곳이다. 볼륨이 낮아 옆 사람 말이 들린다. 와인, 칵테일, 위스키 등 음료 퀄리티가 핵심이다. 소개팅, 비즈니스 미팅, 소규모 모임 장소로 많이 택한다.</p>
+          <p style={{ marginTop: '1rem', color: '#111' }}>강남권 일대가 주 무대다. 바텐더의 실력이 곧 그 집의 수준. 시그니처 한 잔을 주문해보면 분위기를 가늠할 수 있다. 예약을 추천한다. 주말 저녁에는 자리가 빨리 찬다. {year}년 기준 {venues.length}곳을 비교했다.</p>
         </div>
 
         <div className="venue-grid">{venues.map(v => <VenueCard key={v.slug} venue={v} />)}</div>
-        <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: '#A89B80', textAlign: 'center' }}>
+        <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: '#555', textAlign: 'center' }}>
           전체 {venues.length}곳 — 카드를 눌러 상세 확인
         </p>
 
@@ -39,8 +39,8 @@ export default function LoungesPage() {
           <AIRecommendHook />
         </div>
 
-        <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: '#111', borderRadius: '16px', border: '1px solid #333' }}>
-          <h2 style={{ color: '#D4AF37' }}>라운지 처음이세요?</h2>
+        <div className="narrow" style={{ marginTop: '2rem', padding: '2rem', background: '#F5F5F5', borderRadius: '16px', border: '1px solid #E5E7EB' }}>
+          <h2 style={{ color: '#8B5CF6' }}>라운지 처음이세요?</h2>
           <ul className="checklist">
             <li>예약 추천. 인기 있는 곳은 당일 워크인이 어렵다</li>
             <li>복장: 스마트 캐주얼. 셔츠에 깔끔한 바지면 충분</li>
