@@ -3,6 +3,7 @@ import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { SlideUpHook, ScrollBannerHook } from '../components/HookingCTAs';
+import KakaoFloat from '../components/KakaoFloat';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -49,6 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SlideUpHook />
         {/* [후킹7] 스크롤 80% 배너 */}
         <ScrollBannerHook />
+        {/* 카카오톡 상담 */}
+        <KakaoFloat />
         {/* 폰트 CSS — 렌더링 후 비동기 로드 */}
         <Script id="load-pretendard" strategy="afterInteractive">
           {`var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css';document.head.appendChild(l);`}
