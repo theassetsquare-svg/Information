@@ -11,7 +11,8 @@ interface Venue {
   card_hook: string;
 }
 
-const popularTags = ['강남 플로어', '수원', '부산', '대전', '해운대', '호빠', '울산'];
+/* 실제 109개 업소에 있는 조합만 */
+const popularTags = ['강남 클럽', '수원 나이트', '부산 나이트', '대전 나이트', '압구정 라운지', '강남 호빠', '일산 룸'];
 
 export default function SearchBar({ venues }: { venues: Venue[] }) {
   const [query, setQuery] = useState('');
@@ -50,24 +51,15 @@ export default function SearchBar({ venues }: { venues: Venue[] }) {
           marginTop: '0.5rem', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', overflow: 'hidden',
         }}>
           {results.map(v => (
-            <a
-              key={v.slug}
-              href={`/${v.cat_slug}/${v.slug}/`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`}
+              target="_blank" rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              style={{
-                display: 'block', padding: '0.75rem 1rem',
-                borderBottom: '1px solid #E5E7EB', textDecoration: 'none',
-                color: '#111', transition: 'background 0.15s',
-              }}
+              style={{ display: 'block', padding: '0.75rem 1rem', borderBottom: '1px solid #E5E7EB',
+                textDecoration: 'none', color: '#111', transition: 'background 0.15s' }}
               onMouseEnter={e => (e.currentTarget.style.background = '#F5F5F5')}
-              onMouseLeave={e => (e.currentTarget.style.background = '#FFF')}
-            >
+              onMouseLeave={e => (e.currentTarget.style.background = '#FFF')}>
               <span style={{ fontWeight: 600 }}>{v.name}</span>
-              <span style={{ fontSize: '0.8rem', color: '#555', marginLeft: '0.5rem' }}>
-                {v.region}
-              </span>
+              <span style={{ fontSize: '0.8rem', color: '#555', marginLeft: '0.5rem' }}>{v.region}</span>
             </a>
           ))}
         </div>
@@ -85,16 +77,12 @@ export default function SearchBar({ venues }: { venues: Venue[] }) {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem', justifyContent: 'center' }}>
         {popularTags.map(tag => (
-          <button
-            key={tag}
-            onClick={() => { setQuery(tag); setOpen(true); }}
+          <button key={tag} onClick={() => { setQuery(tag); setOpen(true); }}
             style={{
-              background: '#FFF', border: '1px solid #E5E7EB',
-              borderRadius: '20px', padding: '0.4rem 0.875rem', fontSize: '0.85rem',
-              color: '#333', cursor: 'pointer', fontFamily: 'var(--font-sans)',
-              transition: 'all 0.2s',
-            }}
-          >
+              background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '20px',
+              padding: '0.4rem 0.875rem', fontSize: '0.85rem', color: '#333',
+              cursor: 'pointer', fontFamily: 'var(--font-sans)', transition: 'all 0.2s',
+            }}>
             {tag}
           </button>
         ))}
