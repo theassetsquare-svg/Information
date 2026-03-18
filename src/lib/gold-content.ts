@@ -144,9 +144,15 @@ const yojeongTaglines = [
 
 const hoppaTaglines = [
   '여성을 위한 프리미엄 밤의 선택지',
-  '처음이라도 편하게, 시스템이 안내하는 곳',
+  '처음이라도 편하게 시스템이 안내하는 곳',
   '분위기 좋고 서비스 확실한 프리미엄 공간',
   '오늘 주인공은 당신이 된다',
+  '매니저가 처음부터 끝까지 에스코트한다',
+  '예산 걱정 없이 즐길 수 있는 구조다',
+  '친구랑 왔는데 혼자 온 것보다 재밌다',
+  '시스템을 알면 긴장할 필요가 전혀 없다',
+  '입장하면 편안한 분위기에 바로 적응된다',
+  '선택의 폭이 넓어서 취향 저격 가능하다',
 ];
 
 function getTagline(venue: Venue): string {
@@ -286,12 +292,8 @@ export function generateGoldContent(venue: Venue) {
     '야간 이용 팁과 귀가 수단을 함께 친절히 안내합니다 안심귀가 새벽대비',
     '시즌별 특징과 요일별 혼잡도를 보기 쉽게 표기했습니다 시간대참조 주중주말구분',
   ];
-  // 충돌 회피: slug 길이도 factor에 포함
-  const h1 = hash(venue.slug + 'xQ7k');
-  const h2 = hash(venue.slug.split('').reverse().join('') + 'Zm3');
-  const h3 = hash(venue.cat_slug + venue.region + 'rG9');
-  const descIdx = (h1 * 3 + h2 * 7 + h3 + venue.slug.length * 11) % descSentences.length;
-  const description = `${venue.name}. ${descSentences[descIdx]}.`;
+  // description = 업소이름 + 태그라인(고유) + 지역. 태그라인이 109개 전부 고유이므로 description도 고유.
+  const description = `${venue.name} ${venue.region}. ${tagline}.`;
 
   return {
     tagline,
