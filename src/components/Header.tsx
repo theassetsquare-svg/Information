@@ -18,6 +18,7 @@ export default function Header() {
             <a href="/nights/" target="_blank" rel="noopener noreferrer">나이트</a>
             <a href="/lounges/" target="_blank" rel="noopener noreferrer">라운지</a>
             <a href="/rooms/" target="_blank" rel="noopener noreferrer">룸</a>
+            <a href="/yojeongs/" target="_blank" rel="noopener noreferrer">요정</a>
             <a href="/hoppas/" target="_blank" rel="noopener noreferrer">호빠</a>
           </nav>
         </div>
