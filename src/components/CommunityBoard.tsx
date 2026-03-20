@@ -19,7 +19,7 @@ const samplePosts: Record<string, { title: string; author: string; level: string
   ],
   review: [
     { title: '수원찬스돔나이트 솔직 후기', author: '수원사람', level: '클러버', likes: 42, comments: 15, time: '3시간 전' },
-    { title: '강남청담클럽 레이스 금요일 다녀왔습니다', author: '클럽러버', level: 'VIP', likes: 58, comments: 22, time: '1일 전' },
+    { title: '강남클럽 레이스 금요일 다녀왔습니다', author: '클럽러버', level: 'VIP', likes: 58, comments: 22, time: '1일 전' },
     { title: '일산명월관요정 접대 후기', author: '비즈맨', level: '파티피플', likes: 37, comments: 9, time: '2일 전' },
   ],
   party: [

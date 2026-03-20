@@ -54,7 +54,7 @@ export default function NotFound() {
           <div style={{ textAlign: 'left' }}>
             <div className="faq-item">
               <p className="faq-q">Q. 처음인데 어디가 좋을까?</p>
-              <p className="faq-a">테이블 문화가 궁금하면 수유·상봉 쪽 나이트. 플로어를 원하면 강남청담 쪽. 조용한 곳이면 압구정 라운지가 좋다.</p>
+              <p className="faq-a">테이블 문화가 궁금하면 수유·상봉 쪽 나이트. 플로어를 원하면 강남 쪽. 조용한 곳이면 압구정 라운지가 좋다.</p>
             </div>
             <div className="faq-item">
               <p className="faq-q">Q. 신분증 없으면 입장 되나?</p>

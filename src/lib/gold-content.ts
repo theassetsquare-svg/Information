@@ -312,7 +312,7 @@ export function getCategoryContent(catSlug: string) {
   const data: Record<string, { title: string; description: string; heading: string; intro: string }> = {
     club: {
       title: `플로어 사운드 컬렉션 | ${SITE_NAME}`,
-      description: `홍대·이태원·강남청담·제주 DJ 라인업과 플로어 사운드를 최신본으로 정리했습니다.`,
+      description: `홍대·이태원·강남·제주 DJ 라인업과 플로어 사운드를 최신본으로 정리했습니다.`,
       heading: '플로어 사운드, 한눈에 살펴보기',
       intro: 'EDM부터 힙합, 테크노까지. 사운드와 분위기가 다른 각지의 플로어를 정리했다.',
     },

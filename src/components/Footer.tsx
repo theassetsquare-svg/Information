@@ -30,7 +30,7 @@ export default function Footer() {
 
           {/* 지역 링크 (SEO 내부링크) */}
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem', fontSize: '0.8rem' }}>
-            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>강남청담</a>
+            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>강남</a>
             <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>압구정</a>
             <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>홍대</a>
             <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>이태원</a>

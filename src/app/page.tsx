@@ -268,7 +268,7 @@ export default function HomePage() {
         <div className="container narrow">
           <h2>자주 묻는 질문</h2>
           {[
-            { q: '처음인데 어디부터?', a: '테이블 문화가 궁금하면 수유 쪽. 플로어를 원하면 강남청담. 조용한 곳이면 압구정 라운지.' },
+            { q: '처음인데 어디부터?', a: '테이블 문화가 궁금하면 수유 쪽. 플로어를 원하면 강남. 조용한 곳이면 압구정 라운지.' },
             { q: '혼자 가도 괜찮나?', a: '바 카운터가 있는 곳이면 어색하지 않다. 혼자 오는 손님 생각보다 많다.' },
             { q: '복장 규정은?', a: '깔끔한 캐주얼이 기본. 강남권은 슬리퍼·트레이닝복 입장 제한.' },
             { q: '예산은 보통 얼마?', a: '장소마다 다르지만 음료 2~3잔 기준 3~5만 원 선이 보통.' },
@@ -297,7 +297,7 @@ export default function HomePage() {
               실시간 분위기, 이벤트 소식을 인스타그램에서 확인하세요
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['#강남청담클럽', '#부산나이트', '#압구정라운지', '#호빠추천'].map(tag => (
+              {['#강남클럽', '#부산나이트', '#압구정라운지', '#호빠추천'].map(tag => (
                 <a key={tag} href={`https://www.instagram.com/explore/tags/${tag.replace('#','')}/`}
                   target="_blank" rel="noopener noreferrer"
                   style={{ padding: '0.5rem 1rem', background: '#FFF', border: '1px solid #E5E7EB',
