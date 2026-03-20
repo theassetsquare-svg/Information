@@ -104,28 +104,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ 프리미엄 카드: 일산룸 + 일산명월관요정 ═══ */}
+      {/* ═══ 신실장 직통 상담 ═══ */}
       <section className="section">
         <div className="container">
-          <h2>프리미엄 추천</h2>
+          <h2>직통 상담 가능</h2>
           <p style={{ color: '#555', marginBottom: '1rem', fontSize: '0.9rem' }}>
-            신실장 직통 상담 가능
+            신실장 담당 · 전화 한 통으로 바로 상담
           </p>
-          {premiumVenues.map(v => (
-            <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'block', marginBottom: '0.75rem', padding: '1.25rem',
-                background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)', border: '2px solid #DDD6FE',
-                borderRadius: '16px', textDecoration: 'none', color: '#111', transition: 'all 0.2s' }}>
-              <div style={{ fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.25rem' }}>
-                PREMIUM · {v.category}
-              </div>
-              <h3 style={{ fontSize: '1.15rem', marginBottom: '0.25rem' }}>{v.name}</h3>
-              <p style={{ fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.25rem' }}>
-                담당: {v.nickname} {v.nickname_phone}
-              </p>
-              <p style={{ fontSize: '0.85rem', color: '#333' }}>{v.card_hook}</p>
-            </a>
-          ))}
+          <div className="venue-grid">
+            {premiumVenues.map(v => <VenueCard key={v.slug} venue={v} />)}
+          </div>
         </div>
       </section>
 
