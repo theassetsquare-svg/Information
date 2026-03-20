@@ -14,6 +14,9 @@ export default function Footer() {
 
       <footer className="footer">
         <div className="container">
+          <p style={{ textAlign: 'center', fontSize: '1.1rem', fontWeight: 700, color: '#D4AF37', marginBottom: '1rem', letterSpacing: '0.02em' }}>
+            광고문의 카톡 besta12
+          </p>
           <div className="footer-links">
             <a href="/clubs/" target="_blank" rel="noopener noreferrer">클럽</a>
             <a href="/nights/" target="_blank" rel="noopener noreferrer">나이트</a>

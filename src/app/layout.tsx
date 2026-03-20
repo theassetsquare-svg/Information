@@ -3,7 +3,7 @@ import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { SlideUpHook, ScrollBannerHook } from '../components/HookingCTAs';
-import KakaoFloat from '../components/KakaoFloat';
+
 import { JourneyTimer } from '../components/AddictionEngine';
 import './globals.css';
 
@@ -51,8 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SlideUpHook />
         {/* [후킹7] 스크롤 80% 배너 */}
         <ScrollBannerHook />
-        {/* 카카오톡 상담 */}
-        <KakaoFloat />
+        {/* 카카오톡 상담 버튼 삭제됨 */}
         {/* 체류시간 타이머 — 도파민 마일스톤 */}
         <JourneyTimer />
         {/* 폰트 CSS — 렌더링 후 비동기 로드 */}
