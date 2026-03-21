@@ -200,7 +200,7 @@ export default function SafetyPage() {
 
           <div style={{
             marginTop: '1.5rem', padding: '1.25rem', textAlign: 'center',
-            background: 'linear-gradient(135deg, #1A1714, #241F1A)',
+            background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)',
             border: '1px solid var(--border-accent)', borderRadius: '12px',
           }}>
             <p style={{ fontWeight: 700, color: 'var(--purple)', fontSize: '1rem' }}>

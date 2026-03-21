@@ -271,7 +271,7 @@ export default function EventsPage() {
           {/* 이벤트 등록 배너 */}
           <div
             style={{
-              background: 'linear-gradient(135deg, #1A1714, #241F1A)',
+              background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)',
               border: '1px solid var(--border-accent)',
               borderRadius: '12px',
               padding: '1.5rem',

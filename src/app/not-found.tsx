@@ -5,7 +5,6 @@ import SearchBar from '../components/SearchBar';
 export default function NotFound() {
   const allVenues = getAllVenues();
   const cats = getCategories();
-  // 닉네임 있는 업소 우선, 없으면 앞에서 5개
   const popular = allVenues.filter(v => v.nickname).slice(0, 5);
 
   return (
@@ -14,7 +13,7 @@ export default function NotFound() {
         <div className="container">
           <p style={{ fontSize: '4rem', fontWeight: 800, color: '#8B5CF6', marginBottom: '0.5rem' }}>404</p>
           <h1 style={{ fontSize: '1.5rem', marginBottom: '0.75rem' }}>앗, 길을 잃었네!</h1>
-          <p style={{ color: '#E8D5B5', marginBottom: '2rem', fontSize: '1rem' }}>
+          <p style={{ color: '#555', marginBottom: '2rem', fontSize: '1rem' }}>
             주소가 바뀌었거나 잘못 입력했을 수 있다. 대신 지금 핫한 곳을 보여줄게.
           </p>
           <SearchBar venues={allVenues} />
@@ -36,12 +35,12 @@ export default function NotFound() {
           <div style={{ display: 'grid', gap: '0.75rem' }}>
             {cats.map(cat => (
               <a key={cat.slug} href={cat.path} target="_blank" rel="noopener noreferrer" style={{
-                display: 'block', background: '#1A1714', border: '1px solid #3D3425',
+                display: 'block', background: '#FFFFFF', border: '1px solid #E5E7EB',
                 borderRadius: '16px', padding: '1.25rem', textDecoration: 'none',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.08)', transition: 'all 0.2s',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.06)', transition: 'all 0.2s',
               }}>
                 <h3 style={{ color: '#8B5CF6', marginBottom: '0.25rem' }}>{cat.name} {cat.count}곳</h3>
-                <p style={{ fontSize: '0.9rem', color: '#E8D5B5' }}>전체 보기 →</p>
+                <p style={{ fontSize: '0.9rem', color: '#555' }}>전체 보기 →</p>
               </a>
             ))}
           </div>
