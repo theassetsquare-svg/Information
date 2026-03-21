@@ -274,7 +274,7 @@ export default function VenueDetailPage({ params }: Props) {
         <section className="related-section">
           <div className="container">
             <h2>비슷한 곳</h2>
-            <p style={{ color: '#B8A080', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천</p>
+            <p style={{ color: '#666', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천</p>
             <div className="venue-grid">
               {related.map(v => <VenueCard key={v.slug} venue={v} />)}
             </div>
