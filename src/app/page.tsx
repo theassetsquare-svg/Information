@@ -308,7 +308,7 @@ export default function HomePage() {
               실시간 분위기, 이벤트 소식을 인스타그램에서 확인하세요
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['#강남클럽', '#부산나이트', '#압구정라운지', '#호빠추천'].map(tag => (
+              {['#강남청담클럽', '#부산나이트', '#압구정라운지', '#호빠추천'].map(tag => (
                 <a key={tag} href={`https://www.instagram.com/explore/tags/${tag.replace('#','')}/`}
                   target="_blank" rel="noopener noreferrer"
                   style={{ padding: '0.5rem 1rem', background: '#1A1714', border: '1px solid #3D3425',

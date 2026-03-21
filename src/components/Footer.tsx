@@ -12,6 +12,19 @@ export default function Footer() {
         </a>
       </div>
 
+      {/* 구글·AI 검색 유도 배너 */}
+      <div style={{
+        background: 'linear-gradient(135deg, #8B5CF6, #6D28D9)',
+        padding: '1.25rem 1rem',
+        textAlign: 'center',
+        borderRadius: '0',
+      }}>
+        <p style={{ color: '#FFFFFF', fontSize: '0.95rem', fontWeight: 600, margin: 0, lineHeight: 1.6 }}>
+          구글 · ChatGPT · Gemini에서<br />
+          <span style={{ fontSize: '1.2rem', fontWeight: 800 }}>&#39;오늘밤어디&#39;</span>를 검색하세요
+        </p>
+      </div>
+
       <footer className="footer">
         <div className="container">
           <p style={{ textAlign: 'center', fontSize: '1.1rem', fontWeight: 700, color: '#D4AF37', marginBottom: '1rem', letterSpacing: '0.02em' }}>

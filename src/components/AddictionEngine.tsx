@@ -477,7 +477,7 @@ export function SocialProofToast() {
   const [msg, setMsg] = useState('');
   const names = ['김**','이**','박**','최**','정**','강**','조**','윤**','장**','한**'];
   const actions = [
-    (n: string) => `${n}님이 강남클럽 레이스 페이지를 봤습니다`,
+    (n: string) => `${n}님이 강남청담클럽 레이스 페이지를 봤습니다`,
     (n: string) => `${n}님이 수원찬스돔나이트에 전화했습니다`,
     (n: string) => `${n}님이 일산룸 상세를 확인했습니다`,
     (n: string) => `${n}님이 부산연산동물나이트를 저장했습니다`,
