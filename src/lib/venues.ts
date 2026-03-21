@@ -63,7 +63,7 @@ export function getRelatedVenues(venue: Venue, limit = 2): Venue[] {
   return [...diffAll, ...diffRegionSameCat].slice(0, limit);
 }
 
-export const SITE_NAME = '골드나잇 가이드';
+export const SITE_NAME = '오늘밤어디';
 export const SITE_URL = 'https://informationa.pages.dev';
 export const MAIN_SITE_URL = 'https://ilsanroom.pages.dev';
 

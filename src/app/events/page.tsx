@@ -82,7 +82,7 @@ export default function EventsPage() {
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       location: { '@type': 'Place', name: '전국 주요 밤문화 업소', address: '대한민국' },
       description: '금요일 밤 주요 클럽과 나이트의 피크타임.',
-      organizer: { '@type': 'Organization', name: '골드나잇 가이드', url: 'https://informationa.pages.dev' },
+      organizer: { '@type': 'Organization', name: '오늘밤어디', url: 'https://informationa.pages.dev' },
     })),
     ...cal.saturdays.map((d) => ({
       '@context': 'https://schema.org',
@@ -93,7 +93,7 @@ export default function EventsPage() {
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       location: { '@type': 'Place', name: '전국 주요 밤문화 업소', address: '대한민국' },
       description: '토요일 주말 스페셜 이벤트.',
-      organizer: { '@type': 'Organization', name: '골드나잇 가이드', url: 'https://informationa.pages.dev' },
+      organizer: { '@type': 'Organization', name: '오늘밤어디', url: 'https://informationa.pages.dev' },
     })),
     ...(cal.lastFriday
       ? [
@@ -106,7 +106,7 @@ export default function EventsPage() {
             eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
             location: { '@type': 'Place', name: '전국 주요 밤문화 업소', address: '대한민국' },
             description: '매월 마지막 금요일 월말 파티.',
-            organizer: { '@type': 'Organization', name: '골드나잇 가이드', url: 'https://informationa.pages.dev' },
+            organizer: { '@type': 'Organization', name: '오늘밤어디', url: 'https://informationa.pages.dev' },
           },
         ]
       : []),

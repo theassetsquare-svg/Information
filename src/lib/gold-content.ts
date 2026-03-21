@@ -1,6 +1,6 @@
 import { Venue } from './venues';
 
-export const SITE_NAME = '골드나잇 가이드';
+export const SITE_NAME = '오늘밤어디';
 const YEAR = new Date().getFullYear();
 
 /* ── 해시 기반 결정적 선택 ── */
@@ -361,7 +361,7 @@ export function getCategoryContent(catSlug: string) {
 
 export function getHomeContent() {
   return {
-    title: `골드나잇 — 110곳 비교 ${YEAR}`,
+    title: `오늘밤어디 — 110곳 비교 ${YEAR}`,
     description: `110곳 비교표. 6종 분류 ${YEAR} 현장 집계. 지역별 탑재.`,
     heading: '110곳 비교표',
     subheading: `플로어·테이블·바·독립석·풍류·호스트 ${YEAR}`,
