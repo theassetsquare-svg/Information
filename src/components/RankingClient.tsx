@@ -23,7 +23,7 @@ function getRankColor(rank: number): string {
   if (rank === 1) return '#D4A017';
   if (rank === 2) return '#A0A0A0';
   if (rank === 3) return '#CD7F32';
-  return '#8B5CF6';
+  return '#D4AF37';
 }
 
 export default function RankingClient() {
@@ -102,7 +102,7 @@ export default function RankingClient() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = 'var(--border-accent)';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(139,92,246,0.1)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(212,175,55,0.1)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={(e) => {
@@ -139,7 +139,7 @@ export default function RankingClient() {
                   <span
                     style={{
                       fontSize: '0.7rem',
-                      background: 'rgba(139,92,246,0.08)',
+                      background: 'rgba(212,175,55,0.08)',
                       color: 'var(--purple)',
                       padding: '0.15rem 0.5rem',
                       borderRadius: '4px',

@@ -41,7 +41,7 @@ const samplePosts: Record<string, { title: string; author: string; level: string
 };
 
 const levelColors: Record<string, string> = {
-  '뉴비': '#6B7280', '클러버': '#3B82F6', '파티피플': '#8B5CF6', 'VIP': '#F59E0B', '레전드': '#EF4444',
+  '뉴비': '#6B7280', '클러버': '#3B82F6', '파티피플': '#D4AF37', 'VIP': '#F59E0B', '레전드': '#EF4444',
 };
 
 export default function CommunityBoard() {
@@ -61,7 +61,7 @@ export default function CommunityBoard() {
             style={{
               padding: '0.5rem 1rem', borderRadius: '20px', fontSize: '0.9rem',
               border: activeBoard === b.id ? '2px solid var(--purple)' : '1px solid var(--border)',
-              background: activeBoard === b.id ? 'rgba(139,92,246,0.06)' : 'var(--bg-card)',
+              background: activeBoard === b.id ? 'rgba(212,175,55,0.06)' : 'var(--bg-card)',
               color: activeBoard === b.id ? 'var(--purple)' : 'var(--text-sub)',
               cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: activeBoard === b.id ? 700 : 400,
               transition: 'all 0.2s',

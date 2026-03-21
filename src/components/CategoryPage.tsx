@@ -16,10 +16,10 @@ interface CatPageProps {
 }
 
 export default function CategoryPage({ heading, intro, body, guide, timeslots, venues, catLabel, year, isHoppa }: CatPageProps) {
-  const accent = isHoppa ? '#E11D48' : '#8B5CF6';
-  const bgAccent = isHoppa ? '#FFF1F2' : '#F5F3FF';
-  const borderAccent = isHoppa ? '#FECDD3' : '#DDD6FE';
-  const textAccent = isHoppa ? '#881337' : '#8B5CF6';
+  const accent = '#D4AF37';
+  const bgAccent = '#1A1714';
+  const borderAccent = '#D4AF37';
+  const textAccent = '#D4AF37';
 
   return (
     <section className="section">
@@ -31,10 +31,10 @@ export default function CategoryPage({ heading, intro, body, guide, timeslots, v
 
         {/* ① 소개글 500자+ */}
         <h1 style={{ marginTop: '1rem' }}>{heading}</h1>
-        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#333' }}>{intro}</p>
+        <p style={{ maxWidth: '480px', marginBottom: '1.5rem', color: '#E8D5B5' }}>{intro}</p>
         <div className="narrow" style={{ marginBottom: '2.5rem' }}>
-          <p style={{ color: '#111' }}>{body}</p>
-          <p style={{ marginTop: '1rem', color: '#111' }}>
+          <p style={{ color: '#F7E7CE' }}>{body}</p>
+          <p style={{ marginTop: '1rem', color: '#F7E7CE' }}>
             {year}년 기준 {venues.length}곳을 정리했다.
           </p>
         </div>
@@ -43,7 +43,7 @@ export default function CategoryPage({ heading, intro, body, guide, timeslots, v
         <div className="venue-grid">
           {venues.map(v => <VenueCard key={v.slug} venue={v} />)}
         </div>
-        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#555', textAlign: 'center' }}>
+        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#B8A080', textAlign: 'center' }}>
           전체 {venues.length}곳 — 각 카드를 눌러 상세 확인
         </p>
 
@@ -56,7 +56,7 @@ export default function CategoryPage({ heading, intro, body, guide, timeslots, v
           <h2 style={{ color: textAccent }}>{guide.title}</h2>
           <ul className="checklist">
             {guide.items.map((item, i) => (
-              <li key={i} style={isHoppa ? { color: '#4A1D2F' } : undefined}>{item}</li>
+              <li key={i}>{item}</li>
             ))}
           </ul>
         </div>
@@ -68,10 +68,10 @@ export default function CategoryPage({ heading, intro, body, guide, timeslots, v
             {timeslots.map(t => (
               <div key={t.time} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <span style={{ minWidth: '110px', fontSize: '0.9rem', fontWeight: 600 }}>{t.time}</span>
-                <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '4px', height: '8px' }}>
+                <div style={{ flex: 1, background: '#3D3425', borderRadius: '4px', height: '8px' }}>
                   <div style={{ width: t.bar, background: accent, height: '100%', borderRadius: '4px' }} />
                 </div>
-                <span style={{ fontSize: '0.8rem', color: '#555', minWidth: '40px' }}>{t.level}</span>
+                <span style={{ fontSize: '0.8rem', color: '#B8A080', minWidth: '40px' }}>{t.level}</span>
               </div>
             ))}
           </div>

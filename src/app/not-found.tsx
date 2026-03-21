@@ -12,9 +12,9 @@ export default function NotFound() {
     <>
       <section style={{ padding: '3rem 0 1.5rem', textAlign: 'center' }}>
         <div className="container">
-          <p style={{ fontSize: '4rem', fontWeight: 800, color: '#8B5CF6', marginBottom: '0.5rem' }}>404</p>
+          <p style={{ fontSize: '4rem', fontWeight: 800, color: '#D4AF37', marginBottom: '0.5rem' }}>404</p>
           <h1 style={{ fontSize: '1.5rem', marginBottom: '0.75rem' }}>앗, 길을 잃었네!</h1>
-          <p style={{ color: '#333', marginBottom: '2rem', fontSize: '1rem' }}>
+          <p style={{ color: '#E8D5B5', marginBottom: '2rem', fontSize: '1rem' }}>
             주소가 바뀌었거나 잘못 입력했을 수 있다. 대신 지금 핫한 곳을 보여줄게.
           </p>
           <SearchBar venues={allVenues} />
@@ -36,12 +36,12 @@ export default function NotFound() {
           <div style={{ display: 'grid', gap: '0.75rem' }}>
             {cats.map(cat => (
               <a key={cat.slug} href={cat.path} target="_blank" rel="noopener noreferrer" style={{
-                display: 'block', background: '#FFF', border: '1px solid #D1D5DB',
+                display: 'block', background: '#1A1714', border: '1px solid #3D3425',
                 borderRadius: '16px', padding: '1.25rem', textDecoration: 'none',
                 boxShadow: '0 1px 3px rgba(0,0,0,0.08)', transition: 'all 0.2s',
               }}>
-                <h3 style={{ color: '#8B5CF6', marginBottom: '0.25rem' }}>{cat.name} {cat.count}곳</h3>
-                <p style={{ fontSize: '0.9rem', color: '#333' }}>전체 보기 →</p>
+                <h3 style={{ color: '#D4AF37', marginBottom: '0.25rem' }}>{cat.name} {cat.count}곳</h3>
+                <p style={{ fontSize: '0.9rem', color: '#E8D5B5' }}>전체 보기 →</p>
               </a>
             ))}
           </div>

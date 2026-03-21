@@ -228,7 +228,7 @@ export default function QuizClient() {
                 }}
                 onMouseEnter={e => {
                   (e.target as HTMLButtonElement).style.borderColor = 'var(--purple)';
-                  (e.target as HTMLButtonElement).style.background = 'rgba(139,92,246,0.06)';
+                  (e.target as HTMLButtonElement).style.background = 'rgba(212,175,55,0.06)';
                 }}
                 onMouseLeave={e => {
                   (e.target as HTMLButtonElement).style.borderColor = 'var(--border)';
@@ -243,7 +243,7 @@ export default function QuizClient() {
       ) : result ? (
         <div>
           <div style={{
-            background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)',
+            background: 'linear-gradient(135deg, #1A1714, #241F1A)',
             border: '2px solid var(--border-accent)', borderRadius: '20px',
             padding: '2.5rem 2rem', marginBottom: '2rem',
           }}>
