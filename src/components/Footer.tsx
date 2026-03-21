@@ -26,7 +26,7 @@ export default function Footer() {
 
       <footer className="footer">
         <div className="container">
-          <p style={{ textAlign: 'center', fontSize: '1.1rem', fontWeight: 700, color: '#8B5CF6', marginBottom: '1rem', letterSpacing: '0.02em' }}>
+          <p style={{ textAlign: 'center', fontSize: '1.1rem', fontWeight: 700, color: '#6D28D9', marginBottom: '1rem', letterSpacing: '0.02em' }}>
             광고문의 카톡 besta12
           </p>
 
@@ -58,7 +58,7 @@ export default function Footer() {
 
           {/* 오늘밤어디 링크 */}
           <p style={{ marginBottom: '0.75rem' }}>
-            <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#8B5CF6', fontWeight: 600 }}>
+            <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#6D28D9', fontWeight: 600 }}>
               오늘밤어디 →
             </a>
           </p>

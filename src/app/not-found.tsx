@@ -11,7 +11,7 @@ export default function NotFound() {
     <>
       <section style={{ padding: '3rem 0 1.5rem', textAlign: 'center' }}>
         <div className="container">
-          <p style={{ fontSize: '4rem', fontWeight: 800, color: '#8B5CF6', marginBottom: '0.5rem' }}>404</p>
+          <p style={{ fontSize: '4rem', fontWeight: 800, color: '#6D28D9', marginBottom: '0.5rem' }}>404</p>
           <h1 style={{ fontSize: '1.5rem', marginBottom: '0.75rem' }}>앗, 길을 잃었네!</h1>
           <p style={{ color: '#555', marginBottom: '2rem', fontSize: '1rem' }}>
             주소가 바뀌었거나 잘못 입력했을 수 있다. 대신 지금 핫한 곳을 보여줄게.
@@ -39,7 +39,7 @@ export default function NotFound() {
                 borderRadius: '16px', padding: '1.25rem', textDecoration: 'none',
                 boxShadow: '0 1px 3px rgba(0,0,0,0.06)', transition: 'all 0.2s',
               }}>
-                <h3 style={{ color: '#8B5CF6', marginBottom: '0.25rem' }}>{cat.name} {cat.count}곳</h3>
+                <h3 style={{ color: '#6D28D9', marginBottom: '0.25rem' }}>{cat.name} {cat.count}곳</h3>
                 <p style={{ fontSize: '0.9rem', color: '#555' }}>전체 보기 →</p>
               </a>
             ))}

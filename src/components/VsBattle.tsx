@@ -42,7 +42,7 @@ export default function VsBattle({ venues }: { venues: Venue[] }) {
             )}
           </button>
         ))}
-        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#8B5CF6', gridColumn: '2', gridRow: '1' }}>VS</span>
+        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#6D28D9', gridColumn: '2', gridRow: '1' }}>VS</span>
       </div>
       {voted !== null && <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666666' }}>투표 완료. 총 {total}명 참여.</p>}
     </div>

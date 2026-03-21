@@ -804,8 +804,8 @@ export function BudgetCalculator({ venues }: { venues: any[] }) {
           {Object.entries(catLabels).map(([k, l]) => (
             <button key={k} onClick={() => setCategory(k)} style={{
               padding: '0.4rem 0.75rem', borderRadius: '20px', fontSize: '0.8rem', fontFamily: 'var(--font-sans)',
-              border: category === k ? '2px solid #8B5CF6' : '1px solid #E5E7EB',
-              background: category === k ? '#F9FAFB' : '#FFFFFF', color: category === k ? '#8B5CF6' : '#666666',
+              border: category === k ? '2px solid #6D28D9' : '1px solid #E5E7EB',
+              background: category === k ? '#F5F3FF' : '#FFFFFF', color: category === k ? '#6D28D9' : '#666666',
               cursor: 'pointer', fontWeight: category === k ? 700 : 400,
             }}>{l}</button>
           ))}
@@ -1005,9 +1005,9 @@ export function AutoPlayCountdown({ venues }: { venues: any[] }) {
       {!paused && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '4px', height: '4px', overflow: 'hidden' }}>
-            <div style={{ width: `${(countdown / 8) * 100}%`, height: '100%', background: countdown <= 3 ? '#EC4899' : '#8B5CF6', borderRadius: '4px', transition: 'width 1s linear' }} />
+            <div style={{ width: `${(countdown / 8) * 100}%`, height: '100%', background: countdown <= 3 ? '#BE185D' : '#6D28D9', borderRadius: '4px', transition: 'width 1s linear' }} />
           </div>
-          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: countdown <= 3 ? '#EC4899' : '#8B5CF6' }}>{countdown}s</span>
+          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: countdown <= 3 ? '#BE185D' : '#6D28D9' }}>{countdown}s</span>
         </div>
       )}
     </div>

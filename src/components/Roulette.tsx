@@ -41,7 +41,7 @@ export default function Roulette({ venues }: { venues: Venue[] }) {
           border: '2px solid #8B5CF6', borderRadius: '16px',
           maxWidth: '400px', margin: '1.5rem auto 0',
         }}>
-          <span style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '0.75rem', color: '#6D28D9', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             {catLabels[result.cat_slug] || result.cat_slug}
           </span>
           <h3 style={{ margin: '0.5rem 0', fontSize: '1.25rem', color: '#111111' }}>{result.name}</h3>

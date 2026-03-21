@@ -326,7 +326,7 @@ export default function HomePage() {
                 <a key={tag} href={`https://www.instagram.com/explore/tags/${tag.replace('#','')}/`}
                   target="_blank" rel="noopener noreferrer"
                   style={{ padding: '0.5rem 1rem', background: '#FFFFFF', border: '1px solid #E5E7EB',
-                    borderRadius: '20px', fontSize: '0.85rem', color: '#8B5CF6', fontWeight: 600, textDecoration: 'none' }}>
+                    borderRadius: '20px', fontSize: '0.85rem', color: '#6D28D9', fontWeight: 600, textDecoration: 'none' }}>
                   {tag}
                 </a>
               ))}
