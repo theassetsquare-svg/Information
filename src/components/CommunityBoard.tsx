@@ -61,7 +61,7 @@ export default function CommunityBoard() {
             style={{
               padding: '0.5rem 1rem', borderRadius: '20px', fontSize: '0.9rem',
               border: activeBoard === b.id ? '2px solid var(--purple)' : '1px solid var(--border)',
-              background: activeBoard === b.id ? 'rgba(212,175,55,0.06)' : 'var(--bg-card)',
+              background: activeBoard === b.id ? 'rgba(139,92,246,0.06)' : 'var(--bg-card)',
               color: activeBoard === b.id ? 'var(--purple)' : 'var(--text-sub)',
               cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: activeBoard === b.id ? 700 : 400,
               transition: 'all 0.2s',

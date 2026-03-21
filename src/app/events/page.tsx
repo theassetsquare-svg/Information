@@ -203,7 +203,7 @@ export default function EventsPage() {
                       background: isToday
                         ? 'var(--purple)'
                         : hasEvent
-                          ? 'rgba(212,175,55,0.06)'
+                          ? 'rgba(139,92,246,0.06)'
                           : 'transparent',
                       color: isToday ? '#FFF' : 'var(--text)',
                       fontSize: '0.9rem',
@@ -237,7 +237,7 @@ export default function EventsPage() {
                               width: '5px',
                               height: '5px',
                               borderRadius: '50%',
-                              background: '#D4AF37',
+                              background: '#8B5CF6',
                             }}
                           />
                         )}
@@ -259,7 +259,7 @@ export default function EventsPage() {
                   border: '1px solid var(--border)',
                   borderRadius: '12px',
                   background: 'var(--bg-card)',
-                  borderLeft: `4px solid ${i === 0 ? 'var(--purple)' : i === 1 ? '#D4AF37' : '#EF4444'}`,
+                  borderLeft: `4px solid ${i === 0 ? 'var(--purple)' : i === 1 ? '#8B5CF6' : '#EF4444'}`,
                 }}
               >
                 <h3 style={{ fontSize: '1.05rem', marginBottom: '0.5rem' }}>{evt.title}</h3>

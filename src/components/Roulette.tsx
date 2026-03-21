@@ -30,7 +30,7 @@ export default function Roulette({ venues }: { venues: Venue[] }) {
         width: '140px', height: '140px', fontSize: '1.1rem', fontWeight: 700,
         cursor: spinning ? 'wait' : 'pointer', fontFamily: 'var(--font-sans)',
         transition: 'all 0.3s',
-        boxShadow: spinning ? 'none' : '0 4px 20px rgba(212,175,55,0.3)',
+        boxShadow: spinning ? 'none' : '0 4px 20px rgba(139,92,246,0.3)',
         animation: spinning ? 'pulse 0.5s infinite' : 'none',
       }}>
         {spinning ? '돌리는 중...' : '돌려보기'}

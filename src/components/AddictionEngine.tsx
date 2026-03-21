@@ -115,7 +115,7 @@ export function SlotMachine({ venues }: { venues: any[] }) {
         background: spinning ? '#E5E7EB' : 'linear-gradient(135deg, #8B5CF6, #8B5CF6)',
         color: spinning ? '#666666' : '#FFFFFF', border: 'none', borderRadius: '50px', padding: '0.75rem 2rem',
         fontSize: '1rem', fontWeight: 700, cursor: spinning ? 'wait' : 'pointer',
-        boxShadow: spinning ? 'none' : '0 4px 16px rgba(212,175,55,0.3)',
+        boxShadow: spinning ? 'none' : '0 4px 16px rgba(139,92,246,0.3)',
         transition: 'all 0.3s', fontFamily: 'var(--font-sans)',
         animation: spinning ? 'pulse2 0.4s infinite' : 'none',
         minHeight: '48px',
@@ -248,7 +248,7 @@ export function DailyStreak() {
       {/* 보상 애니메이션 */}
       {showReward && (
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: 'rgba(212,175,55,0.95)', zIndex: 10, borderRadius: '16px', animation: 'fadeIn 0.3s' }}>
+          background: 'rgba(139,92,246,0.95)', zIndex: 10, borderRadius: '16px', animation: 'fadeIn 0.3s' }}>
           <div>
             <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>+10P</p>
             <p style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '1.1rem' }}>출석 완료!</p>
@@ -278,7 +278,7 @@ export function DailyStreak() {
           background: '#8B5CF6', color: '#FFFFFF', border: 'none', borderRadius: '8px',
           padding: '0.6rem 1.5rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem',
           fontFamily: 'var(--font-sans)', minHeight: '44px',
-          boxShadow: '0 2px 8px rgba(212,175,55,0.3)',
+          boxShadow: '0 2px 8px rgba(139,92,246,0.3)',
         }}>
           오늘 도장 찍기 (+10P)
         </button>
@@ -381,7 +381,7 @@ export function JourneyTimer() {
         <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: '4px',
           background: '#8B5CF6', color: '#FFFFFF', padding: '0.4rem 0.75rem', borderRadius: '8px',
           fontSize: '0.7rem', whiteSpace: 'nowrap', animation: 'fadeIn 0.5s',
-          boxShadow: '0 4px 12px rgba(212,175,55,0.3)' }}>
+          boxShadow: '0 4px 12px rgba(139,92,246,0.3)' }}>
           {milestone}
         </div>
       )}
@@ -428,7 +428,7 @@ export function BlurReveal({ children, label = '전체 내용 보기' }: { child
           <button onClick={() => setRevealed(true)} style={{
             background: '#8B5CF6', color: '#FFFFFF', border: 'none', borderRadius: '8px',
             padding: '0.6rem 1.5rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem',
-            fontFamily: 'var(--font-sans)', boxShadow: '0 4px 12px rgba(212,175,55,0.3)', minHeight: '44px',
+            fontFamily: 'var(--font-sans)', boxShadow: '0 4px 12px rgba(139,92,246,0.3)', minHeight: '44px',
           }}>
             {label} ↓
           </button>
@@ -638,7 +638,7 @@ export function BingeChain({ venues }: { venues: any[] }) {
         <p style={{ fontSize: '0.75rem', color: '#999', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>몰아보기 모드</p>
         <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem', color: '#FFF' }}>10곳을 한 번에 훑어보기</h3>
         <p style={{ fontSize: '0.85rem', color: '#999', marginBottom: '1.25rem' }}>넷플릭스처럼 다음 업소가 자동으로 넘어갑니다</p>
-        <button onClick={startBinge} style={{ background: '#8B5CF6', color: '#FFFFFF', border: 'none', borderRadius: '12px', padding: '0.875rem 2rem', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', fontFamily: 'var(--font-sans)', minHeight: '48px', boxShadow: '0 4px 16px rgba(212,175,55,0.4)' }}>
+        <button onClick={startBinge} style={{ background: '#8B5CF6', color: '#FFFFFF', border: 'none', borderRadius: '12px', padding: '0.875rem 2rem', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', fontFamily: 'var(--font-sans)', minHeight: '48px', boxShadow: '0 4px 16px rgba(139,92,246,0.4)' }}>
           시작하기 ▶
         </button>
       </div>

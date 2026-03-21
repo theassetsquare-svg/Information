@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 };
 
 const CAT_COLORS: Record<string, string> = {
-  club: '#D4AF37',
-  night: '#D4AF37',
-  lounge: '#D4AF37',
+  club: '#8B5CF6',
+  night: '#8B5CF6',
+  lounge: '#8B5CF6',
   room: '#F59E0B',
   yojeong: '#EF4444',
   hoppa: '#F472B6',
@@ -87,7 +87,7 @@ export default function GalleryPage() {
           >
             {venues.map((venue) => {
               const height = hashHeight(venue.slug);
-              const color = CAT_COLORS[venue.cat_slug] || '#D4AF37';
+              const color = CAT_COLORS[venue.cat_slug] || '#8B5CF6';
 
               return (
                 <a

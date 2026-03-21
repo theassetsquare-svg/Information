@@ -178,7 +178,7 @@ export default function VsPageClient() {
                 <p style={{ fontSize: '0.95rem', fontWeight: 600, marginTop: '0.25rem' }}>{r.winner}</p>
               </div>
               <span style={{
-                background: 'rgba(212,175,55,0.08)', color: 'var(--purple)',
+                background: 'rgba(139,92,246,0.08)', color: 'var(--purple)',
                 padding: '0.25rem 0.75rem', borderRadius: '20px',
                 fontSize: '0.85rem', fontWeight: 700,
               }}>
