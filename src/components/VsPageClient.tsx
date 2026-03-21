@@ -210,7 +210,7 @@ export default function VsPageClient() {
                   </p>
                 </div>
                 <span style={{
-                  background: 'linear-gradient(135deg, #1A1714, #241F1A)',
+                  background: 'linear-gradient(135deg, #FFFFFF, #F9FAFB)',
                   color: 'var(--purple)', padding: '0.25rem 0.75rem',
                   borderRadius: '20px', fontSize: '0.8rem', fontWeight: 700,
                   whiteSpace: 'nowrap',

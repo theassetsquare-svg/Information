@@ -10,7 +10,7 @@ export default function Header() {
       <header className="header">
         <div className="header-inner">
           <a href="/" className="logo" style={{ textDecoration: 'none' }}>
-            골드나잇
+            오늘밤어디
             <span>밤의 격이 다른 선택</span>
           </a>
           <nav>

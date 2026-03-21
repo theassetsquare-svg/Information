@@ -3,7 +3,6 @@ import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { SlideUpHook, ScrollBannerHook } from '../components/HookingCTAs';
-
 import { JourneyTimer, SocialProofToast } from '../components/AddictionEngine';
 import './globals.css';
 
@@ -31,12 +30,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Playfair+Display:wght@400;700;900&display=swap"
-          as="style"
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
       </head>
       <body>
@@ -44,19 +41,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        {/* [후킹6] 3분 체류 후 슬라이드업 */}
         <SlideUpHook />
-        {/* [후킹7] 스크롤 80% 배너 */}
         <ScrollBannerHook />
-        {/* 카카오톡 상담 버튼 삭제됨 */}
-        {/* 체류시간 타이머 — 도파민 마일스톤 */}
         <JourneyTimer />
-        {/* 소셜 증거 토스트 — "방금 OO님이..." */}
         <SocialProofToast />
-        {/* 폰트 CSS — 렌더링 후 비동기 로드 */}
-        <Script id="load-fonts" strategy="afterInteractive">
-          {`var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Playfair+Display:wght@400;700;900&display=swap';document.head.appendChild(l);`}
-        </Script>
       </body>
     </html>
   );

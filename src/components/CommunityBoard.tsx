@@ -41,7 +41,7 @@ const samplePosts: Record<string, { title: string; author: string; level: string
 };
 
 const levelColors: Record<string, string> = {
-  '뉴비': '#6B7280', '클러버': '#3B82F6', '파티피플': '#D4AF37', 'VIP': '#F59E0B', '레전드': '#EF4444',
+  '뉴비': '#6B7280', '클러버': '#3B82F6', '파티피플': '#8B5CF6', 'VIP': '#F59E0B', '레전드': '#EF4444',
 };
 
 export default function CommunityBoard() {

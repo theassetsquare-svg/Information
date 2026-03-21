@@ -23,7 +23,7 @@ function getRankColor(rank: number): string {
   if (rank === 1) return '#D4A017';
   if (rank === 2) return '#A0A0A0';
   if (rank === 3) return '#CD7F32';
-  return '#D4AF37';
+  return '#8B5CF6';
 }
 
 export default function RankingClient() {

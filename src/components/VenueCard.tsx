@@ -6,8 +6,8 @@ const catWords: Record<string, string[]> = {
 };
 
 const catColors: Record<string, string> = {
-  club: '#D4AF37', night: '#B8860B', lounge: '#C5A028',
-  room: '#8B7355', yojeong: '#A08C5B', hoppa: '#CD853F',
+  club: '#8B5CF6', night: '#EC4899', lounge: '#06B6D4',
+  room: '#3B82F6', yojeong: '#059669', hoppa: '#F43F5E',
 };
 
 function shouldShowMeta(venue: Venue): string | null {
@@ -26,7 +26,7 @@ function shouldShowMeta(venue: Venue): string | null {
 
 export default function VenueCard({ venue }: { venue: Venue }) {
   const meta = shouldShowMeta(venue);
-  const bg = catColors[venue.cat_slug] || '#D4AF37';
+  const bg = catColors[venue.cat_slug] || '#8B5CF6';
   const nameParts = venue.name.split(' ');
   const line1 = nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : venue.name;
   const line2 = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
@@ -46,16 +46,16 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         padding: '0.5rem', overflow: 'hidden',
       }}>
-        <span style={{ color: '#0D0D0D', fontSize: '0.7rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.3, wordBreak: 'keep-all' }}>
+        <span style={{ color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.3, wordBreak: 'keep-all' as const }}>
           {line1}
         </span>
         {line2 && (
-          <span style={{ color: 'rgba(13,13,13,0.85)', fontSize: '0.65rem', fontWeight: 600, textAlign: 'center', marginTop: '2px' }}>
+          <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.65rem', fontWeight: 600, textAlign: 'center', marginTop: '2px' }}>
             {line2}
           </span>
         )}
         {venue.nickname && (
-          <span style={{ color: 'rgba(13,13,13,0.7)', fontSize: '0.55rem', marginTop: '4px' }}>
+          <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.55rem', marginTop: '4px' }}>
             ({venue.nickname})
           </span>
         )}
@@ -66,16 +66,11 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         {meta && <span className="venue-card-meta">{meta}</span>}
         <h3>{venue.name}</h3>
         {venue.nickname && (
-          <p style={{ fontSize: '0.8rem', color: '#D4AF37', fontWeight: 600, marginBottom: '0.25rem' }}>
+          <p style={{ fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.25rem' }}>
             담당: {venue.nickname}
           </p>
         )}
         <p className="venue-card-hook">{venue.card_hook}</p>
-        <div className="venue-card-tags">
-          {venue.card_tags.filter(t => !(catWords[venue.cat_slug] || []).some(w => t.includes(w))).slice(0, 3).map(tag => (
-            <span key={tag} className="venue-card-tag">{tag}</span>
-          ))}
-        </div>
       </div>
     </a>
   );

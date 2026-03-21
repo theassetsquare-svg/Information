@@ -17,7 +17,6 @@ export default function Footer() {
         background: 'linear-gradient(135deg, #8B5CF6, #6D28D9)',
         padding: '1.25rem 1rem',
         textAlign: 'center',
-        borderRadius: '0',
       }}>
         <p style={{ color: '#FFFFFF', fontSize: '0.95rem', fontWeight: 600, margin: 0, lineHeight: 1.6 }}>
           구글 · ChatGPT · Gemini에서<br />
@@ -27,7 +26,7 @@ export default function Footer() {
 
       <footer className="footer">
         <div className="container">
-          <p style={{ textAlign: 'center', fontSize: '1.1rem', fontWeight: 700, color: '#D4AF37', marginBottom: '1rem', letterSpacing: '0.02em' }}>
+          <p style={{ textAlign: 'center', fontSize: '1.1rem', fontWeight: 700, color: '#8B5CF6', marginBottom: '1rem', letterSpacing: '0.02em' }}>
             광고문의 카톡 besta12
           </p>
 
@@ -43,29 +42,29 @@ export default function Footer() {
 
           {/* 지역 링크 (SEO 내부링크) */}
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem', fontSize: '0.8rem' }}>
-            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>강남</a>
-            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>압구정</a>
-            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>홍대</a>
-            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>이태원</a>
-            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>수유</a>
-            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>수원</a>
-            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>부산</a>
-            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>대전</a>
-            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>광주</a>
-            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>울산</a>
-            <a href="/rooms/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>일산</a>
-            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8A080' }}>인천</a>
+            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>강남</a>
+            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>압구정</a>
+            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>홍대</a>
+            <a href="/clubs/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>이태원</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>수유</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>수원</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>부산</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>대전</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>광주</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>울산</a>
+            <a href="/rooms/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>일산</a>
+            <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>인천</a>
           </div>
 
           {/* 오늘밤어디 링크 */}
           <p style={{ marginBottom: '0.75rem' }}>
-            <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#D4AF37', fontWeight: 600 }}>
+            <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#8B5CF6', fontWeight: 600 }}>
               오늘밤어디 →
             </a>
           </p>
 
-          <p style={{ color: '#E8D5B5' }}>&copy; {year} 골드나잇 가이드. 만 19세 이상 이용 가능.</p>
-          <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: '#B8A080' }}>
+          <p style={{ color: '#333' }}>&copy; {year} 오늘밤어디. 만 19세 이상 이용 가능.</p>
+          <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: '#666' }}>
             본 사이트는 정보 제공 목적이며 업소와 직접적인 제휴 관계가 없습니다.
           </p>
         </div>

@@ -1,23 +1,19 @@
-/* ── 럭셔리골드(다크) 테마 — 밤의 격이 다른 선택 ── */
-/* Pretendard + Serif: layout.tsx에서 preload */
+/* ── 밝은 화면 테마 — 네이버/구글처럼 선명하고 깔끔 ── */
 
 :root {
-  --bg: #0D0D0D;
-  --bg-alt: #161310;
-  --bg-card: #1A1714;
-  --bg-card-hover: #241F1A;
-  --gold: #D4AF37;
-  --gold-dim: #B8942B;
-  --champagne: #F7E7CE;
-  --purple: #D4AF37;
-  --purple-dim: #B8942B;
-  --cyan: #D4AF37;
-  --text: #F7E7CE;
-  --text-sub: #E8D5B5;
-  --text-muted: #B8A080;
-  --border: #3D3425;
-  --border-accent: #D4AF37;
-  --font-sans: 'Noto Serif KR', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --bg: #FFFFFF;
+  --bg-alt: #F7F7F8;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F9FAFB;
+  --purple: #8B5CF6;
+  --purple-dim: #7C3AED;
+  --cyan: #06B6D4;
+  --text: #111111;
+  --text-sub: #333333;
+  --text-muted: #666666;
+  --border: #E5E7EB;
+  --border-accent: #8B5CF6;
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --max-w: 480px;
   --max-narrow: 480px;
 }
@@ -41,7 +37,6 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-image: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 60%);
 }
 
 body > * {
@@ -55,6 +50,7 @@ h1, h2, h3, h4 {
   line-height: 1.35;
   word-break: keep-all;
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 1rem; }
@@ -69,13 +65,13 @@ p {
 }
 
 a {
-  color: var(--gold);
+  color: var(--purple);
   text-decoration: none;
   transition: color 0.2s;
 }
-a:hover { color: var(--champagne); }
+a:hover { color: var(--purple-dim); }
 a:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--purple);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -92,7 +88,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .narrow { max-width: var(--max-narrow); margin: 0 auto; }
 
-.section { padding: 3rem 0; }
+.section { padding: 2.5rem 0; }
 .section + .section { border-top: 1px solid var(--border); }
 
 /* ── 상단 고정 배너 ── */
@@ -117,7 +113,7 @@ img { max-width: 100%; height: auto; display: block; }
   position: sticky;
   top: 44px;
   z-index: 100;
-  background: rgba(13, 13, 13, 0.95);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   padding: 0.875rem 0;
@@ -135,7 +131,7 @@ img { max-width: 100%; height: auto; display: block; }
 .logo {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--gold);
+  color: var(--purple);
   letter-spacing: -0.02em;
 }
 
@@ -144,17 +140,17 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 0.65rem;
   color: var(--text-muted);
   font-weight: 400;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 }
 
-nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-nav a { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; transition: color 0.2s; }
-nav a:hover { color: var(--gold); }
+nav { display: flex; gap: 1rem; flex-wrap: wrap; }
+nav a { font-size: 0.85rem; color: var(--text-sub); font-weight: 500; transition: color 0.2s; }
+nav a:hover { color: var(--purple); }
 
 /* ── 배너 ── */
 .promo-banner {
-  background: linear-gradient(135deg, #1A1714, #241F1A);
-  border: 1px solid var(--gold);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 0.875rem 1.25rem;
   text-align: center;
@@ -164,10 +160,10 @@ nav a:hover { color: var(--gold); }
 
 .promo-banner a {
   font-size: 0.95rem;
-  color: var(--gold);
+  color: var(--purple);
   font-weight: 700;
 }
-.promo-banner a:hover { color: var(--champagne); }
+.promo-banner a:hover { color: var(--purple-dim); }
 
 /* ── 푸터 ── */
 .footer {
@@ -176,7 +172,7 @@ nav a:hover { color: var(--gold); }
   text-align: center;
   color: var(--text-muted);
   font-size: 0.85rem;
-  background: #0A0A08;
+  background: var(--bg-alt);
 }
 
 .footer-links {
@@ -187,8 +183,8 @@ nav a:hover { color: var(--gold); }
   flex-wrap: wrap;
 }
 
-.footer-links a { color: var(--text-muted); font-size: 0.85rem; }
-.footer-links a:hover { color: var(--gold); }
+.footer-links a { color: var(--text-sub); font-size: 0.85rem; }
+.footer-links a:hover { color: var(--purple); }
 
 /* ── 업소 카드 ── */
 .venue-grid {
@@ -204,7 +200,7 @@ nav a:hover { color: var(--gold); }
   display: flex;
   flex-direction: row;
   background: var(--bg-card);
-  border: 1px solid #D1D5DB;
+  border: 1px solid #E5E7EB;
   border-radius: 16px;
   overflow: hidden;
   transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
@@ -212,11 +208,11 @@ nav a:hover { color: var(--gold); }
   min-height: 100px;
   max-height: 100px;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 .venue-card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+  border-color: var(--purple);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
   transform: translateY(-2px);
 }
 
@@ -231,8 +227,8 @@ nav a:hover { color: var(--gold); }
 
 .venue-card-badge {
   display: inline-block;
-  background: var(--gold);
-  color: #0D0D0D;
+  background: var(--purple);
+  color: #FFFFFF;
   font-size: 0.65rem;
   font-weight: 700;
   padding: 0.2rem 0.5rem;
@@ -246,8 +242,7 @@ nav a:hover { color: var(--gold); }
   font-size: 0.75rem;
   color: var(--text-muted);
   margin-bottom: 0.25rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
 }
 
 .venue-card h3 {
@@ -270,15 +265,13 @@ nav a:hover { color: var(--gold); }
   -webkit-box-orient: vertical;
 }
 
-.venue-card-tags {
-  display: none;
-}
+.venue-card-tags { display: none; }
 
 .venue-card-tag {
   font-size: 0.7rem;
-  color: var(--gold);
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: var(--purple);
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
   padding: 0.15rem 0.5rem;
   border-radius: 12px;
 }
@@ -297,9 +290,9 @@ nav a:hover { color: var(--gold); }
   font-family: var(--font-sans);
 }
 .filter-btn:hover, .filter-btn.active {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--purple);
+  color: var(--purple);
+  background: rgba(139, 92, 246, 0.06);
 }
 
 /* ── 상세페이지 ── */
@@ -312,7 +305,7 @@ nav a:hover { color: var(--gold); }
 
 .detail-tagline {
   font-size: 1.125rem;
-  color: var(--gold);
+  color: var(--purple);
   font-style: italic;
   margin-bottom: 1rem;
 }
@@ -330,7 +323,7 @@ nav a:hover { color: var(--gold); }
   display: inline-block;
   width: 4px;
   height: 4px;
-  background: var(--gold);
+  background: var(--purple);
   border-radius: 50%;
   margin-right: 0.4rem;
   vertical-align: middle;
@@ -348,7 +341,7 @@ nav a:hover { color: var(--gold); }
   border-bottom: 1px solid var(--border);
   font-size: 0.9rem;
 }
-.info-table th { color: var(--gold); font-weight: 600; width: 30%; white-space: nowrap; }
+.info-table th { color: var(--purple); font-weight: 600; width: 30%; white-space: nowrap; }
 .info-table td { color: var(--text); }
 
 /* ── FAQ ── */
@@ -370,7 +363,7 @@ nav a:hover { color: var(--gold); }
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--gold);
+  color: var(--purple);
   font-weight: 700;
 }
 
@@ -384,13 +377,13 @@ nav a:hover { color: var(--gold); }
 /* ── 빵부스러기 ── */
 .breadcrumb { font-size: 0.8rem; color: var(--text-muted); padding: 1rem 0 0; }
 .breadcrumb a { color: var(--text-muted); }
-.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb a:hover { color: var(--purple); }
 .breadcrumb span { margin: 0 0.4rem; }
 
 /* ── 후킹 CTA ── */
 .hooking-mid {
-  background: linear-gradient(135deg, #1A1714, #241F1A);
-  border: 1px solid var(--gold);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
@@ -399,8 +392,8 @@ nav a:hover { color: var(--gold); }
 .hooking-mid p { color: var(--text-sub); margin-bottom: 1rem; font-size: 0.95rem; }
 .hooking-mid a {
   display: inline-block;
-  background: var(--gold);
-  color: #0D0D0D;
+  background: var(--purple);
+  color: #FFFFFF;
   padding: 0.75rem 2rem;
   border-radius: 8px;
   font-weight: 700;
@@ -408,19 +401,19 @@ nav a:hover { color: var(--gold); }
 }
 
 .hooking-large {
-  background: linear-gradient(135deg, #1A1714, #241F1A);
-  border: 2px solid var(--gold);
+  background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+  border: 2px solid rgba(139, 92, 246, 0.3);
   border-radius: 16px;
   padding: 2.5rem 1.5rem;
   text-align: center;
   margin: 2rem 0;
 }
-.hooking-large h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 0.75rem; }
+.hooking-large h3 { color: var(--purple); font-size: 1.3rem; margin-bottom: 0.75rem; }
 .hooking-large p { color: var(--text-sub); margin-bottom: 1.25rem; }
 .hooking-large a {
   display: inline-block;
-  background: var(--gold);
-  color: #0D0D0D;
+  background: var(--purple);
+  color: #FFFFFF;
   padding: 1rem 2.5rem;
   border-radius: 8px;
   font-weight: 700;

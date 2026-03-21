@@ -5,8 +5,8 @@ import { getAllVenues, CAT_SLUG_TO_LABEL } from '@/lib/venues';
 import type { Venue } from '@/lib/venues';
 
 const CAT_COLORS: Record<string, string> = {
-  club: '#D4AF37',
-  night: '#D4AF37',
+  club: '#8B5CF6',
+  night: '#8B5CF6',
   lounge: '#06B6D4',
   room: '#F59E0B',
   yojeong: '#EF4444',
@@ -64,7 +64,7 @@ export default function MapClient() {
         style={{
           width: '100%',
           height: '400px',
-          background: '#1A1714',
+          background: '#FFFFFF',
           borderRadius: '16px',
           display: 'flex',
           alignItems: 'center',

@@ -243,7 +243,7 @@ export default function QuizClient() {
       ) : result ? (
         <div>
           <div style={{
-            background: 'linear-gradient(135deg, #1A1714, #241F1A)',
+            background: 'linear-gradient(135deg, #FFFFFF, #F9FAFB)',
             border: '2px solid var(--border-accent)', borderRadius: '20px',
             padding: '2.5rem 2rem', marginBottom: '2rem',
           }}>
