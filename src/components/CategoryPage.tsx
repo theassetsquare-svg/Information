@@ -16,10 +16,10 @@ interface CatPageProps {
 }
 
 export default function CategoryPage({ heading, intro, body, guide, timeslots, venues, catLabel, year, isHoppa }: CatPageProps) {
-  const accent = '#8B5CF6';
-  const bgAccent = '#FFFFFF';
-  const borderAccent = '#8B5CF6';
-  const textAccent = '#8B5CF6';
+  const accent = isHoppa ? '#F43F5E' : '#8B5CF6';
+  const bgAccent = isHoppa ? '#FFF1F2' : '#FFFFFF';
+  const borderAccent = isHoppa ? '#FDA4AF' : '#8B5CF6';
+  const textAccent = isHoppa ? '#E11D48' : '#8B5CF6';
 
   return (
     <section className="section">
