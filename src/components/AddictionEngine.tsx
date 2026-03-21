@@ -389,7 +389,134 @@ export function JourneyTimer() {
   );
 }
 
-/* ═══ [8] 개인화 추천 — 최근 본 기반 ═══ */
+/* ═══ [8] FOMO 카운터 — "지금 N명이 보고 있습니다" ═══ */
+export function FOMOCounter() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    // 시간대별 시뮬레이션 (실제 데이터 없으므로)
+    const hour = new Date().getHours();
+    const base = hour >= 20 || hour < 4 ? 180 + Math.floor(Math.random() * 150) : 40 + Math.floor(Math.random() * 80);
+    setCount(base);
+    const interval = setInterval(() => {
+      setCount(c => c + Math.floor(Math.random() * 7) - 3); // ±3 변동
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (count <= 0) return null;
+  return (
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.75rem',
+      background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '20px', fontSize: '0.75rem', color: '#DC2626', fontWeight: 600 }}>
+      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#DC2626', animation: 'blink 1.5s infinite' }} />
+      지금 {count}명 탐색 중
+      <style dangerouslySetInnerHTML={{ __html: '@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}' }} />
+    </div>
+  );
+}
+
+/* ═══ [9] 블러 잠금 — 콘텐츠 끊기 → "더 보기" 클릭 유도 ═══ */
+export function BlurReveal({ children, label = '전체 내용 보기' }: { children: React.ReactNode; label?: string }) {
+  const [revealed, setRevealed] = useState(false);
+  return (
+    <div style={{ position: 'relative' }}>
+      <div style={{ maxHeight: revealed ? 'none' : '200px', overflow: 'hidden', transition: 'max-height 0.5s' }}>
+        {children}
+      </div>
+      {!revealed && (
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '120px',
+          background: 'linear-gradient(transparent, #FFF)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '1rem' }}>
+          <button onClick={() => setRevealed(true)} style={{
+            background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '8px',
+            padding: '0.6rem 1.5rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem',
+            fontFamily: 'var(--font-sans)', boxShadow: '0 4px 12px rgba(139,92,246,0.3)', minHeight: '44px',
+          }}>
+            {label} ↓
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ═══ [10] 탐험 진행도 — 전체 카테고리 탐색 % ═══ */
+export function ExploreProgress() {
+  const [data, setData] = useState({ total: 110, visited: 0, categories: 0 });
+  useEffect(() => {
+    const stored = localStorage.getItem('recent_venues');
+    if (stored) {
+      const slugs: string[] = JSON.parse(stored);
+      setData({ total: 110, visited: slugs.length, categories: new Set(slugs.map(s => s.split('-')[0])).size });
+    }
+  }, []);
+
+  if (data.visited === 0) return null;
+  const pct = Math.round(data.visited / data.total * 100);
+
+  return (
+    <div style={{ padding: '1.25rem', background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)', borderRadius: '16px', border: '1px solid #DDD6FE' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+        <h3 style={{ margin: 0, fontSize: '1rem' }}>나의 탐험 지도</h3>
+        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#8B5CF6' }}>{pct}% 달성</span>
+      </div>
+      <div style={{ height: '8px', background: '#E5E7EB', borderRadius: '4px', overflow: 'hidden', marginBottom: '0.5rem' }}>
+        <div style={{ width: `${pct}%`, height: '100%', background: 'linear-gradient(90deg, #8B5CF6, #06B6D4)',
+          borderRadius: '4px', transition: 'width 1s ease-out' }} />
+      </div>
+      <p style={{ fontSize: '0.8rem', color: '#555' }}>
+        {data.total}곳 중 {data.visited}곳 방문 · {6 - data.categories}개 카테고리 미탐험
+      </p>
+      {pct < 50 && <p style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, marginTop: '0.25rem' }}>50% 달성하면 밤의 탐험가 뱃지!</p>}
+      {pct >= 50 && pct < 100 && <p style={{ fontSize: '0.75rem', color: '#06B6D4', fontWeight: 600, marginTop: '0.25rem' }}>거의 다 왔어요! 전체 탐험 완료까지 {data.total - data.visited}곳</p>}
+    </div>
+  );
+}
+
+/* ═══ [11] 소셜 증거 토스트 — "방금 OO님이..." ═══ */
+export function SocialProofToast() {
+  const [show, setShow] = useState(false);
+  const [msg, setMsg] = useState('');
+  const names = ['김**','이**','박**','최**','정**','강**','조**','윤**','장**','한**'];
+  const actions = [
+    (n: string) => `${n}님이 강남클럽 레이스 페이지를 봤습니다`,
+    (n: string) => `${n}님이 수원찬스돔나이트에 전화했습니다`,
+    (n: string) => `${n}님이 일산룸 상세를 확인했습니다`,
+    (n: string) => `${n}님이 부산연산동물나이트를 저장했습니다`,
+    (n: string) => `${n}님이 호빠 카테고리를 탐색 중입니다`,
+  ];
+
+  useEffect(() => {
+    const showToast = () => {
+      const name = names[Math.floor(Math.random() * names.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      setMsg(action(name));
+      setShow(true);
+      setTimeout(() => setShow(false), 4000);
+    };
+    // 첫 표시: 45초 후, 이후 60~120초 랜덤
+    const first = setTimeout(showToast, 45000);
+    const interval = setInterval(showToast, 60000 + Math.random() * 60000);
+    return () => { clearTimeout(first); clearInterval(interval); };
+  }, []);
+
+  if (!show) return null;
+  return (
+    <div style={{
+      position: 'fixed', bottom: '80px', left: '50%', transform: 'translateX(-50%)',
+      maxWidth: '360px', width: 'calc(100% - 2rem)', zIndex: 80,
+      background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '12px',
+      padding: '0.75rem 1rem', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+      animation: 'slideUp2 0.4s ease-out', fontSize: '0.8rem', color: '#333',
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22C55E', flexShrink: 0 }} />
+        {msg}
+      </div>
+      <style dangerouslySetInnerHTML={{ __html: '@keyframes slideUp2{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}' }} />
+    </div>
+  );
+}
+
+/* ═══ [12] 개인화 추천 — 최근 본 기반 ═══ */
 export function PersonalizedFeed({ venues }: { venues: any[] }) {
   const [recentSlugs, setRecentSlugs] = useState<string[]>([]);
 

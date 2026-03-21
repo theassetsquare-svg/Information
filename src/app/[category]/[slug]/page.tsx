@@ -3,7 +3,7 @@ import { getAllVenues, getVenueBySlug, getRelatedVenues, SITE_URL, CAT_SLUG_TO_L
 import { generateGoldContent, SITE_NAME } from '../../../lib/gold-content';
 import VenueCard from '../../../components/VenueCard';
 import StickyPhoneBar from '../../../components/StickyPhoneBar';
-import { ReadingProgress, AutoNext, EndlessRecommend } from '../../../components/AddictionEngine';
+import { ReadingProgress, AutoNext, EndlessRecommend, FOMOCounter, BlurReveal } from '../../../components/AddictionEngine';
 import { MidContentHook, SimilarVenuesHook, AIRecommendHook, FullCompareHook } from '../../../components/HookingCTAs';
 import RecentTracker from '../../../components/RecentTracker';
 
@@ -142,6 +142,7 @@ export default function VenueDetailPage({ params }: Props) {
             <span>{venue.region}</span>
             {venue.hours && <span>{venue.hours}</span>}
           </div>
+          <div style={{ marginTop: '0.75rem' }}><FOMOCounter /></div>
         </div>
       </section>
 
@@ -200,16 +201,18 @@ export default function VenueDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ — BlurReveal로 클릭 유도 */}
       <section className="detail-section">
         <div className="container narrow">
           <h2>Q&amp;A</h2>
-          {gc.faq.map((f, i) => (
-            <div key={i} className="faq-item">
-              <p className="faq-q">Q. {f.q}</p>
-              <p className="faq-a">{f.a}</p>
-            </div>
-          ))}
+          <BlurReveal label="전체 Q&A 보기">
+            {gc.faq.map((f, i) => (
+              <div key={i} className="faq-item">
+                <p className="faq-q">Q. {f.q}</p>
+                <p className="faq-a">{f.a}</p>
+              </div>
+            ))}
+          </BlurReveal>
         </div>
       </section>
 

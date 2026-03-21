@@ -5,7 +5,7 @@ import VenueCard from '../components/VenueCard';
 import SearchBar from '../components/SearchBar';
 import Roulette from '../components/Roulette';
 import VsBattle from '../components/VsBattle';
-import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend, PersonalizedFeed } from '../components/AddictionEngine';
+import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend, PersonalizedFeed, FOMOCounter, ExploreProgress } from '../components/AddictionEngine';
 import { AIRecommendHook, FullCompareHook, MidContentHook, SimilarVenuesHook } from '../components/HookingCTAs';
 
 const content = getHomeContent();
@@ -72,9 +72,10 @@ export default function HomePage() {
           <h1 style={{ fontSize: 'clamp(1.75rem, 5vw, 2.5rem)', marginBottom: '0.5rem' }}>
             밤의 격이 다른 선택
           </h1>
-          <p style={{ color: '#333', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+          <p style={{ color: '#333', marginBottom: '0.75rem', fontSize: '0.95rem' }}>
             전국 {allVenues.length}곳 · {year}년 현장 정보
           </p>
+          <div style={{ marginBottom: '1rem' }}><FOMOCounter /></div>
           <SearchBar venues={allVenues} />
         </div>
       </section>
@@ -332,6 +333,13 @@ export default function HomePage() {
             스크롤하면 더 많은 곳이 나옵니다
           </p>
           <InfiniteFeed venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ 탐험 진행도 ═══ */}
+      <section style={{ padding: '1rem 0' }}>
+        <div className="container narrow">
+          <ExploreProgress />
         </div>
       </section>
 
