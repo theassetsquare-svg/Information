@@ -557,3 +557,357 @@ export function PersonalizedFeed({ venues }: { venues: any[] }) {
     </div>
   );
 }
+
+/* ═══════════════════════════════════════════════════════════
+   95분 체류 — 틱톡/넷플릭스/슬롯머신 심리학 추가 7가지
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══ [13] 틱톡 "스와이프 피드" — 한 번에 1업소, 풀스크린 카드 ═══ */
+export function SwipeFeed({ venues }: { venues: any[] }) {
+  const [idx, setIdx] = useState(0);
+  const [direction, setDirection] = useState<'up'|'down'|null>(null);
+  const shuffled = useRef([...venues].sort(() => Math.random() - 0.5));
+  const v = shuffled.current[idx % shuffled.current.length];
+  const catColors: Record<string, string> = { club: '#7C3AED', night: '#EC4899', lounge: '#D4AF37', room: '#1E3A5F', yojeong: '#059669', hoppa: '#DC2626' };
+
+  const goNext = () => { setDirection('up'); setTimeout(() => { setIdx(i => i + 1); setDirection(null); }, 200); };
+  const goPrev = () => { if (idx > 0) { setDirection('down'); setTimeout(() => { setIdx(i => i - 1); setDirection(null); }, 200); } };
+
+  return (
+    <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '20px', border: '1px solid #E5E7EB' }}>
+      <div style={{
+        background: `linear-gradient(135deg, ${catColors[v.cat_slug] || '#8B5CF6'}22, ${catColors[v.cat_slug] || '#8B5CF6'}08)`,
+        padding: '2rem 1.5rem', minHeight: '280px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+        transition: 'transform 0.2s, opacity 0.2s',
+        transform: direction === 'up' ? 'translateY(-20px)' : direction === 'down' ? 'translateY(20px)' : 'none',
+        opacity: direction ? 0.5 : 1,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+          <span style={{ background: catColors[v.cat_slug] || '#8B5CF6', color: '#FFF', padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.7rem', fontWeight: 700 }}>
+            {v.category}
+          </span>
+          <span style={{ fontSize: '0.8rem', color: '#555' }}>{v.region}</span>
+        </div>
+        <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem', lineHeight: 1.3 }}>{v.name}</h3>
+        {v.nickname && <p style={{ color: '#8B5CF6', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.5rem' }}>담당: {v.nickname}</p>}
+        <p style={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>{v.card_hook}</p>
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
+            style={{ flex: 1, textAlign: 'center', background: catColors[v.cat_slug] || '#8B5CF6', color: '#FFF', padding: '0.75rem', borderRadius: '12px', fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem', minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            자세히 보기
+          </a>
+          <button onClick={goNext} style={{ flex: 1, background: '#F5F5F5', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '0.75rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem', fontFamily: 'var(--font-sans)', minHeight: '48px', color: '#333' }}>
+            다음 추천 →
+          </button>
+        </div>
+      </div>
+      {/* 진행 인디케이터 */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', padding: '0.75rem', background: '#FAFAFA' }}>
+        {Array.from({ length: Math.min(10, shuffled.current.length) }, (_, i) => (
+          <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: i === (idx % 10) ? '#8B5CF6' : '#D1D5DB', transition: 'background 0.3s' }} />
+        ))}
+        <span style={{ fontSize: '0.7rem', color: '#999', marginLeft: '0.5rem' }}>{idx + 1}/{shuffled.current.length}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ═══ [14] 넷플릭스 "다음 에피소드" 자동재생 체인 — 끊을 수 없는 연쇄 ═══ */
+export function BingeChain({ venues }: { venues: any[] }) {
+  const [chain, setChain] = useState<any[]>([]);
+  const [watching, setWatching] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const [countdown, setCountdown] = useState(5);
+
+  const startBinge = () => {
+    const shuffled = [...venues].sort(() => Math.random() - 0.5).slice(0, 10);
+    setChain(shuffled); setWatching(true); setCurrent(0); setCountdown(5);
+  };
+
+  useEffect(() => {
+    if (!watching || countdown <= 0) return;
+    const t = setTimeout(() => setCountdown(c => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [watching, countdown]);
+
+  const nextEp = () => { setCurrent(c => c + 1); setCountdown(5); };
+
+  if (!watching) {
+    return (
+      <div style={{ textAlign: 'center', padding: '2rem 1.5rem', background: '#111', borderRadius: '20px', color: '#FFF' }}>
+        <p style={{ fontSize: '0.75rem', color: '#999', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>몰아보기 모드</p>
+        <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem', color: '#FFF' }}>10곳을 한 번에 훑어보기</h3>
+        <p style={{ fontSize: '0.85rem', color: '#999', marginBottom: '1.25rem' }}>넷플릭스처럼 다음 업소가 자동으로 넘어갑니다</p>
+        <button onClick={startBinge} style={{ background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '12px', padding: '0.875rem 2rem', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', fontFamily: 'var(--font-sans)', minHeight: '48px', boxShadow: '0 4px 16px rgba(139,92,246,0.4)' }}>
+          시작하기 ▶
+        </button>
+      </div>
+    );
+  }
+
+  if (current >= chain.length) {
+    return (
+      <div style={{ textAlign: 'center', padding: '2rem', background: '#111', borderRadius: '20px', color: '#FFF' }}>
+        <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🎬</p>
+        <h3 style={{ color: '#FFF', marginBottom: '0.75rem' }}>10곳 탐험 완료!</h3>
+        <button onClick={startBinge} style={{ background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '12px', padding: '0.75rem 2rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-sans)', minHeight: '48px' }}>
+          새 시리즈 시작 →
+        </button>
+      </div>
+    );
+  }
+
+  const v = chain[current];
+  return (
+    <div style={{ background: '#111', borderRadius: '20px', overflow: 'hidden', color: '#FFF' }}>
+      <div style={{ padding: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+          <span style={{ fontSize: '0.75rem', color: '#999' }}>EP.{current + 1} / 10</span>
+          <span style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600 }}>{countdown > 0 ? `${countdown}초 후 다음` : '준비 완료'}</span>
+        </div>
+        <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '0.5rem' }}>{v.name}</h3>
+        <p style={{ fontSize: '0.85rem', color: '#CCC', marginBottom: '1rem' }}>{v.card_hook}</p>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
+            style={{ flex: 1, textAlign: 'center', background: '#FFF', color: '#111', padding: '0.625rem', borderRadius: '8px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            상세 보기
+          </a>
+          <button onClick={nextEp} style={{ flex: 1, background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '8px', padding: '0.625rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem', fontFamily: 'var(--font-sans)', minHeight: '44px' }}>
+            다음 EP →
+          </button>
+        </div>
+      </div>
+      {/* 넷플릭스 진행바 */}
+      <div style={{ height: '4px', background: '#333' }}>
+        <div style={{ width: `${(current + 1) / 10 * 100}%`, height: '100%', background: 'linear-gradient(90deg, #8B5CF6, #06B6D4)', transition: 'width 0.5s' }} />
+      </div>
+    </div>
+  );
+}
+
+/* ═══ [15] 슬롯머신 "잭팟 헌팅" — 레어 업소 찾기 ═══ */
+export function JackpotHunt({ venues }: { venues: any[] }) {
+  const [spinning, setSpinning] = useState(false);
+  const [result, setResult] = useState<any[]>([]);
+  const [jackpot, setJackpot] = useState(false);
+  const [tries, setTries] = useState(0);
+
+  const spin = () => {
+    setSpinning(true); setJackpot(false);
+    setTimeout(() => {
+      const picks = Array.from({ length: 3 }, () => venues[Math.floor(Math.random() * venues.length)]);
+      const isJackpot = picks[0].cat_slug === picks[1].cat_slug && picks[1].cat_slug === picks[2].cat_slug;
+      setResult(picks);
+      setJackpot(isJackpot);
+      setSpinning(false);
+      setTries(t => t + 1);
+    }, 1500 + Math.random() * 1000);
+  };
+
+  return (
+    <div style={{ padding: '1.5rem', background: 'linear-gradient(135deg, #1E1B4B, #312E81)', borderRadius: '20px', textAlign: 'center', color: '#FFF' }}>
+      <h3 style={{ color: '#FFF', marginBottom: '0.25rem' }}>잭팟 헌팅</h3>
+      <p style={{ fontSize: '0.8rem', color: '#A5B4FC', marginBottom: '1rem' }}>
+        3개가 같은 카테고리면 잭팟! {tries > 0 && <span>{tries}번째 도전</span>}
+      </p>
+      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '1rem', minHeight: '80px', alignItems: 'center' }}>
+        {spinning ? (
+          Array.from({ length: 3 }, (_, i) => (
+            <div key={i} style={{ width: '80px', height: '80px', background: '#4338CA', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', animation: `spin ${0.3 + i * 0.1}s linear infinite` }}>?</div>
+          ))
+        ) : result.length > 0 ? (
+          result.map((v, i) => (
+            <a key={i} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
+              style={{ width: '80px', padding: '0.5rem', background: jackpot ? '#F59E0B' : '#4338CA', borderRadius: '12px', textDecoration: 'none', color: '#FFF', fontSize: '0.65rem', fontWeight: 600, textAlign: 'center', transition: 'transform 0.3s', animation: jackpot ? 'pulse2 0.5s infinite' : 'fadeIn 0.3s' }}>
+              <div style={{ fontSize: '0.6rem', opacity: 0.7 }}>{v.category}</div>
+              <div style={{ marginTop: '0.25rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.name.split(' ').pop()}</div>
+            </a>
+          ))
+        ) : (
+          <p style={{ color: '#A5B4FC', fontSize: '0.9rem' }}>레버를 당겨보세요</p>
+        )}
+      </div>
+      {jackpot && <p style={{ color: '#F59E0B', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.75rem', animation: 'pulse2 0.5s infinite' }}>🎰 잭팟! 같은 카테고리 3개!</p>}
+      <button onClick={spin} disabled={spinning} style={{
+        background: spinning ? '#4338CA' : 'linear-gradient(135deg, #F59E0B, #EF4444)', color: '#FFF', border: 'none', borderRadius: '50px', padding: '0.75rem 2rem', fontWeight: 700, cursor: spinning ? 'wait' : 'pointer', fontSize: '0.95rem', fontFamily: 'var(--font-sans)', minHeight: '48px',
+        boxShadow: '0 4px 16px rgba(245,158,11,0.3)',
+      }}>
+        {spinning ? '돌아가는 중...' : '레버 당기기 🎰'}
+      </button>
+    </div>
+  );
+}
+
+/* ═══ [16] "오늘의 운세" — 매일 다른 결과 → 매일 방문 ═══ */
+export function DailyFortune({ venues }: { venues: any[] }) {
+  const [revealed, setRevealed] = useState(false);
+  const today = new Date().toDateString();
+  const seed = today.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const todayVenue = venues[seed % venues.length];
+
+  const fortunes = [
+    '오늘 밤 운이 트인다. 첫 번째 자리가 명당.',
+    '금요일 에너지가 충전되는 날. 새로운 곳을 시도해볼 것.',
+    '오래된 단골보다 새 장소가 길하다.',
+    '동행자의 추천을 따르면 좋은 밤이 된다.',
+    '오늘은 바 카운터에 앉아라. 의외의 인연.',
+    '자정이 지나면 분위기가 바뀐다. 끝까지 버텨라.',
+    '이번 주말은 평소와 다른 카테고리를 시도할 때.',
+    '예약이 길함. 워크인은 대기가 길어진다.',
+  ];
+  const fortune = fortunes[seed % fortunes.length];
+
+  return (
+    <div style={{ padding: '1.5rem', background: 'linear-gradient(135deg, #FEF3C7, #FFFBEB)', border: '1px solid #FDE68A', borderRadius: '20px', textAlign: 'center' }}>
+      <p style={{ fontSize: '0.75rem', color: '#92400E', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>오늘의 밤 운세</p>
+      {!revealed ? (
+        <button onClick={() => setRevealed(true)} style={{ background: 'linear-gradient(135deg, #F59E0B, #D97706)', color: '#FFF', border: 'none', borderRadius: '50px', padding: '0.875rem 2rem', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', fontFamily: 'var(--font-sans)', minHeight: '48px', boxShadow: '0 4px 16px rgba(217,119,6,0.3)' }}>
+          운세 확인하기 ✨
+        </button>
+      ) : (
+        <div style={{ animation: 'fadeIn 0.5s' }}>
+          <p style={{ fontSize: '1rem', color: '#92400E', fontWeight: 600, marginBottom: '1rem', lineHeight: 1.7 }}>{fortune}</p>
+          <div style={{ padding: '1rem', background: '#FFF', borderRadius: '12px', border: '1px solid #FDE68A' }}>
+            <p style={{ fontSize: '0.75rem', color: '#B45309', marginBottom: '0.25rem' }}>오늘의 행운 장소</p>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{todayVenue.name}</h3>
+            <a href={`/${todayVenue.cat_slug}/${todayVenue.slug}/`} target="_blank" rel="noopener noreferrer"
+              style={{ display: 'inline-block', background: '#F59E0B', color: '#FFF', padding: '0.5rem 1.5rem', borderRadius: '8px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem' }}>
+              확인하기 →
+            </a>
+          </div>
+          <p style={{ fontSize: '0.75rem', color: '#B45309', marginTop: '0.75rem' }}>내일 다시 확인하세요. 매일 바뀝니다.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ═══ [17] "예산 계산기" — 인원+주종 → 예상 금액 + 맞춤 추천 ═══ */
+export function BudgetCalculator({ venues }: { venues: any[] }) {
+  const [people, setPeople] = useState(4);
+  const [bottles, setBottles] = useState(1);
+  const [category, setCategory] = useState('night');
+  const prices: Record<string, number> = { night: 250000, club: 150000, lounge: 180000, room: 400000, yojeong: 500000, hoppa: 300000 };
+  const catLabels: Record<string, string> = { night: '나이트', club: '클럽', lounge: '라운지', room: '룸', yojeong: '요정', hoppa: '호빠' };
+  const total = prices[category] * bottles;
+  const perPerson = Math.ceil(total / people);
+  const matched = venues.filter(v => v.cat_slug === category).slice(0, 3);
+
+  return (
+    <div style={{ padding: '1.5rem', background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '20px' }}>
+      <h3 style={{ marginBottom: '0.25rem' }}>오늘 밤 예산 계산기</h3>
+      <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '1rem' }}>인원과 카테고리를 선택하면 예상 비용을 알려드립니다</p>
+      <div style={{ display: 'grid', gap: '0.75rem', marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          {Object.entries(catLabels).map(([k, l]) => (
+            <button key={k} onClick={() => setCategory(k)} style={{
+              padding: '0.4rem 0.75rem', borderRadius: '20px', fontSize: '0.8rem', fontFamily: 'var(--font-sans)',
+              border: category === k ? '2px solid #8B5CF6' : '1px solid #E5E7EB',
+              background: category === k ? '#F5F3FF' : '#FFF', color: category === k ? '#8B5CF6' : '#555',
+              cursor: 'pointer', fontWeight: category === k ? 700 : 400,
+            }}>{l}</button>
+          ))}
+        </div>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px' }}>인원</label>
+          <input type="range" min="1" max="10" value={people} onChange={e => setPeople(Number(e.target.value))} style={{ flex: 1 }} />
+          <span style={{ fontWeight: 700, color: '#8B5CF6', minWidth: '30px' }}>{people}명</span>
+        </div>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px' }}>양주</label>
+          <input type="range" min="1" max="5" value={bottles} onChange={e => setBottles(Number(e.target.value))} style={{ flex: 1 }} />
+          <span style={{ fontWeight: 700, color: '#8B5CF6', minWidth: '30px' }}>{bottles}병</span>
+        </div>
+      </div>
+      <div style={{ padding: '1rem', background: '#F5F3FF', borderRadius: '12px', textAlign: 'center', marginBottom: '1rem' }}>
+        <p style={{ fontSize: '0.8rem', color: '#555' }}>예상 총 비용</p>
+        <p style={{ fontSize: '1.5rem', fontWeight: 800, color: '#8B5CF6' }}>{total.toLocaleString()}원</p>
+        <p style={{ fontSize: '0.85rem', color: '#333' }}>1인당 약 <strong>{perPerson.toLocaleString()}원</strong></p>
+      </div>
+      {matched.length > 0 && (
+        <div>
+          <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '0.5rem' }}>이 예산에 맞는 곳</p>
+          {matched.map(v => (
+            <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
+              style={{ display: 'block', padding: '0.5rem 0.75rem', marginBottom: '0.25rem', background: '#FAFAFA', borderRadius: '8px', textDecoration: 'none', color: '#111', fontSize: '0.85rem' }}>
+              <strong>{v.name}</strong> <span style={{ color: '#555' }}>· {v.region}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ═══ [18] "이번주 TOP3 변동" — 매주 바뀜 → 매주 방문 ═══ */
+export function WeeklyHot({ venues }: { venues: any[] }) {
+  const week = Math.floor(Date.now() / (7 * 86400000));
+  const seed = week * 31;
+  const top3 = [0, 1, 2].map(i => venues[(seed + i * 13) % venues.length]);
+  const changes = ['+2', 'NEW', '-1'];
+
+  return (
+    <div style={{ padding: '1.5rem', background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <h3 style={{ margin: 0 }}>이번주 급상승</h3>
+        <span style={{ fontSize: '0.7rem', color: '#999', background: '#F5F5F5', padding: '0.2rem 0.5rem', borderRadius: '8px' }}>매주 갱신</span>
+      </div>
+      {top3.map((v, i) => (
+        <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
+          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: i < 2 ? '1px solid #F5F5F5' : 'none', textDecoration: 'none', color: 'inherit' }}>
+          <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#8B5CF6', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, flexShrink: 0 }}>{i + 1}</span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontWeight: 600, fontSize: '0.95rem', color: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{v.name}</p>
+            <p style={{ fontSize: '0.8rem', color: '#555' }}>{v.card_hook}</p>
+          </div>
+          <span style={{ fontSize: '0.7rem', fontWeight: 700, color: changes[i] === 'NEW' ? '#DC2626' : changes[i].startsWith('+') ? '#16A34A' : '#EF4444', flexShrink: 0 }}>
+            {changes[i] === 'NEW' ? '🔥 NEW' : changes[i].startsWith('+') ? `▲${changes[i]}` : `▼${changes[i].slice(1)}`}
+          </span>
+        </a>
+      ))}
+    </div>
+  );
+}
+
+/* ═══ [19] "감정 기반 추천" — 기분 선택 → 맞춤 업소 ═══ */
+export function MoodMatch({ venues }: { venues: any[] }) {
+  const [mood, setMood] = useState<string|null>(null);
+  const moods = [
+    { emoji: '🔥', label: '신나고 싶다', cats: ['club', 'night'] },
+    { emoji: '🍷', label: '차분하게 마시고 싶다', cats: ['lounge', 'yojeong'] },
+    { emoji: '👑', label: '제대로 접대하고 싶다', cats: ['room', 'yojeong'] },
+    { emoji: '💃', label: '특별한 밤을 보내고 싶다', cats: ['hoppa', 'club'] },
+    { emoji: '🎲', label: '아무데나 좋아', cats: ['club', 'night', 'lounge', 'room', 'yojeong', 'hoppa'] },
+  ];
+  const selected = moods.find(m => m.label === mood);
+  const matched = selected ? venues.filter(v => selected.cats.includes(v.cat_slug)).sort(() => Math.random() - 0.5).slice(0, 3) : [];
+
+  return (
+    <div style={{ padding: '1.5rem', background: 'linear-gradient(135deg, #EDE9FE, #F5F3FF)', border: '1px solid #DDD6FE', borderRadius: '20px' }}>
+      <h3 style={{ marginBottom: '0.25rem' }}>지금 기분이 어때요?</h3>
+      <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '1rem' }}>기분에 맞는 곳을 추천해드립니다</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
+        {moods.map(m => (
+          <button key={m.label} onClick={() => setMood(m.label)} style={{
+            padding: '0.5rem 0.875rem', borderRadius: '50px', fontSize: '0.85rem', fontFamily: 'var(--font-sans)',
+            border: mood === m.label ? '2px solid #8B5CF6' : '1px solid #DDD6FE',
+            background: mood === m.label ? '#8B5CF6' : '#FFF', color: mood === m.label ? '#FFF' : '#333',
+            cursor: 'pointer', fontWeight: mood === m.label ? 700 : 400, minHeight: '40px',
+          }}>{m.emoji} {m.label}</button>
+        ))}
+      </div>
+      {matched.length > 0 && (
+        <div style={{ animation: 'fadeIn 0.4s' }}>
+          <p style={{ fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.5rem' }}>당신에게 맞는 곳</p>
+          {matched.map(v => (
+            <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
+              style={{ display: 'block', padding: '0.75rem 1rem', marginBottom: '0.5rem', background: '#FFF', border: '1px solid #DDD6FE', borderRadius: '12px', textDecoration: 'none', color: '#111' }}>
+              <strong>{v.name}</strong>
+              <span style={{ fontSize: '0.8rem', color: '#555', marginLeft: '0.5rem' }}>{v.card_hook}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

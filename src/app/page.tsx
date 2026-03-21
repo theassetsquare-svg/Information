@@ -5,7 +5,7 @@ import VenueCard from '../components/VenueCard';
 import SearchBar from '../components/SearchBar';
 import Roulette from '../components/Roulette';
 import VsBattle from '../components/VsBattle';
-import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend, PersonalizedFeed, FOMOCounter, ExploreProgress } from '../components/AddictionEngine';
+import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend, PersonalizedFeed, FOMOCounter, ExploreProgress, SwipeFeed, BingeChain, JackpotHunt, DailyFortune, BudgetCalculator, WeeklyHot, MoodMatch } from '../components/AddictionEngine';
 import { AIRecommendHook, FullCompareHook, MidContentHook, SimilarVenuesHook } from '../components/HookingCTAs';
 
 const content = getHomeContent();
@@ -159,9 +159,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ 감정 기반 추천 ═══ */}
+      <section style={{ padding: '1rem 0' }}>
+        <div className="container"><MoodMatch venues={allVenues} /></div>
+      </section>
+
       {/* ═══ [후킹2] 중간 끊기 ═══ */}
       <section style={{ padding: '1rem 0' }}>
         <div className="container"><MidContentHook /></div>
+      </section>
+
+      {/* ═══ 오늘의 운세 ═══ */}
+      <section style={{ padding: '1rem 0' }}>
+        <div className="container"><DailyFortune venues={allVenues} /></div>
       </section>
 
       {/* ═══ [D] 첫 방문 가이드 배너 ═══ */}
@@ -318,10 +328,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ 출석 체크 ═══ */}
+      {/* ═══ 잭팟 헌팅 ═══ */}
       <section className="section">
+        <div className="container">
+          <JackpotHunt venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ 예산 계산기 ═══ */}
+      <section className="section" style={{ background: '#F5F5F5' }}>
+        <div className="container">
+          <BudgetCalculator venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ 이번주 급상승 ═══ */}
+      <section className="section">
+        <div className="container">
+          <WeeklyHot venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ 출석 체크 ═══ */}
+      <section className="section" style={{ background: '#F5F5F5' }}>
         <div className="container narrow">
           <DailyStreak />
+        </div>
+      </section>
+
+      {/* ═══ 틱톡 스와이프 피드 ═══ */}
+      <section className="section">
+        <div className="container">
+          <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>한 곳씩 발견하기</h2>
+          <p style={{ textAlign: 'center', color: '#555', marginBottom: '1rem', fontSize: '0.85rem' }}>
+            다음 추천을 눌러보세요
+          </p>
+          <SwipeFeed venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ 몰아보기 모드 ═══ */}
+      <section className="section" style={{ background: '#F5F5F5' }}>
+        <div className="container">
+          <BingeChain venues={allVenues} />
         </div>
       </section>
 
