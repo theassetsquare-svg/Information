@@ -57,9 +57,10 @@ export default function HomePage() {
     hoppa: '여성을 위한 프리미엄 선택',
   };
 
+  /* WCAG AA 4.5:1 대비율 — 흰배경 대비 진한 색상 */
   const catIcons: Record<string, string> = {
-    club: '#8B5CF6', night: '#EC4899', lounge: '#06B6D4',
-    room: '#3B82F6', yojeong: '#059669', hoppa: '#F43F5E',
+    club: '#6D28D9', night: '#BE185D', lounge: '#0E7490',
+    room: '#1D4ED8', yojeong: '#047857', hoppa: '#BE123C',
   };
 
   return (

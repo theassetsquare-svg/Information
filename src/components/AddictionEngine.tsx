@@ -309,7 +309,8 @@ export function DailyStreak() {
 export function EndlessRecommend({ venues }: { venues: any[] }) {
   const [idx, setIdx] = useState(0);
   const [seen, setSeen] = useState(0);
-  const shuffled = useRef([...venues].sort(() => Math.random() - 0.5));
+  const shuffled = useRef(venues);
+  useEffect(() => { shuffled.current = [...venues].sort(() => Math.random() - 0.5); }, [venues]);
   const show = shuffled.current.slice(idx % venues.length, (idx % venues.length) + 2);
 
   const next = () => {
@@ -566,7 +567,8 @@ export function PersonalizedFeed({ venues }: { venues: any[] }) {
 export function SwipeFeed({ venues }: { venues: any[] }) {
   const [idx, setIdx] = useState(0);
   const [direction, setDirection] = useState<'up'|'down'|null>(null);
-  const shuffled = useRef([...venues].sort(() => Math.random() - 0.5));
+  const shuffled = useRef(venues);
+  useEffect(() => { shuffled.current = [...venues].sort(() => Math.random() - 0.5); }, [venues]);
   const v = shuffled.current[idx % shuffled.current.length];
   const catColors: Record<string, string> = { club: '#7C3AED', night: '#8B5CF6', lounge: '#8B5CF6', room: '#1E3A5F', yojeong: '#059669', hoppa: '#DC2626' };
 
@@ -922,7 +924,8 @@ export function TikTokFeed({ venues }: { venues: any[] }) {
   const [idx, setIdx] = useState(0);
   const [likes, setLikes] = useState<Set<number>>(new Set());
   const [combo, setCombo] = useState(0);
-  const shuffled = useRef(venues.sort(() => Math.random() - 0.5));
+  const shuffled = useRef(venues);
+  useEffect(() => { shuffled.current = [...venues].sort(() => Math.random() - 0.5); }, [venues]);
   const v = shuffled.current[idx % shuffled.current.length];
   const catEmoji: Record<string,string> = { club:'🎵', night:'🌙', lounge:'🍷', room:'🚪', yojeong:'🏮', hoppa:'💃' };
 
