@@ -3964,5 +3964,158 @@
     "source_urls": [],
     "nickname": "",
     "nickname_phone": ""
+  },
+  {
+    "name": "신림호빠 궁전",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "신림",
+    "region_slug": "sillim",
+    "district": "신림",
+    "district_slug": "sillim",
+    "slug": "sillim-hoppa-gungjon",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "신림호빠 궁전",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "신림"
+    ],
+    "map_url": "",
+    "card_hook": "신림역 도보 5분, 서울 남부 여성을 위한 프리미엄 공간",
+    "card_value": "",
+    "card_tags": [
+      "신림",
+      "서울남부"
+    ],
+    "keywords": [
+      "신림호빠 궁전",
+      "신림",
+      "호빠"
+    ],
+    "source_urls": [
+      "https://gwanakh.hobbaya.com/"
+    ],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "울산호빠 왈츠",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "울산",
+    "region_slug": "ulsan",
+    "district": "삼산동",
+    "district_slug": "samsan",
+    "slug": "ulsan-hoppa-waltz",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "울산호빠 왈츠",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "울산"
+    ],
+    "map_url": "",
+    "card_hook": "울산 삼산동, 퀄리티와 가성비를 모두 갖춘 곳",
+    "card_value": "",
+    "card_tags": [
+      "울산",
+      "삼산동"
+    ],
+    "keywords": [
+      "울산호빠 왈츠",
+      "울산",
+      "호빠"
+    ],
+    "source_urls": [
+      "https://ulsanhoppa.com/"
+    ],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "전주호빠 갤러리",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "전주",
+    "region_slug": "jeonju",
+    "district": "덕진구",
+    "district_slug": "deokjin",
+    "slug": "jeonju-hoppa-gallery",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "전주호빠 갤러리",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "전주"
+    ],
+    "map_url": "",
+    "card_hook": "전주 덕진구 1위, 감각적인 호스트와 편안한 분위기",
+    "card_value": "",
+    "card_tags": [
+      "전주",
+      "전북"
+    ],
+    "keywords": [
+      "전주호빠 갤러리",
+      "전주",
+      "호빠"
+    ],
+    "source_urls": [
+      "https://jeonjuh.hobbaya.com/"
+    ],
+    "nickname": "",
+    "nickname_phone": ""
+  },
+  {
+    "name": "서면호빠 퍼스트",
+    "category": "호빠",
+    "cat_slug": "hoppa",
+    "region": "부산서면",
+    "region_slug": "busan-seomyeon",
+    "district": "서면",
+    "district_slug": "seomyeon",
+    "slug": "seomyeon-hoppa-first",
+    "address": "",
+    "phone": "",
+    "hours": "",
+    "station": "",
+    "thumbnail": "",
+    "image_alt": "서면호빠 퍼스트",
+    "badge": null,
+    "tags": [
+      "호빠",
+      "서면",
+      "부산"
+    ],
+    "map_url": "",
+    "card_hook": "서면 11년 영업, 부산 최대 규모 호스트바",
+    "card_value": "",
+    "card_tags": [
+      "서면",
+      "부산"
+    ],
+    "keywords": [
+      "서면호빠 퍼스트",
+      "부산서면",
+      "호빠"
+    ],
+    "source_urls": [
+      "https://www.hobbar.net/"
+    ],
+    "nickname": "",
+    "nickname_phone": ""
   }
 ]
