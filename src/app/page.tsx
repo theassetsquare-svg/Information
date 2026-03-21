@@ -27,11 +27,11 @@ const top5 = allVenues.filter(v => {
 }).slice(0, 5);
 
 export const metadata: Metadata = {
-  title: '오늘밤어디 — 일산룸, 일산명월관요정, 전국 나이트·클럽·라운지 실시간 정보',
+  title: '밤키(BAMKEY) — 일산룸, 일산명월관요정, 전국 나이트·클럽·라운지 실시간 정보',
   description: '전국 114곳 비교. 일산룸 신실장, 강남청담클럽, 부산나이트 실시간 현장 정보. 밤의 격이 다른 선택.',
   alternates: { canonical: SITE_URL + '/' },
   openGraph: {
-    title: '오늘밤어디 — 일산룸, 일산명월관요정, 전국 나이트·클럽·라운지 실시간 정보',
+    title: '밤키(BAMKEY) — 일산룸, 일산명월관요정, 전국 나이트·클럽·라운지 실시간 정보',
     description: '전국 114곳 비교. 일산룸 신실장, 강남청담클럽, 부산나이트 실시간 현장 정보.',
     url: SITE_URL + '/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],

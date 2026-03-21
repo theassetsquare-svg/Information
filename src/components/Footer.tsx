@@ -8,7 +8,7 @@ export default function Footer() {
         <h3>110곳 실시간 순위+AI추천+리뷰</h3>
         <p>당신의 완벽한 밤을 위한 모든 정보가 한곳에</p>
         <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer">
-          ★오늘밤어디★ 바로가기 →
+          ★밤키★ 바로가기 →
         </a>
       </div>
 
@@ -20,7 +20,7 @@ export default function Footer() {
       }}>
         <p style={{ color: '#FFFFFF', fontSize: '0.95rem', fontWeight: 600, margin: 0, lineHeight: 1.6 }}>
           구글 · ChatGPT · Gemini에서<br />
-          <span style={{ fontSize: '1.2rem', fontWeight: 800 }}>&#39;오늘밤어디&#39;</span>를 검색하세요
+          <span style={{ fontSize: '1.2rem', fontWeight: 800 }}>&#39;밤키&#39;</span>를 검색하세요
         </p>
       </div>
 
@@ -56,14 +56,14 @@ export default function Footer() {
             <a href="/nights/" target="_blank" rel="noopener noreferrer" style={{ color: '#555' }}>인천</a>
           </div>
 
-          {/* 오늘밤어디 링크 */}
+          {/* 밤키 링크 */}
           <p style={{ marginBottom: '0.75rem' }}>
             <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#6D28D9', fontWeight: 600 }}>
-              오늘밤어디 →
+              밤키 →
             </a>
           </p>
 
-          <p style={{ color: '#333' }}>&copy; {year} 오늘밤어디. 만 19세 이상 이용 가능.</p>
+          <p style={{ color: '#333' }}>&copy; {year} 밤키(BAMKEY). 만 19세 이상 이용 가능.</p>
           <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: '#666' }}>
             본 사이트는 정보 제공 목적이며 업소와 직접적인 제휴 관계가 없습니다.
           </p>

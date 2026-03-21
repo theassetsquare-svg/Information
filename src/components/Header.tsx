@@ -4,13 +4,13 @@ export default function Header() {
       {/* [후킹1] 상단 고정 배너 */}
       <div className="top-banner">
         <a href="https://ilsanroom.pages.dev" target="_blank" rel="noopener noreferrer">
-          프리미엄 정보+실시간 예약은 ★오늘밤어디★에서 →
+          프리미엄 정보+실시간 예약은 ★밤키★에서 →
         </a>
       </div>
       <header className="header">
         <div className="header-inner">
-          <a href="/" className="logo" style={{ textDecoration: 'none' }}>
-            오늘밤어디
+          <a href="/" className="logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <img src="/logo.svg" alt="BAMKEY 밤키" width="100" height="30" style={{ display: 'block' }} />
             <span>밤의 격이 다른 선택</span>
           </a>
           <nav>

@@ -179,7 +179,7 @@ export default function CommunityBoard() {
             padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: 700,
             textDecoration: 'none', fontSize: '0.95rem',
           }}>
-          오늘밤어디에서 전체 커뮤니티 보기 →
+          밤키에서 전체 커뮤니티 보기 →
         </a>
       </div>
     </div>

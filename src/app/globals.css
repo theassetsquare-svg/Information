@@ -139,18 +139,22 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--purple);
-  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo img {
+  height: 30px;
+  width: auto;
 }
 
 .logo span {
-  display: block;
   font-size: 0.65rem;
   color: var(--text-muted);
   font-weight: 400;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 nav { display: flex; gap: 1rem; flex-wrap: wrap; }

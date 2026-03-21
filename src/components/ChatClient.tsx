@@ -10,7 +10,7 @@ interface Message {
 const initialMessages: Message[] = [
   {
     role: 'bot',
-    text: '안녕하세요! 오늘밤어디 가이드 AI 상담입니다. 오늘밤 어디로 갈지 고민이신가요?',
+    text: '안녕하세요! 밤키 가이드 AI 상담입니다. 오늘밤 어디로 갈지 고민이신가요?',
   },
   {
     role: 'bot',
@@ -62,7 +62,7 @@ export default function ChatClient() {
             AI
           </div>
           <div>
-            <p style={{ fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.2 }}>오늘밤어디 AI</p>
+            <p style={{ fontWeight: 700, fontSize: '0.95rem', lineHeight: 1.2 }}>밤키 AI</p>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>준비 중</p>
           </div>
         </div>
