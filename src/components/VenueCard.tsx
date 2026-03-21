@@ -5,6 +5,11 @@ const catWords: Record<string, string[]> = {
   room: ['룸'], yojeong: ['요정'], hoppa: ['호빠'],
 };
 
+const catColors: Record<string, string> = {
+  club: '#7C3AED', night: '#EC4899', lounge: '#D4AF37',
+  room: '#1E3A5F', yojeong: '#059669', hoppa: '#DC2626',
+};
+
 function shouldShowMeta(venue: Venue): string | null {
   const name = venue.name;
   const regionInName = name.includes(venue.region) || name.includes(venue.district);
@@ -21,6 +26,10 @@ function shouldShowMeta(venue: Venue): string | null {
 
 export default function VenueCard({ venue }: { venue: Venue }) {
   const meta = shouldShowMeta(venue);
+  const bg = catColors[venue.cat_slug] || '#8B5CF6';
+  const nameParts = venue.name.split(' ');
+  const line1 = nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : venue.name;
+  const line2 = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
 
   return (
     <a
@@ -28,8 +37,30 @@ export default function VenueCard({ venue }: { venue: Venue }) {
       target="_blank"
       rel="noopener noreferrer"
       className="venue-card"
-      style={{ textDecoration: 'none', color: 'inherit' }}
+      style={{ textDecoration: 'none', color: 'inherit', flexDirection: 'row' }}
     >
+      {/* 1:1 썸네일 (카테고리별 색상 + 업소명) */}
+      <div style={{
+        width: '100px', minWidth: '100px', height: '100px',
+        background: bg, borderRadius: '16px 0 0 16px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        padding: '0.5rem', overflow: 'hidden',
+      }}>
+        <span style={{ color: '#FFF', fontSize: '0.7rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.3, wordBreak: 'keep-all' }}>
+          {line1}
+        </span>
+        {line2 && (
+          <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.65rem', fontWeight: 600, textAlign: 'center', marginTop: '2px' }}>
+            {line2}
+          </span>
+        )}
+        {venue.nickname && (
+          <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.55rem', marginTop: '4px' }}>
+            ({venue.nickname})
+          </span>
+        )}
+      </div>
+
       <div className="venue-card-body">
         {venue.badge && <span className="venue-card-badge">{venue.badge}</span>}
         {meta && <span className="venue-card-meta">{meta}</span>}
