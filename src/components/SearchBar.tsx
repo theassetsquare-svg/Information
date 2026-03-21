@@ -12,7 +12,7 @@ interface Venue {
 }
 
 /* 실제 109개 업소에 있는 조합만 */
-const popularTags = ['강남 클럽', '수원 나이트', '부산 나이트', '대전 나이트', '압구정 라운지', '강남 호빠', '일산 룸'];
+const popularTags = ['강남 클럽', '수원 나이트', '부산 나이트', '일산 룸', '일산 요정', '압구정 클럽', '강남 호빠', '대전 나이트'];
 
 export default function SearchBar({ venues }: { venues: Venue[] }) {
   const [query, setQuery] = useState('');
