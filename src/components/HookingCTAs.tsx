@@ -28,7 +28,7 @@ export function SimilarVenuesHook() {
 export function AIRecommendHook() {
   return (
     <div style={{ background: 'linear-gradient(135deg, #FFFFFF, #F9FAFB)', border: '1px solid #8B5CF6', borderRadius: '16px', padding: '1.5rem', textAlign: 'center', margin: '1.5rem 0' }}>
-      <p style={{ color: '#8B5CF6', fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.5rem' }}>AI가 당신에게 맞는 곳을 추천합니다</p>
+      <p style={{ color: '#6D28D9', fontWeight: 700, fontSize: '1.05rem', marginBottom: '0.5rem' }}>AI가 당신에게 맞는 곳을 추천합니다</p>
       <p style={{ color: '#333333', fontSize: '0.9rem', marginBottom: '1rem' }}>취향, 예산, 위치를 분석해 최적의 밤을 설계합니다</p>
       <a href={MAIN_URL} target="_blank" rel="noopener noreferrer" style={{
         display: 'inline-block', background: '#8B5CF6', color: '#FFFFFF', padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none',
@@ -80,7 +80,7 @@ export function ScrollBannerHook() {
       background: '#FFFFFF', border: '2px solid #8B5CF6', borderRadius: '16px', padding: '1.25rem', textAlign: 'center',
       boxShadow: '0 4px 20px rgba(0,0,0,0.1)', animation: 'fadeInUp 0.4s ease-out' }}>
       <button onClick={() => setDismissed(true)} style={{ position: 'absolute', top: '0.5rem', right: '0.75rem', background: 'none', border: 'none', color: '#666666', fontSize: '1.2rem', cursor: 'pointer' }}>×</button>
-      <p style={{ color: '#8B5CF6', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.95rem' }}>여기서 끝이 아닙니다</p>
+      <p style={{ color: '#6D28D9', fontWeight: 700, marginBottom: '0.75rem', fontSize: '0.95rem' }}>여기서 끝이 아닙니다</p>
       <a href={MAIN_URL} target="_blank" rel="noopener noreferrer" style={{
         display: 'inline-block', background: '#8B5CF6', color: '#FFFFFF', padding: '0.6rem 1.5rem', borderRadius: '8px', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none',
       }}>완벽한 밤 시작하기 →</a>

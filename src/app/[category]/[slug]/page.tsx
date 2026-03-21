@@ -134,7 +134,7 @@ export default function VenueDetailPage({ params }: Props) {
           <h1>{venue.name}</h1>
           <p className="detail-tagline">{gc.tagline}</p>
           {hasPhone && (
-            <p style={{ color: '#8B5CF6', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
+            <p style={{ color: '#6D28D9', fontWeight: 700, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
               담당: {venue.nickname}
             </p>
           )}

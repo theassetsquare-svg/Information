@@ -46,16 +46,16 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         padding: '0.5rem', overflow: 'hidden',
       }}>
-        <span style={{ color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, textAlign: 'center', lineHeight: 1.3, wordBreak: 'keep-all' as const }}>
+        <span style={{ color: '#FFFFFF', fontSize: '0.75rem', fontWeight: 800, textAlign: 'center', lineHeight: 1.3, wordBreak: 'keep-all' as const, textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
           {line1}
         </span>
         {line2 && (
-          <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.65rem', fontWeight: 600, textAlign: 'center', marginTop: '2px' }}>
+          <span style={{ color: '#FFFFFF', fontSize: '0.7rem', fontWeight: 700, textAlign: 'center', marginTop: '2px', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
             {line2}
           </span>
         )}
         {venue.nickname && (
-          <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.55rem', marginTop: '4px' }}>
+          <span style={{ color: '#FFFFFF', fontSize: '0.6rem', fontWeight: 600, marginTop: '4px', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
             ({venue.nickname})
           </span>
         )}
@@ -66,7 +66,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         {meta && <span className="venue-card-meta">{meta}</span>}
         <h3>{venue.name}</h3>
         {venue.nickname && (
-          <p style={{ fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.25rem' }}>
+          <p style={{ fontSize: '0.8rem', color: '#6D28D9', fontWeight: 700, marginBottom: '0.25rem' }}>
             담당: {venue.nickname}
           </p>
         )}

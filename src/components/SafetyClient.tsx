@@ -74,6 +74,7 @@ export default function SafetyClient() {
             value={weight}
             onChange={e => setWeight(Number(e.target.value))}
             style={{ width: '100%', accentColor: 'var(--purple)' }}
+            aria-label="체중 선택"
           />
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
             <span>40kg</span><span>120kg</span>
@@ -92,6 +93,7 @@ export default function SafetyClient() {
             value={drinks}
             onChange={e => setDrinks(Number(e.target.value))}
             style={{ width: '100%', accentColor: 'var(--purple)' }}
+            aria-label="음주량 선택"
           />
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
             <span>0잔</span><span>15잔</span>

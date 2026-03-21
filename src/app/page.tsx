@@ -125,7 +125,7 @@ export default function HomePage() {
                     <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '0.5rem' }}>{v.card_hook}</p>
                   </a>
                   <a href="tel:010-3695-4929" target="_blank" rel="noopener noreferrer"
-                    style={{ display: 'inline-block', background: '#22C55E', color: '#FFF', fontWeight: 700,
+                    style={{ display: 'inline-block', background: '#15803D', color: '#FFF', fontWeight: 700,
                       fontSize: '0.8rem', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none' }}>
                     📞 신실장 010-3695-4929
                   </a>

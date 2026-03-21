@@ -34,7 +34,7 @@ export function InfiniteFeed({ venues }: { venues: any[] }) {
           <div style={{ width: `${Math.round(explored / venues.length * 100)}%`, height: '100%',
             background: 'linear-gradient(90deg, #8B5CF6, #8B5CF6)', borderRadius: '4px', transition: 'width 0.5s' }} />
         </div>
-        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#8B5CF6', whiteSpace: 'nowrap' }}>
+        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#6D28D9', whiteSpace: 'nowrap' }}>
           {explored}/{venues.length} 탐색
         </span>
       </div>
@@ -48,11 +48,11 @@ export function InfiniteFeed({ venues }: { venues: any[] }) {
           onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <span style={{ fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 700, textTransform: 'uppercase' }}>{v.cat_slug}</span>
+              <span style={{ fontSize: '0.7rem', color: '#6D28D9', fontWeight: 700, textTransform: 'uppercase' }}>{v.cat_slug}</span>
               <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '0.25rem 0', color: '#111111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{v.name}</h3>
               <p style={{ fontSize: '0.85rem', color: '#666666', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical' as any }}>{v.card_hook}</p>
             </div>
-            <span style={{ fontSize: '1.2rem', color: '#8B5CF6', marginLeft: '0.5rem' }}>→</span>
+            <span style={{ fontSize: '1.2rem', color: '#6D28D9', marginLeft: '0.5rem' }}>→</span>
           </div>
         </a>
       ))}
@@ -60,7 +60,7 @@ export function InfiniteFeed({ venues }: { venues: any[] }) {
         <div ref={loader} style={{ padding: '2rem', textAlign: 'center' }}>
           <div style={{ width: '24px', height: '24px', border: '3px solid #E5E7EB', borderTop: '3px solid #8B5CF6',
             borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto' }} />
-          <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600 }}>
+          <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: '#6D28D9', fontWeight: 600 }}>
             다음 발견까지 잠시만...
           </p>
           <style dangerouslySetInnerHTML={{ __html: '@keyframes spin{to{transform:rotate(360deg)}}' }} />
@@ -68,7 +68,7 @@ export function InfiniteFeed({ venues }: { venues: any[] }) {
       )}
       {count >= venues.length && (
         <div style={{ textAlign: 'center', padding: '1.5rem', background: '#FFFFFF', borderRadius: '12px', marginTop: '0.5rem' }}>
-          <p style={{ fontWeight: 700, color: '#8B5CF6', marginBottom: '0.5rem' }}>전체 {venues.length}곳 탐색 완료!</p>
+          <p style={{ fontWeight: 700, color: '#6D28D9', marginBottom: '0.5rem' }}>전체 {venues.length}곳 탐색 완료!</p>
           <p style={{ fontSize: '0.85rem', color: '#666666' }}>처음부터 다시 둘러보시겠어요?</p>
           <button onClick={() => { setCount(3); setExplored(3); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             style={{ marginTop: '0.75rem', background: '#8B5CF6', color: '#FFFFFF', border: 'none', borderRadius: '8px',
@@ -108,7 +108,7 @@ export function SlotMachine({ venues }: { venues: any[] }) {
       <h3 style={{ marginBottom: '0.25rem' }}>오늘의 행운</h3>
       <p style={{ fontSize: '0.85rem', color: '#666666', marginBottom: '1rem' }}>
         당겨서 운명의 장소를 만나보세요
-        {streak > 0 && <span style={{ color: '#8B5CF6', fontWeight: 700 }}> · {streak}연속 도전</span>}
+        {streak > 0 && <span style={{ color: '#6D28D9', fontWeight: 700 }}> · {streak}연속 도전</span>}
       </p>
 
       <button onClick={spin} disabled={spinning} style={{
@@ -135,12 +135,12 @@ export function SlotMachine({ venues }: { venues: any[] }) {
             </a>
           </div>
           {streak >= 3 && (
-            <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: '#8B5CF6', fontWeight: 600 }}>
+            <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: '#6D28D9', fontWeight: 600 }}>
               {streak}연속! 운이 폭발하고 있어요
             </p>
           )}
           {streak >= 5 && (
-            <p style={{ fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600, marginTop: '0.25rem' }}>
+            <p style={{ fontSize: '0.8rem', color: '#6D28D9', fontWeight: 600, marginTop: '0.25rem' }}>
               전설의 도전자 등극! 계속 돌려보세요
             </p>
           )}
@@ -257,7 +257,7 @@ export function DailyStreak() {
       )}
 
       <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem', color: '#111111' }}>
-        출석 체크 {streak > 0 && <span style={{ color: '#8B5CF6' }}>· {streak}일째</span>}
+        출석 체크 {streak > 0 && <span style={{ color: '#6D28D9' }}>· {streak}일째</span>}
       </h3>
 
       {/* 7일 진행 표시 */}
@@ -283,7 +283,7 @@ export function DailyStreak() {
           오늘 도장 찍기 (+10P)
         </button>
       ) : (
-        <p style={{ fontSize: '0.85rem', color: '#8B5CF6', fontWeight: 600 }}>오늘 출석 완료!</p>
+        <p style={{ fontSize: '0.85rem', color: '#6D28D9', fontWeight: 600 }}>오늘 출석 완료!</p>
       )}
 
       {currentReward && (
@@ -322,7 +322,7 @@ export function EndlessRecommend({ venues }: { venues: any[] }) {
     <div style={{ padding: '1.5rem 0' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <h3 style={{ margin: 0 }}>이것도 봤나요?</h3>
-        <span style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600 }}>{seen}곳 발견</span>
+        <span style={{ fontSize: '0.75rem', color: '#6D28D9', fontWeight: 600 }}>{seen}곳 발견</span>
       </div>
       {show.map(v => (
         <a key={v.slug + idx} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
@@ -338,7 +338,7 @@ export function EndlessRecommend({ venues }: { venues: any[] }) {
       <button onClick={next} style={{
         display: 'block', width: '100%', padding: '0.7rem', background: '#F7F7F8',
         border: '1px solid #E5E7EB', borderRadius: '8px', cursor: 'pointer',
-        fontSize: '0.85rem', fontWeight: 600, color: '#8B5CF6', fontFamily: 'var(--font-sans)',
+        fontSize: '0.85rem', fontWeight: 600, color: '#6D28D9', fontFamily: 'var(--font-sans)',
         marginTop: '0.5rem', minHeight: '44px', transition: 'background 0.2s',
       }}
         onMouseEnter={e => (e.currentTarget.style.background = '#F9FAFB')}
@@ -375,7 +375,7 @@ export function JourneyTimer() {
   return (
     <div style={{ position: 'fixed', top: '48px', right: '8px', zIndex: 90,
       background: 'rgba(26,23,20,0.95)', border: '1px solid #E5E7EB', borderRadius: '20px',
-      padding: '0.35rem 0.75rem', fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 600,
+      padding: '0.35rem 0.75rem', fontSize: '0.7rem', color: '#6D28D9', fontWeight: 600,
       backdropFilter: 'blur(8px)', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
       {min}:{sec.toString().padStart(2, '0')}
       {milestone && (
@@ -407,8 +407,8 @@ export function FOMOCounter() {
   if (count <= 0) return null;
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.35rem 0.75rem',
-      background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '20px', fontSize: '0.75rem', color: '#DC2626', fontWeight: 600 }}>
-      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#DC2626', animation: 'blink 1.5s infinite' }} />
+      background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: '20px', fontSize: '0.8rem', color: '#991B1B', fontWeight: 700 }}>
+      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#991B1B', animation: 'blink 1.5s infinite' }} />
       지금 {count}명 탐색 중
       <style dangerouslySetInnerHTML={{ __html: '@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}' }} />
     </div>
@@ -457,7 +457,7 @@ export function ExploreProgress() {
     <div style={{ padding: '1.25rem', background: 'linear-gradient(135deg, #FFFFFF, #F9FAFB)', borderRadius: '16px', border: '1px solid #8B5CF6' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
         <h3 style={{ margin: 0, fontSize: '1rem', color: '#111111' }}>나의 탐험 지도</h3>
-        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#8B5CF6' }}>{pct}% 달성</span>
+        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#6D28D9' }}>{pct}% 달성</span>
       </div>
       <div style={{ height: '8px', background: '#E5E7EB', borderRadius: '4px', overflow: 'hidden', marginBottom: '0.5rem' }}>
         <div style={{ width: `${pct}%`, height: '100%', background: 'linear-gradient(90deg, #8B5CF6, #8B5CF6)',
@@ -466,8 +466,8 @@ export function ExploreProgress() {
       <p style={{ fontSize: '0.8rem', color: '#666666' }}>
         {data.total}곳 중 {data.visited}곳 방문 · {6 - data.categories}개 카테고리 미탐험
       </p>
-      {pct < 50 && <p style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, marginTop: '0.25rem' }}>50% 달성하면 밤의 탐험가 뱃지!</p>}
-      {pct >= 50 && pct < 100 && <p style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, marginTop: '0.25rem' }}>거의 다 왔어요! 전체 탐험 완료까지 {data.total - data.visited}곳</p>}
+      {pct < 50 && <p style={{ fontSize: '0.75rem', color: '#6D28D9', fontWeight: 600, marginTop: '0.25rem' }}>50% 달성하면 밤의 탐험가 뱃지!</p>}
+      {pct >= 50 && pct < 100 && <p style={{ fontSize: '0.75rem', color: '#6D28D9', fontWeight: 600, marginTop: '0.25rem' }}>거의 다 왔어요! 전체 탐험 완료까지 {data.total - data.visited}곳</p>}
     </div>
   );
 }
@@ -591,7 +591,7 @@ export function SwipeFeed({ venues }: { venues: any[] }) {
           <span style={{ fontSize: '0.8rem', color: '#666666' }}>{v.region}</span>
         </div>
         <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem', lineHeight: 1.3, color: '#111111' }}>{v.name}</h3>
-        {v.nickname && <p style={{ color: '#8B5CF6', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.5rem' }}>담당: {v.nickname}</p>}
+        {v.nickname && <p style={{ color: '#6D28D9', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.5rem' }}>담당: {v.nickname}</p>}
         <p style={{ color: '#333333', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>{v.card_hook}</p>
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
@@ -665,7 +665,7 @@ export function BingeChain({ venues }: { venues: any[] }) {
       <div style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <span style={{ fontSize: '0.75rem', color: '#999' }}>EP.{current + 1} / 10</span>
-          <span style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600 }}>{countdown > 0 ? `${countdown}초 후 다음` : '준비 완료'}</span>
+          <span style={{ fontSize: '0.75rem', color: '#6D28D9', fontWeight: 600 }}>{countdown > 0 ? `${countdown}초 후 다음` : '준비 완료'}</span>
         </div>
         <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '0.5rem' }}>{v.name}</h3>
         <p style={{ fontSize: '0.85rem', color: '#CCC', marginBottom: '1rem' }}>{v.card_hook}</p>
@@ -812,18 +812,18 @@ export function BudgetCalculator({ venues }: { venues: any[] }) {
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px', color: '#333333' }}>인원</label>
-          <input type="range" min="1" max="10" value={people} onChange={e => setPeople(Number(e.target.value))} style={{ flex: 1 }} />
-          <span style={{ fontWeight: 700, color: '#8B5CF6', minWidth: '30px' }}>{people}명</span>
+          <input type="range" min="1" max="10" value={people} onChange={e => setPeople(Number(e.target.value))} style={{ flex: 1 }} aria-label="인원 수 선택" />
+          <span style={{ fontWeight: 700, color: '#6D28D9', minWidth: '30px' }}>{people}명</span>
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px', color: '#333333' }}>양주</label>
-          <input type="range" min="1" max="5" value={bottles} onChange={e => setBottles(Number(e.target.value))} style={{ flex: 1 }} />
-          <span style={{ fontWeight: 700, color: '#8B5CF6', minWidth: '30px' }}>{bottles}병</span>
+          <input type="range" min="1" max="5" value={bottles} onChange={e => setBottles(Number(e.target.value))} style={{ flex: 1 }} aria-label="양주 병 수 선택" />
+          <span style={{ fontWeight: 700, color: '#6D28D9', minWidth: '30px' }}>{bottles}병</span>
         </div>
       </div>
       <div style={{ padding: '1rem', background: '#F9FAFB', borderRadius: '12px', textAlign: 'center', marginBottom: '1rem' }}>
         <p style={{ fontSize: '0.8rem', color: '#666666' }}>예상 총 비용</p>
-        <p style={{ fontSize: '1.5rem', fontWeight: 800, color: '#8B5CF6' }}>{total.toLocaleString()}원</p>
+        <p style={{ fontSize: '1.5rem', fontWeight: 800, color: '#6D28D9' }}>{total.toLocaleString()}원</p>
         <p style={{ fontSize: '0.85rem', color: '#333333' }}>1인당 약 <strong>{perPerson.toLocaleString()}원</strong></p>
       </div>
       {matched.length > 0 && (
@@ -900,7 +900,7 @@ export function MoodMatch({ venues }: { venues: any[] }) {
       </div>
       {matched.length > 0 && (
         <div style={{ animation: 'fadeIn 0.4s' }}>
-          <p style={{ fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.5rem' }}>당신에게 맞는 곳</p>
+          <p style={{ fontSize: '0.8rem', color: '#6D28D9', fontWeight: 600, marginBottom: '0.5rem' }}>당신에게 맞는 곳</p>
           {matched.map(v => (
             <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', padding: '0.75rem 1rem', marginBottom: '0.5rem', background: '#FFFFFF', border: '1px solid #8B5CF6', borderRadius: '12px', textDecoration: 'none', color: '#111111' }}>
@@ -952,7 +952,7 @@ export function TikTokFeed({ venues }: { venues: any[] }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
           <span style={{ fontSize: '1.5rem' }}>{catEmoji[v.cat_slug] || '🌃'}</span>
           <div>
-            <p style={{ fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 700 }}>{v.cat_slug}</p>
+            <p style={{ fontSize: '0.7rem', color: '#6D28D9', fontWeight: 700 }}>{v.cat_slug}</p>
             <p style={{ fontSize: '0.75rem', color: '#666' }}>{v.region}</p>
           </div>
           <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#999' }}>{idx + 1}/{shuffled.current.length}</span>
@@ -961,12 +961,12 @@ export function TikTokFeed({ venues }: { venues: any[] }) {
           <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111', marginBottom: '0.5rem' }}>{v.name}</h3>
           <p style={{ fontSize: '0.95rem', color: '#333', lineHeight: 1.7, marginBottom: '1rem' }}>{v.card_hook}</p>
         </a>
-        {v.nickname && <p style={{ fontSize: '0.85rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '1rem' }}>담당: {v.nickname}</p>}
+        {v.nickname && <p style={{ fontSize: '0.85rem', color: '#6D28D9', fontWeight: 600, marginBottom: '1rem' }}>담당: {v.nickname}</p>}
         <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
           <button onClick={toggleLike} style={{ flex: 1, padding: '0.6rem', borderRadius: '12px', border: likes.has(idx) ? '2px solid #EC4899' : '1px solid #E5E7EB', background: likes.has(idx) ? '#FDF2F8' : '#FFF', cursor: 'pointer', fontSize: '0.9rem', fontFamily: 'var(--font-sans)', fontWeight: 600, color: likes.has(idx) ? '#EC4899' : '#666', minHeight: '44px' }}>
             {likes.has(idx) ? '❤️ 좋아요' : '🤍 좋아요'}
           </button>
-          <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer" style={{ flex: 1, padding: '0.6rem', borderRadius: '12px', border: '1px solid #8B5CF6', background: '#F5F3FF', textAlign: 'center', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, color: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '44px' }}>
+          <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer" style={{ flex: 1, padding: '0.6rem', borderRadius: '12px', border: '1px solid #8B5CF6', background: '#F5F3FF', textAlign: 'center', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, color: '#6D28D9', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '44px' }}>
             상세 보기 →
           </a>
         </div>
@@ -998,7 +998,7 @@ export function AutoPlayCountdown({ venues }: { venues: any[] }) {
         <button onClick={() => setPaused(!paused)} style={{ background: 'none', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '0.3rem 0.75rem', cursor: 'pointer', fontSize: '0.8rem', fontFamily: 'var(--font-sans)', color: '#666' }}>{paused ? '▶ 재개' : '⏸ 일시정지'}</button>
       </div>
       <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer" style={{ display: 'block', padding: '1rem', background: '#F9FAFB', borderRadius: '12px', textDecoration: 'none', color: 'inherit', marginBottom: '1rem' }}>
-        <p style={{ fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 700, marginBottom: '0.25rem' }}>{v.region} · {v.cat_slug}</p>
+        <p style={{ fontSize: '0.7rem', color: '#6D28D9', fontWeight: 700, marginBottom: '0.25rem' }}>{v.region} · {v.cat_slug}</p>
         <h4 style={{ fontSize: '1.1rem', color: '#111', marginBottom: '0.25rem' }}>{v.name}</h4>
         <p style={{ fontSize: '0.85rem', color: '#555' }}>{v.card_hook}</p>
       </a>
@@ -1127,7 +1127,7 @@ export function VenueQuizGame({ venues }: { venues: any[] }) {
     <div style={{ padding: '1.5rem', background: '#FFFFFF', border: '2px solid #8B5CF6', borderRadius: '20px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <h3 style={{ margin: 0, color: '#111' }}>🧠 업소 퀴즈</h3>
-        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#8B5CF6' }}>{score}/{maxRounds}</span>
+        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#6D28D9' }}>{score}/{maxRounds}</span>
       </div>
       {done ? (
         <div style={{ textAlign: 'center', padding: '1rem' }}>
@@ -1139,7 +1139,7 @@ export function VenueQuizGame({ venues }: { venues: any[] }) {
       ) : (
         <>
           <div style={{ background: '#F5F3FF', borderRadius: '12px', padding: '1rem', marginBottom: '1rem' }}>
-            <p style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.25rem' }}>힌트 ({round + 1}/{maxRounds})</p>
+            <p style={{ fontSize: '0.75rem', color: '#6D28D9', fontWeight: 600, marginBottom: '0.25rem' }}>힌트 ({round + 1}/{maxRounds})</p>
             <p style={{ fontSize: '0.95rem', color: '#333', fontWeight: 500, lineHeight: 1.5 }}>"{q.hint}"</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
@@ -1177,7 +1177,7 @@ export function RetentionRewards() {
           <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '3px', height: '3px', overflow: 'hidden' }}>
             <div style={{ width: `${Math.min(100, (sec / nx.at) * 100)}%`, height: '100%', background: '#8B5CF6', borderRadius: '3px', transition: 'width 1s' }} />
           </div>
-          <span style={{ fontSize: '0.55rem', fontWeight: 700, color: '#8B5CF6' }}>{Math.floor((nx.at-sec)/60)}:{String((nx.at-sec)%60).padStart(2,'0')}</span>
+          <span style={{ fontSize: '0.55rem', fontWeight: 700, color: '#6D28D9' }}>{Math.floor((nx.at-sec)/60)}:{String((nx.at-sec)%60).padStart(2,'0')}</span>
         </div>
       </div>}
       <style dangerouslySetInnerHTML={{ __html: '@keyframes fadeInDown{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}' }} />
