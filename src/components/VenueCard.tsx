@@ -41,7 +41,7 @@ export default function VenueCard({ venue }: { venue: Venue }) {
         )}
         <p className="venue-card-hook">{venue.card_hook}</p>
         <div className="venue-card-tags">
-          {venue.card_tags.slice(0, 3).map(tag => (
+          {venue.card_tags.filter(t => !(catWords[venue.cat_slug] || []).some(w => t.includes(w))).slice(0, 3).map(tag => (
             <span key={tag} className="venue-card-tag">{tag}</span>
           ))}
         </div>

@@ -16,7 +16,9 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const venue = getVenueBySlug(params.slug);
   if (!venue) return { title: '페이지를 찾을 수 없습니다' };
-  const gc = generateGoldContent(venue);
+  const allV = getAllVenues();
+  const vIdx = allV.findIndex(v => v.slug === params.slug);
+  const gc = generateGoldContent(venue, vIdx);
   const url = `${SITE_URL}/${venue.cat_slug}/${venue.slug}/`;
   return {
     title: gc.title,
@@ -67,13 +69,20 @@ export default function VenueDetailPage({ params }: Props) {
   const venue = getVenueBySlug(params.slug);
   if (!venue) return <div className="container section"><h1>페이지를 찾을 수 없습니다</h1></div>;
 
-  const gc = generateGoldContent(venue);
+  const allV = getAllVenues();
+  const vIdx = allV.findIndex(v => v.slug === venue.slug);
+  const gc = generateGoldContent(venue, vIdx);
   const related = getRelatedVenues(venue, 3);
   const year = new Date().getFullYear();
   const catLabel = CAT_SLUG_TO_LABEL[venue.cat_slug] || venue.category;
   const catPath = catPaths[venue.cat_slug] || '/';
   const hasPhone = !!(venue.nickname && venue.nickname_phone);
   const guide = catGuide[venue.cat_slug] || catGuide.night;
+
+  // 카테고리 단어 필터 (키워드 스터핑 방지)
+  const catWord = { club: '클럽', night: '나이트', lounge: '라운지', room: '룸', yojeong: '요정', hoppa: '호빠' }[venue.cat_slug] || '';
+  const filteredTags = venue.tags.filter(t => !t.includes(catWord) && t !== venue.category);
+  const filteredCardTags = venue.card_tags.filter(t => !t.includes(catWord) && t !== venue.category);
 
   // JSON-LD
   const localBizLd = {
@@ -159,7 +168,7 @@ export default function VenueDetailPage({ params }: Props) {
               {venue.hours && <tr><th>영업시간</th><td>{venue.hours}</td></tr>}
               {venue.station && <tr><th>교통</th><td>{venue.station}</td></tr>}
               {hasPhone && <tr><th>담당</th><td>{venue.nickname} ({venue.nickname_phone})</td></tr>}
-              {venue.tags.length > 0 && <tr><th>태그</th><td>{venue.tags.join(', ')}</td></tr>}
+              {filteredTags.length > 0 && <tr><th>태그</th><td>{filteredTags.join(', ')}</td></tr>}
             </tbody>
           </table>
         </div>
@@ -243,11 +252,11 @@ export default function VenueDetailPage({ params }: Props) {
         </section>
       )}
 
-      {/* 태그 */}
-      {venue.card_tags.length > 0 && (
+      {/* 태그 (카테고리 단어 제외 — 스터핑 방지) */}
+      {filteredCardTags.length > 0 && (
         <section style={{ padding: '1rem 0' }}>
           <div className="container narrow">
-            {venue.card_tags.map(t => (
+            {filteredCardTags.map(t => (
               <span key={t} className="venue-card-tag" style={{ marginRight: '0.4rem', display: 'inline-block', marginBottom: '0.25rem' }}>{t}</span>
             ))}
           </div>
