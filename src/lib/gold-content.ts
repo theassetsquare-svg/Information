@@ -361,9 +361,9 @@ export function getCategoryContent(catSlug: string) {
 
 export function getHomeContent() {
   return {
-    title: `골드나잇 — 103곳 비교 ${YEAR}`,
-    description: `103곳 비교표. 6종 분류 ${YEAR} 현장 집계. 지역별 탑재.`,
-    heading: '103곳 비교표',
+    title: `골드나잇 — 110곳 비교 ${YEAR}`,
+    description: `110곳 비교표. 6종 분류 ${YEAR} 현장 집계. 지역별 탑재.`,
+    heading: '110곳 비교표',
     subheading: `플로어·테이블·바·독립석·풍류·호스트 ${YEAR}`,
   };
 }

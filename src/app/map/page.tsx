@@ -33,7 +33,7 @@ export default function MapPage() {
         <div className="container">
           <h1 style={{ marginBottom: '0.5rem' }}>전국 밤문화 지도</h1>
           <p style={{ color: 'var(--text-sub)', marginBottom: '2rem', maxWidth: '600px' }}>
-            지역과 카테고리를 선택해 내 주변 업소를 찾아보자. 전국 103곳의 현장 정보를 한눈에 확인할 수 있다.
+            지역과 카테고리를 선택해 내 주변 업소를 찾아보자. 전국 110곳의 현장 정보를 한눈에 확인할 수 있다.
           </p>
           <MapClient />
         </div>

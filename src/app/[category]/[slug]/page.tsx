@@ -134,7 +134,7 @@ export default function VenueDetailPage({ params }: Props) {
           <h1>{venue.name}</h1>
           <p className="detail-tagline">{gc.tagline}</p>
           {hasPhone && (
-            <p style={{ color: '#8B5CF6', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
+            <p style={{ color: '#D4AF37', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.95rem' }}>
               담당: {venue.nickname}
             </p>
           )}
@@ -176,7 +176,7 @@ export default function VenueDetailPage({ params }: Props) {
       </section>
 
       {/* [D] 첫 방문 가이드 */}
-      <section className="detail-section" style={{ background: '#F5F5F5', padding: '2rem 0' }}>
+      <section className="detail-section" style={{ background: '#161310', padding: '2rem 0' }}>
         <div className="container narrow">
           <h2>처음 방문하세요?</h2>
           <p style={{ marginBottom: '1rem' }}>{guide.intro}</p>
@@ -217,7 +217,7 @@ export default function VenueDetailPage({ params }: Props) {
       </section>
 
       {/* [E] 인기 시간대 */}
-      <section className="detail-section" style={{ background: '#F5F5F5', padding: '2rem 0' }}>
+      <section className="detail-section" style={{ background: '#161310', padding: '2rem 0' }}>
         <div className="container narrow">
           <h2>인기 시간대</h2>
           <div style={{ display: 'grid', gap: '0.75rem' }}>
@@ -229,10 +229,10 @@ export default function VenueDetailPage({ params }: Props) {
             ].map(t => (
               <div key={t.time} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <span style={{ minWidth: '80px', fontSize: '0.9rem', fontWeight: 600 }}>{t.time}</span>
-                <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
-                  <div style={{ width: t.bar, background: '#8B5CF6', height: '100%', borderRadius: '4px' }} />
+                <div style={{ flex: 1, background: '#3D3425', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
+                  <div style={{ width: t.bar, background: '#D4AF37', height: '100%', borderRadius: '4px' }} />
                 </div>
-                <span style={{ fontSize: '0.8rem', color: '#555', minWidth: '40px' }}>{t.level}</span>
+                <span style={{ fontSize: '0.8rem', color: '#B8A080', minWidth: '40px' }}>{t.level}</span>
               </div>
             ))}
           </div>
@@ -274,7 +274,7 @@ export default function VenueDetailPage({ params }: Props) {
         <section className="related-section">
           <div className="container">
             <h2>비슷한 곳</h2>
-            <p style={{ color: '#555', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천</p>
+            <p style={{ color: '#B8A080', marginBottom: '1rem', fontSize: '0.9rem' }}>같은 카테고리에서 추천</p>
             <div className="venue-grid">
               {related.map(v => <VenueCard key={v.slug} venue={v} />)}
             </div>

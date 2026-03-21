@@ -203,7 +203,7 @@ export default function EventsPage() {
                       background: isToday
                         ? 'var(--purple)'
                         : hasEvent
-                          ? 'rgba(139,92,246,0.06)'
+                          ? 'rgba(212,175,55,0.06)'
                           : 'transparent',
                       color: isToday ? '#FFF' : 'var(--text)',
                       fontSize: '0.9rem',
@@ -237,7 +237,7 @@ export default function EventsPage() {
                               width: '5px',
                               height: '5px',
                               borderRadius: '50%',
-                              background: '#EC4899',
+                              background: '#D4AF37',
                             }}
                           />
                         )}
@@ -259,7 +259,7 @@ export default function EventsPage() {
                   border: '1px solid var(--border)',
                   borderRadius: '12px',
                   background: 'var(--bg-card)',
-                  borderLeft: `4px solid ${i === 0 ? 'var(--purple)' : i === 1 ? '#EC4899' : '#EF4444'}`,
+                  borderLeft: `4px solid ${i === 0 ? 'var(--purple)' : i === 1 ? '#D4AF37' : '#EF4444'}`,
                 }}
               >
                 <h3 style={{ fontSize: '1.05rem', marginBottom: '0.5rem' }}>{evt.title}</h3>
@@ -271,7 +271,7 @@ export default function EventsPage() {
           {/* 이벤트 등록 배너 */}
           <div
             style={{
-              background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)',
+              background: 'linear-gradient(135deg, #1A1714, #241F1A)',
               border: '1px solid var(--border-accent)',
               borderRadius: '12px',
               padding: '1.5rem',

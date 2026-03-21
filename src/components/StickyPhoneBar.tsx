@@ -11,7 +11,7 @@ export default function StickyPhoneBar({ name, nickname, phone }: { name: string
         aria-label={`${nickname}에게 전화`}
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
-          background: '#22C55E', color: '#FFF',
+          background: '#22C55E', color: '#0D0D0D',
           padding: '1rem 1.5rem', borderRadius: '12px',
           fontWeight: 700, fontSize: '1rem',
           textDecoration: 'none', whiteSpace: 'nowrap',

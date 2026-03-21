@@ -29,49 +29,49 @@ export function InfiniteFeed({ venues }: { venues: any[] }) {
     <div>
       {/* 자이가르닉 효과: 진행률 표시 → "조금만 더 보면 전부 본다" */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', padding: '0.75rem 1rem',
-        background: '#F5F3FF', borderRadius: '12px', border: '1px solid #DDD6FE' }}>
-        <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '4px', height: '6px', overflow: 'hidden' }}>
+        background: '#1A1714', borderRadius: '12px', border: '1px solid #D4AF37' }}>
+        <div style={{ flex: 1, background: '#3D3425', borderRadius: '4px', height: '6px', overflow: 'hidden' }}>
           <div style={{ width: `${Math.round(explored / venues.length * 100)}%`, height: '100%',
-            background: 'linear-gradient(90deg, #8B5CF6, #06B6D4)', borderRadius: '4px', transition: 'width 0.5s' }} />
+            background: 'linear-gradient(90deg, #D4AF37, #D4AF37)', borderRadius: '4px', transition: 'width 0.5s' }} />
         </div>
-        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#8B5CF6', whiteSpace: 'nowrap' }}>
+        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#D4AF37', whiteSpace: 'nowrap' }}>
           {explored}/{venues.length} 탐색
         </span>
       </div>
 
       {venues.slice(0, count).map((v) => (
         <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-          style={{ display: 'block', padding: '1rem', marginBottom: '0.75rem', background: '#FFF',
-            border: '1px solid #E5E7EB', borderRadius: '12px', textDecoration: 'none', color: 'inherit',
+          style={{ display: 'block', padding: '1rem', marginBottom: '0.75rem', background: '#1A1714',
+            border: '1px solid #3D3425', borderRadius: '12px', textDecoration: 'none', color: 'inherit',
             transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'pointer' }}
           onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <span style={{ fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 700, textTransform: 'uppercase' }}>{v.cat_slug}</span>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '0.25rem 0', color: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{v.name}</h3>
-              <p style={{ fontSize: '0.85rem', color: '#555', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical' as any }}>{v.card_hook}</p>
+              <span style={{ fontSize: '0.7rem', color: '#D4AF37', fontWeight: 700, textTransform: 'uppercase' }}>{v.cat_slug}</span>
+              <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: '0.25rem 0', color: '#F7E7CE', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{v.name}</h3>
+              <p style={{ fontSize: '0.85rem', color: '#B8A080', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical' as any }}>{v.card_hook}</p>
             </div>
-            <span style={{ fontSize: '1.2rem', color: '#8B5CF6', marginLeft: '0.5rem' }}>→</span>
+            <span style={{ fontSize: '1.2rem', color: '#D4AF37', marginLeft: '0.5rem' }}>→</span>
           </div>
         </a>
       ))}
       {count < venues.length && (
         <div ref={loader} style={{ padding: '2rem', textAlign: 'center' }}>
-          <div style={{ width: '24px', height: '24px', border: '3px solid #E5E7EB', borderTop: '3px solid #8B5CF6',
+          <div style={{ width: '24px', height: '24px', border: '3px solid #3D3425', borderTop: '3px solid #D4AF37',
             borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto' }} />
-          <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600 }}>
+          <p style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: '#D4AF37', fontWeight: 600 }}>
             다음 발견까지 잠시만...
           </p>
           <style dangerouslySetInnerHTML={{ __html: '@keyframes spin{to{transform:rotate(360deg)}}' }} />
         </div>
       )}
       {count >= venues.length && (
-        <div style={{ textAlign: 'center', padding: '1.5rem', background: '#F5F3FF', borderRadius: '12px', marginTop: '0.5rem' }}>
-          <p style={{ fontWeight: 700, color: '#8B5CF6', marginBottom: '0.5rem' }}>전체 {venues.length}곳 탐색 완료!</p>
-          <p style={{ fontSize: '0.85rem', color: '#555' }}>처음부터 다시 둘러보시겠어요?</p>
+        <div style={{ textAlign: 'center', padding: '1.5rem', background: '#1A1714', borderRadius: '12px', marginTop: '0.5rem' }}>
+          <p style={{ fontWeight: 700, color: '#D4AF37', marginBottom: '0.5rem' }}>전체 {venues.length}곳 탐색 완료!</p>
+          <p style={{ fontSize: '0.85rem', color: '#B8A080' }}>처음부터 다시 둘러보시겠어요?</p>
           <button onClick={() => { setCount(3); setExplored(3); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            style={{ marginTop: '0.75rem', background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '8px',
+            style={{ marginTop: '0.75rem', background: '#D4AF37', color: '#0D0D0D', border: 'none', borderRadius: '8px',
               padding: '0.6rem 1.5rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem', fontFamily: 'var(--font-sans)' }}>
             처음부터 다시 →
           </button>
@@ -106,16 +106,16 @@ export function SlotMachine({ venues }: { venues: any[] }) {
   return (
     <div style={{ textAlign: 'center', padding: '2rem 0' }}>
       <h3 style={{ marginBottom: '0.25rem' }}>오늘의 행운</h3>
-      <p style={{ fontSize: '0.85rem', color: '#555', marginBottom: '1rem' }}>
+      <p style={{ fontSize: '0.85rem', color: '#B8A080', marginBottom: '1rem' }}>
         당겨서 운명의 장소를 만나보세요
-        {streak > 0 && <span style={{ color: '#8B5CF6', fontWeight: 700 }}> · {streak}연속 도전</span>}
+        {streak > 0 && <span style={{ color: '#D4AF37', fontWeight: 700 }}> · {streak}연속 도전</span>}
       </p>
 
       <button onClick={spin} disabled={spinning} style={{
-        background: spinning ? '#E5E7EB' : 'linear-gradient(135deg, #8B5CF6, #06B6D4)',
-        color: '#FFF', border: 'none', borderRadius: '50px', padding: '0.75rem 2rem',
+        background: spinning ? '#3D3425' : 'linear-gradient(135deg, #D4AF37, #D4AF37)',
+        color: spinning ? '#B8A080' : '#0D0D0D', border: 'none', borderRadius: '50px', padding: '0.75rem 2rem',
         fontSize: '1rem', fontWeight: 700, cursor: spinning ? 'wait' : 'pointer',
-        boxShadow: spinning ? 'none' : '0 4px 16px rgba(139,92,246,0.3)',
+        boxShadow: spinning ? 'none' : '0 4px 16px rgba(212,175,55,0.3)',
         transition: 'all 0.3s', fontFamily: 'var(--font-sans)',
         animation: spinning ? 'pulse2 0.4s infinite' : 'none',
         minHeight: '48px',
@@ -125,22 +125,22 @@ export function SlotMachine({ venues }: { venues: any[] }) {
 
       {result && (
         <div style={{ marginTop: '1.5rem', animation: 'fadeIn 0.5s' }}>
-          <div style={{ padding: '1.5rem', background: '#F5F3FF', borderRadius: '16px', border: '2px solid #DDD6FE', maxWidth: '360px', margin: '0 auto' }}>
-            <h3 style={{ margin: '0.5rem 0', fontSize: '1.1rem' }}>{result.name}</h3>
-            <p style={{ fontSize: '0.85rem', color: '#555', marginBottom: '1rem' }}>{result.card_hook}</p>
+          <div style={{ padding: '1.5rem', background: '#1A1714', borderRadius: '16px', border: '2px solid #D4AF37', maxWidth: '360px', margin: '0 auto' }}>
+            <h3 style={{ margin: '0.5rem 0', fontSize: '1.1rem', color: '#F7E7CE' }}>{result.name}</h3>
+            <p style={{ fontSize: '0.85rem', color: '#B8A080', marginBottom: '1rem' }}>{result.card_hook}</p>
             <a href={`/${result.cat_slug}/${result.slug}/`} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-block', background: '#8B5CF6', color: '#FFF', padding: '0.5rem 1.5rem',
+              style={{ display: 'inline-block', background: '#D4AF37', color: '#0D0D0D', padding: '0.5rem 1.5rem',
                 borderRadius: '8px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem' }}>
               자세히 보기 →
             </a>
           </div>
           {streak >= 3 && (
-            <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: '#8B5CF6', fontWeight: 600 }}>
+            <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', color: '#D4AF37', fontWeight: 600 }}>
               {streak}연속! 운이 폭발하고 있어요
             </p>
           )}
           {streak >= 5 && (
-            <p style={{ fontSize: '0.8rem', color: '#06B6D4', fontWeight: 600, marginTop: '0.25rem' }}>
+            <p style={{ fontSize: '0.8rem', color: '#D4AF37', fontWeight: 600, marginTop: '0.25rem' }}>
               전설의 도전자 등극! 계속 돌려보세요
             </p>
           )}
@@ -179,13 +179,13 @@ export function AutoNext({ venues, current }: { venues: any[]; current?: string 
       <h3 style={{ fontSize: '1.1rem', marginBottom: '0.25rem', color: '#FFF' }}>{next.name}</h3>
       <p style={{ fontSize: '0.85rem', color: '#999', marginBottom: '1rem' }}>{next.card_hook}</p>
       <a href={`/${next.cat_slug}/${next.slug}/`} target="_blank" rel="noopener noreferrer"
-        style={{ display: 'inline-block', background: '#FFF', color: '#111', padding: '0.6rem 1.5rem',
+        style={{ display: 'inline-block', background: '#D4AF37', color: '#0D0D0D', padding: '0.6rem 1.5rem',
           borderRadius: '8px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem' }}>
         지금 보기 →
       </a>
       {/* 넷플릭스 스타일 진행 바 */}
       <div style={{ marginTop: '0.75rem', height: '3px', background: '#333', borderRadius: '2px', overflow: 'hidden' }}>
-        <div style={{ width: `${(8 - countdown) / 8 * 100}%`, height: '100%', background: '#8B5CF6',
+        <div style={{ width: `${(8 - countdown) / 8 * 100}%`, height: '100%', background: '#D4AF37',
           transition: 'width 1s linear', borderRadius: '2px' }} />
       </div>
     </div>
@@ -206,7 +206,7 @@ export function ReadingProgress() {
 
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 250, height: '3px', background: 'transparent' }}>
-      <div style={{ width: `${progress}%`, height: '100%', background: 'linear-gradient(90deg, #8B5CF6, #06B6D4)',
+      <div style={{ width: `${progress}%`, height: '100%', background: 'linear-gradient(90deg, #D4AF37, #D4AF37)',
         transition: 'width 0.1s', borderRadius: '0 2px 2px 0' }} />
     </div>
   );
@@ -244,20 +244,20 @@ export function DailyStreak() {
   const currentReward = rewards.filter(r => streak >= r.day).pop();
 
   return (
-    <div style={{ padding: '1.5rem', background: '#F5F3FF', borderRadius: '16px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ padding: '1.5rem', background: '#1A1714', borderRadius: '16px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
       {/* 보상 애니메이션 */}
       {showReward && (
         <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: 'rgba(139,92,246,0.95)', zIndex: 10, borderRadius: '16px', animation: 'fadeIn 0.3s' }}>
+          background: 'rgba(212,175,55,0.95)', zIndex: 10, borderRadius: '16px', animation: 'fadeIn 0.3s' }}>
           <div>
             <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>+10P</p>
-            <p style={{ color: '#FFF', fontWeight: 700, fontSize: '1.1rem' }}>출석 완료!</p>
+            <p style={{ color: '#0D0D0D', fontWeight: 700, fontSize: '1.1rem' }}>출석 완료!</p>
           </div>
         </div>
       )}
 
-      <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>
-        출석 체크 {streak > 0 && <span style={{ color: '#8B5CF6' }}>· {streak}일째</span>}
+      <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem', color: '#F7E7CE' }}>
+        출석 체크 {streak > 0 && <span style={{ color: '#D4AF37' }}>· {streak}일째</span>}
       </h3>
 
       {/* 7일 진행 표시 */}
@@ -265,9 +265,9 @@ export function DailyStreak() {
         {dots.map((filled, i) => (
           <div key={i} style={{
             width: '32px', height: '32px', borderRadius: '50%',
-            background: filled ? '#8B5CF6' : '#E5E7EB',
+            background: filled ? '#D4AF37' : '#3D3425',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '0.7rem', color: filled ? '#FFF' : '#555', fontWeight: 700,
+            fontSize: '0.7rem', color: filled ? '#0D0D0D' : '#B8A080', fontWeight: 700,
             transition: 'all 0.3s', transform: filled ? 'scale(1.1)' : 'scale(1)',
           }}>{filled ? '✓' : i + 1}</div>
         ))}
@@ -275,19 +275,19 @@ export function DailyStreak() {
 
       {!claimed ? (
         <button onClick={claim} style={{
-          background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '8px',
+          background: '#D4AF37', color: '#0D0D0D', border: 'none', borderRadius: '8px',
           padding: '0.6rem 1.5rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem',
           fontFamily: 'var(--font-sans)', minHeight: '44px',
-          boxShadow: '0 2px 8px rgba(139,92,246,0.3)',
+          boxShadow: '0 2px 8px rgba(212,175,55,0.3)',
         }}>
           오늘 도장 찍기 (+10P)
         </button>
       ) : (
-        <p style={{ fontSize: '0.85rem', color: '#8B5CF6', fontWeight: 600 }}>오늘 출석 완료!</p>
+        <p style={{ fontSize: '0.85rem', color: '#D4AF37', fontWeight: 600 }}>오늘 출석 완료!</p>
       )}
 
       {currentReward && (
-        <p style={{ fontSize: '0.8rem', color: '#555', marginTop: '0.75rem', fontWeight: 600 }}>
+        <p style={{ fontSize: '0.8rem', color: '#B8A080', marginTop: '0.75rem', fontWeight: 600 }}>
           {currentReward.text}
         </p>
       )}
@@ -321,27 +321,27 @@ export function EndlessRecommend({ venues }: { venues: any[] }) {
     <div style={{ padding: '1.5rem 0' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <h3 style={{ margin: 0 }}>이것도 봤나요?</h3>
-        <span style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600 }}>{seen}곳 발견</span>
+        <span style={{ fontSize: '0.75rem', color: '#D4AF37', fontWeight: 600 }}>{seen}곳 발견</span>
       </div>
       {show.map(v => (
         <a key={v.slug + idx} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-          style={{ display: 'block', padding: '0.75rem 1rem', marginBottom: '0.5rem', background: '#FFF',
-            border: '1px solid #E5E7EB', borderRadius: '10px', textDecoration: 'none', color: 'inherit',
+          style={{ display: 'block', padding: '0.75rem 1rem', marginBottom: '0.5rem', background: '#1A1714',
+            border: '1px solid #3D3425', borderRadius: '10px', textDecoration: 'none', color: 'inherit',
             transition: 'border-color 0.2s' }}
-          onMouseEnter={e => (e.currentTarget.style.borderColor = '#DDD6FE')}
-          onMouseLeave={e => (e.currentTarget.style.borderColor = '#E5E7EB')}>
-          <strong style={{ color: '#111' }}>{v.name}</strong>
-          <span style={{ fontSize: '0.8rem', color: '#555', marginLeft: '0.5rem' }}>{v.card_hook}</span>
+          onMouseEnter={e => (e.currentTarget.style.borderColor = '#D4AF37')}
+          onMouseLeave={e => (e.currentTarget.style.borderColor = '#3D3425')}>
+          <strong style={{ color: '#F7E7CE' }}>{v.name}</strong>
+          <span style={{ fontSize: '0.8rem', color: '#B8A080', marginLeft: '0.5rem' }}>{v.card_hook}</span>
         </a>
       ))}
       <button onClick={next} style={{
-        display: 'block', width: '100%', padding: '0.7rem', background: '#F5F5F5',
-        border: '1px solid #E5E7EB', borderRadius: '8px', cursor: 'pointer',
-        fontSize: '0.85rem', fontWeight: 600, color: '#8B5CF6', fontFamily: 'var(--font-sans)',
+        display: 'block', width: '100%', padding: '0.7rem', background: '#161310',
+        border: '1px solid #3D3425', borderRadius: '8px', cursor: 'pointer',
+        fontSize: '0.85rem', fontWeight: 600, color: '#D4AF37', fontFamily: 'var(--font-sans)',
         marginTop: '0.5rem', minHeight: '44px', transition: 'background 0.2s',
       }}
-        onMouseEnter={e => (e.currentTarget.style.background = '#EDE9FE')}
-        onMouseLeave={e => (e.currentTarget.style.background = '#F5F5F5')}>
+        onMouseEnter={e => (e.currentTarget.style.background = '#241F1A')}
+        onMouseLeave={e => (e.currentTarget.style.background = '#161310')}>
         다른 곳 발견하기 →
       </button>
     </div>
@@ -373,15 +373,15 @@ export function JourneyTimer() {
 
   return (
     <div style={{ position: 'fixed', top: '48px', right: '8px', zIndex: 90,
-      background: 'rgba(255,255,255,0.95)', border: '1px solid #E5E7EB', borderRadius: '20px',
-      padding: '0.35rem 0.75rem', fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 600,
+      background: 'rgba(26,23,20,0.95)', border: '1px solid #3D3425', borderRadius: '20px',
+      padding: '0.35rem 0.75rem', fontSize: '0.7rem', color: '#D4AF37', fontWeight: 600,
       backdropFilter: 'blur(8px)', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
       {min}:{sec.toString().padStart(2, '0')}
       {milestone && (
         <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: '4px',
-          background: '#8B5CF6', color: '#FFF', padding: '0.4rem 0.75rem', borderRadius: '8px',
+          background: '#D4AF37', color: '#0D0D0D', padding: '0.4rem 0.75rem', borderRadius: '8px',
           fontSize: '0.7rem', whiteSpace: 'nowrap', animation: 'fadeIn 0.5s',
-          boxShadow: '0 4px 12px rgba(139,92,246,0.3)' }}>
+          boxShadow: '0 4px 12px rgba(212,175,55,0.3)' }}>
           {milestone}
         </div>
       )}
@@ -424,11 +424,11 @@ export function BlurReveal({ children, label = '전체 내용 보기' }: { child
       </div>
       {!revealed && (
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '120px',
-          background: 'linear-gradient(transparent, #FFF)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '1rem' }}>
+          background: 'linear-gradient(transparent, #1A1714)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '1rem' }}>
           <button onClick={() => setRevealed(true)} style={{
-            background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '8px',
+            background: '#D4AF37', color: '#0D0D0D', border: 'none', borderRadius: '8px',
             padding: '0.6rem 1.5rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem',
-            fontFamily: 'var(--font-sans)', boxShadow: '0 4px 12px rgba(139,92,246,0.3)', minHeight: '44px',
+            fontFamily: 'var(--font-sans)', boxShadow: '0 4px 12px rgba(212,175,55,0.3)', minHeight: '44px',
           }}>
             {label} ↓
           </button>
@@ -453,20 +453,20 @@ export function ExploreProgress() {
   const pct = Math.round(data.visited / data.total * 100);
 
   return (
-    <div style={{ padding: '1.25rem', background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)', borderRadius: '16px', border: '1px solid #DDD6FE' }}>
+    <div style={{ padding: '1.25rem', background: 'linear-gradient(135deg, #1A1714, #241F1A)', borderRadius: '16px', border: '1px solid #D4AF37' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-        <h3 style={{ margin: 0, fontSize: '1rem' }}>나의 탐험 지도</h3>
-        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#8B5CF6' }}>{pct}% 달성</span>
+        <h3 style={{ margin: 0, fontSize: '1rem', color: '#F7E7CE' }}>나의 탐험 지도</h3>
+        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#D4AF37' }}>{pct}% 달성</span>
       </div>
-      <div style={{ height: '8px', background: '#E5E7EB', borderRadius: '4px', overflow: 'hidden', marginBottom: '0.5rem' }}>
-        <div style={{ width: `${pct}%`, height: '100%', background: 'linear-gradient(90deg, #8B5CF6, #06B6D4)',
+      <div style={{ height: '8px', background: '#3D3425', borderRadius: '4px', overflow: 'hidden', marginBottom: '0.5rem' }}>
+        <div style={{ width: `${pct}%`, height: '100%', background: 'linear-gradient(90deg, #D4AF37, #D4AF37)',
           borderRadius: '4px', transition: 'width 1s ease-out' }} />
       </div>
-      <p style={{ fontSize: '0.8rem', color: '#555' }}>
+      <p style={{ fontSize: '0.8rem', color: '#B8A080' }}>
         {data.total}곳 중 {data.visited}곳 방문 · {6 - data.categories}개 카테고리 미탐험
       </p>
-      {pct < 50 && <p style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, marginTop: '0.25rem' }}>50% 달성하면 밤의 탐험가 뱃지!</p>}
-      {pct >= 50 && pct < 100 && <p style={{ fontSize: '0.75rem', color: '#06B6D4', fontWeight: 600, marginTop: '0.25rem' }}>거의 다 왔어요! 전체 탐험 완료까지 {data.total - data.visited}곳</p>}
+      {pct < 50 && <p style={{ fontSize: '0.75rem', color: '#D4AF37', fontWeight: 600, marginTop: '0.25rem' }}>50% 달성하면 밤의 탐험가 뱃지!</p>}
+      {pct >= 50 && pct < 100 && <p style={{ fontSize: '0.75rem', color: '#D4AF37', fontWeight: 600, marginTop: '0.25rem' }}>거의 다 왔어요! 전체 탐험 완료까지 {data.total - data.visited}곳</p>}
     </div>
   );
 }
@@ -503,9 +503,9 @@ export function SocialProofToast() {
     <div style={{
       position: 'fixed', bottom: '80px', left: '50%', transform: 'translateX(-50%)',
       maxWidth: '360px', width: 'calc(100% - 2rem)', zIndex: 80,
-      background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '12px',
+      background: '#1A1714', border: '1px solid #3D3425', borderRadius: '12px',
       padding: '0.75rem 1rem', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-      animation: 'slideUp2 0.4s ease-out', fontSize: '0.8rem', color: '#333',
+      animation: 'slideUp2 0.4s ease-out', fontSize: '0.8rem', color: '#E8D5B5',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22C55E', flexShrink: 0 }} />
@@ -541,16 +541,16 @@ export function PersonalizedFeed({ venues }: { venues: any[] }) {
     .slice(0, 3);
 
   return (
-    <div style={{ padding: '1.5rem', background: '#F5F3FF', borderRadius: '16px' }}>
-      <h3 style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>당신을 위한 추천</h3>
-      <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '1rem' }}>최근 관심사 기반</p>
+    <div style={{ padding: '1.5rem', background: '#1A1714', borderRadius: '16px' }}>
+      <h3 style={{ fontSize: '1rem', marginBottom: '0.25rem', color: '#F7E7CE' }}>당신을 위한 추천</h3>
+      <p style={{ fontSize: '0.8rem', color: '#B8A080', marginBottom: '1rem' }}>최근 관심사 기반</p>
       <div style={{ display: 'grid', gap: '0.5rem' }}>
         {recommended.map(v => (
           <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-            style={{ display: 'block', padding: '0.75rem 1rem', background: '#FFF', border: '1px solid #DDD6FE',
-              borderRadius: '10px', textDecoration: 'none', color: '#111' }}>
+            style={{ display: 'block', padding: '0.75rem 1rem', background: '#1A1714', border: '1px solid #D4AF37',
+              borderRadius: '10px', textDecoration: 'none', color: '#F7E7CE' }}>
             <strong>{v.name}</strong>
-            <span style={{ fontSize: '0.8rem', color: '#555', marginLeft: '0.5rem' }}>{v.card_hook}</span>
+            <span style={{ fontSize: '0.8rem', color: '#B8A080', marginLeft: '0.5rem' }}>{v.card_hook}</span>
           </a>
         ))}
       </div>
@@ -568,43 +568,43 @@ export function SwipeFeed({ venues }: { venues: any[] }) {
   const [direction, setDirection] = useState<'up'|'down'|null>(null);
   const shuffled = useRef([...venues].sort(() => Math.random() - 0.5));
   const v = shuffled.current[idx % shuffled.current.length];
-  const catColors: Record<string, string> = { club: '#7C3AED', night: '#EC4899', lounge: '#D4AF37', room: '#1E3A5F', yojeong: '#059669', hoppa: '#DC2626' };
+  const catColors: Record<string, string> = { club: '#B8942B', night: '#D4AF37', lounge: '#D4AF37', room: '#1E3A5F', yojeong: '#059669', hoppa: '#DC2626' };
 
   const goNext = () => { setDirection('up'); setTimeout(() => { setIdx(i => i + 1); setDirection(null); }, 200); };
   const goPrev = () => { if (idx > 0) { setDirection('down'); setTimeout(() => { setIdx(i => i - 1); setDirection(null); }, 200); } };
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '20px', border: '1px solid #E5E7EB' }}>
+    <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '20px', border: '1px solid #3D3425' }}>
       <div style={{
-        background: `linear-gradient(135deg, ${catColors[v.cat_slug] || '#8B5CF6'}22, ${catColors[v.cat_slug] || '#8B5CF6'}08)`,
+        background: `linear-gradient(135deg, ${catColors[v.cat_slug] || '#D4AF37'}22, ${catColors[v.cat_slug] || '#D4AF37'}08)`,
         padding: '2rem 1.5rem', minHeight: '280px', display: 'flex', flexDirection: 'column', justifyContent: 'center',
         transition: 'transform 0.2s, opacity 0.2s',
         transform: direction === 'up' ? 'translateY(-20px)' : direction === 'down' ? 'translateY(20px)' : 'none',
         opacity: direction ? 0.5 : 1,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-          <span style={{ background: catColors[v.cat_slug] || '#8B5CF6', color: '#FFF', padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.7rem', fontWeight: 700 }}>
+          <span style={{ background: catColors[v.cat_slug] || '#D4AF37', color: '#0D0D0D', padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.7rem', fontWeight: 700 }}>
             {v.category}
           </span>
-          <span style={{ fontSize: '0.8rem', color: '#555' }}>{v.region}</span>
+          <span style={{ fontSize: '0.8rem', color: '#B8A080' }}>{v.region}</span>
         </div>
-        <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem', lineHeight: 1.3 }}>{v.name}</h3>
-        {v.nickname && <p style={{ color: '#8B5CF6', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.5rem' }}>담당: {v.nickname}</p>}
-        <p style={{ color: '#333', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>{v.card_hook}</p>
+        <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem', lineHeight: 1.3, color: '#F7E7CE' }}>{v.name}</h3>
+        {v.nickname && <p style={{ color: '#D4AF37', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.5rem' }}>담당: {v.nickname}</p>}
+        <p style={{ color: '#E8D5B5', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>{v.card_hook}</p>
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-            style={{ flex: 1, textAlign: 'center', background: catColors[v.cat_slug] || '#8B5CF6', color: '#FFF', padding: '0.75rem', borderRadius: '12px', fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem', minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            style={{ flex: 1, textAlign: 'center', background: catColors[v.cat_slug] || '#D4AF37', color: '#0D0D0D', padding: '0.75rem', borderRadius: '12px', fontWeight: 700, textDecoration: 'none', fontSize: '0.95rem', minHeight: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             자세히 보기
           </a>
-          <button onClick={goNext} style={{ flex: 1, background: '#F5F5F5', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '0.75rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem', fontFamily: 'var(--font-sans)', minHeight: '48px', color: '#333' }}>
+          <button onClick={goNext} style={{ flex: 1, background: '#161310', border: '1px solid #3D3425', borderRadius: '12px', padding: '0.75rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem', fontFamily: 'var(--font-sans)', minHeight: '48px', color: '#E8D5B5' }}>
             다음 추천 →
           </button>
         </div>
       </div>
       {/* 진행 인디케이터 */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', padding: '0.75rem', background: '#FAFAFA' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', padding: '0.75rem', background: '#161310' }}>
         {Array.from({ length: Math.min(10, shuffled.current.length) }, (_, i) => (
-          <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: i === (idx % 10) ? '#8B5CF6' : '#D1D5DB', transition: 'background 0.3s' }} />
+          <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: i === (idx % 10) ? '#D4AF37' : '#3D3425', transition: 'background 0.3s' }} />
         ))}
         <span style={{ fontSize: '0.7rem', color: '#999', marginLeft: '0.5rem' }}>{idx + 1}/{shuffled.current.length}</span>
       </div>
@@ -638,7 +638,7 @@ export function BingeChain({ venues }: { venues: any[] }) {
         <p style={{ fontSize: '0.75rem', color: '#999', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>몰아보기 모드</p>
         <h3 style={{ fontSize: '1.2rem', marginBottom: '0.75rem', color: '#FFF' }}>10곳을 한 번에 훑어보기</h3>
         <p style={{ fontSize: '0.85rem', color: '#999', marginBottom: '1.25rem' }}>넷플릭스처럼 다음 업소가 자동으로 넘어갑니다</p>
-        <button onClick={startBinge} style={{ background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '12px', padding: '0.875rem 2rem', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', fontFamily: 'var(--font-sans)', minHeight: '48px', boxShadow: '0 4px 16px rgba(139,92,246,0.4)' }}>
+        <button onClick={startBinge} style={{ background: '#D4AF37', color: '#0D0D0D', border: 'none', borderRadius: '12px', padding: '0.875rem 2rem', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', fontFamily: 'var(--font-sans)', minHeight: '48px', boxShadow: '0 4px 16px rgba(212,175,55,0.4)' }}>
           시작하기 ▶
         </button>
       </div>
@@ -650,7 +650,7 @@ export function BingeChain({ venues }: { venues: any[] }) {
       <div style={{ textAlign: 'center', padding: '2rem', background: '#111', borderRadius: '20px', color: '#FFF' }}>
         <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🎬</p>
         <h3 style={{ color: '#FFF', marginBottom: '0.75rem' }}>10곳 탐험 완료!</h3>
-        <button onClick={startBinge} style={{ background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '12px', padding: '0.75rem 2rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-sans)', minHeight: '48px' }}>
+        <button onClick={startBinge} style={{ background: '#D4AF37', color: '#0D0D0D', border: 'none', borderRadius: '12px', padding: '0.75rem 2rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-sans)', minHeight: '48px' }}>
           새 시리즈 시작 →
         </button>
       </div>
@@ -663,23 +663,23 @@ export function BingeChain({ venues }: { venues: any[] }) {
       <div style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <span style={{ fontSize: '0.75rem', color: '#999' }}>EP.{current + 1} / 10</span>
-          <span style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600 }}>{countdown > 0 ? `${countdown}초 후 다음` : '준비 완료'}</span>
+          <span style={{ fontSize: '0.75rem', color: '#D4AF37', fontWeight: 600 }}>{countdown > 0 ? `${countdown}초 후 다음` : '준비 완료'}</span>
         </div>
         <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '0.5rem' }}>{v.name}</h3>
         <p style={{ fontSize: '0.85rem', color: '#CCC', marginBottom: '1rem' }}>{v.card_hook}</p>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-            style={{ flex: 1, textAlign: 'center', background: '#FFF', color: '#111', padding: '0.625rem', borderRadius: '8px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            style={{ flex: 1, textAlign: 'center', background: '#D4AF37', color: '#0D0D0D', padding: '0.625rem', borderRadius: '8px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             상세 보기
           </a>
-          <button onClick={nextEp} style={{ flex: 1, background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '8px', padding: '0.625rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem', fontFamily: 'var(--font-sans)', minHeight: '44px' }}>
+          <button onClick={nextEp} style={{ flex: 1, background: '#D4AF37', color: '#0D0D0D', border: 'none', borderRadius: '8px', padding: '0.625rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem', fontFamily: 'var(--font-sans)', minHeight: '44px' }}>
             다음 EP →
           </button>
         </div>
       </div>
       {/* 넷플릭스 진행바 */}
       <div style={{ height: '4px', background: '#333' }}>
-        <div style={{ width: `${(current + 1) / 10 * 100}%`, height: '100%', background: 'linear-gradient(90deg, #8B5CF6, #06B6D4)', transition: 'width 0.5s' }} />
+        <div style={{ width: `${(current + 1) / 10 * 100}%`, height: '100%', background: 'linear-gradient(90deg, #D4AF37, #D4AF37)', transition: 'width 0.5s' }} />
       </div>
     </div>
   );
@@ -767,9 +767,9 @@ export function DailyFortune({ venues }: { venues: any[] }) {
       ) : (
         <div style={{ animation: 'fadeIn 0.5s' }}>
           <p style={{ fontSize: '1rem', color: '#92400E', fontWeight: 600, marginBottom: '1rem', lineHeight: 1.7 }}>{fortune}</p>
-          <div style={{ padding: '1rem', background: '#FFF', borderRadius: '12px', border: '1px solid #FDE68A' }}>
+          <div style={{ padding: '1rem', background: '#1A1714', borderRadius: '12px', border: '1px solid #FDE68A' }}>
             <p style={{ fontSize: '0.75rem', color: '#B45309', marginBottom: '0.25rem' }}>오늘의 행운 장소</p>
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{todayVenue.name}</h3>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#F7E7CE' }}>{todayVenue.name}</h3>
             <a href={`/${todayVenue.cat_slug}/${todayVenue.slug}/`} target="_blank" rel="noopener noreferrer"
               style={{ display: 'inline-block', background: '#F59E0B', color: '#FFF', padding: '0.5rem 1.5rem', borderRadius: '8px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem' }}>
               확인하기 →
@@ -794,43 +794,43 @@ export function BudgetCalculator({ venues }: { venues: any[] }) {
   const matched = venues.filter(v => v.cat_slug === category).slice(0, 3);
 
   return (
-    <div style={{ padding: '1.5rem', background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '20px' }}>
-      <h3 style={{ marginBottom: '0.25rem' }}>오늘 밤 예산 계산기</h3>
-      <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '1rem' }}>인원과 카테고리를 선택하면 예상 비용을 알려드립니다</p>
+    <div style={{ padding: '1.5rem', background: '#1A1714', border: '1px solid #3D3425', borderRadius: '20px' }}>
+      <h3 style={{ marginBottom: '0.25rem', color: '#F7E7CE' }}>오늘 밤 예산 계산기</h3>
+      <p style={{ fontSize: '0.8rem', color: '#B8A080', marginBottom: '1rem' }}>인원과 카테고리를 선택하면 예상 비용을 알려드립니다</p>
       <div style={{ display: 'grid', gap: '0.75rem', marginBottom: '1rem' }}>
         <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           {Object.entries(catLabels).map(([k, l]) => (
             <button key={k} onClick={() => setCategory(k)} style={{
               padding: '0.4rem 0.75rem', borderRadius: '20px', fontSize: '0.8rem', fontFamily: 'var(--font-sans)',
-              border: category === k ? '2px solid #8B5CF6' : '1px solid #E5E7EB',
-              background: category === k ? '#F5F3FF' : '#FFF', color: category === k ? '#8B5CF6' : '#555',
+              border: category === k ? '2px solid #D4AF37' : '1px solid #3D3425',
+              background: category === k ? '#241F1A' : '#1A1714', color: category === k ? '#D4AF37' : '#B8A080',
               cursor: 'pointer', fontWeight: category === k ? 700 : 400,
             }}>{l}</button>
           ))}
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px' }}>인원</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px', color: '#E8D5B5' }}>인원</label>
           <input type="range" min="1" max="10" value={people} onChange={e => setPeople(Number(e.target.value))} style={{ flex: 1 }} />
-          <span style={{ fontWeight: 700, color: '#8B5CF6', minWidth: '30px' }}>{people}명</span>
+          <span style={{ fontWeight: 700, color: '#D4AF37', minWidth: '30px' }}>{people}명</span>
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px' }}>양주</label>
+          <label style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '50px', color: '#E8D5B5' }}>양주</label>
           <input type="range" min="1" max="5" value={bottles} onChange={e => setBottles(Number(e.target.value))} style={{ flex: 1 }} />
-          <span style={{ fontWeight: 700, color: '#8B5CF6', minWidth: '30px' }}>{bottles}병</span>
+          <span style={{ fontWeight: 700, color: '#D4AF37', minWidth: '30px' }}>{bottles}병</span>
         </div>
       </div>
-      <div style={{ padding: '1rem', background: '#F5F3FF', borderRadius: '12px', textAlign: 'center', marginBottom: '1rem' }}>
-        <p style={{ fontSize: '0.8rem', color: '#555' }}>예상 총 비용</p>
-        <p style={{ fontSize: '1.5rem', fontWeight: 800, color: '#8B5CF6' }}>{total.toLocaleString()}원</p>
-        <p style={{ fontSize: '0.85rem', color: '#333' }}>1인당 약 <strong>{perPerson.toLocaleString()}원</strong></p>
+      <div style={{ padding: '1rem', background: '#241F1A', borderRadius: '12px', textAlign: 'center', marginBottom: '1rem' }}>
+        <p style={{ fontSize: '0.8rem', color: '#B8A080' }}>예상 총 비용</p>
+        <p style={{ fontSize: '1.5rem', fontWeight: 800, color: '#D4AF37' }}>{total.toLocaleString()}원</p>
+        <p style={{ fontSize: '0.85rem', color: '#E8D5B5' }}>1인당 약 <strong>{perPerson.toLocaleString()}원</strong></p>
       </div>
       {matched.length > 0 && (
         <div>
-          <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '0.5rem' }}>이 예산에 맞는 곳</p>
+          <p style={{ fontSize: '0.8rem', color: '#B8A080', marginBottom: '0.5rem' }}>이 예산에 맞는 곳</p>
           {matched.map(v => (
             <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'block', padding: '0.5rem 0.75rem', marginBottom: '0.25rem', background: '#FAFAFA', borderRadius: '8px', textDecoration: 'none', color: '#111', fontSize: '0.85rem' }}>
-              <strong>{v.name}</strong> <span style={{ color: '#555' }}>· {v.region}</span>
+              style={{ display: 'block', padding: '0.5rem 0.75rem', marginBottom: '0.25rem', background: '#161310', borderRadius: '8px', textDecoration: 'none', color: '#F7E7CE', fontSize: '0.85rem' }}>
+              <strong>{v.name}</strong> <span style={{ color: '#B8A080' }}>· {v.region}</span>
             </a>
           ))}
         </div>
@@ -847,18 +847,18 @@ export function WeeklyHot({ venues }: { venues: any[] }) {
   const changes = ['+2', 'NEW', '-1'];
 
   return (
-    <div style={{ padding: '1.5rem', background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '20px' }}>
+    <div style={{ padding: '1.5rem', background: '#1A1714', border: '1px solid #3D3425', borderRadius: '20px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h3 style={{ margin: 0 }}>이번주 급상승</h3>
-        <span style={{ fontSize: '0.7rem', color: '#999', background: '#F5F5F5', padding: '0.2rem 0.5rem', borderRadius: '8px' }}>매주 갱신</span>
+        <h3 style={{ margin: 0, color: '#F7E7CE' }}>이번주 급상승</h3>
+        <span style={{ fontSize: '0.7rem', color: '#999', background: '#161310', padding: '0.2rem 0.5rem', borderRadius: '8px' }}>매주 갱신</span>
       </div>
       {top3.map((v, i) => (
         <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: i < 2 ? '1px solid #F5F5F5' : 'none', textDecoration: 'none', color: 'inherit' }}>
-          <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#8B5CF6', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, flexShrink: 0 }}>{i + 1}</span>
+          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem 0', borderBottom: i < 2 ? '1px solid #241F1A' : 'none', textDecoration: 'none', color: 'inherit' }}>
+          <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#D4AF37', color: '#0D0D0D', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, flexShrink: 0 }}>{i + 1}</span>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{ fontWeight: 600, fontSize: '0.95rem', color: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{v.name}</p>
-            <p style={{ fontSize: '0.8rem', color: '#555' }}>{v.card_hook}</p>
+            <p style={{ fontWeight: 600, fontSize: '0.95rem', color: '#F7E7CE', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{v.name}</p>
+            <p style={{ fontSize: '0.8rem', color: '#B8A080' }}>{v.card_hook}</p>
           </div>
           <span style={{ fontSize: '0.7rem', fontWeight: 700, color: changes[i] === 'NEW' ? '#DC2626' : changes[i].startsWith('+') ? '#16A34A' : '#EF4444', flexShrink: 0 }}>
             {changes[i] === 'NEW' ? '🔥 NEW' : changes[i].startsWith('+') ? `▲${changes[i]}` : `▼${changes[i].slice(1)}`}
@@ -883,27 +883,27 @@ export function MoodMatch({ venues }: { venues: any[] }) {
   const matched = selected ? venues.filter(v => selected.cats.includes(v.cat_slug)).sort(() => Math.random() - 0.5).slice(0, 3) : [];
 
   return (
-    <div style={{ padding: '1.5rem', background: 'linear-gradient(135deg, #EDE9FE, #F5F3FF)', border: '1px solid #DDD6FE', borderRadius: '20px' }}>
-      <h3 style={{ marginBottom: '0.25rem' }}>지금 기분이 어때요?</h3>
-      <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '1rem' }}>기분에 맞는 곳을 추천해드립니다</p>
+    <div style={{ padding: '1.5rem', background: 'linear-gradient(135deg, #241F1A, #1A1714)', border: '1px solid #D4AF37', borderRadius: '20px' }}>
+      <h3 style={{ marginBottom: '0.25rem', color: '#F7E7CE' }}>지금 기분이 어때요?</h3>
+      <p style={{ fontSize: '0.8rem', color: '#B8A080', marginBottom: '1rem' }}>기분에 맞는 곳을 추천해드립니다</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
         {moods.map(m => (
           <button key={m.label} onClick={() => setMood(m.label)} style={{
             padding: '0.5rem 0.875rem', borderRadius: '50px', fontSize: '0.85rem', fontFamily: 'var(--font-sans)',
-            border: mood === m.label ? '2px solid #8B5CF6' : '1px solid #DDD6FE',
-            background: mood === m.label ? '#8B5CF6' : '#FFF', color: mood === m.label ? '#FFF' : '#333',
+            border: mood === m.label ? '2px solid #D4AF37' : '1px solid #D4AF37',
+            background: mood === m.label ? '#D4AF37' : '#1A1714', color: mood === m.label ? '#0D0D0D' : '#E8D5B5',
             cursor: 'pointer', fontWeight: mood === m.label ? 700 : 400, minHeight: '40px',
           }}>{m.emoji} {m.label}</button>
         ))}
       </div>
       {matched.length > 0 && (
         <div style={{ animation: 'fadeIn 0.4s' }}>
-          <p style={{ fontSize: '0.8rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.5rem' }}>당신에게 맞는 곳</p>
+          <p style={{ fontSize: '0.8rem', color: '#D4AF37', fontWeight: 600, marginBottom: '0.5rem' }}>당신에게 맞는 곳</p>
           {matched.map(v => (
             <a key={v.slug} href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'block', padding: '0.75rem 1rem', marginBottom: '0.5rem', background: '#FFF', border: '1px solid #DDD6FE', borderRadius: '12px', textDecoration: 'none', color: '#111' }}>
+              style={{ display: 'block', padding: '0.75rem 1rem', marginBottom: '0.5rem', background: '#1A1714', border: '1px solid #D4AF37', borderRadius: '12px', textDecoration: 'none', color: '#F7E7CE' }}>
               <strong>{v.name}</strong>
-              <span style={{ fontSize: '0.8rem', color: '#555', marginLeft: '0.5rem' }}>{v.card_hook}</span>
+              <span style={{ fontSize: '0.8rem', color: '#B8A080', marginLeft: '0.5rem' }}>{v.card_hook}</span>
             </a>
           ))}
         </div>

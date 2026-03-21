@@ -21,33 +21,33 @@ export default function Roulette({ venues }: { venues: Venue[] }) {
   return (
     <div style={{ textAlign: 'center' }}>
       <h2>오늘 갈 곳 룰렛</h2>
-      <p style={{ color: '#555', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+      <p style={{ color: '#B8A080', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
         어디 갈지 고민된다면 돌려보자. 운명이 정해준다.
       </p>
       <button onClick={spin} disabled={spinning} style={{
-        background: spinning ? '#E5E7EB' : '#8B5CF6',
-        color: '#FFF', border: 'none', borderRadius: '50%',
+        background: spinning ? '#3D3425' : '#D4AF37',
+        color: spinning ? '#B8A080' : '#0D0D0D', border: 'none', borderRadius: '50%',
         width: '140px', height: '140px', fontSize: '1.1rem', fontWeight: 700,
         cursor: spinning ? 'wait' : 'pointer', fontFamily: 'var(--font-sans)',
         transition: 'all 0.3s',
-        boxShadow: spinning ? 'none' : '0 4px 20px rgba(139,92,246,0.3)',
+        boxShadow: spinning ? 'none' : '0 4px 20px rgba(212,175,55,0.3)',
         animation: spinning ? 'pulse 0.5s infinite' : 'none',
       }}>
         {spinning ? '돌리는 중...' : '돌려보기'}
       </button>
       {result && (
         <div style={{
-          marginTop: '1.5rem', padding: '1.5rem', background: '#FFF',
-          border: '2px solid #DDD6FE', borderRadius: '16px',
+          marginTop: '1.5rem', padding: '1.5rem', background: '#1A1714',
+          border: '2px solid #D4AF37', borderRadius: '16px',
           maxWidth: '400px', margin: '1.5rem auto 0',
         }}>
-          <span style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '0.75rem', color: '#D4AF37', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             {catLabels[result.cat_slug] || result.cat_slug}
           </span>
-          <h3 style={{ margin: '0.5rem 0', fontSize: '1.25rem' }}>{result.name}</h3>
-          <p style={{ color: '#555', fontSize: '0.9rem', marginBottom: '1rem' }}>{result.card_hook}</p>
+          <h3 style={{ margin: '0.5rem 0', fontSize: '1.25rem', color: '#F7E7CE' }}>{result.name}</h3>
+          <p style={{ color: '#B8A080', fontSize: '0.9rem', marginBottom: '1rem' }}>{result.card_hook}</p>
           <a href={`/${result.cat_slug}/${result.slug}/`} target="_blank" rel="noopener noreferrer"
-            style={{ display: 'inline-block', background: '#8B5CF6', color: '#FFF',
+            style={{ display: 'inline-block', background: '#D4AF37', color: '#0D0D0D',
               padding: '0.6rem 1.5rem', borderRadius: '8px', fontWeight: 600,
               textDecoration: 'none', fontSize: '0.9rem' }}>
             상세 보기 →
