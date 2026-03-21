@@ -118,15 +118,17 @@ export default function HomePage() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
               {premiumVenues.map(v => (
                 <div key={v.slug} style={{ background: '#FFFFFF', borderRadius: '12px', padding: '1rem',
-                  border: '1px solid #FCD34D', textAlign: 'center' }}>
+                  border: '1px solid #FCD34D', textAlign: 'center',
+                  display: 'flex', flexDirection: 'column', minHeight: '160px' }}>
                   <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
-                    style={{ textDecoration: 'none', color: '#111' }}>
+                    style={{ textDecoration: 'none', color: '#111', flex: 1 }}>
                     <p style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>{v.name}</p>
-                    <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '0.5rem' }}>{v.card_hook}</p>
+                    <p style={{ fontSize: '0.8rem', color: '#555' }}>{v.card_hook}</p>
                   </a>
                   <a href="tel:010-3695-4929" target="_blank" rel="noopener noreferrer"
-                    style={{ display: 'inline-block', background: '#15803D', color: '#FFF', fontWeight: 700,
-                      fontSize: '0.8rem', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none' }}>
+                    style={{ display: 'block', background: '#15803D', color: '#FFF', fontWeight: 700,
+                      fontSize: '0.8rem', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none',
+                      marginTop: '0.75rem' }}>
                     📞 신실장 010-3695-4929
                   </a>
                 </div>

@@ -9,10 +9,12 @@ export default function Header() {
       </div>
       <header className="header">
         <div className="header-inner">
-          <a href="/" className="logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <img src="/logo.svg" alt="BAMKEY 밤키" width="100" height="30" style={{ display: 'block' }} />
-            <span>밤의 격이 다른 선택</span>
-          </a>
+          <div className="header-top">
+            <a href="/" className="logo" style={{ textDecoration: 'none' }}>
+              <img src="/logo.svg" alt="BAMKEY 밤키" width="100" height="30" />
+            </a>
+            <span className="logo-tagline">밤의 격이 다른 선택</span>
+          </div>
           <nav>
             <a href="/clubs/" target="_blank" rel="noopener noreferrer">클럽</a>
             <a href="/nights/" target="_blank" rel="noopener noreferrer">나이트</a>
