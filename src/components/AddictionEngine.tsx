@@ -911,3 +911,273 @@ export function MoodMatch({ venues }: { venues: any[] }) {
     </div>
   );
 }
+
+/* ═══════════════════════════════════════════
+   95분 체류 킬러 메커니즘 7가지 추가
+   틱톡 무한루프 + 넷플릭스 오토플레이 + 슬롯머신 가변보상
+   ═══════════════════════════════════════════ */
+
+/* ═══ [20] 틱톡식 풀스크린 스와이프 — 한번 시작하면 멈출 수 없다 ═══ */
+export function TikTokFeed({ venues }: { venues: any[] }) {
+  const [idx, setIdx] = useState(0);
+  const [likes, setLikes] = useState<Set<number>>(new Set());
+  const [combo, setCombo] = useState(0);
+  const shuffled = useRef(venues.sort(() => Math.random() - 0.5));
+  const v = shuffled.current[idx % shuffled.current.length];
+  const catEmoji: Record<string,string> = { club:'🎵', night:'🌙', lounge:'🍷', room:'🚪', yojeong:'🏮', hoppa:'💃' };
+
+  const next = () => { setIdx(i => i + 1); setCombo(c => c + 1); };
+  const prev = () => { if (idx > 0) { setIdx(i => i - 1); setCombo(0); } };
+  const toggleLike = () => {
+    setLikes(prev => {
+      const n = new Set(prev);
+      if (n.has(idx)) n.delete(idx); else n.add(idx);
+      return n;
+    });
+  };
+
+  return (
+    <div style={{ background: 'linear-gradient(180deg, #F5F3FF, #FFFFFF)', borderRadius: '20px', overflow: 'hidden', border: '1px solid #E5E7EB' }}>
+      {combo >= 3 && (
+        <div style={{ background: 'linear-gradient(90deg, #8B5CF6, #EC4899)', padding: '0.4rem 1rem', textAlign: 'center' }}>
+          <span style={{ color: '#FFF', fontSize: '0.8rem', fontWeight: 700 }}>
+            🔥 {combo}곳 연속 탐색 중! {combo >= 10 ? '전설의 탐험가!' : combo >= 5 ? '멈출 수 없지?' : '계속 가자!'}
+          </span>
+        </div>
+      )}
+      <div style={{ padding: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+          <span style={{ fontSize: '1.5rem' }}>{catEmoji[v.cat_slug] || '🌃'}</span>
+          <div>
+            <p style={{ fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 700 }}>{v.cat_slug}</p>
+            <p style={{ fontSize: '0.75rem', color: '#666' }}>{v.region}</p>
+          </div>
+          <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: '#999' }}>{idx + 1}/{shuffled.current.length}</span>
+        </div>
+        <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#111', marginBottom: '0.5rem' }}>{v.name}</h3>
+          <p style={{ fontSize: '0.95rem', color: '#333', lineHeight: 1.7, marginBottom: '1rem' }}>{v.card_hook}</p>
+        </a>
+        {v.nickname && <p style={{ fontSize: '0.85rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '1rem' }}>담당: {v.nickname}</p>}
+        <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
+          <button onClick={toggleLike} style={{ flex: 1, padding: '0.6rem', borderRadius: '12px', border: likes.has(idx) ? '2px solid #EC4899' : '1px solid #E5E7EB', background: likes.has(idx) ? '#FDF2F8' : '#FFF', cursor: 'pointer', fontSize: '0.9rem', fontFamily: 'var(--font-sans)', fontWeight: 600, color: likes.has(idx) ? '#EC4899' : '#666', minHeight: '44px' }}>
+            {likes.has(idx) ? '❤️ 좋아요' : '🤍 좋아요'}
+          </button>
+          <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer" style={{ flex: 1, padding: '0.6rem', borderRadius: '12px', border: '1px solid #8B5CF6', background: '#F5F3FF', textAlign: 'center', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600, color: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '44px' }}>
+            상세 보기 →
+          </a>
+        </div>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button onClick={prev} disabled={idx === 0} style={{ flex: 1, padding: '0.75rem', borderRadius: '12px', border: 'none', background: idx > 0 ? '#E5E7EB' : '#F5F5F5', cursor: idx > 0 ? 'pointer' : 'default', fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: '0.9rem', color: idx > 0 ? '#333' : '#CCC', minHeight: '48px' }}>← 이전</button>
+          <button onClick={next} style={{ flex: 2, padding: '0.75rem', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: '0.95rem', color: '#FFF', minHeight: '48px', boxShadow: '0 4px 12px rgba(139,92,246,0.3)' }}>다음 추천 →</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══ [21] 넷플릭스식 오토플레이 카운트다운 ═══ */
+export function AutoPlayCountdown({ venues }: { venues: any[] }) {
+  const [idx, setIdx] = useState(0);
+  const [countdown, setCountdown] = useState(8);
+  const [paused, setPaused] = useState(false);
+  const v = venues[idx % venues.length];
+  useEffect(() => {
+    if (paused) return;
+    if (countdown <= 0) { setIdx(i => (i + 1) % venues.length); setCountdown(8); return; }
+    const t = setTimeout(() => setCountdown(c => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [countdown, paused, venues.length]);
+  return (
+    <div style={{ padding: '1.5rem', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <h3 style={{ margin: 0, fontSize: '1rem', color: '#111' }}>자동 추천</h3>
+        <button onClick={() => setPaused(!paused)} style={{ background: 'none', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '0.3rem 0.75rem', cursor: 'pointer', fontSize: '0.8rem', fontFamily: 'var(--font-sans)', color: '#666' }}>{paused ? '▶ 재개' : '⏸ 일시정지'}</button>
+      </div>
+      <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer" style={{ display: 'block', padding: '1rem', background: '#F9FAFB', borderRadius: '12px', textDecoration: 'none', color: 'inherit', marginBottom: '1rem' }}>
+        <p style={{ fontSize: '0.7rem', color: '#8B5CF6', fontWeight: 700, marginBottom: '0.25rem' }}>{v.region} · {v.cat_slug}</p>
+        <h4 style={{ fontSize: '1.1rem', color: '#111', marginBottom: '0.25rem' }}>{v.name}</h4>
+        <p style={{ fontSize: '0.85rem', color: '#555' }}>{v.card_hook}</p>
+      </a>
+      {!paused && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '4px', height: '4px', overflow: 'hidden' }}>
+            <div style={{ width: `${(countdown / 8) * 100}%`, height: '100%', background: countdown <= 3 ? '#EC4899' : '#8B5CF6', borderRadius: '4px', transition: 'width 1s linear' }} />
+          </div>
+          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: countdown <= 3 ? '#EC4899' : '#8B5CF6' }}>{countdown}s</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ═══ [22] 슬롯머신 메가 잭팟 ═══ */
+export function MegaSlot({ venues }: { venues: any[] }) {
+  const [spinning, setSpinning] = useState(false);
+  const [results, setResults] = useState<any[]>([]);
+  const [jackpot, setJackpot] = useState(false);
+  const [spins, setSpins] = useState(0);
+  const spin = () => {
+    setSpinning(true); setJackpot(false); setSpins(s => s + 1);
+    setTimeout(() => {
+      const r = [0,1,2].map(() => venues[Math.floor(Math.random() * venues.length)]);
+      setResults(r); setJackpot(r[0].cat_slug === r[1].cat_slug && r[1].cat_slug === r[2].cat_slug); setSpinning(false);
+    }, 1500);
+  };
+  return (
+    <div style={{ padding: '1.5rem', background: jackpot ? 'linear-gradient(135deg, #FEF3C7, #FDE68A)' : 'linear-gradient(135deg, #1E1B4B, #312E81)', borderRadius: '20px', textAlign: 'center' }}>
+      <h3 style={{ color: jackpot ? '#92400E' : '#FFF', marginBottom: '0.25rem' }}>{jackpot ? '🎰 잭팟!' : '🎰 운명의 슬롯'}</h3>
+      <p style={{ fontSize: '0.8rem', color: jackpot ? '#A16207' : '#A5B4FC', marginBottom: '1rem' }}>3개가 같은 카테고리면 잭팟! (도전 {spins}회)</p>
+      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginBottom: '1rem', minHeight: '80px', alignItems: 'center' }}>
+        {spinning ? <p style={{ color: '#A5B4FC', fontSize: '1.5rem' }}>🎰 🎰 🎰</p> : results.length > 0 ? results.map((r, i) => (
+          <a key={i} href={`/${r.cat_slug}/${r.slug}/`} target="_blank" rel="noopener noreferrer" style={{ flex: 1, padding: '0.5rem', background: jackpot ? '#FFF' : 'rgba(255,255,255,0.1)', borderRadius: '12px', textDecoration: 'none', color: jackpot ? '#111' : '#FFF', border: jackpot ? '2px solid #F59E0B' : '1px solid rgba(255,255,255,0.2)', textAlign: 'center' }}>
+            <p style={{ fontSize: '0.6rem', fontWeight: 700, color: jackpot ? '#8B5CF6' : '#A5B4FC' }}>{r.cat_slug}</p>
+            <p style={{ fontSize: '0.7rem', fontWeight: 600, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as any }}>{r.name}</p>
+          </a>
+        )) : <p style={{ color: '#A5B4FC', fontSize: '0.9rem' }}>레버를 당겨보세요</p>}
+      </div>
+      <button onClick={spin} disabled={spinning} style={{ background: spinning ? '#6B7280' : 'linear-gradient(135deg, #F59E0B, #EF4444)', color: '#FFF', border: 'none', borderRadius: '50px', padding: '0.75rem 2rem', fontWeight: 700, cursor: spinning ? 'default' : 'pointer', fontSize: '0.95rem', fontFamily: 'var(--font-sans)', minHeight: '48px', boxShadow: '0 4px 16px rgba(245,158,11,0.3)' }}>
+        {spinning ? '돌아가는 중...' : spins === 0 ? '첫 번째 도전! 🎰' : '한 번 더! 🎰'}
+      </button>
+      {jackpot && <p style={{ marginTop: '0.75rem', fontSize: '0.85rem', fontWeight: 700, color: '#DC2626' }}>🎉 3곳 모두 같은 카테고리!</p>}
+    </div>
+  );
+}
+
+/* ═══ [23] 실시간 활동 피드 — FOMO 극대화 ═══ */
+export function LiveActivityFeed() {
+  const [activities, setActivities] = useState<string[]>([]);
+  const names = ['김**','이**','박**','최**','정**','강**','조**','윤**'];
+  const actions = ['수원찬스돔나이트 상세를 봤습니다','일산룸에 전화했습니다','강남청담클럽 레이스를 찜했습니다','부산연산동물나이트에 후기를 남겼습니다','밤문화 MBTI 테스트를 완료했습니다','일산명월관요정 상세를 확인했습니다','오늘의 룰렛을 돌렸습니다','강남호빠 로얄 상세를 봤습니다'];
+  useEffect(() => {
+    const add = () => {
+      const name = names[Math.floor(Math.random() * names.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      const time = Math.floor(Math.random() * 30) + 1;
+      setActivities(prev => [`${name}님이 ${time}초 전 ${action}`, ...prev].slice(0, 5));
+    };
+    add(); const interval = setInterval(add, 4000 + Math.random() * 3000); return () => clearInterval(interval);
+  }, []);
+  return (
+    <div style={{ padding: '1rem', background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22C55E', animation: 'pulse 2s infinite' }} />
+        <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#111' }}>실시간 활동</span>
+      </div>
+      {activities.map((a, i) => (<p key={i+a} style={{ fontSize: '0.8rem', color: i === 0 ? '#111' : '#999', padding: '0.3rem 0', borderBottom: i < activities.length - 1 ? '1px solid #F5F5F5' : 'none', opacity: 1 - i * 0.15 }}>{a}</p>))}
+      <style dangerouslySetInnerHTML={{ __html: '@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}' }} />
+    </div>
+  );
+}
+
+/* ═══ [24] 인스타 스토리 모드 ═══ */
+export function StoryMode({ venues }: { venues: any[] }) {
+  const [idx, setIdx] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const stories = venues.slice(0, 8);
+  const v = stories[idx];
+  useEffect(() => {
+    setProgress(0);
+    const iv = setInterval(() => { setProgress(p => { if (p >= 100) { setIdx(i => (i + 1) % stories.length); return 0; } return p + 2; }); }, 100);
+    return () => clearInterval(iv);
+  }, [idx, stories.length]);
+  return (
+    <div style={{ borderRadius: '20px', overflow: 'hidden', background: '#111' }}>
+      <div style={{ display: 'flex', gap: '3px', padding: '0.5rem 0.75rem', position: 'relative', zIndex: 2 }}>
+        {stories.map((_, i) => (<div key={i} style={{ flex: 1, height: '3px', borderRadius: '2px', background: 'rgba(255,255,255,0.3)', overflow: 'hidden' }}><div style={{ width: i < idx ? '100%' : i === idx ? `${progress}%` : '0%', height: '100%', background: '#FFF', transition: i === idx ? 'width 0.1s linear' : 'none' }} /></div>))}
+      </div>
+      <div style={{ padding: '1.5rem 1.5rem 1.5rem', background: 'linear-gradient(180deg, rgba(139,92,246,0.8), rgba(17,17,17,0.95))', minHeight: '180px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', fontWeight: 700, marginBottom: '0.25rem' }}>{v.region} · {v.cat_slug}</p>
+        <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#FFF', marginBottom: '0.5rem' }}>{v.name}</h3>
+        <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, marginBottom: '1rem' }}>{v.card_hook}</p>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button onClick={() => setIdx(i => i > 0 ? i - 1 : stories.length - 1)} style={{ flex: 1, padding: '0.6rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.3)', background: 'transparent', color: '#FFF', cursor: 'pointer', fontFamily: 'var(--font-sans)', minHeight: '44px' }}>←</button>
+          <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer" style={{ flex: 3, padding: '0.6rem', borderRadius: '10px', background: '#8B5CF6', textAlign: 'center', color: '#FFF', textDecoration: 'none', fontWeight: 700, fontSize: '0.9rem', minHeight: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>자세히 보기</a>
+          <button onClick={() => setIdx(i => (i + 1) % stories.length)} style={{ flex: 1, padding: '0.6rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.3)', background: 'transparent', color: '#FFF', cursor: 'pointer', fontFamily: 'var(--font-sans)', minHeight: '44px' }}>→</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══ [25] 업소 퀴즈 미니게임 ═══ */
+export function VenueQuizGame({ venues }: { venues: any[] }) {
+  const [score, setScore] = useState(0);
+  const [round, setRound] = useState(0);
+  const [selected, setSelected] = useState<string|null>(null);
+  const [correct, setCorrect] = useState<string|null>(null);
+  const maxRounds = 5;
+  const getQ = useCallback(() => {
+    const ans = venues[Math.floor(Math.random() * venues.length)];
+    const opts = [ans];
+    while (opts.length < 4) { const r = venues[Math.floor(Math.random() * venues.length)]; if (!opts.find(o => o.slug === r.slug)) opts.push(r); }
+    return { hint: ans.card_hook, answer: ans.name, options: opts.sort(() => Math.random() - 0.5).map(o => o.name) };
+  }, [venues]);
+  const [q, setQ] = useState(() => getQ());
+  const pick = (name: string) => {
+    if (selected) return; setSelected(name); setCorrect(q.answer);
+    if (name === q.answer) setScore(s => s + 1);
+    setTimeout(() => { if (round + 1 < maxRounds) { setRound(r => r + 1); setSelected(null); setCorrect(null); setQ(getQ()); } }, 1500);
+  };
+  const done = round >= maxRounds - 1 && selected;
+  return (
+    <div style={{ padding: '1.5rem', background: '#FFFFFF', border: '2px solid #8B5CF6', borderRadius: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <h3 style={{ margin: 0, color: '#111' }}>🧠 업소 퀴즈</h3>
+        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#8B5CF6' }}>{score}/{maxRounds}</span>
+      </div>
+      {done ? (
+        <div style={{ textAlign: 'center', padding: '1rem' }}>
+          <p style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{score >= 4 ? '🏆' : score >= 2 ? '👏' : '💪'}</p>
+          <p style={{ fontSize: '1.1rem', fontWeight: 700, color: '#111', marginBottom: '0.5rem' }}>{maxRounds}문제 중 {score}개 정답!</p>
+          <p style={{ fontSize: '0.85rem', color: '#666', marginBottom: '1rem' }}>{score >= 4 ? '밤문화 전문가!' : '더 탐색해보세요!'}</p>
+          <button onClick={() => { setRound(0); setScore(0); setSelected(null); setCorrect(null); setQ(getQ()); }} style={{ background: '#8B5CF6', color: '#FFF', border: 'none', borderRadius: '12px', padding: '0.75rem 2rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-sans)', minHeight: '48px' }}>다시 도전 →</button>
+        </div>
+      ) : (
+        <>
+          <div style={{ background: '#F5F3FF', borderRadius: '12px', padding: '1rem', marginBottom: '1rem' }}>
+            <p style={{ fontSize: '0.75rem', color: '#8B5CF6', fontWeight: 600, marginBottom: '0.25rem' }}>힌트 ({round + 1}/{maxRounds})</p>
+            <p style={{ fontSize: '0.95rem', color: '#333', fontWeight: 500, lineHeight: 1.5 }}>"{q.hint}"</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+            {q.options.map(name => {
+              let bg = '#FFF', bd = '1px solid #E5E7EB', cl = '#333';
+              if (selected) { if (name === correct) { bg = '#DCFCE7'; bd = '2px solid #22C55E'; cl = '#166534'; } else if (name === selected) { bg = '#FEE2E2'; bd = '2px solid #EF4444'; cl = '#991B1B'; } }
+              return <button key={name} onClick={() => pick(name)} style={{ padding: '0.75rem', borderRadius: '12px', border: bd, background: bg, cursor: selected ? 'default' : 'pointer', fontFamily: 'var(--font-sans)', fontSize: '0.85rem', fontWeight: 600, color: cl, minHeight: '48px', lineHeight: 1.3 }}>{name}</button>;
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ═══ [26] 체류시간 보상 시스템 — 오래 있을수록 뱃지 ═══ */
+export function RetentionRewards() {
+  const [sec, setSec] = useState(0);
+  const [badges, setBadges] = useState<string[]>([]);
+  const [toast, setToast] = useState('');
+  const ms = [{at:60,msg:'🎯 1분! 탐색 초보',b:'탐색초보'},{at:180,msg:'⭐ 3분! 정보 수집가',b:'수집가'},{at:300,msg:'🔥 5분! 마니아',b:'마니아'},{at:600,msg:'💎 10분! VIP',b:'VIP'},{at:900,msg:'👑 15분! 전설',b:'전설'},{at:1800,msg:'🏆 30분! 밤의 제왕',b:'제왕'}];
+  useEffect(() => { const t = setInterval(() => setSec(s => s + 1), 1000); return () => clearInterval(t); }, []);
+  useEffect(() => {
+    const m = ms.find(x => x.at === sec);
+    if (m && !badges.includes(m.b)) { setBadges(p => [...p, m.b]); setToast(m.msg); setTimeout(() => setToast(''), 4000); }
+  }, [sec]);
+  const nx = ms.find(x => x.at > sec);
+  if (sec < 30) return null;
+  return (
+    <>
+      {toast && <div style={{ position: 'fixed', top: '60px', left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'linear-gradient(135deg, #8B5CF6, #EC4899)', color: '#FFF', padding: '0.75rem 1.5rem', borderRadius: '50px', fontWeight: 700, fontSize: '0.85rem', boxShadow: '0 8px 24px rgba(139,92,246,0.3)', maxWidth: '90%', textAlign: 'center', animation: 'fadeInDown 0.5s' }}>{toast}</div>}
+      {nx && <div style={{ position: 'fixed', bottom: '70px', right: '16px', zIndex: 90, background: '#FFF', border: '1px solid #E5E7EB', borderRadius: '12px', padding: '0.5rem 0.75rem', boxShadow: '0 2px 12px rgba(0,0,0,0.08)', maxWidth: '150px' }}>
+        <p style={{ fontSize: '0.6rem', color: '#666', marginBottom: '0.2rem' }}>{badges.length > 0 ? `🏅 ${badges[badges.length-1]}` : '보상까지'}</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+          <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '3px', height: '3px', overflow: 'hidden' }}>
+            <div style={{ width: `${Math.min(100, (sec / nx.at) * 100)}%`, height: '100%', background: '#8B5CF6', borderRadius: '3px', transition: 'width 1s' }} />
+          </div>
+          <span style={{ fontSize: '0.55rem', fontWeight: 700, color: '#8B5CF6' }}>{Math.floor((nx.at-sec)/60)}:{String((nx.at-sec)%60).padStart(2,'0')}</span>
+        </div>
+      </div>}
+      <style dangerouslySetInnerHTML={{ __html: '@keyframes fadeInDown{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}' }} />
+    </>
+  );
+}

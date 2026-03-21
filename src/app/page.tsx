@@ -4,7 +4,7 @@ import VenueCard from '../components/VenueCard';
 import SearchBar from '../components/SearchBar';
 import Roulette from '../components/Roulette';
 import VsBattle from '../components/VsBattle';
-import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend, PersonalizedFeed, FOMOCounter, ExploreProgress, SwipeFeed, BingeChain, JackpotHunt, DailyFortune, BudgetCalculator, WeeklyHot, MoodMatch } from '../components/AddictionEngine';
+import { SlotMachine, DailyStreak, InfiniteFeed, EndlessRecommend, PersonalizedFeed, FOMOCounter, ExploreProgress, SwipeFeed, BingeChain, JackpotHunt, DailyFortune, BudgetCalculator, WeeklyHot, MoodMatch, TikTokFeed, AutoPlayCountdown, MegaSlot, LiveActivityFeed, StoryMode, VenueQuizGame, RetentionRewards } from '../components/AddictionEngine';
 import { AIRecommendHook, FullCompareHook, MidContentHook, SimilarVenuesHook } from '../components/HookingCTAs';
 
 const cats = getCategories();
@@ -395,6 +395,67 @@ export default function HomePage() {
       <section className="section">
         <div className="container narrow"><EndlessRecommend venues={priorityVenues} /></div>
       </section>
+
+      {/* ═══════════════════════════════════════
+         95분 체류 킬러 메커니즘 — 7가지 추가
+         ═══════════════════════════════════════ */}
+
+      {/* ═══ [20] 틱톡식 풀스크린 스와이프 ═══ */}
+      <section className="section">
+        <div className="container">
+          <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>한 곳씩 탐험하기</h2>
+          <p style={{ textAlign: 'center', color: '#666', marginBottom: '1rem', fontSize: '0.85rem' }}>
+            다음 버튼을 누르면 새로운 곳이 나타난다. 멈출 수 있을까?
+          </p>
+          <TikTokFeed venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ [24] 인스타 스토리 모드 ═══ */}
+      <section className="section" style={{ background: '#F7F7F8' }}>
+        <div className="container">
+          <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>스토리로 보기</h2>
+          <p style={{ textAlign: 'center', color: '#666', marginBottom: '1rem', fontSize: '0.85rem' }}>
+            자동으로 넘어가는 스토리. 마음에 드는 곳은 바로 클릭
+          </p>
+          <StoryMode venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ [22] 메가 슬롯 잭팟 ═══ */}
+      <section className="section">
+        <div className="container">
+          <MegaSlot venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ [25] 업소 퀴즈 미니게임 ═══ */}
+      <section className="section" style={{ background: '#F7F7F8' }}>
+        <div className="container">
+          <VenueQuizGame venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ [21] 넷플릭스 오토플레이 ═══ */}
+      <section className="section">
+        <div className="container">
+          <h2 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>자동 추천</h2>
+          <p style={{ textAlign: 'center', color: '#666', marginBottom: '1rem', fontSize: '0.85rem' }}>
+            8초마다 새로운 곳을 보여준다. 일시정지 가능
+          </p>
+          <AutoPlayCountdown venues={allVenues} />
+        </div>
+      </section>
+
+      {/* ═══ [23] 실시간 활동 피드 ═══ */}
+      <section className="section" style={{ background: '#F7F7F8' }}>
+        <div className="container">
+          <LiveActivityFeed />
+        </div>
+      </section>
+
+      {/* ═══ [26] 체류시간 보상 — 글로벌 ═══ */}
+      <RetentionRewards />
     </>
   );
 }

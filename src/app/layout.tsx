@@ -3,7 +3,7 @@ import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { SlideUpHook, ScrollBannerHook } from '../components/HookingCTAs';
-import { JourneyTimer, SocialProofToast } from '../components/AddictionEngine';
+import { JourneyTimer, SocialProofToast, RetentionRewards } from '../components/AddictionEngine';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -45,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollBannerHook />
         <JourneyTimer />
         <SocialProofToast />
+        <RetentionRewards />
       </body>
     </html>
   );
