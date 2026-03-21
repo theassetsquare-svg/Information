@@ -27,12 +27,12 @@ const top5 = allVenues.filter(v => {
 }).slice(0, 5);
 
 export const metadata: Metadata = {
-  title: '오늘밤어디 — 전국 110곳 비교, 밤의 격이 다른 선택',
-  description: '전국 110곳 비교. 나이트·클럽·라운지·룸·요정·호빠 카테고리별 정리. 밤의 격이 다른 선택.',
+  title: '오늘밤어디 — 일산룸, 일산명월관요정, 전국 나이트·클럽·라운지 실시간 정보',
+  description: '전국 114곳 비교. 일산룸 신실장, 강남청담클럽, 부산나이트 실시간 현장 정보. 밤의 격이 다른 선택.',
   alternates: { canonical: SITE_URL + '/' },
   openGraph: {
-    title: '오늘밤어디 — 전국 110곳 비교, 밤의 격이 다른 선택',
-    description: '전국 110곳 비교. 밤의 격이 다른 선택.',
+    title: '오늘밤어디 — 일산룸, 일산명월관요정, 전국 나이트·클럽·라운지 실시간 정보',
+    description: '전국 114곳 비교. 일산룸 신실장, 강남청담클럽, 부산나이트 실시간 현장 정보.',
     url: SITE_URL + '/', siteName: SITE_NAME, locale: 'ko_KR', type: 'website',
     images: [{ url: '/og/home.png', width: 1200, height: 630 }],
   },
@@ -44,7 +44,7 @@ export default function HomePage() {
   const jsonLd = {
     '@context': 'https://schema.org', '@type': 'WebSite',
     name: SITE_NAME, url: SITE_URL,
-    description: '전국 110곳 비교. 밤의 격이 다른 선택.',
+    description: '전국 114곳 비교. 밤의 격이 다른 선택.',
     potentialAction: { '@type': 'SearchAction', target: `${SITE_URL}/search?q={search_term_string}`, 'query-input': 'required name=search_term_string' },
   };
 
@@ -104,15 +104,33 @@ export default function HomePage() {
         <div className="container"><PersonalizedFeed venues={allVenues} /></div>
       </section>
 
-      {/* ═══ 신실장 직통 상담 ═══ */}
-      <section className="section">
+      {/* ═══ PREMIUM — 신실장 직통 상담 ═══ */}
+      <section style={{ padding: '1.5rem 0' }}>
         <div className="container">
-          <h2>직통 상담 가능</h2>
-          <p style={{ color: '#555', marginBottom: '1rem', fontSize: '0.9rem' }}>
-            신실장 담당 · 전화 한 통으로 바로 상담
-          </p>
-          <div className="venue-grid">
-            {premiumVenues.map(v => <VenueCard key={v.slug} venue={v} />)}
+          <div style={{ background: 'linear-gradient(135deg, #FEF3C7, #FDE68A)', border: '2px solid #F59E0B',
+            borderRadius: '16px', padding: '1.25rem', marginBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+              <span style={{ background: '#F59E0B', color: '#111', fontSize: '0.7rem', fontWeight: 700,
+                padding: '0.2rem 0.6rem', borderRadius: '4px' }}>★ PREMIUM</span>
+              <span style={{ fontSize: '0.85rem', color: '#92400E', fontWeight: 600 }}>신실장 직통 상담</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+              {premiumVenues.map(v => (
+                <div key={v.slug} style={{ background: '#FFFFFF', borderRadius: '12px', padding: '1rem',
+                  border: '1px solid #FCD34D', textAlign: 'center' }}>
+                  <a href={`/${v.cat_slug}/${v.slug}/`} target="_blank" rel="noopener noreferrer"
+                    style={{ textDecoration: 'none', color: '#111' }}>
+                    <p style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>{v.name}</p>
+                    <p style={{ fontSize: '0.8rem', color: '#555', marginBottom: '0.5rem' }}>{v.card_hook}</p>
+                  </a>
+                  <a href="tel:010-3695-4929" target="_blank" rel="noopener noreferrer"
+                    style={{ display: 'inline-block', background: '#22C55E', color: '#FFF', fontWeight: 700,
+                      fontSize: '0.8rem', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none' }}>
+                    📞 신실장 010-3695-4929
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
