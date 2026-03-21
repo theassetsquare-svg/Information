@@ -3,41 +3,55 @@ import { Venue } from './venues';
 export const SITE_NAME = '밤키';
 const YEAR = new Date().getFullYear();
 
-/* ── 해시 기반 결정적 선택 ── */
+/* ── djb2 해시 — 균일 분포 ── */
 function hash(str: string): number {
-  let h = 0;
+  let h = 5381;
   for (let i = 0; i < str.length; i++) {
-    h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+    h = ((h << 5) + h + str.charCodeAt(i)) | 0;
   }
   return Math.abs(h);
 }
 
+/* ── 독립 해시 선택 — 항목마다 개별 해시 → 조합 충돌 제거 ── */
 function pick<T>(arr: T[], slug: string, count: number, offset = 0): T[] {
-  const h = hash(slug + offset);
   const result: T[] = [];
   const used = new Set<number>();
-  for (let i = 0; i < count * 3 && result.length < count; i++) {
-    let idx = (h + i * 11 + offset * 17) % arr.length;
-    while (used.has(idx)) idx = (idx + 1) % arr.length;
-    used.add(idx);
-    result.push(arr[idx]);
+  for (let i = 0; i < count; i++) {
+    let idx = hash(slug + ':' + offset + ':' + i) % arr.length;
+    let attempts = 0;
+    while (used.has(idx) && attempts < arr.length) {
+      idx = (idx + 1) % arr.length;
+      attempts++;
+    }
+    if (!used.has(idx)) {
+      used.add(idx);
+      result.push(arr[idx]);
+    }
   }
   return result;
 }
 
-/* ── 태그라인 풀 (카테고리별) ── */
+/* ── 한국어 조사 ── */
+function hasJong(s: string): boolean {
+  const c = s.charCodeAt(s.length - 1);
+  return c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 !== 0;
+}
+function eunNeun(s: string) { return hasJong(s) ? '은' : '는'; }
+function iGa(s: string) { return hasJong(s) ? '이' : '가'; }
+
+/* ═══ 태그라인 풀 (카테고리별) ═══ */
 const clubTaglines = [
-  '비트가 몸을 감싸는 순간, 밤이 시작된다',
+  '비트가 몸을 감싸는 순간, 시간이 멈춘다',
   '조명이 꺼지면 사운드가 공간을 지배한다',
-  '플로어 위에서 시간을 잊는 곳',
-  '밤이 깊을수록 에너지가 올라가는 공간',
+  '플로어 위에서 시간을 잊게 되는 곳',
+  '에너지가 올라갈수록 공간이 달라진다',
   '입구를 지나는 순간 일상이 멈춘다',
   '사운드 시스템이 다른 차원인 곳',
-  '금요일 밤, 이곳이 아니면 어디를 가겠나',
-  'DJ의 선곡이 밤의 온도를 결정한다',
+  '이곳이 아니면 어디를 가겠나',
+  'DJ의 선곡이 온도를 결정한다',
   '처음 오면 놀라고, 두 번째부턴 단골이 된다',
   '이 동네 야간 문화의 중심축',
-  '드레스코드를 지키면 밤이 달라진다',
+  '드레스코드를 지키면 경험이 달라진다',
   '스피커에서 나오는 베이스가 가슴을 때린다',
   '줄 서서라도 들어가야 하는 이유가 있다',
   '여기 음악이 좋다는 건 이미 정평이 나 있다',
@@ -45,7 +59,7 @@ const clubTaglines = [
   '플로어에 서면 모두가 하나가 된다',
   '자정이 지나야 진짜가 시작된다',
   '조명과 사운드의 조합이 완벽한 곳',
-  '한 번 경험하면 평범한 밤은 심심해진다',
+  '한 번 경험하면 평범한 저녁은 심심해진다',
   '주말이면 대기줄이 생기는 데는 이유가 있다',
   '여기 단골은 다른 곳에서 만족 못 한다',
   '입구부터 느껴지는 에너지가 남다르다',
@@ -54,7 +68,7 @@ const clubTaglines = [
   '새벽까지 에너지가 떨어지지 않는 공간',
   '처음 가도 분위기에 금방 녹아든다',
   '라인업이 달라지면 분위기도 달라진다',
-  '여기서 보낸 밤은 오래 기억에 남는다',
+  '여기서 보낸 시간은 오래 기억에 남는다',
   '사운드를 제대로 느끼려면 안쪽으로 가라',
   '평일에도 사람이 빠지지 않는 곳',
   '이 공간의 에너지는 직접 와봐야 안다',
@@ -65,35 +79,35 @@ const clubTaglines = [
 ];
 
 const nightTaglines = [
-  '테이블에 앉는 순간 밤의 주인공이 된다',
+  '테이블에 앉는 순간 주인공이 된다',
   '격식과 흥이 동시에 존재하는 드문 장소',
-  '이 동네 밤 문화의 산증인',
+  '이 동네 야간 문화의 산증인',
   '오래된 단골이 많다는 건 이유가 분명하다',
   '피크타임의 열기를 직접 느껴봐야 안다',
-  '여기 한번 오면 다른 데 못 간다는 후기가 많다',
+  '한번 오면 다른 데 못 간다는 후기가 많다',
   '좌석 배치부터 남다른 전략이 필요한 곳',
   '자정이 넘으면 진짜 분위기가 시작된다',
-  '주말 밤이면 이 거리가 들썩인다',
-  '전통과 현대가 공존하는 밤의 사교장',
+  '주말이면 이 거리가 들썩인다',
+  '전통과 현대가 공존하는 사교장',
   '한 번 앉으면 시간이 어떻게 가는지 모른다',
   '단골이 단골을 부르는 곳',
   '웨이터가 알아서 분위기를 만들어준다',
-  '금요일 밤이면 빈 자리를 찾기 어렵다',
+  '빈 자리를 찾기 어려운 금·토요일',
   '이 거리에서 가장 오래된 곳에는 이유가 있다',
   '양주 한 병이면 저녁이 달라진다',
-  '자리 잡고 앉으면 밤이 시작된다는 걸 안다',
+  '자리 잡고 앉으면 시작이다',
   '여기 분위기를 말로 설명하기 어렵다',
   '처음 왔는데 벌써 단골 된 기분',
-  '피크타임에 이 좌석을 잡았다면 운이 좋은 거다',
-  '밤이 깊어질수록 뜨거워지는 곳',
+  '이 좌석을 잡았다면 운이 좋은 거다',
+  '깊어질수록 뜨거워지는 곳',
   '일찍 도착하면 좋은 자리를 고를 수 있다',
   '한잔 걸치면서 하루를 마무리하기 딱 좋다',
   '이 동네 사람들이 모이는 데는 이유가 있다',
   '오래 앉아 있어도 지루하지 않은 구조다',
   '자리마다 다른 분위기를 즐길 수 있다',
   '전화 한 통이면 그날 분위기를 미리 알 수 있다',
-  '여기를 모르면 이 동네 밤을 모르는 거다',
-  '사전에 도착하면 여유롭게 밤을 시작한다',
+  '여기를 모르면 이 동네를 모르는 거다',
+  '사전에 도착하면 여유롭게 시작한다',
   '안쪽 부스석의 프라이버시가 남다르다',
   '첫 방문이라도 직원이 잘 안내해준다',
   '주중에 오면 한결 여유롭게 즐길 수 있다',
@@ -101,7 +115,7 @@ const nightTaglines = [
   '동행과 대화가 편한 좌석 구성이 장점이다',
   '미리 예약하면 대기 없이 바로 입장한다',
   '두세 번 와봐야 진짜 매력을 알게 된다',
-  '밤이 길어질수록 흥이 올라간다',
+  '시간이 갈수록 흥이 올라간다',
   '자정 무렵이 가장 뜨거운 시간대다',
   '평일 저녁은 여유로운 분위기를 원하는 사람에게 딱이다',
   '이곳의 단골은 다른 데 갈 생각을 안 한다',
@@ -111,7 +125,6 @@ const nightTaglines = [
   '주변 맛집까지 코스로 엮으면 완벽한 저녁이다',
   '한 자리에서 저녁부터 새벽까지 가능하다',
   '귀가할 때쯤 또 오고 싶다는 생각이 든다',
-  '이 동네 밤의 마지막 퍼즐 한 조각',
   '아무한테나 알려주기 아까운 곳',
   '잘 모르면 지나치기 쉬운 숨은 명소',
   '경험자 사이에서 입소문 난 곳',
@@ -121,12 +134,11 @@ const nightTaglines = [
   '자주 가는 사람만 아는 골든타임이 있다',
   '이곳 분위기에 반하면 다른 데 못 간다',
   '한 번 앉으면 나가기 싫어지는 마력이 있다',
-  '금요일 밤, 여기 아니면 어디를 가겠나',
   '이 동네 저녁의 마무리는 항상 여기다',
 ];
 
 const loungeTaglines = [
-  '대화에 집중할 수 있는 유일한 밤',
+  '대화에 집중할 수 있는 유일한 저녁',
   '잔을 기울이며 시간이 천천히 흐르는 곳',
   '분위기만으로 값어치를 하는 공간',
   '볼륨이 낮아 대화가 주인공이 되는 곳',
@@ -137,7 +149,7 @@ const roomTaglines = [
   '문이 닫히면 오롯이 우리만의 시간',
   '프라이빗한 공간에서 격식을 갖추다',
   '단체 모임도 비즈니스 접대도 여기서 해결된다',
-  '인원수에 맞는 사이즈를 골라 앉으면 밤이 시작된다',
+  '인원수에 맞는 사이즈를 골라 앉으면 시작이다',
 ];
 
 const yojeongTaglines = [
@@ -145,7 +157,7 @@ const yojeongTaglines = [
 ];
 
 const hoppaTaglines = [
-  '여성을 위한 프리미엄 밤의 선택지',
+  '여성을 위한 프리미엄 선택지',
   '처음이라도 편하게 시스템이 안내하는 곳',
   '분위기 좋고 서비스 확실한 프리미엄 공간',
   '오늘 주인공은 당신이 된다',
@@ -159,72 +171,95 @@ const hoppaTaglines = [
 
 function getTagline(venue: Venue): string {
   const pools: Record<string, string[]> = {
-    club: clubTaglines,
-    night: nightTaglines,
-    lounge: loungeTaglines,
-    room: roomTaglines,
-    yojeong: yojeongTaglines,
-    hoppa: hoppaTaglines,
+    club: clubTaglines, night: nightTaglines, lounge: loungeTaglines,
+    room: roomTaglines, yojeong: yojeongTaglines, hoppa: hoppaTaglines,
   };
   const pool = pools[venue.cat_slug] || clubTaglines;
-  const idx = hash(venue.slug + 'tagline') % pool.length;
-  return pool[idx];
+  return pool[hash(venue.slug + 'tagline') % pool.length];
 }
 
-/* ── 서사 풀 (지역명/카테고리명 사용 금지 — 스터핑 방지) ── */
-const narrativePool = [
-  () => `문을 열고 들어서는 순간의 공기부터 다르다. 밤이 깊어질수록 이곳은 제 색깔을 드러낸다.`,
-  () => `밤 외출을 계획할 때, 여기는 항상 후보에 올라온다. 분위기와 접근성의 균형이 괜찮다.`,
-  () => `피크타임은 자정 무렵이다. 그 전에 도착하면 좋은 자리를 고를 여유가 생긴다.`,
-  () => `이곳의 강점은 한마디로 정리하기 어렵다. 직접 가봐야 느낌이 온다는 후기가 많다.`,
-  () => `사전에 전화 한 통이면 당일 상황을 파악할 수 있다. 주말이라면 확인이 필수다.`,
-  () => `안쪽 좌석과 바 카운터의 분위기가 사뭇 다르다. 첫 방문이면 바 쪽에서 한잔하며 공간을 파악하는 편이 낫다.`,
-  () => `금요일 밤에는 대기가 생길 수 있다. 일찍 움직이거나 평일을 노려보는 것도 방법이다.`,
-  () => `단체로 오면 테이블을, 소수라면 바석을 추천한다. 인원에 따라 경험이 달라진다.`,
-  () => `접근성과 분위기를 동시에 잡은 몇 안 되는 곳이다.`,
-  () => `첫인상이 전부는 아니다. 두세 번 방문하면 진짜 매력이 보이기 시작한다.`,
-  () => `주변에 식사할 곳이 많다. 저녁부터 자연스럽게 밤으로 이어지는 동선이 완성된다.`,
-  () => `혼자 와도 어색하지 않은 구조다. 바 카운터가 자연스러운 1인석 역할을 한다.`,
-  () => `주중에 방문하면 여유롭게 즐길 수 있다. 직원 응대도 한결 느긋해진다.`,
-  () => `가격대는 주변 상권 수준이다. 예산을 잡아두면 부담이 줄어든다.`,
-  () => `다녀온 사람들의 공통 후기는 "다시 오고 싶다"이다.`,
-  () => `약속 장소를 정할 때 여기를 떠올리는 사람이 늘어나고 있다.`,
-  () => `내부 인테리어가 정돈돼서 사진도 잘 나온다. SNS 후기가 많은 이유가 분명하다.`,
-  () => `운영 시간을 꼭 확인하고 가라. 요일에 따라 오픈 시간이 다를 수 있다.`,
-  () => `여기는 음악 선곡이 좋다는 평이 많다. 취향에 맞는 밤을 보내고 싶다면 참고하자.`,
-  () => `이 동네에서 밤을 보내본 사람이라면 이곳의 위치를 이미 알 것이다.`,
+/* ═══ 서사 풀 — 48개 (업소명·카테고리·지역명 미사용) ═══ */
+const narrativePool: string[] = [
+  '문을 열고 들어서면 공기가 달라진다는 걸 느낀다. 조명의 톤과 배경 음악이 독자적인 분위기를 만들어놓고 있다.',
+  '첫 방문이라면 입구에서 잠깐 멈춰 공간을 훑어보자. 어디에 자리를 잡느냐에 따라 경험이 크게 달라진다.',
+  '내부가 깔끔하게 정돈돼 있다. 디테일에 신경 쓴 흔적이 곳곳에 보여 사진도 잘 나온다.',
+  '외관만 보고 판단하지 마라. 안에 들어서면 느낌이 확 다르다는 후기가 많다.',
+  '처음 왔는데도 편안한 느낌이 드는 건 직원 응대가 자연스럽기 때문이다.',
+  '동행자가 있다면 입장 전 어떤 자리를 원하는지 미리 이야기해두는 게 좋다.',
+  '이른 시간에 방문하면 한산한 분위기에서 공간을 천천히 느낄 수 있다.',
+  '메인 홀 외에 별도의 구역이 있기도 하다. 직원에게 안내를 받아보자.',
+  '첫인상이 강렬한 곳이다. 그래서 재방문율이 높다.',
+  '입구부터 메인 공간까지 걸어가면서 전체 구성을 파악해보자. 예상과 다를 수 있다.',
+  '인테리어 스타일에 호불호가 갈릴 수 있지만, 전반적인 완성도는 높은 편이다.',
+  '공간의 향기까지 인상적이다. 작은 요소에도 신경 쓴다는 증거다.',
+  '피크타임은 자정 무렵이다. 그 전에 도착하면 좋은 자리를 고를 여유가 생긴다.',
+  '주중에 방문하면 여유로운 분위기를 만끽할 수 있다. 직원 응대도 한결 세심해진다.',
+  '금·토요일에는 대기가 생길 수 있다. 일찍 움직이거나 주중을 노리는 것도 방법이다.',
+  '오픈 직후에 방문하면 분위기가 형성되기 전이라 차분하게 공간을 살필 수 있다.',
+  '토요일이 가장 붐비는 요일이다. 특별한 이유가 없다면 금요일이 조금 더 여유롭다.',
+  '마감 시간이 가까워지면 분위기가 급격히 달라진다. 여유 있게 즐기려면 일찍 자리 잡자.',
+  '계절에 따라 방문객 수가 달라진다. 여름과 연말이 특히 붐빈다.',
+  '공휴일 전날은 주말 못지않게 사람이 몰린다. 미리 연락하는 편이 안전하다.',
+  '주말 낮에 전화하면 저녁 상황을 알려준다. 부담 없이 문의하자.',
+  '늦은 시간에 도착하면 이미 분위기가 무르익어 있어 바로 동화될 수 있다.',
+  '이른 저녁에 출발해서 주변에서 식사한 뒤 방문하는 코스를 추천한다.',
+  '비 오는 날에 방문하면 의외로 한산해서 여유롭게 보낼 수 있다.',
+  '직원 응대가 다른 곳과 확실히 다르다. 초행자도 편하게 안내받을 수 있다.',
+  '사전에 전화 한 통이면 당일 상황을 파악할 수 있다. 특히 주말에는 확인이 필수다.',
+  '테이블 서비스가 기본이라 자리에 앉으면 직원이 먼저 다가온다.',
+  '요청하면 좌석 변경이 가능한 경우가 많다. 불편하면 바로 말하자.',
+  '스태프 추천 메뉴를 한번 물어보자. 직접 경험에서 나온 의견이라 참고가 된다.',
+  '기념일이나 특별한 목적을 미리 알려주면 세팅을 도와주기도 한다.',
+  '이름을 기억해주는 직원이 있다면 단골이 된 증거다.',
+  '퇴장 시 안내까지 꼼꼼하다. 마지막 인상도 좋게 가져간다.',
+  '접근성과 분위기를 동시에 잡은 몇 안 되는 곳이다. 교통편은 미리 확인해두자.',
+  '주변에 식사할 곳이 많다. 저녁부터 자연스럽게 이어지는 동선이 완성된다.',
+  '가격대는 주변 상권 수준이다. 예산을 잡아두면 부담 없이 즐길 수 있다.',
+  '혼자 와도 어색하지 않은 구조다. 바 카운터가 자연스러운 1인석 역할을 한다.',
+  '주차가 쉽지 않을 수 있다. 대중교통이나 택시 이용을 추천한다.',
+  '예약이 필수는 아니지만 주말에는 미리 연락하는 편이 안전하다.',
+  '1차로 끝낼 수도 있고, 근처에서 2차를 이어갈 수도 있다.',
+  '귀가 교통편을 미리 확인해두자. 새벽에는 택시 잡기가 어려울 수 있다.',
+  '보조배터리와 현금을 챙기면 불편할 일이 줄어든다.',
+  '다녀온 사람들의 공통 후기는 "다시 오고 싶다"이다. 그 이유는 직접 가봐야 안다.',
+  '단체 모임 장소로 추천하면 실패 확률이 낮다. 공간이 그 역할을 해준다.',
+  '두세 번 방문해야 진짜 매력이 보이기 시작한다. 처음에 아니다 싶어도 한 번 더 가보자.',
+  'SNS 후기보다 직접 경험이 중요하다. 사진보다 실제가 나은 경우가 많다.',
+  '친구를 데려왔다가 감사 인사를 받았다는 후기가 꽤 있다.',
+  '나갈 때쯤 다음 방문 날짜를 정하게 된다. 그만큼 여운이 남는다.',
+  '약속 장소를 정할 때 이곳을 떠올리는 사람이 점점 늘고 있다.',
 ];
 
-/* ── FAQ 풀 (지역명/카테고리명 미사용) ── */
-const faqPool: (() => { q: string; a: string })[] = [
-  () => ({ q: '영업시간이 어떻게 되나요?', a: '방문 전 전화로 확인하는 편을 권합니다. 요일에 따라 다를 수 있습니다.' }),
-  () => ({ q: '위치를 알고 싶어요', a: '정확한 주소는 전화 문의가 가장 빠릅니다. 기본 정보란을 참고하세요.' }),
-  () => ({ q: '입장 연령 기준이 있나요?', a: '만 19세 이상만 출입 가능합니다. 신분증을 반드시 지참하세요.' }),
-  () => ({ q: '사전 예약이 필요한가요?', a: '예약 없이 방문 가능하지만 주말에는 미리 연락을 권합니다.' }),
-  () => ({ q: '1인 방문도 괜찮은가요?', a: '바 카운터를 이용하면 단독 방문도 자연스럽습니다.' }),
-  () => ({ q: '주차 공간이 있나요?', a: '인근 유료 주차장을 이용하거나 대중교통을 추천합니다.' }),
-  () => ({ q: '카드 결제가 되나요?', a: '대부분의 카드 결제가 가능합니다.' }),
-  () => ({ q: '복장 규정이 있나요?', a: '깔끔한 캐주얼 이상을 권장합니다. 슬리퍼나 운동복은 제한될 수 있습니다.' }),
-  () => ({ q: '가장 붐비는 시간대는?', a: '보통 금·토요일 밤 11시~새벽 1시가 절정입니다.' }),
-  () => ({ q: '예산은 얼마 정도 잡아야 하나요?', a: '주변 상권 평균 수준입니다. 전화로 미리 알아보면 계획이 수월합니다.' }),
-];
-
-/* ── 팁 풀 ── */
+/* ═══ 팁 풀 — 28개 ═══ */
 const tipPool: string[] = [
-  '피크타임 전에 도착하면 좋은 자리를 선점하게 된다.',
+  '피크타임 전에 도착하면 좋은 자리를 선점할 수 있다.',
   '신분증은 필수다. 없으면 입장이 불가능하다.',
-  '보조 배터리를 꼭 챙기자. 새벽에 배터리 없으면 곤란하다.',
-  '귀중품은 최소한으로 가져가는 것이 안전하다.',
+  '보조배터리를 꼭 챙기자. 새벽에 배터리가 없으면 곤란하다.',
+  '귀중품은 최소한으로 가져가자.',
   '음주 후 운전은 절대 금지. 대리운전이나 택시를 이용하자.',
-  '복장은 깔끔하게. 첫인상이 저녁 경험을 좌우한다.',
+  '복장은 깔끔하게. 첫인상이 경험을 좌우한다.',
   '물을 충분히 마셔두면 다음 날 컨디션이 한결 낫다.',
-  '바 카운터에 앉으면 혼자서도 자연스럽게 분위기를 만끽하게 된다.',
+  '바 카운터에 앉으면 혼자서도 자연스럽게 분위기를 만끽할 수 있다.',
   '주변 맛집을 미리 알아두면 저녁부터 새벽까지 동선이 완성된다.',
-  '주말 밤에는 택시 잡기가 어렵다. 호출 앱을 미리 준비하자.',
+  '주말에는 택시 잡기가 어렵다. 호출 앱을 미리 설치하자.',
   '처음 가는 곳이라면 너무 늦은 시간보다 오픈 직후가 편하다.',
   '동행자와 귀가 방법을 미리 합의해두면 편하다.',
-  '사전에 전화로 현재 상황을 확인하면 헛걸음을 줄인다.',
+  '사전에 전화로 상황을 확인하면 헛걸음을 줄인다.',
   '리뷰는 참고만 하자. 직접 가봐야 비로소 판단이 가능하다.',
+  '음료를 주문할 때 추천을 물어보면 만족도가 높아진다.',
+  '화장실 위치를 미리 파악해두면 편하다.',
+  '소지품은 눈에 보이는 곳에 두자. 분실 주의.',
+  '에어컨이 강한 곳이 있다. 겉옷 하나 챙기면 좋다.',
+  '입장 전 현금 잔액을 확인하자. 카드가 안 되는 경우도 있다.',
+  '주변 편의점 위치를 알아두면 유용하다.',
+  '주차 요금을 미리 확인하면 예산 관리에 도움이 된다.',
+  '사진 촬영이 제한되는 구역이 있을 수 있다. 확인 후 촬영하자.',
+  '2차를 계획한다면 근처 선택지를 미리 알아두자.',
+  '음주량 조절이 핵심이다. 즐거운 기억으로 남겨야 한다.',
+  '흡연 구역을 미리 확인해두면 편하다.',
+  '단체라면 예산을 나눌 방법을 미리 정해두자.',
+  '영수증을 꼭 받자. 나중에 확인할 일이 생길 수 있다.',
+  '방문 후기를 남기면 다른 사람에게 도움이 된다.',
 ];
 
 const catLabel: Record<string, string> = {
@@ -232,126 +267,270 @@ const catLabel: Record<string, string> = {
   room: '룸', yojeong: '요정', hoppa: '호빠',
 };
 
-/* 카테고리 단어 목록 (치환 대상) */
-const catWords = ['나이트', '클럽', '라운지', '룸', '요정', '호빠'];
+/* ═══ 업소별 서사 생성 — 템플릿(고유) + 풀(다양) ═══ */
+function generateNarrative(venue: Venue, label: string): string {
+  // 지역·구역이 동일하면 중복 방지
+  const loc = venue.region === venue.district ? venue.district : `${venue.region} ${venue.district}`;
+  const tplVariants = [
+    (v: Venue, l: string) => `${v.name}${eunNeun(v.name)} ${loc}에 자리한 ${l}이다. ${v.station ? v.station + '에서 접근할 수 있다.' : '위치는 방문 전 확인하자.'} ${v.hours ? '영업시간은 ' + v.hours + '이다.' : ''}`,
+    (v: Venue, l: string) => `${v.district}에 있는 ${v.name}. ${v.card_hook || '직접 방문해야 분위기를 알 수 있는 곳이다.'} ${v.station ? v.station + ' 인근이라 교통이 편리하다.' : ''}`,
+    (v: Venue, l: string) => `${v.name}${eunNeun(v.name)} ${loc} 소재 ${l}이다. ${v.card_hook || '현장 분위기를 직접 확인해보자.'}`,
+    (v: Venue, l: string) => `${v.district}의 ${l}, ${v.name}. ${v.hours ? v.hours + '에 운영한다.' : '운영 시간은 전화로 확인 가능하다.'} ${v.station ? v.station + '에서 가깝다.' : ''}`,
+    (v: Venue, l: string) => `${v.name}${iGa(v.name)} ${v.district}에서 눈에 띄는 건 분명하다. ${v.card_hook || '직접 방문해서 확인해보자.'} ${v.station ? '가장 가까운 역은 ' + v.station + '이다.' : ''}`,
+    (v: Venue, l: string) => `${loc}에 위치한 ${v.name}. ${v.card_hook || '방문 전 전화 한 통을 추천한다.'} ${v.hours ? '영업시간: ' + v.hours + '.' : ''}`,
+  ];
+  const tplFn = tplVariants[hash(venue.slug + ':tpl') % tplVariants.length];
+  const templatePara = tplFn(venue, label).replace(/\s{2,}/g, ' ').trim();
 
-/* ── 메인 콘텐츠 생성 ── */
+  // 풀에서 4개 독립 선택 → C(48,4) = 194,580 조합
+  const poolParas = pick(narrativePool, venue.slug, 4, 0);
+  return [templatePara, ...poolParas].join('\n\n');
+}
+
+/* ═══ 업소별 FAQ — 실제 데이터 기반 (12개 중 5개 선택) ═══ */
+function generateFaq(venue: Venue, label: string): { q: string; a: string }[] {
+  const allFaq: { q: string; a: string }[] = [
+    {
+      q: `${venue.name} 영업시간이 어떻게 되나요?`,
+      a: venue.hours
+        ? `${venue.hours}에 운영합니다. 요일이나 시즌에 따라 변동 가능하니 방문 전 전화 확인을 권장합니다.`
+        : '요일에 따라 상이합니다. 방문 전 전화로 확인하시면 정확합니다.',
+    },
+    {
+      q: `${venue.name} 위치가 어디인가요?`,
+      a: venue.address
+        ? `${venue.address}에 위치합니다.${venue.station ? ' ' + venue.station + '에서 접근 가능합니다.' : ''}`
+        : `${venue.district} ${venue.region} 소재입니다.${venue.station ? ' ' + venue.station + '에서 접근 가능합니다.' : ' 정확한 위치는 전화 문의가 빠릅니다.'}`,
+    },
+    {
+      q: '입장 연령 기준이 있나요?',
+      a: '만 19세 이상만 출입 가능합니다. 신분증(주민등록증, 운전면허증, 여권)을 반드시 지참하세요.',
+    },
+    {
+      q: '사전 예약이 필요한가요?',
+      a: venue.cat_slug === 'yojeong' ? '예약제로 운영됩니다. 반드시 사전에 전화로 예약하세요.'
+        : venue.cat_slug === 'room' ? '예약을 권장합니다. 인원수와 목적을 미리 알려주시면 적합한 공간을 배정받을 수 있습니다.'
+        : '예약 없이 방문 가능하지만, 주말에는 미리 연락하시는 편이 안전합니다.',
+    },
+    {
+      q: '1인 방문도 괜찮은가요?',
+      a: venue.cat_slug === 'room' ? '보통 2인 이상 이용을 권장하지만, 전화로 문의하시면 안내받을 수 있습니다.'
+        : venue.cat_slug === 'hoppa' ? '물론입니다. 혼자 방문하는 분도 많으며 매니저가 편하게 안내해드립니다.'
+        : '바 카운터를 이용하면 혼자서도 자연스럽게 분위기를 즐길 수 있습니다.',
+    },
+    {
+      q: '주차는 가능한가요?',
+      a: venue.station
+        ? `인근 유료 주차장을 이용하거나 ${venue.station} 대중교통을 추천합니다.`
+        : '인근 유료 주차장을 이용하시거나 택시를 추천합니다.',
+    },
+    {
+      q: '결제 방법은 어떻게 되나요?',
+      a: '카드 결제 가능합니다. 다만 일부 서비스는 현금만 되는 경우도 있으니 소액 현금을 준비하세요.',
+    },
+    {
+      q: '복장 규정이 있나요?',
+      a: venue.cat_slug === 'club' ? '드레스코드가 있습니다. 깔끔한 캐주얼 이상, 슬리퍼·반바지·운동복은 입장 제한됩니다.'
+        : venue.cat_slug === 'yojeong' ? '격식을 갖춘 복장을 권장합니다. 비즈니스 캐주얼 이상이 적합합니다.'
+        : '깔끔한 캐주얼이면 충분합니다. 슬리퍼나 운동복은 제한될 수 있습니다.',
+    },
+    {
+      q: '가장 붐비는 시간대는 언제인가요?',
+      a: venue.cat_slug === 'lounge' ? '금·토요일 저녁 9시~11시가 가장 활발합니다.'
+        : venue.cat_slug === 'yojeong' ? '저녁 6시~9시 예약이 가장 많습니다.'
+        : '금·토요일 23시~새벽 1시가 피크타임입니다. 일찍 도착하면 좋은 자리를 확보할 수 있습니다.',
+    },
+    {
+      q: '예산은 얼마 정도 잡아야 하나요?',
+      a: venue.cat_slug === 'night' ? '양주 1병 기준 10~30만 원대가 일반적입니다. 지역과 요일에 따라 차이가 있으니 전화로 확인하세요.'
+        : venue.cat_slug === 'club' ? '입장료 무료~3만 원, 음료 1~2만 원대가 보통입니다.'
+        : venue.cat_slug === 'yojeong' ? '코스 요리 기준 1인 10~20만 원대입니다. 인원과 메뉴에 따라 달라집니다.'
+        : venue.cat_slug === 'room' ? '인원수와 이용 시간에 따라 다릅니다. 전화로 견적을 받아보세요.'
+        : '이용 형태에 따라 다릅니다. 전화로 미리 알아보면 계획이 수월합니다.',
+    },
+    {
+      q: `${venue.name} 문의 연락처가 어떻게 되나요?`,
+      a: venue.nickname && venue.nickname_phone
+        ? `담당 ${venue.nickname}(${venue.nickname_phone})에게 연락하시면 됩니다.`
+        : venue.phone ? `${venue.phone}으로 전화 문의하시면 됩니다.`
+        : '상단 기본 정보에 기재된 연락처를 참고하세요.',
+    },
+    {
+      q: '주변에 식사할 곳이 있나요?',
+      a: `${venue.district} 인근에 다양한 음식점이 있습니다. 저녁 식사 후 방문하면 자연스러운 코스가 됩니다.`,
+    },
+  ];
+  return pick(allFaq, venue.slug, 5, 10);
+}
+
+/* ═══ 업소별 인기 시간대 — 카테고리 기반 + 해시 변동 ═══ */
+function generateTimeSlots(venue: Venue): { time: string; level: string; bar: string }[] {
+  const vary = (base: number, seed: number): number => {
+    const h = hash(venue.slug + ':ts:' + seed);
+    const delta = (h % 25) - 12;
+    return Math.min(98, Math.max(5, base + delta));
+  };
+  const levelOf = (pct: number): string => {
+    if (pct <= 20) return '한산';
+    if (pct <= 40) return '여유';
+    if (pct <= 60) return '보통';
+    if (pct <= 75) return '활발';
+    if (pct <= 88) return '붐빔';
+    return '피크';
+  };
+  type TB = { time: string; base: number; seed: number };
+  const patterns: Record<string, TB[]> = {
+    club: [
+      { time: '평일 저녁', base: 15, seed: 0 },
+      { time: '금요일 23시~', base: 82, seed: 1 },
+      { time: '토요일 자정~', base: 93, seed: 2 },
+      { time: '일요일', base: 12, seed: 3 },
+    ],
+    night: [
+      { time: '평일 저녁', base: 25, seed: 0 },
+      { time: '금요일 22시~', base: 78, seed: 1 },
+      { time: '토요일 22시~', base: 90, seed: 2 },
+      { time: '일요일', base: 18, seed: 3 },
+    ],
+    lounge: [
+      { time: '평일 저녁', base: 38, seed: 0 },
+      { time: '금·토 20시~', base: 75, seed: 1 },
+      { time: '금·토 23시~', base: 58, seed: 2 },
+      { time: '일요일', base: 28, seed: 3 },
+    ],
+    room: [
+      { time: '평일', base: 32, seed: 0 },
+      { time: '금요일 저녁', base: 72, seed: 1 },
+      { time: '토요일 저녁', base: 85, seed: 2 },
+      { time: '일요일', base: 22, seed: 3 },
+    ],
+    yojeong: [
+      { time: '평일 점심', base: 42, seed: 0 },
+      { time: '평일 저녁', base: 68, seed: 1 },
+      { time: '주말 저녁', base: 88, seed: 2 },
+      { time: '공휴일', base: 52, seed: 3 },
+    ],
+    hoppa: [
+      { time: '평일', base: 18, seed: 0 },
+      { time: '금요일 22시~', base: 80, seed: 1 },
+      { time: '토요일 23시~', base: 92, seed: 2 },
+      { time: '일요일', base: 14, seed: 3 },
+    ],
+  };
+  const pat = patterns[venue.cat_slug] || patterns.night;
+  return pat.map(p => {
+    const pct = vary(p.base, p.seed);
+    return { time: p.time, level: levelOf(pct), bar: pct + '%' };
+  });
+}
+
+/* ═══ 업소별 첫 방문 가이드 — 업소 데이터 반영 ═══ */
+function generateGuide(venue: Venue): { intro: string; tips: string[] } {
+  const catIntros: Record<string, string> = {
+    night: `${venue.name}${eunNeun(venue.name)} 테이블 중심의 사교 공간이다. 입장 후 웨이터가 자리를 안내한다.`,
+    club: `${venue.name}${eunNeun(venue.name)} 플로어 중심 공간이다. 드레스코드를 확인하고 방문하자.`,
+    lounge: `${venue.name}${eunNeun(venue.name)} 대화가 주인공인 공간이다. 음악 볼륨이 낮아 편안하다.`,
+    room: `${venue.name}${eunNeun(venue.name)} 프라이빗 공간이다. 인원수에 맞는 사이즈를 미리 확인하자.`,
+    yojeong: `${venue.name}${eunNeun(venue.name)} 한정식 코스와 공연이 함께하는 전통 공간이다. 예약제로 운영된다.`,
+    hoppa: `${venue.name}${eunNeun(venue.name)} 여성 고객을 위한 공간이다. 시스템을 미리 이해하면 편하다.`,
+  };
+  const catTips: Record<string, string[]> = {
+    night: ['양주 1병이 기본 주문 단위', '테이블 위치가 경험을 좌우한다', '피크타임 전에 도착하면 좋은 자리'],
+    club: ['슬리퍼·운동복 입장 불가', '입장료+음료 별도인 곳 대부분', '귀중품은 최소한으로'],
+    lounge: ['시그니처 칵테일부터 시도해보자', '바 카운터는 1인 환영', '주말 저녁은 예약 추천'],
+    room: ['전화로 인원·예산·목적 전달', '정찰제 확인하면 가격 투명', '픽업 서비스 있는 곳도 있다'],
+    yojeong: ['사전 예약 필수', '정장 또는 비즈니스 캐주얼', '알레르기 있으면 미리 알려주자'],
+    hoppa: ['매니저가 시스템 설명해준다', '호스트 지명은 선택사항', '예산 미리 정해두면 부담 없다'],
+  };
+
+  let intro = catIntros[venue.cat_slug] || catIntros.night;
+  if (venue.station) intro += ` ${venue.station}에서 접근 가능.`;
+  if (venue.hours) intro += ` 영업시간: ${venue.hours}.`;
+
+  const tips = [...(catTips[venue.cat_slug] || catTips.night)];
+  if (venue.nickname && venue.nickname_phone) tips.push(`문의: ${venue.nickname} ${venue.nickname_phone}`);
+  return { intro, tips };
+}
+
+/* ═══ 메타 설명 — 실제 문장 (업소별 고유) ═══ */
+function generateDescription(venue: Venue, label: string, tagline: string): string {
+  const dloc = venue.region === venue.district ? venue.district : `${venue.region} ${venue.district}`;
+  const descVariants = [
+    (v: Venue, l: string, t: string) => `${v.name} ${l} ${v.district} 방문 정보. ${v.hours || '영업시간 확인 필요'}. ${t}`,
+    (v: Venue, l: string, t: string) => `${v.district} ${v.name}. ${t} ${v.hours ? v.hours + ' 운영.' : ''}교통·예산·체크리스트 수록.`,
+    (v: Venue, l: string, t: string) => `${v.name} — ${t} ${dloc} 소재 ${l}. 영업시간·위치·이용 팁 안내.`,
+    (v: Venue, l: string, t: string) => `${v.district} ${l} ${v.name}. ${t} 주소·시간·후기·교통 정리.`,
+    (v: Venue, l: string, t: string) => `${v.name} 완벽 가이드. ${v.district} ${l}. ${v.hours || '시간 확인 필요'}. ${t}`,
+    (v: Venue, l: string, t: string) => `${dloc} ${v.name} ${l}. ${t} 위치·예산·방문 팁 총정리.`,
+  ];
+  const fn = descVariants[hash(venue.slug + ':desc') % descVariants.length];
+  return fn(venue, label, tagline).replace(/\s{2,}/g, ' ').trim().slice(0, 155);
+}
+
+/* ═══════════════════════════════════════
+   메인 콘텐츠 생성
+   ═══════════════════════════════════════ */
 export function generateGoldContent(venue: Venue, venueIndex = 0) {
   const tagline = getTagline(venue);
   const label = catLabel[venue.cat_slug] || venue.category;
 
-  // 서사 3단락 (지역명/카테고리명 사용하지 않음)
-  const selectedNarratives = pick(narrativePool, venue.slug, 3, 0);
-  let narrativeText = selectedNarratives.map(fn => fn()).join('\n\n');
-
-  // 업소명 2회 초과 시 "이곳"으로 치환
-  let nameCount = 0;
-  const escaped = venue.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  narrativeText = narrativeText.replace(new RegExp(escaped, 'g'), () => {
-    nameCount++;
-    return nameCount <= 2 ? venue.name : '이곳';
-  });
-
-  // nameCount가 2에 도달하면 카테고리 단어도 "여기", "이곳"으로 치환
-  if (nameCount >= 2) {
-    const replacements = ['여기', '이곳', '해당 업소'];
-    let catWordCount = 0;
-    for (const cw of catWords) {
-      narrativeText = narrativeText.replace(new RegExp(cw, 'g'), () => {
-        catWordCount++;
-        return catWordCount <= 1 ? cw : replacements[catWordCount % replacements.length];
-      });
-    }
-  }
-
-  // FAQ 5개 (지역명/카테고리명 미사용)
-  const faq = pick(faqPool, venue.slug, 5, 1).map(fn => fn());
-
-  // 팁 6개
-  const tips = pick(tipPool, venue.slug, 6, 2);
-
-  // 고유 description — venue.name만 포함, 지역명 제거 (유사도 방지)
-  // 20개 독립 문장 — 모든 한국어 단어가 서로 겹치지 않음, 각 13단어(2+chars) 이상
-  const descSentences = [
-    '답사 기록을 올해 현장에서 직접 작성한 메모입니다 꼼꼼히 빠짐없이 남겼습니다 스크랩하세요',
-    '공개된 체크리스트로 단골들의 노하우까지 총정리하여 수록했습니다 참고하세요 보관추천',
-    '경험자가 남긴 안내서 완결판이며 세밀하게 모든면을 구성했습니다 마지막페이지까지',
-    '취재 정리본으로 금년 밀착 르포를 빼곡히 담았습니다 핵심자료입니다 독점제공',
-    '필독 꿀팁 모음과 초행길 참고 자료를 엄선하여 실었습니다 활용하세요 초보환영',
-    '총집합 요약으로 운영 시간과 방문 흐름까지 정리했습니다 확인바랍니다 오픈클로즈포함',
-    '확인 사항과 피크타임 복장 교통편을 조목조목 적었습니다 미리읽자 외출전필수',
-    '핵심 포인트와 실전 활용법을 샅샅이 알려드립니다 놓치지마세요 즐겨찾기등록',
-    '고민 해결을 돕는 접근성과 동선을 상세히 파악했습니다 도움되길 내비게이션활용',
-    '종합 판단 자료로 최신 개정 내용을 충실하게 반영했습니다 업데이트됨 신뢰도높음',
-    '추천 목록과 생생 탐방 후기를 한데 모았습니다 지금바로확인 랭킹반영',
-    '매력 발견과 사전 숙지 필수 항목을 열거했습니다 읽어보세요 기본상식정리',
-    '예산 견적부터 좌석 배치까지 상세하게 서술했습니다 가격비교가능 절약팁수록',
-    '음료 메뉴와 주변 맛집 루트를 하나로 엮었습니다 코스추천포함 동선최적화',
-    '입장 절차와 착장 규정을 세세하게 기재했습니다 사전필독자료 통과율향상',
-    '주차 안내와 대중교통 노선을 나란히 병기했습니다 길찾기편리 지하철버스택시 주변주차장표시',
-    '첫 방문자를 위한 준비물과 유의점 목록을 나열했습니다 꼭보세요 초심자배려',
-    '재방문율 높은 이유를 구체적으로 분석하여 기술했습니다 상세분석본 데이터기반',
-    '야간 이용 팁과 귀가 수단을 함께 친절히 안내합니다 안심귀가 새벽대비',
-    '시즌별 특징과 요일별 혼잡도를 보기 쉽게 표기했습니다 시간대참조 주중주말구분',
-  ];
-  // description — 1500개 고유 합성어 (25접두사×60접미사), 각 venue 10개 순차할당 → 겹침 0
-  const pre = ['현장','방문','단골','피크','첫걸음','입장','좌석','음료','주차','드레스','새벽','예산','실전','접근','동선','최신','탐방','랭킹','예약','귀가','야간','주말','시즌','혼잡','분위기'];
-  const suf = ['기록','정리','안내','비법','요약','해설','분석','후기','가이드','설계','메모','수록','체크','모음','리포트','팁','자료','포인트','르포','칼럼','참고','입문','정보','현황','전망','특성','핵심','개요','소개','설명','문서','브리핑','편집','인사이트','프로파일','인덱스','개론','실무','매뉴얼','레퍼런스','케이스','프리뷰','스케치','다이제스트','스냅샷','워크북','아카이브','컬렉션','세부','총평','개정','부록','색인','발췌','초록','요령','대비','감상','절차','동향'];
-  const allWords: string[] = [];
-  for (const p of pre) for (const s of suf) allWords.push(p + s);
-  // venue i → words [i*10 .. i*10+9] (1500개 중 150*10=1500, 150개 업소까지 겹침 0)
-  const start = (venueIndex % 150) * 10;
-  const picked = allWords.slice(start, start + 10).join(' ');
-  const description = `${venue.name}. ${picked}.`.slice(0, 150);
+  const narrative = generateNarrative(venue, label);
+  const faq = generateFaq(venue, label);
+  const tips = pick(tipPool, venue.slug, 6, 20);
+  const description = generateDescription(venue, label, tagline);
+  const timeSlots = generateTimeSlots(venue);
+  const guide = generateGuide(venue);
 
   return {
     tagline,
     title: `${venue.name} — ${tagline} | ${SITE_NAME}`,
     description,
     ogImage: `/og/${venue.cat_slug}-${venue.slug}.png`,
-    narrative: narrativeText,
+    narrative,
     faq,
     tips,
+    timeSlots,
+    guide,
     year: YEAR,
   };
 }
 
-/* ── 카테고리 페이지 콘텐츠 (완전히 다른 어휘 — 공유 단어 없음) ── */
+/* ═══ 카테고리 페이지 콘텐츠 ═══ */
 export function getCategoryContent(catSlug: string) {
   const data: Record<string, { title: string; description: string; heading: string; intro: string }> = {
     club: {
       title: `플로어 사운드 컬렉션 | ${SITE_NAME}`,
-      description: `홍대·이태원·강남·제주 DJ 라인업과 플로어 사운드를 최신본으로 정리했습니다.`,
+      description: '홍대·이태원·강남·제주 DJ 라인업과 플로어 사운드를 최신본으로 정리했습니다.',
       heading: '플로어 사운드, 한눈에 살펴보기',
       intro: 'EDM부터 힙합, 테크노까지. 사운드와 분위기가 다른 각지의 플로어를 정리했다.',
     },
     night: {
       title: `테이블 사교 모음집 | ${SITE_NAME}`,
-      description: `수유·상봉·인천·수원 테이블석 배치와 입장 규정을 올해 데이터로 수록했습니다.`,
+      description: '수유·상봉·인천·수원 테이블석 배치와 입장 규정을 올해 데이터로 수록했습니다.',
       heading: '테이블 사교, 격식과 흥이 함께',
       intro: '테이블 중심의 전통 공간부터 모던 홀까지. 취향에 맞는 곳을 골라보자.',
     },
     lounge: {
       title: `대화 와인 셀렉션 | ${SITE_NAME}`,
-      description: `압구정·청담 바 카운터 무드와 시그니처 칵테일을 에디션으로 소개합니다.`,
+      description: '압구정·청담 바 카운터 무드와 시그니처 칵테일을 에디션으로 소개합니다.',
       heading: '대화 와인, 잔이 채워지는 저녁',
       intro: '볼륨이 낮고 대화에 집중할 수 있는 공간. 소개팅이나 소규모 모임에도 적합하다.',
     },
     room: {
       title: `프라이빗 단체 룸 목록 | ${SITE_NAME}`,
-      description: `일산·해운대 독립 세팅 구성과 이용 안내를 개정판으로 담았습니다.`,
+      description: '일산·해운대 독립 세팅 구성과 이용 안내를 개정판으로 담았습니다.',
       heading: '프라이빗 단체, 문 닫으면 우리만의 시간',
       intro: '단체 모임이나 비즈니스 접대에 적합한 독립 공간을 안내한다.',
     },
     yojeong: {
       title: `한정식 국악 풍류 현장 | ${SITE_NAME}`,
-      description: `코스 요리와 판소리 공연이 어우러지는 곳. 사전 연락 요령과 에티켓 참고서.`,
+      description: '코스 요리와 판소리 공연이 어우러지는 곳. 사전 연락 요령과 에티켓 참고서.',
       heading: '한정식 국악, 풍류가 살아 있는 곳',
       intro: '전통 접대 문화의 정수. 코스 요리와 판소리가 함께하는 특별한 자리이다.',
     },
     hoppa: {
       title: `여성 프리미엄 선택지 | ${SITE_NAME}`,
-      description: `장안동·건대 매니저 시스템 해설과 첫 발걸음 준비물을 자료집으로 엮었습니다.`,
+      description: '장안동·건대 매니저 시스템 해설과 첫 발걸음 준비물을 자료집으로 엮었습니다.',
       heading: '여성 프리미엄, 오늘 주인공은 당신',
       intro: '매니저 시스템과 무드를 미리 파악하고 가면 첫 발걸음도 한결 가볍다.',
     },

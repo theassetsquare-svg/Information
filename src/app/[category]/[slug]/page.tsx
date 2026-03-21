@@ -38,32 +38,6 @@ const catPaths: Record<string, string> = {
   room: '/rooms/', yojeong: '/yojeongs/', hoppa: '/hoppas/',
 };
 
-const catGuide: Record<string, { intro: string; tips: string[] }> = {
-  night: {
-    intro: '테이블 중심의 사교 문화. 웨이터가 자리를 안내한다. 복장은 깔끔하게, 신분증 필수.',
-    tips: ['양주 1병이 기본 주문 단위', '테이블 위치가 경험을 좌우한다', '피크타임(22~01시) 전에 도착하면 좋은 자리'],
-  },
-  club: {
-    intro: '서서 즐기는 플로어 중심. 드레스코드 확인 필수. 일찍 가면 대기 없이 입장.',
-    tips: ['슬리퍼·운동복 입장 불가', '입장료+음료 별도인 곳 대부분', '귀중품은 최소한으로'],
-  },
-  lounge: {
-    intro: '대화가 주인공인 공간. 볼륨 낮고 분위기 좋다. 예약 추천.',
-    tips: ['시그니처 칵테일부터 시도해보자', '바 카운터는 1인 손님 환영', '주말 저녁은 예약 필수'],
-  },
-  room: {
-    intro: '프라이빗 공간. 인원수에 맞는 사이즈를 미리 확인. 단체 모임·접대에 적합.',
-    tips: ['전화로 인원·예산·목적 미리 전달', '정찰제 확인하면 가격 투명', '픽업 서비스 있는 곳도 있다'],
-  },
-  yojeong: {
-    intro: '한정식 코스와 국악 공연. 예약제 운영. 격식을 갖추고 방문하자.',
-    tips: ['사전 예약 필수 (당일 워크인 거의 불가)', '정장 또는 비즈니스 캐주얼', '알레르기 있으면 미리 알려주자'],
-  },
-  hoppa: {
-    intro: '여성 고객을 위한 공간. 시스템을 미리 이해하면 첫 방문도 편하다.',
-    tips: ['매니저가 시스템 설명해준다', '호스트 지명은 선택사항', '예산 미리 정해두면 부담 없다'],
-  },
-};
 
 export default function VenueDetailPage({ params }: Props) {
   const venue = getVenueBySlug(params.slug);
@@ -77,7 +51,6 @@ export default function VenueDetailPage({ params }: Props) {
   const catLabel = CAT_SLUG_TO_LABEL[venue.cat_slug] || venue.category;
   const catPath = catPaths[venue.cat_slug] || '/';
   const hasPhone = !!(venue.nickname && venue.nickname_phone);
-  const guide = catGuide[venue.cat_slug] || catGuide.night;
 
   // 카테고리 단어 필터 (키워드 스터핑 방지)
   const catWord = { club: '클럽', night: '나이트', lounge: '라운지', room: '룸', yojeong: '요정', hoppa: '호빠' }[venue.cat_slug] || '';
@@ -179,10 +152,10 @@ export default function VenueDetailPage({ params }: Props) {
       <section className="detail-section" style={{ background: '#F7F7F8', padding: '2rem 0' }}>
         <div className="container narrow">
           <h2>처음 방문하세요?</h2>
-          <p style={{ marginBottom: '1rem' }}>{guide.intro}</p>
+          <p style={{ marginBottom: '1rem' }}>{gc.guide.intro}</p>
           <ul className="checklist">
             <li>신분증 지참 (주민등록증·면허증·여권)</li>
-            {guide.tips.map((tip, i) => <li key={i}>{tip}</li>)}
+            {gc.guide.tips.map((tip, i) => <li key={i}>{tip}</li>)}
             <li>귀가 교통편 미리 확인</li>
           </ul>
         </div>
@@ -221,12 +194,7 @@ export default function VenueDetailPage({ params }: Props) {
         <div className="container narrow">
           <h2>인기 시간대</h2>
           <div style={{ display: 'grid', gap: '0.75rem' }}>
-            {[
-              { time: '평일 저녁', level: '여유', bar: '30%' },
-              { time: '금요일 밤', level: '붐빔', bar: '85%' },
-              { time: '토요일 밤', level: '피크', bar: '95%' },
-              { time: '일요일', level: '한산', bar: '20%' },
-            ].map(t => (
+            {gc.timeSlots.map(t => (
               <div key={t.time} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <span style={{ minWidth: '80px', fontSize: '0.9rem', fontWeight: 600, color: '#111' }}>{t.time}</span>
                 <div style={{ flex: 1, background: '#E5E7EB', borderRadius: '4px', height: '8px', overflow: 'hidden' }}>
